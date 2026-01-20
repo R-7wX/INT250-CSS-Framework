@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Unit Conversions</title>
+  <link rel="stylesheet" href="1.css">
+</head>
+<body>
+
+<section id="home">
+  <header><b>Unit Conversions</b></header>
+
+  <nav>
+    <div class="topdiv">
+      <button class="topmenu" onclick="location.href='#temperature'">Temperature</button>
+      <button class="topmenu" onclick="location.href='#weight'">Weight</button>
+      <button class="topmenu" onclick="location.href='#distance'">Distance</button>
+    </div>
+  </nav>
+</section>
+
+<div id="all-conversions">
+
+
+<section id="temperature" class="b temperature">
+  <div id="tmp">
+    <figure>
+      <img src="src/temp.png" width="200">
+      <figcaption>Celsius to Fahrenheit Conversion</figcaption>
+    </figure>
+
+    <article>
+      <fieldset>
+        <legend>Temperature</legend>
+
+        <label>Celsius</label><br>
+        <input type="number" id="celsius"><br><br>
+
+        <button onclick="temperature()">Convert</button><br><br>
+
+        <label>Fahrenheit</label><br>
+        <input type="number" id="fahrenheit" readonly>
+      </fieldset>
+    </article>
+
+    <aside>Formula: (°C × 9/5) + 32</aside>
+  </div>
+</section>
+
+
+<section id="weight" class="b weight">
+  <div id="wgt">
+    <figure>
+      <img src="src/weight.png" width="200">
+      <figcaption>Kilograms to Pounds Conversion</figcaption>
+    </figure>
+
+    <article>
+      <fieldset>
+        <legend>Weight</legend>
+
+        <label>Kilograms</label><br>
+        <input type="number" id="kilo"><br><br>
+
+        <button onclick="weight()">Convert</button><br><br>
+
+        <label>Pounds</label><br>
+        <input type="number" id="pounds" readonly>
+      </fieldset>
+    </article>
+
+    <aside>Formula: kg × 2.2</aside>
+  </div>
+</section>
+
+
+<section id="distance" class="b distance">
+  <div id="dst">
+    <figure>
+      <img src="src/speed.png" width="200">
+      <figcaption>Kilometer to Mile Conversion</figcaption>
+    </figure>
+
+    <article>
+      <fieldset>
+        <legend>Distance</legend>
+
+        <label>Kilometers</label><br>
+        <input type="number" id="km"><br><br>
+
+        <button onclick="distance()">Convert</button><br><br>
+
+        <label>Miles</label><br>
+        <input type="number" id="miles" readonly>
+      </fieldset>
+    </article>
+
+    <aside>Formula: km × 0.62137</aside>
+  </div>
+</section>
+
+</div>
+
+
+<div id="go-home" class="iconbutton">
+  <a href="#home">
+    <img src="src/home.png" width="30">
+  </a>
+</div>
+
+<footer>
+  Learn more about HTML/CSS/JS as a part of INT250 CSS Framework
+</footer>
+
+<script src="1.js"></script>
+</body>
+</html>
