@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>X TASK | Your Real Life Mission Assistant</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Poppins:wght@500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="background-glow"></div>
+
+    <div class="toast-container position-fixed bottom-0 end-0 p-3" style="z-index: 1100;">
+        <div id="liveToast" class="toast custom-toast align-items-center border-0" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="d-flex">
+                <div class="toast-body d-flex align-items-center gap-2">
+                    <i id="toastIcon" class="bi"></i>
+                    <strong id="toastMessage">Notification</strong>
+                </div>
+                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
+            </div>
+        </div>
+    </div>
+
+    <div class="container main-wrapper">
+        <header class="app-header fade-in-up">
+            <h1 class="brand-title">
+                <i class="bi bi-terminal-fill me-2 text-primary-custom"></i>X <span class="text-gradient">TASK</span>
+            </h1>
+            <p class="brand-subtitle"><span>YOUR REAL LIFE MISSION ASSISTANT</span></p>
+
+            <div class="header-info mt-3">
+                <div id="greeting" class="greeting-text">Welcome back</div>
+                <div id="currentClock" class="clock-text">Loading...</div>
+                
+                <div class="d-flex justify-content-center gap-2 mt-4 flex-wrap">
+                    <button id="importBtn" class="btn btn-sm btn-outline-theme rounded-pill px-3">
+                        <i class="bi bi-upload me-1"></i> Import
+                    </button>
+                    <button id="exportBtn" class="btn btn-sm btn-outline-theme rounded-pill px-3">
+                        <i class="bi bi-download me-1"></i> Export
+                    </button>
+                    <div class="vr bg-secondary opacity-50 mx-1"></div>
+                    <button id="musicBtn" class="btn btn-sm btn-outline-primary-custom rounded-pill px-3">
+                        <i class="bi bi-headphones me-1"></i> Focus
+                    </button>
+                    <button id="themeLauncherBtn" class="btn btn-sm btn-outline-theme rounded-pill px-3">
+                        <i class="bi bi-palette2 me-1"></i> Theme
+                    </button>
+                    <button id="routineBtn" class="btn btn-sm btn-outline-theme rounded-pill px-3">
+                        <i class="bi bi-calendar-week me-1"></i> Protocols
+                    </button>
+                </div>
+                <input type="file" id="importFileInput" accept=".json" hidden>
+            </div>
+        </header>
+
+        <div class="task-container">
+            <div class="custom-card fade-in-up">
+                
+                <div class="add-task-panel mb-4 p-3 rounded-4">
+                    <div class="row g-2 mb-2">
+                        <div class="col-md-8">
+                            <input type="text" id="taskInput" class="form-control custom-input" placeholder="Mission Objective..." autocomplete="off">
+                        </div>
+                        <div class="col-md-4">
+                            <select id="priorityInput" class="form-select custom-input">
+                                <option value="Low">🟢 Low Priority</option>
+                                <option value="Medium" selected>🟡 Medium Priority</option>
+                                <option value="High">🔥 High Priority</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row g-2">
+                        <div class="col-md-12">
+                            <textarea id="taskDescInput" class="form-control custom-input" rows="1" placeholder="Details (Optional)..." style="resize: none;"></textarea>
+                        </div>
+                    </div>
+                    <div class="row g-2 mt-1">
+                         <div class="col-md-4">
+                            <input type="text" id="dueDateInput" class="form-control custom-input" placeholder="Deadline..." readonly="readonly">
+                        </div>
+                        <div class="col-md-5">
+                            <input type="file" id="fileInput" class="d-none" multiple>
+                            <label for="fileInput" class="custom-file-upload w-100" id="fileInputLabel">
+                                <i class="bi bi-paperclip me-2"></i> <span id="fileLabelText">Attach Files</span>
+                            </label>
+                        </div>
+                        <div class="col-md-3">
+                            <button id="addTaskBtn" class="btn btn-primary-glow w-100 h-100">
+                                <i class="bi bi-plus-lg me-1"></i> Deploy
+                            </button>
+                        </div>
+                    </div>
+                    <div id="addFilePreview" class="d-flex flex-wrap gap-2 mt-2"></div>
+                </div>
+
+                <div class="divider-glow my-4"></div>
+
+                <div class="row g-2 align-items-center mb-4">
+                    
+                    <div class="col-search-wide">
+                        <div class="search-wrapper">
+                            <i class="bi bi-search"></i>
+                            <input type="text" id="searchInput" class="form-control custom-input search-input" placeholder="Search..." autocomplete="off">
+                        </div>
+                    </div>
+                    
+                    <div class="col-sort-compact">
+                        <select id="sortInput" class="form-select custom-input">
+                            <option value="newest">By Created</option>
+                            <option value="priority">By Priority</option>
+                            <option value="date">By Deadline</option>
+                        </select>
+                    </div>
+
+                    <div class="col-filter-combined d-flex justify-content-end">
+                        <div class="d-flex align-items-center gap-2" style="max-width: 100%; overflow-x: auto; padding-right: 5px;">
+                            <button id="sortOrderBtn" class="btn btn-outline-theme custom-input d-flex align-items-center justify-content-center me-1" style="width: 45px; padding: 0; flex-shrink: 0;">
+                                <i id="sortIcon" class="bi bi-sort-down"></i>
+                            </button>
+                            
+                            <ul class="nav nav-pills custom-pills" id="filterTabs">
+                                <li class="nav-item"><button class="nav-link active" data-filter="all">All</button></li>
+                                <li class="nav-item"><button class="nav-link" data-filter="active">Active</button></li>
+                                <li class="nav-item"><button class="nav-link" data-filter="overdue">Overdue</button></li>
+                                <li class="nav-item"><button class="nav-link" data-filter="completed">Done</button></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="taskList" class="task-list-wrapper mb-3"></div>
+
+                <div id="emptyState" class="empty-state d-none">
+                    <div class="empty-icon-wrapper"><i class="bi bi-layers-half"></i></div>
+                    <h3 id="emptyTitle">System Clear</h3>
+                    <p id="emptyDesc">No active tasks in the queue.</p>
+                </div>
+
+                <div class="footer-stats-container d-flex justify-content-center align-items-center position-relative mt-3">
+                    <span id="taskStats" class="text-muted small fw-medium">0 tasks total</span>
+                    <div class="footer-actions position-absolute end-0 top-50 translate-middle-y d-flex gap-2">
+                        <button id="selectAllBtn" class="btn btn-sm btn-outline-primary-custom border-0">
+                            <i class="bi bi-check-all me-1"></i> All
+                        </button>
+                        <button id="clearCompletedBtn" class="btn btn-sm btn-outline-danger border-0 d-none" data-bs-dismiss="modal">
+                            <i class="bi bi-trash-fill me-1"></i> Clear
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="themeModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-sm">
+            <div class="modal-content custom-modal-content">
+                <div class="modal-header border-bottom border-secondary border-opacity-25 justify-content-center">
+                    <h5 class="modal-title"><i class="bi bi-palette2 me-2"></i>Select Theme</h5>
+                </div>
+                <div class="modal-body text-center">
+                    <div class="d-flex justify-content-center gap-3 flex-wrap mb-4">
+                        <button class="theme-btn-lg" data-color="#8b5cf6" data-gradient="linear-gradient(135deg, #c084fc 0%, #6366f1 100%)" title="Purple" style="background: #8b5cf6;"></button>
+                        <button class="theme-btn-lg" data-color="#ef4444" data-gradient="linear-gradient(135deg, #f87171 0%, #dc2626 100%)" title="Red" style="background: #ef4444;"></button>
+                        <button class="theme-btn-lg" data-color="#06b6d4" data-gradient="linear-gradient(135deg, #67e8f9 0%, #0891b2 100%)" title="Blue" style="background: #06b6d4;"></button>
+                        <button class="theme-btn-lg" data-color="#10b981" data-gradient="linear-gradient(135deg, #34d399 0%, #059669 100%)" title="Green" style="background: #10b981;"></button>
+                        <button class="theme-btn-lg" data-color="#f59e0b" data-gradient="linear-gradient(135deg, #fbbf24 0%, #d97706 100%)" title="Orange" style="background: #f59e0b;"></button>
+                        <button class="theme-btn-lg rainbow-btn" id="rainbowModeBtn" title="RGB Mode" style="background: conic-gradient(red, orange, yellow, green, blue, indigo, violet, red);"></button>
+                    </div>
+                    <div class="custom-color-wrapper border-top border-secondary border-opacity-25 pt-3">
+                        <label class="form-label text-muted small mb-2">CUSTOM RGB</label>
+                        <div class="d-flex justify-content-center align-items-center gap-2">
+                            <input type="color" id="customThemeInput" class="form-control form-control-color custom-color-picker" value="#8b5cf6">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="routineModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content custom-modal-content">
+                <div class="modal-header border-bottom border-secondary border-opacity-25">
+                    <h5 class="modal-title"><i class="bi bi-grid-1x2-fill me-2"></i>Weekly Protocols</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <div class="d-flex align-items-center gap-2">
+                            <span class="badge bg-primary bg-opacity-10 text-primary-custom border border-primary border-opacity-25 px-3 py-2">
+                                <i class="bi bi-calendar-check me-1"></i> Today: <span id="currentDayName" class="fw-bold">...</span>
+                            </span>
+                        </div>
+                        <div class="d-flex gap-2">
+                            <button id="resetRoutineBtn" class="btn btn-xs btn-outline-danger border-0">
+                                <i class="bi bi-arrow-counterclockwise"></i> Reset
+                            </button>
+                            <button id="deployRoutineBtn" class="btn btn-primary-glow btn-sm">
+                                <i class="bi bi-rocket-takeoff-fill me-1"></i> Deploy Today
+                            </button>
+                        </div>
+                    </div>
+                    <ul class="nav nav-pills custom-pills mb-3" id="routineTabs" role="tablist"></ul>
+                    <div class="tab-content mb-4" id="routineContent"></div>
+                    <div class="routine-add-form">
+                        <h6 class="text-muted small text-uppercase fw-bold mb-2"><i class="bi bi-plus-circle me-1"></i>Add New Protocol</h6>
+                        <div class="row g-2">
+                            <div class="col-md-2">
+                                <input type="text" id="newRoutineTime" class="form-control form-control-sm" placeholder="--:--" autocomplete="off">
+                            </div>
+                            <div class="col-md-4">
+                                <input type="text" id="newRoutineTitle" class="form-control form-control-sm" placeholder="Title (e.g. Coding)" autocomplete="off">
+                            </div>
+                            <div class="col-md-4">
+                                <input type="text" id="newRoutineDesc" class="form-control form-control-sm" placeholder="Description..." autocomplete="off">
+                            </div>
+                            <div class="col-md-2">
+                                <button id="addRoutineBtn" class="btn btn-sm btn-outline-theme w-100 text-white border-secondary">Add</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="deleteRoutineModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content custom-modal-content border-danger border-opacity-50">
+                <div class="modal-header border-0">
+                    <h5 class="modal-title text-danger"><i class="bi bi-trash3-fill me-2"></i>Remove Protocol?</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body text-center">
+                    <p class="mb-0 text-muted">Are you sure you want to remove this item from the schedule?</p>
+                    <input type="hidden" id="deleteRoutineDay">
+                    <input type="hidden" id="deleteRoutineIndex">
+                </div>
+                <div class="modal-footer border-0 justify-content-center">
+                    <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-danger btn-sm px-4" id="confirmDeleteRoutineBtn">Yes, Remove</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="editModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content custom-modal-content">
+                <div class="modal-header border-bottom border-secondary border-opacity-25">
+                    <h5 class="modal-title">Update Mission</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" id="editTaskId">
+                    <div class="mb-3">
+                        <label class="form-label text-muted small text-uppercase fw-bold">Objective</label>
+                        <input type="text" class="form-control custom-input" id="editTaskTitle">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label text-muted small text-uppercase fw-bold">Details</label>
+                        <textarea class="form-control custom-input" id="editTaskDesc" rows="3"></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label text-muted small text-uppercase fw-bold">Deadline</label>
+                        <input type="text" class="form-control custom-input" id="editTaskDueDate" placeholder="Change due date..." readonly="readonly">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label text-muted small text-uppercase fw-bold">Attachments</label>
+                        <div id="editFilesPreview" class="d-flex flex-wrap gap-2 mt-2 attachment-grid"></div>
+                        <small class="text-muted d-block mt-2">*File update not supported yet.</small>
+                    </div>
+                </div>
+                <div class="modal-footer border-top border-secondary border-opacity-25">
+                    <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary-glow btn-sm" id="saveEditBtn">Save Changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="deleteModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content custom-modal-content border-danger border-opacity-50">
+                <div class="modal-header border-0">
+                    <h5 class="modal-title text-danger"><i class="bi bi-exclamation-triangle-fill me-2"></i>Terminate?</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body text-center">
+                    <p class="mb-0 text-muted">This action cannot be undone.</p>
+                    <input type="hidden" id="deleteTaskId">
+                </div>
+                <div class="modal-footer border-0 justify-content-center">
+                    <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-danger btn-sm px-4" id="confirmDeleteBtn" data-bs-dismiss="modal">Yes, Delete</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="clearModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content custom-modal-content border-warning border-opacity-50">
+                <div class="modal-header border-0">
+                    <h5 class="modal-title text-warning"><i class="bi bi-eraser-fill me-2"></i>Wipe Archives?</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body text-center">
+                    <p class="mb-0 text-muted">Permanently delete ALL completed missions?</p>
+                </div>
+                <div class="modal-footer border-0 justify-content-center">
+                    <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-warning btn-sm px-4" id="confirmClearBtn" data-bs-dismiss="modal">Yes, Wipe All</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade lightbox-modal" id="universalPreviewModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-xl">
+            <div class="modal-content bg-transparent border-0 shadow-none rounded-4 overflow-hidden position-relative">
+                <div class="lightbox-toolbar d-flex align-items-center justify-content-between p-3 position-absolute top-0 start-0 w-100 z-3">
+                    <h6 class="modal-title text-white text-truncate pe-3 mb-0" id="previewFileName" style="max-width: 50%; text-shadow: 0 1px 2px rgba(0,0,0,0.5);">Preview</h6>
+                    <div class="d-flex gap-2">
+                        <a id="previewOpenBtn" href="#" target="_blank" class="btn btn-lightbox" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Open in New Tab"><i class="bi bi-box-arrow-up-right"></i></a>
+                        <a id="previewDownloadBtn" href="#" download class="btn btn-lightbox" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Download File"><i class="bi bi-download"></i></a>
+                        <button type="button" class="btn btn-lightbox" data-bs-dismiss="modal" aria-label="Close" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Close"><i class="bi bi-x-lg"></i></button>
+                    </div>
+                </div>
+                <div class="modal-body p-0 text-center position-relative d-flex align-items-center justify-content-center" id="universalPreviewBody" style="height: 85vh; background: rgba(0,0,0,0.5);"></div>
+            </div>
+        </div>
+    </div>
+
+    <div id="miniPlayer" class="mini-player d-none">
+        <div id="playerHeader" class="d-flex align-items-center justify-content-between mb-2">
+            <small class="text-muted fw-bold d-flex align-items-center gap-1" style="font-size: 0.7rem; letter-spacing: 1px;">
+                <i class="bi bi-soundwave text-primary-custom"></i> FOCUS RADIO
+            </small>
+            <button type="button" class="btn-close btn-close-white btn-sm" onclick="togglePlayer()" style="font-size: 0.7rem;"></button>
+        </div>
+        <div class="ratio ratio-16x9 mb-2 rounded-3 overflow-hidden border border-secondary border-opacity-25 bg-black">
+            <div id="youtube-player"></div>
+        </div>
+        <div class="d-flex align-items-center gap-2 mb-2 px-1">
+            <i class="bi bi-volume-down text-muted" style="font-size: 0.8rem;"></i>
+            <input type="range" class="form-range custom-range" id="volumeSlider" min="0" max="100" value="50">
+            <i class="bi bi-volume-up text-muted" style="font-size: 0.8rem;"></i>
+        </div>
+        <div class="d-flex gap-2">
+            <button id="btn-neon" class="btn btn-xs btn-outline-secondary flex-fill station-btn" onclick="playStation(0)">🟣 Neon</button>
+            <button id="btn-lofi" class="btn btn-xs btn-outline-secondary flex-fill station-btn" onclick="playStation(1)">☕ Lofi</button>
+            <button id="btn-anime" class="btn btn-xs btn-outline-secondary flex-fill station-btn" onclick="playStation(2)">🌸 Anime</button>
+        </div>
+    </div>
+
+    <div class="system-version">
+        <span class="opacity-50">SYS.VER</span> <span class="text-primary-custom fw-bold">2.4.8</span> <span class="opacity-25 ms-1">| STABLE</span>
+    </div>
+
+    <script src="https://www.youtube.com/iframe_api"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script src="script.js"></script>
+
+</body>
+</html>
