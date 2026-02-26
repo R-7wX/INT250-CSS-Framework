@@ -16,138 +16,84 @@
         a { text-decoration: none; }
         
         .hero-slider-box {
-            position: relative;
-            width: 100%;
-            height: 300px;
-            border-radius: 24px;
-            overflow: hidden;
-            background-color: #000;
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
-            margin-bottom: 40px;
-            z-index: 10;
+            position: relative; width: 100%; height: 300px; border-radius: 24px;
+            overflow: hidden; background-color: #000; box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+            margin-bottom: 40px; z-index: 10;
         }
-        @media (min-width: 768px) {
-            .hero-slider-box { height: 500px; }
-        }
+        @media (min-width: 768px) { .hero-slider-box { height: 500px; } }
 
         .slider-btn {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 45px;
-            height: 45px;
-            border-radius: 50%;
-            background-color: rgba(0, 0, 0, 0.4);
-            backdrop-filter: blur(4px);
-            border: 2px solid rgba(255, 255, 255, 0.7);
-            color: white;
-            font-size: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            z-index: 50;
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.3s ease;
+            position: absolute; top: 50%; transform: translateY(-50%); width: 45px; height: 45px;
+            border-radius: 50%; background-color: rgba(0, 0, 0, 0.4); backdrop-filter: blur(4px);
+            border: 2px solid rgba(255, 255, 255, 0.7); color: white; font-size: 20px;
+            display: flex; align-items: center; justify-content: center; cursor: pointer;
+            z-index: 30; opacity: 0; visibility: hidden; transition: all 0.3s ease;
         }
-        
-        .slider-btn.prev { left: 15px; }
-        .slider-btn.next { right: 15px; }
-        @media (min-width: 768px) {
-            .slider-btn.prev { left: 25px; }
-            .slider-btn.next { right: 25px; }
-        }
+        .slider-btn.prev { left: 15px; } .slider-btn.next { right: 15px; }
+        @media (min-width: 768px) { .slider-btn.prev { left: 25px; } .slider-btn.next { right: 25px; } }
 
-        .hero-slider-box:hover .slider-btn {
-            opacity: 1;
-            visibility: visible;
-        }
-
-        .slider-btn:hover {
-            background-color: rgba(0, 0, 0, 0.8);
-            transform: translateY(-50%) scale(1.1);
-        }
-
-        @media (max-width: 768px) {
-            .slider-btn {
-                opacity: 1;
-                visibility: visible;
-            }
-        }
+        .hero-slider-box:hover .slider-btn { opacity: 1; visibility: visible; }
+        .slider-btn:hover { background-color: rgba(0, 0, 0, 0.8); transform: translateY(-50%) scale(1.1); }
+        @media (max-width: 768px) { .slider-btn { opacity: 1; visibility: visible; } }
 
         .slide {
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            opacity: 0;
-            transition: opacity 0.8s ease-in-out, transform 5s linear;
-            z-index: 1;
-            transform: scale(1);
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0;
+            transition: opacity 0.8s ease-in-out, transform 5s linear; z-index: 1; transform: scale(1);
         }
-        .slide.active {
-            opacity: 1;
-            z-index: 2;
-            transform: scale(1.05);
-        }
+        .slide.active { opacity: 1; z-index: 2; transform: scale(1.05); }
         
         .dot {
-            width: 8px; height: 8px;
-            background-color: rgba(255, 255, 255, 0.4);
-            border-radius: 99px;
-            display: inline-block;
-            transition: all 0.4s ease;
-            cursor: pointer;
-            margin: 0 3px;
-            position: relative;
-            z-index: 50;
+            width: 8px; height: 8px; background-color: rgba(255, 255, 255, 0.4); border-radius: 99px;
+            display: inline-block; transition: all 0.4s ease; cursor: pointer; margin: 0 3px; position: relative; z-index: 30;
         }
-        .dot.active {
-            width: 24px;
-            background-color: rgba(255, 255, 255, 1);
-        }
+        .dot.active { width: 24px; background-color: rgba(255, 255, 255, 1); }
 
-        /* 1. ปุ่ม Start Discovering */
-        .btn-primary {
-            transition: all 0.3s ease;
-        }
-        .btn-primary:hover {
-            transform: translateY(-4px) scale(1.05);
-            box-shadow: 0 10px 20px rgba(13, 148, 136, 0.4);
-        }
+        .btn-primary { transition: all 0.3s ease; }
+        .btn-primary:hover { transform: translateY(-4px) scale(1.05); box-shadow: 0 10px 20px rgba(13, 148, 136, 0.4); }
 
-        /* 2. ปุ่ม My Dashboard */
-        .btn-secondary {
-            transition: all 0.3s ease;
-        }
-        .btn-secondary:hover {
-            transform: translateY(-4px) scale(1.05);
-            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
-            border-color: #0d9488 !important;
-            color: #0d9488 !important;
-        }
+        .btn-secondary { transition: all 0.3s ease; }
+        .btn-secondary:hover { transform: translateY(-4px) scale(1.05); box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1); border-color: #0d9488 !important; color: #0d9488 !important; }
 
-        /* 3. การ์ดสถานที่ (Explore By Vibe) */
-        .vibe-card {
-            transition: all 0.4s ease;
-            border: 1px solid transparent;
-        }
+        .vibe-card { transition: all 0.4s ease; border: 1px solid transparent; }
         .dark .vibe-card { border-color: #333333; }
+        .vibe-card:hover { transform: translateY(-10px); box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25); border-color: #2dd4bf !important; }
         
-        .vibe-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-            border-color: #2dd4bf !important;
+        .vibe-card img { transition: transform 0.6s ease-in-out; transform: scale(1); }
+        .vibe-card:hover img { transform: scale(1.1); }
+
+        /* =========================================================
+           Sidebar Glassmorphism 
+        ========================================================= */
+        .glass-sidebar {
+            background-color: rgba(255, 255, 255, 0.2); 
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-left: 1px solid rgba(255, 255, 255, 0.5);
+            box-shadow: -10px 0 30px rgba(0, 0, 0, 0.1);
         }
-        
-        .vibe-card img {
-            transition: transform 0.6s ease-in-out;
-            transform: scale(1);
-        }
-        .vibe-card:hover img {
-            transform: scale(1.1);
+        .dark .glass-sidebar {
+            background-color: rgba(0, 0, 0, 0.5); 
+            border-left: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: -10px 0 30px rgba(0, 0, 0, 0.5);
         }
 
-        /* CSS สำหรับ 3D Toggle Switch */
+        /* =========================================================
+           อัปเกรดความอ่านง่าย: เมนู Stroke & Glow 
+        ========================================================= */
+        .menu-text {
+            /* โหมดสว่าง: ตัวอักษรสีดำ ขอบ/เงาสีขาว */
+            -webkit-text-stroke: 0.5px rgb(80, 207, 216);
+            text-shadow: 0 0 6px rgb(255, 255, 255) 0 0 12px rgba(255, 255, 255, 0.8);
+        }
+        
+        .dark .menu-text {
+            /* โหมดมืด: ตัวอักษรสีขาว ขอบ/เงาสีดำ */
+            -webkit-text-stroke: 0.5px rgba(0, 0, 0, 0.9);
+            text-shadow: 0 0 6px rgba(0, 0, 0, 1), 0 0 12px rgba(0, 0, 0, 0.8);
+        }
+        /* ========================================================= */
+
+        /* CSS Toggle Switch */
         .toggle * { box-sizing: border-box; }
         #hide-checkbox { opacity: 0; height: 0; width: 0; position: absolute; }
         .toggle {
@@ -162,10 +108,7 @@
             overflow: hidden; box-shadow: 0 0 35px 4px rgba(255, 255, 255);
             transition: all 500ms ease-out; z-index: 10;
         }
-        .crater {
-            position: absolute; display: inline-block; background: #FAEAF1;
-            border-radius: 50%; transition: 500ms;
-        }
+        .crater { position: absolute; display: inline-block; background: #FAEAF1; border-radius: 50%; transition: 500ms; }
         .crater-1 { background: #FFFFF9; width: 86px; height: 86px; left: 10px; bottom: 10px; }
         .crater-2 { width: 20px; height: 20px; top: -7px; left: 44px; }
         .crater-3 { width: 16px; height: 16px; top: 20px; right: -4px; }
@@ -174,10 +117,7 @@
         .crater-6 { width: 10px; height: 10px; top: 48px; left: 20px; }
         .crater-7 { width: 12px; height: 12px; bottom: 5px; left: 35px; }
         
-        .star {
-            position: absolute; display: inline-block; border-radius: 50%;
-            background: #FFF; box-shadow: 1px 0 2px 2px rgba(255, 255, 255);
-        }
+        .star { position: absolute; display: inline-block; border-radius: 50%; background: #FFF; box-shadow: 1px 0 2px 2px rgba(255, 255, 255); }
         .star-1 { width: 6px; height: 6px; right: 90px; bottom: 40px; }
         .star-2 { width: 8px; height: 8px; right: 70px; top: 10px; }
         .star-3 { width: 5px; height: 5px; right: 60px; bottom: 15px; }
@@ -199,9 +139,7 @@
         }
         
         #hide-checkbox:checked + .toggle { background: #24D7F7; }
-        #hide-checkbox:checked + .toggle .toggle-button {
-            background: #F7FFFF; transform: translateX(102px); box-shadow: 0 0 35px 5px rgba(255, 255, 255);
-        }
+        #hide-checkbox:checked + .toggle .toggle-button { background: #F7FFFF; transform: translateX(102px); box-shadow: 0 0 35px 5px rgba(255, 255, 255); }
         #hide-checkbox:checked + .toggle .toggle-button .crater { transform: rotate(-45deg) translateX(70px); }
         #hide-checkbox:checked + .toggle .star { animation: move 2s infinite; transform: none; box-shadow: none; }
         #hide-checkbox:checked + .toggle .star-1 { width: 40px; height: 10px; border-radius: 10px; background: #FFF; left: 20px; top: 25px; box-shadow: none; }
@@ -221,15 +159,15 @@
     </style>
 </head>
 
-<body class="bg:gray-5 bg:black@dark m:0 transition:bg|0.3s relative">
+<body class="bg:gray-5 bg:black@dark m:0 transition:bg|0.3s overflow-x:hidden">
 
-    <nav class="flex justify-content:space-between align-items:center p:15|5% bg:white bg:black@dark border-bottom:1|solid|gray-20 border-bottom:1|solid|gray-80@dark sticky top:0 z:50 transition:0.3s">
+    <nav class="flex justify-content:space-between align-items:center p:15|5% bg:white bg:black@dark border-bottom:1|solid|gray-20 border-bottom:1|solid|gray-80@dark sticky top:0 z:60 transition:background|0.3s">
         
-        <a href="#" class="flex align-items:center">
+        <a href="#" class="flex align-items:center relative">
             <img src="src/logo.png" alt="Travelaroha Logo" class="h:60 h:75@md w:auto obj:contain filter:brightness(0)|invert(1)@dark transition:0.3s">
         </a>
         
-        <div class="flex align-items:center gap:20 gap:40@md">
+        <div class="flex align-items:center gap:20 gap:40@md relative">
             
             <div class="w:70 h:35 relative flex-shrink:0">
                 <div class="absolute top:0 left:0 transform:scale(0.35) transform-origin:top|left scale(0.38)@hover transition:transform|0.3s">
@@ -256,18 +194,28 @@
                 <a href="#" class="color:gray-60 color:white@dark color:teal-60@hover transition:0.2s">My Trips</a>
             </div>
 
-            <div onclick="toggleMobileMenu(this)" class="hide@md f:28 cursor:pointer color:black color:white@dark select:none transition:0.3s">
+            <div onclick="toggleMobileMenu()" id="hamburger-btn" class="hide@md f:28 cursor:pointer color:black color:white@dark select:none transition:0.3s transform:rotate(0)">
                 ☰
             </div>
         </div>
-
-        <div id="mobile-menu" class="hide absolute top:100% left:0 w:full bg:white bg:black@dark shadow:lg border-top:1|solid|gray-20 border-top:1|solid|gray-80@dark p:20 flex:col gap:20 text:center f:16 fw:600 uppercase letter-spacing:1 z:40">
-            <a href="#" class="color:gray-60 color:white@dark color:teal-60@hover block">Destinations</a>
-            <a href="#" class="color:gray-60 color:white@dark color:teal-60@hover block">Experiences</a>
-            <a href="#" class="color:gray-60 color:white@dark color:teal-60@hover block">About Us</a>
-            <a href="#" class="color:gray-60 color:white@dark color:teal-60@hover block">My Trips</a>
-        </div>
     </nav>
+
+    <div id="menu-overlay" onclick="toggleMobileMenu()" class="hide@md fixed inset:0 bg:transparent z:40 pointer-events:none"></div>
+
+    <div id="mobile-menu" class="glass-sidebar hide@md fixed top:0 right:0 w:60% max-w:250 h:100vh z:50 flex flex:col pt:100 px:20 gap:30 text:left transition:transform|0.4s|cubic-bezier(0.4,0,0.2,1) transform:translateX(100%) shadow:-10|0|30|rgba(0,0,0,0.1)">
+        
+        <a href="#" class="menu-text f:16 fw:700 uppercase letter-spacing:1 color:black color:white@dark color:teal-60@hover transition:0.3s">Destinations</a>
+        <div class="w:full h:1 bg:gray-60|0.2 bg:gray-20|0.2@dark"></div>
+        
+        <a href="#" class="menu-text f:16 fw:700 uppercase letter-spacing:1 color:black color:white@dark color:teal-60@hover transition:0.3s">Experiences</a>
+        <div class="w:full h:1 bg:gray-60|0.2 bg:gray-20|0.2@dark"></div>
+        
+        <a href="#" class="menu-text f:16 fw:700 uppercase letter-spacing:1 color:black color:white@dark color:teal-60@hover transition:0.3s">About Us</a>
+        <div class="w:full h:1 bg:gray-60|0.2 bg:gray-20|0.2@dark"></div>
+        
+        <a href="#" class="menu-text f:16 fw:700 uppercase letter-spacing:1 color:black color:white@dark color:teal-60@hover transition:0.3s">My Trips</a>
+        <div class="w:full h:1 bg:gray-60|0.2 bg:gray-20|0.2@dark"></div>
+    </div>
 
     <main class="max-w:1200 mx:auto p:20|5% mt:20">
 
@@ -309,7 +257,6 @@
                     <span class="dot" onclick="goToSlide(8)"></span> 
                     <span class="dot" onclick="goToSlide(9)"></span> 
                 </div>
-
             </div>
 
             <div class="flex flex:col flex:row@sm justify-content:center gap:20">
@@ -320,7 +267,7 @@
                     My Dashboard
                 </button>
             </div>
-            </section>
+        </section>
 
         <section class="mb:80">
             <h2 class="f:32 f:40@md fw:800 m:0 mb:40 text:center letter-spacing:-0.5 color:black color:white@dark transition:0.3s">Explore By Vibe</h2>
@@ -362,21 +309,28 @@
     </main>
 
     <script>
-        // --- ฟังก์ชันสำหรับเปิด-ปิด เมนูมือถือ ---
-        function toggleMobileMenu(icon) {
+        function toggleMobileMenu() {
             const menu = document.getElementById('mobile-menu');
-            if (menu.classList.contains('hide')) {
-                menu.classList.remove('hide');
-                menu.classList.add('flex');
-                icon.innerText = '✕'; // เปลี่ยนเป็นกากบาทตอนเปิด
+            const overlay = document.getElementById('menu-overlay');
+            const icon = document.getElementById('hamburger-btn');
+            
+            if (menu.classList.contains('transform:translateX(100%)')) {
+                menu.classList.remove('transform:translateX(100%)');
+                menu.classList.add('transform:translateX(0)');
+                overlay.classList.remove('pointer-events:none');
+                overlay.classList.add('pointer-events:auto');
+                icon.innerText = '✕';
+                icon.classList.add('transform:rotate(90deg)');
             } else {
-                menu.classList.add('hide');
-                menu.classList.remove('flex');
-                icon.innerText = '☰'; // กลับเป็นสามขีดตอนปิด
+                menu.classList.add('transform:translateX(100%)');
+                menu.classList.remove('transform:translateX(0)');
+                overlay.classList.add('pointer-events:none');
+                overlay.classList.remove('pointer-events:auto');
+                icon.innerText = '☰';
+                icon.classList.remove('transform:rotate(90deg)');
             }
         }
 
-        // --- โค้ด Slider (คงเดิม) ---
         let currentIndex = 0;
         const slides = document.querySelectorAll('.slide');
         const dots = document.querySelectorAll('.dot');
