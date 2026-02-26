@@ -61,9 +61,7 @@
         .vibe-card img { transition: transform 0.6s ease-in-out; transform: scale(1); }
         .vibe-card:hover img { transform: scale(1.1); }
 
-        /* =========================================================
-           Sidebar Glassmorphism 
-        ========================================================= */
+        /* Sidebar Glassmorphism */
         .glass-sidebar {
             background-color: rgba(255, 255, 255, 0.2); 
             backdrop-filter: blur(20px);
@@ -77,19 +75,15 @@
             box-shadow: -10px 0 30px rgba(0, 0, 0, 0.5);
         }
 
-
+        /* เมนู Stroke & Glow */
         .menu-text {
-            /* โหมดสว่าง: ตัวอักษรสีดำ ขอบ/เงาสีขาว */
-            -webkit-text-stroke: 0.5px rgb(80, 207, 216);
-            text-shadow: 0 0 6px rgb(255, 255, 255) 0 0 12px rgba(255, 255, 255, 0.8);
+            -webkit-text-stroke: 0.5px rgba(255, 255, 255, 0.9);
+            text-shadow: 0 0 6px rgba(255, 255, 255, 1), 0 0 12px rgba(255, 255, 255, 0.8);
         }
-        
         .dark .menu-text {
-            /* โหมดมืด: ตัวอักษรสีขาว ขอบ/เงาสีดำ */
             -webkit-text-stroke: 0.5px rgba(0, 0, 0, 0.9);
             text-shadow: 0 0 6px rgba(0, 0, 0, 1), 0 0 12px rgba(0, 0, 0, 0.8);
         }
-
 
         /* CSS Toggle Switch */
         .toggle * { box-sizing: border-box; }
@@ -212,7 +206,10 @@
         <div class="w:full h:1 bg:gray-60|0.2 bg:gray-20|0.2@dark"></div>
         
         <a href="#" class="menu-text f:16 fw:700 uppercase letter-spacing:1 color:black color:white@dark color:teal-60@hover transition:0.3s">My Trips</a>
-        <div class="w:full h:1 bg:gray-60|0.2 bg:gray-20|0.2@dark"></div>
+        
+        <div class="mt:20">
+            <button class="btn-primary w:full bg:teal-60 color:white f:14 fw:600 p:12 r:12 border:none cursor:pointer shadow:md">Book Now</button>
+        </div>
     </div>
 
     <main class="max-w:1200 mx:auto p:20|5% mt:20">
@@ -306,6 +303,48 @@
 
     </main>
 
+    <footer class="bg:white bg:black@dark border-top:1|solid|gray-20 border-top:1|solid|gray-80@dark pt:60 pb:30 px:5% transition:bg|0.3s mt:80">
+        <div class="max-w:1200 mx:auto">
+            
+            <div class="grid grid-cols:1 grid-cols:4@md gap:40 mb:60">
+                <div class="col-span:2@md">
+                    <div class="flex align-items:center mb:20">
+                        <img src="src/logo.png" alt="Travelaroha Logo" class="h:50 w:auto obj:contain filter:brightness(0)|invert(1)@dark transition:0.3s">
+                    </div>
+                    <p class="f:14 color:gray-60 color:gray-40@dark line-height:1.6 max-w:400 transition:color|0.3s">
+                        Experience the world like never before. Curated premium travel packages for the modern explorer.
+                    </p>
+                </div>
+                
+                <div>
+                    <h4 class="f:16 fw:700 mb:20 color:black color:white@dark transition:color|0.3s">Explore</h4>
+                    <div class="flex flex:col gap:10 f:14">
+                        <a href="#" class="color:gray-60 color:gray-40@dark color:teal-60@hover transition:0.2s">Directions</a>
+                        <a href="#" class="color:gray-60 color:gray-40@dark color:teal-60@hover transition:0.2s">Travel Guides</a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h4 class="f:16 fw:700 mb:20 color:black color:white@dark transition:color|0.3s">Connect</h4>
+                    <div class="flex flex:col gap:10 f:14">
+                        <a href="#" class="color:gray-60 color:gray-40@dark color:teal-60@hover transition:0.2s">Instagram</a>
+                        <a href="#" class="color:gray-60 color:gray-40@dark color:teal-60@hover transition:0.2s">Twitter</a>
+                        <a href="#" class="color:gray-60 color:gray-40@dark color:teal-60@hover transition:0.2s">Contact Us</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="border-top:1|solid|gray-20 border-top:1|solid|gray-80@dark pt:30 flex flex:col flex:row@md justify-content:space-between align-items:center gap:20 text:center text:left@md transition:border|0.3s">
+                <p class="f:14 color:gray-50 color:gray-40@dark m:0 transition:color|0.3s">
+                    © 2077 Travelaroha. All rights reserved.
+                </p>
+                <p class="f:14 fw:600 color:teal-60 m:0 letter-spacing:1 text:right@md">
+                    Organized by TW-Limited Corporation,2077
+                </p>
+            </div>
+            
+        </div>
+    </footer>
     <script>
         function toggleMobileMenu() {
             const menu = document.getElementById('mobile-menu');
