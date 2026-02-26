@@ -15,7 +15,9 @@
         body { font-family: 'Poppins', sans-serif; }
         a { text-decoration: none; }
         
-
+        /* =========================================
+           1. โค้ดสำหรับ Slider 
+        ========================================= */
         .hero-slider-box {
             position: relative; width: 100%; height: 300px; border-radius: 24px;
             overflow: hidden; background-color: #000; box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
@@ -39,7 +41,7 @@
         .slider-btn.prev { left: 15px; } .slider-btn.next { right: 15px; }
         @media (min-width: 768px) { .slider-btn.prev { left: 25px; } .slider-btn.next { right: 25px; } }
         .hero-slider-box:hover .slider-btn { opacity: 1; visibility: visible; }
-        .slider-btn:hover { background-color: rgba(0, 0, 0, 0.8); transform: translateY(-50%) scale(1.1); }
+        .slider-btn:hover { background-color: rgba(0, 0, 0, 0.8) !important; transform: translateY(-50%) scale(1.1) !important; }
         @media (max-width: 768px) { .slider-btn { opacity: 1; visibility: visible; } }
         
         .dot {
@@ -48,10 +50,52 @@
         }
         .dot.active { width: 24px; background-color: rgba(255, 255, 255, 1); }
 
+        /* =========================================
+           2. โค้ดแก้บั๊ก Hover พัง (ยัด !important บังคับให้แสดงผล)
+        ========================================= */
+        .btn-primary {
+            transition: all 0.3s ease !important;
+        }
+        .btn-primary:hover {
+            transform: translateY(-4px) scale(1.05) !important;
+            box-shadow: 0 10px 20px rgba(13, 148, 136, 0.4) !important;
+        }
+
+        .btn-secondary {
+            transition: all 0.3s ease !important;
+        }
+        .btn-secondary:hover {
+            transform: translateY(-4px) scale(1.05) !important;
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1) !important;
+            border-color: #0d9488 !important;
+            color: #0d9488 !important;
+        }
+
+        .vibe-card {
+            transition: all 0.4s ease !important;
+            border: 1px solid transparent;
+        }
+        .dark .vibe-card { border-color: #333333; }
+        
+        .vibe-card:hover {
+            transform: translateY(-10px) !important;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25) !important;
+            border-color: #2dd4bf !important;
+        }
+        
+        .vibe-card img {
+            transition: transform 0.6s ease-in-out !important;
+            transform: scale(1) !important;
+        }
+        .vibe-card:hover img {
+            transform: scale(1.1) !important;
+        }
+
+
         .glass-sidebar {
             background-color: rgba(255, 255, 255, 0.2); 
             backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px); 
+            -webkit-backdrop-filter: blur(20px);
             border-left: 1px solid rgba(255, 255, 255, 0.5);
             box-shadow: -10px 0 30px rgba(0, 0, 0, 0.1);
         }
@@ -62,8 +106,8 @@
         }
 
         .menu-text {
-            -webkit-text-stroke: 0.5px rgb(0, 0, 0);
-            text-shadow: 0 0 6px rgb(0, 253, 232), 0 0 12px rgba(0, 253, 232);
+            -webkit-text-stroke: 0.5px rgba(0, 0, 0, 0.9);
+            text-shadow: 0 0 6px rgb(13, 158, 216), 0 0 12px rgba(13, 158, 216);
         }
         .dark .menu-text {
             -webkit-text-stroke: 0.5px rgba(0, 0, 0, 0.9);
@@ -211,10 +255,10 @@
             </div>
 
             <div class="flex flex:col flex:row@sm justify-content:center gap:20">
-                <button class="bg:teal-60 color:white f:16 fw:600 p:16|40 r:12 border:none cursor:pointer shadow:md transition:all|0.3s transform:translateY(-4)@hover transform:scale(1.05)@hover">
+                <button class="btn-primary bg:teal-60 color:white f:16 fw:600 p:16|40 r:12 border:none cursor:pointer shadow:md">
                     Start Discovering
                 </button>
-                <button class="bg:white bg:black@dark color:black color:white@dark f:16 fw:600 p:16|40 r:12 border:1|solid|gray-20 border:1|solid|gray-70@dark cursor:pointer transition:all|0.3s transform:translateY(-4)@hover border-color:teal-60@hover color:teal-60@hover transform:scale(1.05)@hover">
+                <button class="btn-secondary bg:white bg:black@dark color:black color:white@dark f:16 fw:600 p:16|40 r:12 border:1|solid|gray-20 border:1|solid|gray-70@dark cursor:pointer">
                     My Dashboard
                 </button>
             </div>
@@ -224,9 +268,9 @@
             <h2 class="f:32 f:40@md fw:800 m:0 mb:40 text:center letter-spacing:-0.5 color:black color:white@dark transition:0.3s">Explore By Vibe</h2>
             <div class="grid grid-cols:1 grid-cols:3@md gap:30">
                 
-                <div class="group bg:white bg:black@dark r:20 overflow:hidden shadow:sm cursor:pointer transition:all|0.4s border:1|solid|transparent border-color:#333@dark transform:translateY(-10)@hover shadow:0|25|50|-12|rgba(0,0,0,0.25)@hover border-color:teal-40@hover">
+                <div class="vibe-card bg:white bg:black@dark r:20 overflow:hidden shadow:sm cursor:pointer">
                     <div class="h:250 overflow:hidden relative">
-                        <img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=600&q=80" class="w:full h:full obj:cover transition:transform|0.6s|ease-in-out transform:scale(1) transform:scale(1.1)@group-hover">
+                        <img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=600&q=80" class="w:full h:full obj:cover">
                     </div>
                     <div class="p:25 text:center">
                         <h3 class="f:22 fw:700 m:0 mb:10 color:black color:white@dark transition:0.3s">Mountain Retreat</h3>
@@ -234,9 +278,9 @@
                     </div>
                 </div>
 
-                <div class="group bg:white bg:black@dark r:20 overflow:hidden shadow:sm cursor:pointer transition:all|0.4s border:1|solid|transparent border-color:#333@dark transform:translateY(-10)@hover shadow:0|25|50|-12|rgba(0,0,0,0.25)@hover border-color:teal-40@hover">
+                <div class="vibe-card bg:white bg:black@dark r:20 overflow:hidden shadow:sm cursor:pointer">
                     <div class="h:250 overflow:hidden relative">
-                        <img src="https://images.unsplash.com/photo-1499793983690-e29da59ef1c2?auto=format&fit=crop&w=600&q=80" class="w:full h:full obj:cover transition:transform|0.6s|ease-in-out transform:scale(1) transform:scale(1.1)@group-hover">
+                        <img src="https://images.unsplash.com/photo-1499793983690-e29da59ef1c2?auto=format&fit=crop&w=600&q=80" class="w:full h:full obj:cover">
                     </div>
                     <div class="p:25 text:center">
                         <h3 class="f:22 fw:700 m:0 mb:10 color:black color:white@dark transition:0.3s">Tropical Paradise</h3>
@@ -244,9 +288,9 @@
                     </div>
                 </div>
 
-                <div class="group bg:white bg:black@dark r:20 overflow:hidden shadow:sm cursor:pointer transition:all|0.4s border:1|solid|transparent border-color:#333@dark transform:translateY(-10)@hover shadow:0|25|50|-12|rgba(0,0,0,0.25)@hover border-color:teal-40@hover">
+                <div class="vibe-card bg:white bg:black@dark r:20 overflow:hidden shadow:sm cursor:pointer">
                     <div class="h:250 overflow:hidden relative">
-                        <img src="https://images.unsplash.com/photo-1449844908441-8829872d2607?auto=format&fit=crop&w=600&q=80" class="w:full h:full obj:cover transition:transform|0.6s|ease-in-out transform:scale(1) transform:scale(1.1)@group-hover">
+                        <img src="https://images.unsplash.com/photo-1449844908441-8829872d2607?auto=format&fit=crop&w=600&q=80" class="w:full h:full obj:cover">
                     </div>
                     <div class="p:25 text:center">
                         <h3 class="f:22 fw:700 m:0 mb:10 color:black color:white@dark transition:0.3s">City Escapes</h3>
@@ -296,7 +340,7 @@
                     © 2077 Travelaroha. All rights reserved.
                 </p>
                 <p class="f:14 fw:600 color:teal-60 m:0 letter-spacing:1 text:right@md">
-                    Organized by TW-MASTER Corporation ©2077
+                    Organized by TW-Master Corporation © 2077
                 </p>
             </div>
             
