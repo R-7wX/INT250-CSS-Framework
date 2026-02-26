@@ -131,26 +131,21 @@
             transition: all 0.4s ease;
             border: 1px solid transparent;
         }
-        /* สีขอบตอนเป็น Dark Mode */
         .dark .vibe-card { border-color: #333333; }
         
-        /* เมื่อเอาเมาส์ชี้ที่การ์ด */
         .vibe-card:hover {
             transform: translateY(-10px);
             box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
             border-color: #2dd4bf !important;
         }
         
-        /* รูปภาพข้างในการ์ด */
         .vibe-card img {
             transition: transform 0.6s ease-in-out;
             transform: scale(1);
         }
-        /* รูปภาพจะซูมเข้าเฉพาะตอนเอาเมาส์ชี้ที่การ์ดเท่านั้น */
         .vibe-card:hover img {
             transform: scale(1.1);
         }
-        /* ----------------------------------------------------------------- */
 
         /* CSS สำหรับ 3D Toggle Switch */
         .toggle * { box-sizing: border-box; }
@@ -226,7 +221,7 @@
     </style>
 </head>
 
-<body class="bg:gray-5 bg:black@dark m:0 transition:bg|0.3s">
+<body class="bg:gray-5 bg:black@dark m:0 transition:bg|0.3s relative">
 
     <nav class="flex justify-content:space-between align-items:center p:15|5% bg:white bg:black@dark border-bottom:1|solid|gray-20 border-bottom:1|solid|gray-80@dark sticky top:0 z:50 transition:0.3s">
         
@@ -261,7 +256,16 @@
                 <a href="#" class="color:gray-60 color:white@dark color:teal-60@hover transition:0.2s">My Trips</a>
             </div>
 
-            <div class="hide@md f:28 cursor:pointer color:black color:white@dark">☰</div>
+            <div onclick="toggleMobileMenu(this)" class="hide@md f:28 cursor:pointer color:black color:white@dark select:none transition:0.3s">
+                ☰
+            </div>
+        </div>
+
+        <div id="mobile-menu" class="hide absolute top:100% left:0 w:full bg:white bg:black@dark shadow:lg border-top:1|solid|gray-20 border-top:1|solid|gray-80@dark p:20 flex:col gap:20 text:center f:16 fw:600 uppercase letter-spacing:1 z:40">
+            <a href="#" class="color:gray-60 color:white@dark color:teal-60@hover block">Destinations</a>
+            <a href="#" class="color:gray-60 color:white@dark color:teal-60@hover block">Experiences</a>
+            <a href="#" class="color:gray-60 color:white@dark color:teal-60@hover block">About Us</a>
+            <a href="#" class="color:gray-60 color:white@dark color:teal-60@hover block">My Trips</a>
         </div>
     </nav>
 
@@ -312,11 +316,11 @@
                 <button class="btn-primary bg:teal-60 color:white f:16 fw:600 p:16|40 r:12 border:none cursor:pointer shadow:md">
                     Start Discovering
                 </button>
-                <button class="btn-secondary bg:white bg:black@dark color:black color:white@dark f:16 fw:600 p:16|40 r:12 border:1|solid|gray-20 border:1|solid|gray-70@dark cursor:pointer hide block@sm">
+                <button class="btn-secondary bg:white bg:black@dark color:black color:white@dark f:16 fw:600 p:16|40 r:12 border:1|solid|gray-20 border:1|solid|gray-70@dark cursor:pointer">
                     My Dashboard
                 </button>
             </div>
-        </section>
+            </section>
 
         <section class="mb:80">
             <h2 class="f:32 f:40@md fw:800 m:0 mb:40 text:center letter-spacing:-0.5 color:black color:white@dark transition:0.3s">Explore By Vibe</h2>
@@ -358,6 +362,21 @@
     </main>
 
     <script>
+        // --- ฟังก์ชันสำหรับเปิด-ปิด เมนูมือถือ ---
+        function toggleMobileMenu(icon) {
+            const menu = document.getElementById('mobile-menu');
+            if (menu.classList.contains('hide')) {
+                menu.classList.remove('hide');
+                menu.classList.add('flex');
+                icon.innerText = '✕'; // เปลี่ยนเป็นกากบาทตอนเปิด
+            } else {
+                menu.classList.add('hide');
+                menu.classList.remove('flex');
+                icon.innerText = '☰'; // กลับเป็นสามขีดตอนปิด
+            }
+        }
+
+        // --- โค้ด Slider (คงเดิม) ---
         let currentIndex = 0;
         const slides = document.querySelectorAll('.slide');
         const dots = document.querySelectorAll('.dot');
