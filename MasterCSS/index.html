@@ -15,9 +15,7 @@
         body { font-family: 'Poppins', sans-serif; }
         a { text-decoration: none; }
         
-        /* =========================================
-           1. โค้ดสำหรับ Slider (กู้ชีพให้กลับมาเลื่อนได้)
-        ========================================= */
+
         .hero-slider-box {
             position: relative; width: 100%; height: 300px; border-radius: 24px;
             overflow: hidden; background-color: #000; box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
@@ -50,13 +48,10 @@
         }
         .dot.active { width: 24px; background-color: rgba(255, 255, 255, 1); }
 
-        /* =========================================
-           2. โค้ดสำหรับ Glass Sidebar & ข้อความเรืองแสง (กู้ชีพให้เมนูกลับมาใสปิ๊ง)
-        ========================================= */
         .glass-sidebar {
             background-color: rgba(255, 255, 255, 0.2); 
             backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px); /* สำคัญมากสำหรับมือถือ iOS */
+            -webkit-backdrop-filter: blur(20px); 
             border-left: 1px solid rgba(255, 255, 255, 0.5);
             box-shadow: -10px 0 30px rgba(0, 0, 0, 0.1);
         }
@@ -75,9 +70,7 @@
             text-shadow: 0 0 6px rgba(0, 0, 0, 1), 0 0 12px rgba(0, 0, 0, 0.8);
         }
 
-        /* =========================================
-           3. โค้ด 3D Toggle Switch (วาดรูปดาว/พระจันทร์)
-        ========================================= */
+
         .toggle * { box-sizing: border-box; }
         #hide-checkbox { opacity: 0; height: 0; width: 0; position: absolute; }
         .toggle { position: relative; cursor: pointer; display: inline-block; width: 200px; height: 100px; background: #211042; border-radius: 50px; transition: 500ms; overflow: hidden; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.3); }
