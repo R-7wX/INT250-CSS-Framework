@@ -15,12 +15,21 @@
         body { font-family: 'Poppins', sans-serif; }
         a { text-decoration: none; }
         
+        /* =========================================
+           1. โค้ดสำหรับ Slider (กู้ชีพให้กลับมาเลื่อนได้)
+        ========================================= */
         .hero-slider-box {
             position: relative; width: 100%; height: 300px; border-radius: 24px;
             overflow: hidden; background-color: #000; box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
             margin-bottom: 40px; z-index: 10;
         }
         @media (min-width: 768px) { .hero-slider-box { height: 500px; } }
+
+        .slide {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0;
+            transition: opacity 0.8s ease-in-out, transform 5s linear; z-index: 1; transform: scale(1);
+        }
+        .slide.active { opacity: 1; z-index: 2; transform: scale(1.05); }
 
         .slider-btn {
             position: absolute; top: 50%; transform: translateY(-50%); width: 45px; height: 45px;
@@ -31,16 +40,9 @@
         }
         .slider-btn.prev { left: 15px; } .slider-btn.next { right: 15px; }
         @media (min-width: 768px) { .slider-btn.prev { left: 25px; } .slider-btn.next { right: 25px; } }
-
         .hero-slider-box:hover .slider-btn { opacity: 1; visibility: visible; }
         .slider-btn:hover { background-color: rgba(0, 0, 0, 0.8); transform: translateY(-50%) scale(1.1); }
         @media (max-width: 768px) { .slider-btn { opacity: 1; visibility: visible; } }
-
-        .slide {
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0;
-            transition: opacity 0.8s ease-in-out, transform 5s linear; z-index: 1; transform: scale(1);
-        }
-        .slide.active { opacity: 1; z-index: 2; transform: scale(1.05); }
         
         .dot {
             width: 8px; height: 8px; background-color: rgba(255, 255, 255, 0.4); border-radius: 99px;
@@ -48,24 +50,13 @@
         }
         .dot.active { width: 24px; background-color: rgba(255, 255, 255, 1); }
 
-        .btn-primary { transition: all 0.3s ease; }
-        .btn-primary:hover { transform: translateY(-4px) scale(1.05); box-shadow: 0 10px 20px rgba(13, 148, 136, 0.4); }
-
-        .btn-secondary { transition: all 0.3s ease; }
-        .btn-secondary:hover { transform: translateY(-4px) scale(1.05); box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1); border-color: #0d9488 !important; color: #0d9488 !important; }
-
-        .vibe-card { transition: all 0.4s ease; border: 1px solid transparent; }
-        .dark .vibe-card { border-color: #333333; }
-        .vibe-card:hover { transform: translateY(-10px); box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25); border-color: #2dd4bf !important; }
-        
-        .vibe-card img { transition: transform 0.6s ease-in-out; transform: scale(1); }
-        .vibe-card:hover img { transform: scale(1.1); }
-
-        /* Sidebar Glassmorphism */
+        /* =========================================
+           2. โค้ดสำหรับ Glass Sidebar & ข้อความเรืองแสง (กู้ชีพให้เมนูกลับมาใสปิ๊ง)
+        ========================================= */
         .glass-sidebar {
             background-color: rgba(255, 255, 255, 0.2); 
             backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px); /* สำคัญมากสำหรับมือถือ iOS */
             border-left: 1px solid rgba(255, 255, 255, 0.5);
             box-shadow: -10px 0 30px rgba(0, 0, 0, 0.1);
         }
@@ -75,31 +66,22 @@
             box-shadow: -10px 0 30px rgba(0, 0, 0, 0.5);
         }
 
-        /* เมนู Stroke & Glow */
         .menu-text {
             -webkit-text-stroke: 0.5px rgb(0, 0, 0);
-            text-shadow: 0 0 6px rgba(32, 241, 248, 0.884), 0 0 12px rgba(32, 241, 248, 0.884);
+            text-shadow: 0 0 6px rgb(0, 253, 232), 0 0 12px rgba(0, 253, 232);
         }
         .dark .menu-text {
             -webkit-text-stroke: 0.5px rgba(0, 0, 0, 0.9);
             text-shadow: 0 0 6px rgba(0, 0, 0, 1), 0 0 12px rgba(0, 0, 0, 0.8);
         }
 
-        /* CSS Toggle Switch */
+        /* =========================================
+           3. โค้ด 3D Toggle Switch (วาดรูปดาว/พระจันทร์)
+        ========================================= */
         .toggle * { box-sizing: border-box; }
         #hide-checkbox { opacity: 0; height: 0; width: 0; position: absolute; }
-        .toggle {
-            position: relative; cursor: pointer; display: inline-block;
-            width: 200px; height: 100px; background: #211042;
-            border-radius: 50px; transition: 500ms; overflow: hidden;
-            box-shadow: 0 10px 15px -3px rgba(0,0,0,0.3);
-        }
-        .toggle-button {
-            position: absolute; display: inline-block; top: 7px; left: 6px;
-            width: 86px; height: 86px; border-radius: 50%; background: #FAEAF1;
-            overflow: hidden; box-shadow: 0 0 35px 4px rgba(255, 255, 255);
-            transition: all 500ms ease-out; z-index: 10;
-        }
+        .toggle { position: relative; cursor: pointer; display: inline-block; width: 200px; height: 100px; background: #211042; border-radius: 50px; transition: 500ms; overflow: hidden; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.3); }
+        .toggle-button { position: absolute; display: inline-block; top: 7px; left: 6px; width: 86px; height: 86px; border-radius: 50%; background: #FAEAF1; overflow: hidden; box-shadow: 0 0 35px 4px rgba(255, 255, 255); transition: all 500ms ease-out; z-index: 10; }
         .crater { position: absolute; display: inline-block; background: #FAEAF1; border-radius: 50%; transition: 500ms; }
         .crater-1 { background: #FFFFF9; width: 86px; height: 86px; left: 10px; bottom: 10px; }
         .crater-2 { width: 20px; height: 20px; top: -7px; left: 44px; }
@@ -108,28 +90,17 @@
         .crater-5 { width: 15px; height: 15px; top: 40px; left: 48px; }
         .crater-6 { width: 10px; height: 10px; top: 48px; left: 20px; }
         .crater-7 { width: 12px; height: 12px; bottom: 5px; left: 35px; }
-        
         .star { position: absolute; display: inline-block; border-radius: 50%; background: #FFF; box-shadow: 1px 0 2px 2px rgba(255, 255, 255); }
         .star-1 { width: 6px; height: 6px; right: 90px; bottom: 40px; }
         .star-2 { width: 8px; height: 8px; right: 70px; top: 10px; }
         .star-3 { width: 5px; height: 5px; right: 60px; bottom: 15px; }
         .star-4 { width: 3px; height: 3px; right: 40px; bottom: 50px; }
         .star-5 { width: 4px; height: 4px; right: 10px; bottom: 35px; }
-        .star-6, .star-7, .star-8 {
-            width: 10px; height: 2px; border-radius: 2px; transform: rotate(-45deg);
-            box-shadow: 5px 0px 4px 1px #FFF; animation-name: travel;
-            animation-duration: 1.5s; animation-timing-function: ease-out; animation-iteration-count: infinite;
-        }
+        .star-6, .star-7, .star-8 { width: 10px; height: 2px; border-radius: 2px; transform: rotate(-45deg); box-shadow: 5px 0px 4px 1px #FFF; animation-name: travel; animation-duration: 1.5s; animation-timing-function: ease-out; animation-iteration-count: infinite; }
         .star-6 { right: 30px; bottom: 30px; animation-delay: -2s; }
         .star-7 { right: 50px; bottom: 60px; }
         .star-8 { right: 90px; top: 10px; animation-delay: -4s; }
-        
-        @keyframes travel {
-            0% { transform: rotate(-45deg) translateX(70px); }
-            50% { transform: rotate(-45deg) translateX(-20px); box-shadow: 5px 0px 6px 1px #FFF; }
-            100% { transform: rotate(-45deg) translateX(-30px); width: 2px; height: 2px; opacity: 0; box-shadow: none; }
-        }
-        
+        @keyframes travel { 0% { transform: rotate(-45deg) translateX(70px); } 50% { transform: rotate(-45deg) translateX(-20px); box-shadow: 5px 0px 6px 1px #FFF; } 100% { transform: rotate(-45deg) translateX(-30px); width: 2px; height: 2px; opacity: 0; box-shadow: none; } }
         #hide-checkbox:checked + .toggle { background: #24D7F7; }
         #hide-checkbox:checked + .toggle .toggle-button { background: #F7FFFF; transform: translateX(102px); box-shadow: 0 0 35px 5px rgba(255, 255, 255); }
         #hide-checkbox:checked + .toggle .toggle-button .crater { transform: rotate(-45deg) translateX(70px); }
@@ -142,12 +113,7 @@
         #hide-checkbox:checked + .toggle .star-6 { width: 18px; height: 18px; background: #FFF; border-radius: 50%; left: 38px; bottom: 20px; box-shadow: -1px 0 2px 0 rgba(0,0,0,0.1); }
         #hide-checkbox:checked + .toggle .star-7 { width: 24px; height: 24px; background: #FFF; border-radius: 50%; left: 52px; bottom: 20px; box-shadow: -1px 0 2px 0 rgba(0,0,0,0.1); }
         #hide-checkbox:checked + .toggle .star-8 { width: 21px; height: 21px; background: #FFF; border-radius: 50%; left: 70px; top: 59px; box-shadow: -1px 0 2px 0 rgba(0,0,0,0.1); }
-        
-        @keyframes move {
-            0% { transform: none; }
-            25% { transform: translateX(2px); }
-            100% { transform: translateX(-2px); }
-        }
+        @keyframes move { 0% { transform: none; } 25% { transform: translateX(2px); } 100% { transform: translateX(-2px); } }
     </style>
 </head>
 
@@ -194,7 +160,7 @@
 
     <div id="menu-overlay" onclick="toggleMobileMenu()" class="hide@md fixed inset:0 bg:transparent z:40 pointer-events:none"></div>
 
-    <div id="mobile-menu" class="glass-sidebar hide@md fixed top:0 right:0 w:60% max-w:250 h:100vh z:50 flex flex:col pt:100 px:20 gap:30 text:left transition:transform|0.4s|cubic-bezier(0.4,0,0.2,1) transform:translateX(100%) shadow:-10|0|30|rgba(0,0,0,0.1)">
+    <div id="mobile-menu" class="glass-sidebar hide@md fixed top:0 right:0 w:60% max-w:250 h:100vh z:50 flex flex:col pt:100 px:20 gap:30 text:left transition:transform|0.4s|cubic-bezier(0.4,0,0.2,1) transform:translateX(100%)">
         
         <a href="#" class="menu-text f:16 fw:700 uppercase letter-spacing:1 color:black color:white@dark color:teal-60@hover transition:0.3s">Destinations</a>
         <div class="w:full h:1 bg:gray-60|0.2 bg:gray-20|0.2@dark"></div>
@@ -207,7 +173,6 @@
         
         <a href="#" class="menu-text f:16 fw:700 uppercase letter-spacing:1 color:black color:white@dark color:teal-60@hover transition:0.3s">My Trips</a>
         <div class="w:full h:1 bg:gray-60|0.2 bg:gray-20|0.2@dark"></div>
-
     </div>
 
     <main class="max-w:1200 mx:auto p:20|5% mt:20">
@@ -253,10 +218,10 @@
             </div>
 
             <div class="flex flex:col flex:row@sm justify-content:center gap:20">
-                <button class="btn-primary bg:teal-60 color:white f:16 fw:600 p:16|40 r:12 border:none cursor:pointer shadow:md">
+                <button class="bg:teal-60 color:white f:16 fw:600 p:16|40 r:12 border:none cursor:pointer shadow:md transition:all|0.3s transform:translateY(-4)@hover transform:scale(1.05)@hover">
                     Start Discovering
                 </button>
-                <button class="btn-secondary bg:white bg:black@dark color:black color:white@dark f:16 fw:600 p:16|40 r:12 border:1|solid|gray-20 border:1|solid|gray-70@dark cursor:pointer">
+                <button class="bg:white bg:black@dark color:black color:white@dark f:16 fw:600 p:16|40 r:12 border:1|solid|gray-20 border:1|solid|gray-70@dark cursor:pointer transition:all|0.3s transform:translateY(-4)@hover border-color:teal-60@hover color:teal-60@hover transform:scale(1.05)@hover">
                     My Dashboard
                 </button>
             </div>
@@ -266,9 +231,9 @@
             <h2 class="f:32 f:40@md fw:800 m:0 mb:40 text:center letter-spacing:-0.5 color:black color:white@dark transition:0.3s">Explore By Vibe</h2>
             <div class="grid grid-cols:1 grid-cols:3@md gap:30">
                 
-                <div class="vibe-card bg:white bg:black@dark r:20 overflow:hidden shadow:sm cursor:pointer">
+                <div class="group bg:white bg:black@dark r:20 overflow:hidden shadow:sm cursor:pointer transition:all|0.4s border:1|solid|transparent border-color:#333@dark transform:translateY(-10)@hover shadow:0|25|50|-12|rgba(0,0,0,0.25)@hover border-color:teal-40@hover">
                     <div class="h:250 overflow:hidden relative">
-                        <img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=600&q=80" class="w:full h:full obj:cover">
+                        <img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=600&q=80" class="w:full h:full obj:cover transition:transform|0.6s|ease-in-out transform:scale(1) transform:scale(1.1)@group-hover">
                     </div>
                     <div class="p:25 text:center">
                         <h3 class="f:22 fw:700 m:0 mb:10 color:black color:white@dark transition:0.3s">Mountain Retreat</h3>
@@ -276,9 +241,9 @@
                     </div>
                 </div>
 
-                <div class="vibe-card bg:white bg:black@dark r:20 overflow:hidden shadow:sm cursor:pointer">
+                <div class="group bg:white bg:black@dark r:20 overflow:hidden shadow:sm cursor:pointer transition:all|0.4s border:1|solid|transparent border-color:#333@dark transform:translateY(-10)@hover shadow:0|25|50|-12|rgba(0,0,0,0.25)@hover border-color:teal-40@hover">
                     <div class="h:250 overflow:hidden relative">
-                        <img src="https://images.unsplash.com/photo-1499793983690-e29da59ef1c2?auto=format&fit=crop&w=600&q=80" class="w:full h:full obj:cover">
+                        <img src="https://images.unsplash.com/photo-1499793983690-e29da59ef1c2?auto=format&fit=crop&w=600&q=80" class="w:full h:full obj:cover transition:transform|0.6s|ease-in-out transform:scale(1) transform:scale(1.1)@group-hover">
                     </div>
                     <div class="p:25 text:center">
                         <h3 class="f:22 fw:700 m:0 mb:10 color:black color:white@dark transition:0.3s">Tropical Paradise</h3>
@@ -286,9 +251,9 @@
                     </div>
                 </div>
 
-                <div class="vibe-card bg:white bg:black@dark r:20 overflow:hidden shadow:sm cursor:pointer">
+                <div class="group bg:white bg:black@dark r:20 overflow:hidden shadow:sm cursor:pointer transition:all|0.4s border:1|solid|transparent border-color:#333@dark transform:translateY(-10)@hover shadow:0|25|50|-12|rgba(0,0,0,0.25)@hover border-color:teal-40@hover">
                     <div class="h:250 overflow:hidden relative">
-                        <img src="https://images.unsplash.com/photo-1449844908441-8829872d2607?auto=format&fit=crop&w=600&q=80" class="w:full h:full obj:cover">
+                        <img src="https://images.unsplash.com/photo-1449844908441-8829872d2607?auto=format&fit=crop&w=600&q=80" class="w:full h:full obj:cover transition:transform|0.6s|ease-in-out transform:scale(1) transform:scale(1.1)@group-hover">
                     </div>
                     <div class="p:25 text:center">
                         <h3 class="f:22 fw:700 m:0 mb:10 color:black color:white@dark transition:0.3s">City Escapes</h3>
@@ -317,7 +282,8 @@
                 <div>
                     <h4 class="f:16 fw:700 mb:20 color:black color:white@dark transition:color|0.3s">Explore</h4>
                     <div class="flex flex:col gap:10 f:14">
-                        <a href="#" class="color:gray-60 color:gray-40@dark color:teal-60@hover transition:0.2s">Directions</a>
+                        <a href="#" class="color:gray-60 color:gray-40@dark color:teal-60@hover transition:0.2s">Destinations</a>
+                        <a href="#" class="color:gray-60 color:gray-40@dark color:teal-60@hover transition:0.2s">Experiences</a>
                         <a href="#" class="color:gray-60 color:gray-40@dark color:teal-60@hover transition:0.2s">Travel Guides</a>
                     </div>
                 </div>
@@ -334,15 +300,16 @@
 
             <div class="border-top:1|solid|gray-20 border-top:1|solid|gray-80@dark pt:30 flex flex:col flex:row@md justify-content:space-between align-items:center gap:20 text:center text:left@md transition:border|0.3s">
                 <p class="f:14 color:gray-50 color:gray-40@dark m:0 transition:color|0.3s">
-                    © Ձθ77 Travelaroha. All rights reserved.
+                    © 2077 Travelaroha. All rights reserved.
                 </p>
                 <p class="f:14 fw:600 color:teal-60 m:0 letter-spacing:1 text:right@md">
-                    Organized by TW-Limited Corporation © Ձθ77
+                    Organized by TW-MASTER Corporation ©2077
                 </p>
             </div>
             
         </div>
     </footer>
+
     <script>
         function toggleMobileMenu() {
             const menu = document.getElementById('mobile-menu');
