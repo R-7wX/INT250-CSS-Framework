@@ -7,7 +7,7 @@ import path from 'path'
 export default defineConfig({
   plugins: [
     vue(),
-    tailwindcss(), // Integrated Tailwind v4 plugin
+    tailwindcss() // Integrated Tailwind v4 plugin
   ],
   resolve: {
     alias: {

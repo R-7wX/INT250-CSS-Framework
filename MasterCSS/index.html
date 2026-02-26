@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Traveloha</title>
+    <link rel="icon" type="image/png" href="src/favicon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <script src="https://unpkg.com/@master/css"></script>
+
+    <style>
+        body { font-family: 'Poppins', sans-serif; }
+        a { text-decoration: none; }
+        
+        .hero-slider-box {
+            position: relative;
+            width: 100%;
+            height: 300px;
+            border-radius: 24px;
+            overflow: hidden;
+            background-color: #000;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+            margin-bottom: 40px;
+            z-index: 10;
+        }
+        @media (min-width: 768px) {
+            .hero-slider-box { height: 500px; }
+        }
+
+        .slider-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background-color: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(4px);
+            border: 2px solid rgba(255, 255, 255, 0.7);
+            color: white;
+            font-size: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 50;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .slider-btn.prev { left: 15px; }
+        .slider-btn.next { right: 15px; }
+        @media (min-width: 768px) {
+            .slider-btn.prev { left: 25px; }
+            .slider-btn.next { right: 25px; }
+        }
+
+        .hero-slider-box:hover .slider-btn {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .slider-btn:hover {
+            background-color: rgba(0, 0, 0, 0.8);
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        @media (max-width: 768px) {
+            .slider-btn {
+                opacity: 1;
+                visibility: visible;
+            }
+        }
+
+        .slide {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            opacity: 0;
+            transition: opacity 0.8s ease-in-out, transform 5s linear;
+            z-index: 1;
+            transform: scale(1);
+        }
+        .slide.active {
+            opacity: 1;
+            z-index: 2;
+            transform: scale(1.05);
+        }
+        
+        .dot {
+            width: 8px; height: 8px;
+            background-color: rgba(255, 255, 255, 0.4);
+            border-radius: 99px;
+            display: inline-block;
+            transition: all 0.4s ease;
+            cursor: pointer;
+            margin: 0 3px;
+            position: relative;
+            z-index: 50;
+        }
+        .dot.active {
+            width: 24px;
+            background-color: rgba(255, 255, 255, 1);
+        }
+
+        /* 1. ปุ่ม Start Discovering */
+        .btn-primary {
+            transition: all 0.3s ease;
+        }
+        .btn-primary:hover {
+            transform: translateY(-4px) scale(1.05);
+            box-shadow: 0 10px 20px rgba(13, 148, 136, 0.4);
+        }
+
+        /* 2. ปุ่ม My Dashboard */
+        .btn-secondary {
+            transition: all 0.3s ease;
+        }
+        .btn-secondary:hover {
+            transform: translateY(-4px) scale(1.05);
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+            border-color: #0d9488 !important;
+            color: #0d9488 !important;
+        }
+
+        /* 3. การ์ดสถานที่ (Explore By Vibe) */
+        .vibe-card {
+            transition: all 0.4s ease;
+            border: 1px solid transparent;
+        }
+        /* สีขอบตอนเป็น Dark Mode */
+        .dark .vibe-card { border-color: #333333; }
+        
+        /* เมื่อเอาเมาส์ชี้ที่การ์ด */
+        .vibe-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            border-color: #2dd4bf !important;
+        }
+        
+        /* รูปภาพข้างในการ์ด */
+        .vibe-card img {
+            transition: transform 0.6s ease-in-out;
+            transform: scale(1);
+        }
+        /* รูปภาพจะซูมเข้าเฉพาะตอนเอาเมาส์ชี้ที่การ์ดเท่านั้น */
+        .vibe-card:hover img {
+            transform: scale(1.1);
+        }
+        /* ----------------------------------------------------------------- */
+
+        /* CSS สำหรับ 3D Toggle Switch */
+        .toggle * { box-sizing: border-box; }
+        #hide-checkbox { opacity: 0; height: 0; width: 0; position: absolute; }
+        .toggle {
+            position: relative; cursor: pointer; display: inline-block;
+            width: 200px; height: 100px; background: #211042;
+            border-radius: 50px; transition: 500ms; overflow: hidden;
+            box-shadow: 0 10px 15px -3px rgba(0,0,0,0.3);
+        }
+        .toggle-button {
+            position: absolute; display: inline-block; top: 7px; left: 6px;
+            width: 86px; height: 86px; border-radius: 50%; background: #FAEAF1;
+            overflow: hidden; box-shadow: 0 0 35px 4px rgba(255, 255, 255);
+            transition: all 500ms ease-out; z-index: 10;
+        }
+        .crater {
+            position: absolute; display: inline-block; background: #FAEAF1;
+            border-radius: 50%; transition: 500ms;
+        }
+        .crater-1 { background: #FFFFF9; width: 86px; height: 86px; left: 10px; bottom: 10px; }
+        .crater-2 { width: 20px; height: 20px; top: -7px; left: 44px; }
+        .crater-3 { width: 16px; height: 16px; top: 20px; right: -4px; }
+        .crater-4 { width: 10px; height: 10px; top: 24px; left: 30px; }
+        .crater-5 { width: 15px; height: 15px; top: 40px; left: 48px; }
+        .crater-6 { width: 10px; height: 10px; top: 48px; left: 20px; }
+        .crater-7 { width: 12px; height: 12px; bottom: 5px; left: 35px; }
+        
+        .star {
+            position: absolute; display: inline-block; border-radius: 50%;
+            background: #FFF; box-shadow: 1px 0 2px 2px rgba(255, 255, 255);
+        }
+        .star-1 { width: 6px; height: 6px; right: 90px; bottom: 40px; }
+        .star-2 { width: 8px; height: 8px; right: 70px; top: 10px; }
+        .star-3 { width: 5px; height: 5px; right: 60px; bottom: 15px; }
+        .star-4 { width: 3px; height: 3px; right: 40px; bottom: 50px; }
+        .star-5 { width: 4px; height: 4px; right: 10px; bottom: 35px; }
+        .star-6, .star-7, .star-8 {
+            width: 10px; height: 2px; border-radius: 2px; transform: rotate(-45deg);
+            box-shadow: 5px 0px 4px 1px #FFF; animation-name: travel;
+            animation-duration: 1.5s; animation-timing-function: ease-out; animation-iteration-count: infinite;
+        }
+        .star-6 { right: 30px; bottom: 30px; animation-delay: -2s; }
+        .star-7 { right: 50px; bottom: 60px; }
+        .star-8 { right: 90px; top: 10px; animation-delay: -4s; }
+        
+        @keyframes travel {
+            0% { transform: rotate(-45deg) translateX(70px); }
+            50% { transform: rotate(-45deg) translateX(-20px); box-shadow: 5px 0px 6px 1px #FFF; }
+            100% { transform: rotate(-45deg) translateX(-30px); width: 2px; height: 2px; opacity: 0; box-shadow: none; }
+        }
+        
+        #hide-checkbox:checked + .toggle { background: #24D7F7; }
+        #hide-checkbox:checked + .toggle .toggle-button {
+            background: #F7FFFF; transform: translateX(102px); box-shadow: 0 0 35px 5px rgba(255, 255, 255);
+        }
+        #hide-checkbox:checked + .toggle .toggle-button .crater { transform: rotate(-45deg) translateX(70px); }
+        #hide-checkbox:checked + .toggle .star { animation: move 2s infinite; transform: none; box-shadow: none; }
+        #hide-checkbox:checked + .toggle .star-1 { width: 40px; height: 10px; border-radius: 10px; background: #FFF; left: 20px; top: 25px; box-shadow: none; }
+        #hide-checkbox:checked + .toggle .star-2 { width: 12px; height: 12px; background: #FFF; left: 26px; top: 23px; box-shadow: -1px 0 2px 0 rgba(0,0,0,0.1); }
+        #hide-checkbox:checked + .toggle .star-3 { width: 16px; height: 16px; background: #FFF; left: 35px; top: 19px; box-shadow: -1px 0 2px 0 rgba(0,0,0,0.1); }
+        #hide-checkbox:checked + .toggle .star-4 { width: 14px; height: 14px; background: #FFF; left: 46px; top: 21px; box-shadow: -1px 0 2px 0 rgba(0,0,0,0.1); }
+        #hide-checkbox:checked + .toggle .star-5 { width: 60px; height: 15px; border-radius: 15px; background: #FFF; left: 30px; bottom: 20px; box-shadow: none; }
+        #hide-checkbox:checked + .toggle .star-6 { width: 18px; height: 18px; background: #FFF; border-radius: 50%; left: 38px; bottom: 20px; box-shadow: -1px 0 2px 0 rgba(0,0,0,0.1); }
+        #hide-checkbox:checked + .toggle .star-7 { width: 24px; height: 24px; background: #FFF; border-radius: 50%; left: 52px; bottom: 20px; box-shadow: -1px 0 2px 0 rgba(0,0,0,0.1); }
+        #hide-checkbox:checked + .toggle .star-8 { width: 21px; height: 21px; background: #FFF; border-radius: 50%; left: 70px; top: 59px; box-shadow: -1px 0 2px 0 rgba(0,0,0,0.1); }
+        
+        @keyframes move {
+            0% { transform: none; }
+            25% { transform: translateX(2px); }
+            100% { transform: translateX(-2px); }
+        }
+    </style>
+</head>
+
+<body class="bg:gray-5 bg:black@dark m:0 transition:bg|0.3s">
+
+    <nav class="flex justify-content:space-between align-items:center p:15|5% bg:white bg:black@dark border-bottom:1|solid|gray-20 border-bottom:1|solid|gray-80@dark sticky top:0 z:50 transition:0.3s">
+        
+        <a href="#" class="flex align-items:center">
+            <img src="src/logo.png" alt="Travelaroha Logo" class="h:60 h:75@md w:auto obj:contain filter:brightness(0)|invert(1)@dark transition:0.3s">
+        </a>
+        
+        <div class="flex align-items:center gap:20 gap:40@md">
+            
+            <div class="w:70 h:35 relative flex-shrink:0">
+                <div class="absolute top:0 left:0 transform:scale(0.35) transform-origin:top|left scale(0.38)@hover transition:transform|0.3s">
+                    <input type="checkbox" id="hide-checkbox" checked onchange="document.documentElement.classList.toggle('dark')">
+                    <label for="hide-checkbox" class="toggle">
+                        <span class="toggle-button">
+                            <span class="crater crater-1"></span><span class="crater crater-2"></span>
+                            <span class="crater crater-3"></span><span class="crater crater-4"></span>
+                            <span class="crater crater-5"></span><span class="crater crater-6"></span>
+                            <span class="crater crater-7"></span>
+                        </span>
+                        <span class="star star-1"></span><span class="star star-2"></span>
+                        <span class="star star-3"></span><span class="star star-4"></span>
+                        <span class="star star-5"></span><span class="star star-6"></span>
+                        <span class="star star-7"></span><span class="star star-8"></span>
+                    </label>
+                </div>
+            </div>
+
+            <div class="hide flex@md gap:40 f:15 fw:600 uppercase letter-spacing:1">
+                <a href="#" class="color:gray-60 color:white@dark color:teal-60@hover transition:0.2s">Destinations</a>
+                <a href="#" class="color:gray-60 color:white@dark color:teal-60@hover transition:0.2s">Experiences</a>
+                <a href="#" class="color:gray-60 color:white@dark color:teal-60@hover transition:0.2s">About Us</a>
+                <a href="#" class="color:gray-60 color:white@dark color:teal-60@hover transition:0.2s">My Trips</a>
+            </div>
+
+            <div class="hide@md f:28 cursor:pointer color:black color:white@dark">☰</div>
+        </div>
+    </nav>
+
+    <main class="max-w:1200 mx:auto p:20|5% mt:20">
+
+        <section class="text:center mb:80 mt:20">
+            <h1 class="f:40 f:64@md fw:900 m:0 mb:20 line-height:1.2 letter-spacing:-1 color:black color:white@dark transition:0.3s">
+                Discover the <span class="color:teal-60 color:teal-40@dark transition:0.3s">Unseen World</span>
+            </h1>
+            
+            <p class="f:16 f:20@md color:gray-60 color:gray-30@dark max-w:700 mx:auto mb:40 line-height:1.6 fw:400 transition:0.3s">
+                Your journey begins here. Explore breathtaking destinations and curated experiences designed for the modern traveler.
+            </p>
+            
+            <div class="hero-slider-box">
+                <div class="slide active"><img src="https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&w=1200&q=80" class="w:full h:full obj:cover"></div>
+                <div class="slide"><img src="https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?auto=format&fit=crop&w=1200&q=80" class="w:full h:full obj:cover"></div>
+                <div class="slide"><img src="https://images.unsplash.com/photo-1504150558240-0b4fd8946624?auto=format&fit=crop&w=1200&q=80" class="w:full h:full obj:cover"></div>
+                <div class="slide"><img src="https://images.unsplash.com/photo-1447752875215-b2761acb3c5d?auto=format&fit=crop&w=1200&q=80" class="w:full h:full obj:cover"></div>
+                <div class="slide"><img src="https://images.unsplash.com/photo-1433086966358-54859d0ed716?auto=format&fit=crop&w=1200&q=80" class="w:full h:full obj:cover"></div>
+                <div class="slide"><img src="https://images.unsplash.com/photo-1465146344425-f00d5f5c8f07?auto=format&fit=crop&w=1200&q=80" class="w:full h:full obj:cover"></div>
+                <div class="slide"><img src="https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=1200&q=80" class="w:full h:full obj:cover"></div>
+                <div class="slide"><img src="https://images.unsplash.com/photo-1426604966848-d7adac402bff?auto=format&fit=crop&w=1200&q=80" class="w:full h:full obj:cover"></div>
+                <div class="slide"><img src="https://images.unsplash.com/photo-1472214103451-9374bd1c798e?auto=format&fit=crop&w=1200&q=80" class="w:full h:full obj:cover"></div>
+                <div class="slide"><img src="https://images.unsplash.com/photo-1606918801925-e2c914c4b503?auto=format&fit=crop&w=1200&q=80" class="w:full h:full obj:cover"></div>
+
+                <div class="absolute bottom:0 left:0 w:full h:40% bg:linear-gradient(180deg,transparent,rgba(0,0,0,0.6)) z:15 pointer-events:none"></div>
+
+                <button onclick="changeSlide(-1)" class="slider-btn prev">❮</button>
+                <button onclick="changeSlide(1)" class="slider-btn next">❯</button>
+
+                <div class="absolute bottom:20 left:50% translateX(-50%) flex align-items:center z:20">
+                    <span class="dot active" onclick="goToSlide(0)"></span> 
+                    <span class="dot" onclick="goToSlide(1)"></span> 
+                    <span class="dot" onclick="goToSlide(2)"></span> 
+                    <span class="dot" onclick="goToSlide(3)"></span> 
+                    <span class="dot" onclick="goToSlide(4)"></span> 
+                    <span class="dot" onclick="goToSlide(5)"></span> 
+                    <span class="dot" onclick="goToSlide(6)"></span> 
+                    <span class="dot" onclick="goToSlide(7)"></span> 
+                    <span class="dot" onclick="goToSlide(8)"></span> 
+                    <span class="dot" onclick="goToSlide(9)"></span> 
+                </div>
+
+            </div>
+
+            <div class="flex flex:col flex:row@sm justify-content:center gap:20">
+                <button class="btn-primary bg:teal-60 color:white f:16 fw:600 p:16|40 r:12 border:none cursor:pointer shadow:md">
+                    Start Discovering
+                </button>
+                <button class="btn-secondary bg:white bg:black@dark color:black color:white@dark f:16 fw:600 p:16|40 r:12 border:1|solid|gray-20 border:1|solid|gray-70@dark cursor:pointer hide block@sm">
+                    My Dashboard
+                </button>
+            </div>
+        </section>
+
+        <section class="mb:80">
+            <h2 class="f:32 f:40@md fw:800 m:0 mb:40 text:center letter-spacing:-0.5 color:black color:white@dark transition:0.3s">Explore By Vibe</h2>
+            <div class="grid grid-cols:1 grid-cols:3@md gap:30">
+                
+                <div class="vibe-card bg:white bg:black@dark r:20 overflow:hidden shadow:sm cursor:pointer">
+                    <div class="h:250 overflow:hidden relative">
+                        <img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=600&q=80" class="w:full h:full obj:cover">
+                    </div>
+                    <div class="p:25 text:center">
+                        <h3 class="f:22 fw:700 m:0 mb:10 color:black color:white@dark transition:0.3s">Mountain Retreat</h3>
+                        <p class="f:14 color:gray-60 color:gray-30@dark m:0 transition:0.3s">Escape to the peaceful peaks.</p>
+                    </div>
+                </div>
+
+                <div class="vibe-card bg:white bg:black@dark r:20 overflow:hidden shadow:sm cursor:pointer">
+                    <div class="h:250 overflow:hidden relative">
+                        <img src="https://images.unsplash.com/photo-1499793983690-e29da59ef1c2?auto=format&fit=crop&w=600&q=80" class="w:full h:full obj:cover">
+                    </div>
+                    <div class="p:25 text:center">
+                        <h3 class="f:22 fw:700 m:0 mb:10 color:black color:white@dark transition:0.3s">Tropical Paradise</h3>
+                        <p class="f:14 color:gray-60 color:gray-30@dark m:0 transition:0.3s">Crystal clear waters await.</p>
+                    </div>
+                </div>
+
+                <div class="vibe-card bg:white bg:black@dark r:20 overflow:hidden shadow:sm cursor:pointer">
+                    <div class="h:250 overflow:hidden relative">
+                        <img src="https://images.unsplash.com/photo-1449844908441-8829872d2607?auto=format&fit=crop&w=600&q=80" class="w:full h:full obj:cover">
+                    </div>
+                    <div class="p:25 text:center">
+                        <h3 class="f:22 fw:700 m:0 mb:10 color:black color:white@dark transition:0.3s">City Escapes</h3>
+                        <p class="f:14 color:gray-60 color:gray-30@dark m:0 transition:0.3s">Discover urban adventures.</p>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <script>
+        let currentIndex = 0;
+        const slides = document.querySelectorAll('.slide');
+        const dots = document.querySelectorAll('.dot');
+        let autoPlayInterval;
+
+        function updateSlider() {
+            slides.forEach(slide => slide.classList.remove('active'));
+            dots.forEach(dot => dot.classList.remove('active'));
+            slides[currentIndex].classList.add('active');
+            dots[currentIndex].classList.add('active');
+        }
+
+        function changeSlide(direction) {
+            currentIndex += direction;
+            if (currentIndex < 0) currentIndex = slides.length - 1;
+            if (currentIndex >= slides.length) currentIndex = 0;
+            updateSlider();
+            resetAutoPlay();
+        }
+
+        function goToSlide(index) {
+            currentIndex = index;
+            updateSlider();
+            resetAutoPlay();
+        }
+
+        function startAutoPlay() {
+            autoPlayInterval = setInterval(() => {
+                changeSlide(1);
+            }, 5000); 
+        }
+
+        function resetAutoPlay() {
+            clearInterval(autoPlayInterval);
+            startAutoPlay();
+        }
+
+        startAutoPlay();
+    </script>
+
+</body>
+</html>
