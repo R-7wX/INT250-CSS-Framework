@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Traveloha - Discovery</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = { 
+            darkMode: 'class', 
+            theme: { 
+                extend: { 
+                    colors: { 
+                        brand: { 
+                            50: '#f4f5f4', 
+                            100: '#e6e9e6', 
+                            500: '#8ba888',
+                            600: '#6b8a68', 
+                            900: '#3a4a39' 
+                        } 
+                    } 
+                } 
+            } 
+        }
+    </script>
+    <script>if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) document.documentElement.classList.add('dark'); else document.documentElement.classList.remove('dark');</script>
+    <style>
+        * { box-sizing: border-box; } #hide-checkbox { opacity: 0; height: 0; width: 0; position: absolute; } .toggle { position: relative; cursor: pointer; display: inline-block; width: 200px; height: 100px; background: #211042; border-radius: 50px; transition: 500ms; overflow: hidden; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.3); } .toggle-button { position: absolute; display: inline-block; top: 7px; left: 6px; width: 86px; height: 86px; border-radius: 50%; background: #FAEAF1; overflow: hidden; box-shadow: 0 0 35px 4px rgba(255, 255, 255); transition: all 500ms ease-out; z-index: 10; } .crater { position: absolute; display: inline-block; background: #FAEAF1; border-radius: 50%; transition: 500ms; } .crater-1 { background: #FFFFF9; width: 86px; height: 86px; left: 10px; bottom: 10px; } .crater-2 { width: 20px; height: 20px; top: -7px; left: 44px; } .crater-3 { width: 16px; height: 16px; top: 20px; right: -4px; } .crater-4 { width: 10px; height: 10px; top: 24px; left: 30px; } .crater-5 { width: 15px; height: 15px; top: 40px; left: 48px; } .crater-6 { width: 10px; height: 10px; top: 48px; left: 20px; } .crater-7 { width: 12px; height: 12px; bottom: 5px; left: 35px; } .star { position: absolute; display: inline-block; border-radius: 50%; background: #FFF; box-shadow: 1px 0 2px 2px rgba(255, 255, 255); } .star-1 { width: 6px; height: 6px; right: 90px; bottom: 40px; } .star-2 { width: 8px; height: 8px; right: 70px; top: 10px; } .star-3 { width: 5px; height: 5px; right: 60px; bottom: 15px; } .star-4 { width: 3px; height: 3px; right: 40px; bottom: 50px; } .star-5 { width: 4px; height: 4px; right: 10px; bottom: 35px; } .star-6, .star-7, .star-8 { width: 10px; height: 2px; border-radius: 2px; transform: rotate(-45deg); box-shadow: 5px 0px 4px 1px #FFF; animation-name: travel; animation-duration: 1.5s; animation-timing-function: ease-out; animation-iteration-count: infinite; } .star-6 { right: 30px; bottom: 30px; animation-delay: -2s; } .star-7 { right: 50px; bottom: 60px; } .star-8 { right: 90px; top: 10px; animation-delay: -4s; } @keyframes travel { 0% { transform: rotate(-45deg) translateX(70px); } 50% { transform: rotate(-45deg) translateX(-20px); box-shadow: 5px 0px 6px 1px #FFF; } 100% { transform: rotate(-45deg) translateX(-30px); width: 2px; height: 2px; opacity: 0; box-shadow: none; } } #hide-checkbox:checked + .toggle { background: #24D7F7; } #hide-checkbox:checked + .toggle .toggle-button { background: #F7FFFF; transform: translateX(102px); box-shadow: 0 0 35px 5px rgba(255, 255, 255); }
+        
+        .glass-panel { 
+            background: rgba(255, 255, 255, 0.65); 
+            backdrop-filter: blur(16px); 
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.5); 
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
+        } 
+        .dark .glass-panel { 
+            background: rgba(24, 24, 27, 0.7); 
+            border: 1px solid rgba(255, 255, 255, 0.08); 
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+        }
+        ::-webkit-scrollbar { width: 6px; height: 6px; } ::-webkit-scrollbar-thumb { background-color: #d4d4d8; border-radius: 10px; } .dark ::-webkit-scrollbar-thumb { background-color: #3f3f46; }
+        .scrollbar-hide::-webkit-scrollbar { display: none; } .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+
+        /* 🌿 Beautiful Earth-tone Background */
+        body {
+            background-color: #f2efe8;
+            background-image:
+                radial-gradient(ellipse 90% 70% at 10% 30%, rgba(139, 168, 136, 0.22) 0%, transparent 55%),
+                radial-gradient(ellipse 70% 60% at 90% 10%, rgba(196, 181, 148, 0.18) 0%, transparent 50%),
+                radial-gradient(ellipse 80% 70% at 50% 90%, rgba(152, 186, 148, 0.15) 0%, transparent 55%),
+                radial-gradient(ellipse 50% 40% at 75% 55%, rgba(210, 200, 175, 0.12) 0%, transparent 40%);
+        }
+        html.dark body {
+            background-color: #111912;
+            background-image:
+                radial-gradient(ellipse 90% 70% at 10% 30%, rgba(58, 74, 57, 0.4) 0%, transparent 55%),
+                radial-gradient(ellipse 70% 60% at 90% 10%, rgba(35, 55, 35, 0.3) 0%, transparent 50%),
+                radial-gradient(ellipse 80% 70% at 50% 90%, rgba(45, 65, 42, 0.25) 0%, transparent 55%);
+        }
+    </style>
+</head>
+<body class="text-zinc-800 dark:text-zinc-300 transition-colors duration-500 pb-20">
+
+    <nav class="sticky top-4 z-50 glass-panel shadow-sm flex justify-between items-center max-w-7xl mx-auto px-6 py-4 rounded-3xl transition-all duration-500">
+        <div class="flex items-center gap-3">
+            <img src="src/logo.png" alt="Travelaroha Logo" class="w-10 h-10 rounded-full object-cover border-2 border-brand-500 shadow-sm bg-white">
+            <div class="font-bold text-brand-600 dark:text-brand-500 text-2xl tracking-tight">Travelaroha</div>
+        </div>
+        
+        <div class="hidden md:flex gap-8 font-medium text-zinc-500 dark:text-zinc-400">
+            <a href="index.html" class="relative px-1 py-2 text-zinc-900 dark:text-white font-bold transition-colors">
+                DISCOVERY
+                <span class="absolute -bottom-1 left-0 w-full h-[2px] bg-zinc-900 dark:bg-white rounded-full"></span>
+            </a>
+            <a href="storyboard.html" class="relative group px-1 py-2 hover:text-zinc-900 dark:hover:text-white transition-colors">
+                TRIP STORYBOARD
+                <span class="absolute -bottom-1 left-0 w-0 h-[2px] bg-zinc-300 dark:bg-zinc-600 rounded-full transition-all duration-300 group-hover:w-full"></span>
+            </a>
+            <a href="dashboard.html" class="relative group px-1 py-2 hover:text-zinc-900 dark:hover:text-white transition-colors">
+                DASHBOARD
+                <span class="absolute -bottom-1 left-0 w-0 h-[2px] bg-zinc-300 dark:bg-zinc-600 rounded-full transition-all duration-300 group-hover:w-full"></span>
+            </a>
+            <a href="checklist.html" class="relative group px-1 py-2 hover:text-zinc-900 dark:hover:text-white transition-colors">
+                CHECKLIST
+                <span class="absolute -bottom-1 left-0 w-0 h-[2px] bg-zinc-300 dark:bg-zinc-600 rounded-full transition-all duration-300 group-hover:w-full"></span>
+            </a>
+        </div>
+        
+        <div class="flex items-center gap-4">
+            <div class="w-[80px] h-[40px] flex items-center justify-center overflow-hidden">
+                <div style="transform: scale(0.4); transform-origin: center;">
+                    <input type="checkbox" id="hide-checkbox" class="theme-toggle">
+                    <label for="hide-checkbox" class="toggle m-0"><span class="toggle-button"><span class="crater crater-1"></span></span><span class="star star-1"></span></label>
+                </div>
+            </div>
+            <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=100&q=80" alt="Profile" class="w-10 h-10 rounded-full object-cover shadow-md border-2 border-white dark:border-zinc-800 cursor-pointer hover:scale-105 transition-transform">
+        </div>
+    </nav>
+
+    <main class="max-w-7xl mx-auto mt-12 p-4 space-y-6">
+        <div>
+            <h2 class="text-3xl font-bold">Discover Vibes</h2>
+            <p class="text-slate-500 dark:text-slate-400 mt-1">หาแรงบันดาลใจและบันทึกสถานที่ที่คุณชอบ</p>
+        </div>
+        
+        <div id="filter-container" class="flex gap-3 overflow-x-auto pb-4 scrollbar-hide">
+            <button data-vibe="All" class="filter-btn active px-5 py-2.5 rounded-full text-sm font-medium shadow-sm whitespace-nowrap transition-all border bg-white dark:bg-zinc-800 border-zinc-200 dark:border-zinc-700 text-zinc-600 dark:text-zinc-300 hover:bg-brand-500 hover:text-white hover:border-brand-500 dark:hover:bg-brand-500 dark:hover:text-white [&.active]:bg-brand-500 [&.active]:text-white [&.active]:border-brand-500 dark:[&.active]:bg-brand-500">ทั้งหมด (All)</button>
+            <button data-vibe="Urban Adventure" class="filter-btn px-5 py-2.5 rounded-full text-sm font-medium shadow-sm whitespace-nowrap transition-all border bg-white dark:bg-zinc-800 border-zinc-200 dark:border-zinc-700 text-zinc-600 dark:text-zinc-300 hover:bg-slate-500 hover:text-white hover:border-slate-500 dark:hover:bg-slate-500 dark:hover:text-white [&.active]:bg-slate-500 [&.active]:text-white [&.active]:border-slate-500 dark:[&.active]:bg-slate-500">🏙️ Urban Adventure</button>
+            <button data-vibe="Slow Living" class="filter-btn px-5 py-2.5 rounded-full text-sm font-medium shadow-sm whitespace-nowrap transition-all border bg-white dark:bg-zinc-800 border-zinc-200 dark:border-zinc-700 text-zinc-600 dark:text-zinc-300 hover:bg-amber-600 hover:text-white hover:border-amber-600 dark:hover:bg-amber-600 dark:hover:text-white [&.active]:bg-amber-600 [&.active]:text-white [&.active]:border-amber-600 dark:[&.active]:bg-amber-600">☕ Slow Living</button>
+            <button data-vibe="Nature Retreat" class="filter-btn px-5 py-2.5 rounded-full text-sm font-medium shadow-sm whitespace-nowrap transition-all border bg-white dark:bg-zinc-800 border-zinc-200 dark:border-zinc-700 text-zinc-600 dark:text-zinc-300 hover:bg-emerald-600 hover:text-white hover:border-emerald-600 dark:hover:bg-emerald-600 dark:hover:text-white [&.active]:bg-emerald-600 [&.active]:text-white [&.active]:border-emerald-600 dark:[&.active]:bg-emerald-600">🌲 Nature Retreat</button>
+            <button data-vibe="Foodie Tour" class="filter-btn px-5 py-2.5 rounded-full text-sm font-medium shadow-sm whitespace-nowrap transition-all border bg-white dark:bg-zinc-800 border-zinc-200 dark:border-zinc-700 text-zinc-600 dark:text-zinc-300 hover:bg-rose-500 hover:text-white hover:border-rose-500 dark:hover:bg-rose-500 dark:hover:text-white [&.active]:bg-rose-500 [&.active]:text-white [&.active]:border-rose-500 dark:[&.active]:bg-rose-500">🍣 Foodie Tour</button>
+            <button data-vibe="Beach Getaway" class="filter-btn px-5 py-2.5 rounded-full text-sm font-medium shadow-sm whitespace-nowrap transition-all border bg-white dark:bg-zinc-800 border-zinc-200 dark:border-zinc-700 text-zinc-600 dark:text-zinc-300 hover:bg-cyan-500 hover:text-white hover:border-cyan-500 dark:hover:bg-cyan-500 dark:hover:text-white [&.active]:bg-cyan-500 [&.active]:text-white [&.active]:border-cyan-500 dark:[&.active]:bg-cyan-500">🏖️ Beach Getaway</button>
+        </div>
+
+        <div id="places-canvas" class="grid grid-cols-2 md:grid-cols-4 gap-4 auto-rows-[200px] transition-all duration-500"></div>
+    </main>
+
+    <script>
+        const toggleInput = document.getElementById('hide-checkbox');
+        if (document.documentElement.classList.contains('dark')) toggleInput.checked = false; else toggleInput.checked = true;
+        toggleInput.addEventListener('change', (e) => {
+            if (e.target.checked) { document.documentElement.classList.remove('dark'); localStorage.setItem('theme', 'light'); } 
+            else { document.documentElement.classList.add('dark'); localStorage.setItem('theme', 'dark'); }
+        });
+
+        // ฐานข้อมูล 20 สถานที่
+        const placesData = [
+            { name: 'ปารีส, ฝรั่งเศส',        vibe: 'Urban Adventure', emoji: '🏙️', img: 'https://images.unsplash.com/photo-1499856871958-5b9627545d1a?auto=format&fit=crop&w=800&q=80', desc: 'เดินเล่นริมแม่น้ำแซนและชมสถาปัตยกรรม' },
+            { name: 'ดูไบ, UAE',               vibe: 'Urban Adventure', emoji: '🏙️', img: 'https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=800&q=80', desc: 'แสงสียามค่ำคืนในมหานครสุดล้ำ' },
+            { name: 'กรุงเทพฯ, ไทย',           vibe: 'Urban Adventure', emoji: '🏙️', img: 'https://images.unsplash.com/photo-1508009603885-50cf7c579365?auto=format&fit=crop&w=800&q=80', desc: 'สตรีทฟู้ดและวัฒนธรรมที่ไม่มีที่ไหนเหมือน' },
+            { name: 'โซล, เกาหลีใต้',          vibe: 'Urban Adventure', emoji: '🏙️', img: 'https://images.unsplash.com/photo-1517154421773-0529f29ea451?auto=format&fit=crop&w=800&q=80', desc: 'K-culture ตึกระฟ้า และอาหารอร่อย' },
+            { name: 'นิวยอร์ก, สหรัฐอเมริกา', vibe: 'Urban Adventure', emoji: '🏙️', img: 'https://images.unsplash.com/photo-1496442226666-8d4d0e62e6e9?auto=format&fit=crop&w=800&q=80', desc: 'เมืองที่ไม่เคยหลับใหล' },
+            { name: 'ลอนดอน, สหราชอาณาจักร',  vibe: 'Urban Adventure', emoji: '🏙️', img: 'https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?auto=format&fit=crop&w=800&q=80', desc: '' },
+            { name: 'ปักกิ่ง, จีน',            vibe: 'Urban Adventure', emoji: '🏙️', img: 'https://images.unsplash.com/photo-1508804185872-d7badad00f7d?auto=format&fit=crop&w=800&q=80', desc: '' },
+            { name: 'สิงคโปร์',                vibe: 'Urban Adventure', emoji: '🏙️', img: 'https://images.unsplash.com/photo-1525625293386-3f8f99389edd?auto=format&fit=crop&w=800&q=80', desc: '' },
+            { name: 'ทะเลสาบโคโม่, อิตาลี',   vibe: 'Slow Living',     emoji: '☕', img: 'https://images.unsplash.com/photo-1542259009477-d625272157b7?auto=format&fit=crop&w=500&q=80',  desc: 'บรรยากาศงามสงบริมทะเลสาบ' },
+            { name: 'เกียวโต, ญี่ปุ่น',        vibe: 'Slow Living',     emoji: '☕', img: 'https://images.unsplash.com/photo-1528360983277-13d401cdc186?auto=format&fit=crop&w=800&q=80', desc: 'วัด สวน และวิถีชีวิตแบบดั้งเดิม' },
+            { name: 'ซูริค, สวิตเซอร์แลนด์',  vibe: 'Slow Living',     emoji: '☕', img: 'https://images.unsplash.com/photo-1528702748617-c64d49f918af?auto=format&fit=crop&w=800&q=80', desc: '' },
+            { name: 'ภูเขาไฟฟูจิ, ญี่ปุ่น',  vibe: 'Nature Retreat',  emoji: '🌲', img: 'https://images.unsplash.com/photo-1490806843957-31f4c9a91c65?auto=format&fit=crop&w=500&q=80',  desc: 'ยอดเขาสูงสุดแห่งแดนอาทิตย์อุทัย' },
+            { name: 'ป่าสนแบล็คฟอเรสต์',       vibe: 'Nature Retreat',  emoji: '🌲', img: 'https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&w=500&q=80',  desc: '' },
+            { name: 'นิวซีแลนด์',              vibe: 'Nature Retreat',  emoji: '🌲', img: 'https://images.unsplash.com/photo-1469521669194-babb45599def?auto=format&fit=crop&w=800&q=80', desc: 'ทิวทัศน์สวยงามจาก Lord of the Rings' },
+            { name: 'ไทเป, ไต้หวัน',           vibe: 'Foodie Tour',     emoji: '🍣', img: 'https://images.unsplash.com/photo-1550951298-5c7b95a66bfc?auto=format&fit=crop&w=800&q=80', desc: 'ตลาดกลางคืนและอาหารต้นตำรับ' },
+            { name: 'โอซาก้า, ญี่ปุ่น',        vibe: 'Foodie Tour',     emoji: '🍣', img: 'https://images.unsplash.com/photo-1589308078059-be1415eab4c3?auto=format&fit=crop&w=800&q=80', desc: 'เมืองหลวงแห่งอาหารอร่อยของญี่ปุ่น' },
+            { name: 'ดานัง, เวียดนาม',          vibe: 'Foodie Tour',     emoji: '🍣', img: 'https://images.unsplash.com/photo-1559592413-7cec4d0cae2b?auto=format&fit=crop&w=800&q=80', desc: '' },
+            { name: 'มัลดีฟส์',                vibe: 'Beach Getaway',   emoji: '🏖️', img: 'https://images.unsplash.com/photo-1510414842594-a61c69b5ae57?auto=format&fit=crop&w=500&q=80',  desc: 'น้ำทะเลใสราวแก้ว รีสอร์ทกลางทะเล' },
+            { name: 'ซิดนีย์, ออสเตรเลีย',    vibe: 'Beach Getaway',   emoji: '🏖️', img: 'https://images.unsplash.com/photo-1506973035872-a4ec16b8e8d9?auto=format&fit=crop&w=800&q=80', desc: '' },
+            { name: 'บาหลี, อินโดนีเซีย',      vibe: 'Beach Getaway',   emoji: '🏖️', img: 'https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=800&q=80', desc: 'เกาะแห่งพระเจ้า วัฒนธรรมและทะเล' },
+        ];
+
+        const canvas = document.getElementById('places-canvas');
+        const filterBtns = document.querySelectorAll('.filter-btn');
+
+        function renderPlaces(filterVibe) {
+            canvas.innerHTML = '';
+            const filteredPlaces = filterVibe === 'All' ? placesData : placesData.filter(p => p.vibe === filterVibe);
+
+            filteredPlaces.forEach((place, index) => {
+                const isLarge = (index === 0 || index === 3);
+                const colSpan = isLarge ? 'col-span-2' : 'col-span-1';
+                const rowSpan = isLarge ? 'row-span-2' : 'row-span-1';
+                
+                const html = `
+                    <div class="${colSpan} ${rowSpan} rounded-3xl relative overflow-hidden group shadow-md cursor-pointer">
+                        <img src="${place.img}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-transparent"></div>
+                        <div class="absolute bottom-4 left-4 z-20 text-white">
+                            <span class="px-2 py-1 bg-white/20 backdrop-blur-md rounded-md text-xs font-medium mb-2 inline-block">${place.emoji} ${place.vibe}</span>
+                            <h3 class="font-bold ${isLarge ? 'text-2xl' : 'text-lg'}">${place.name}</h3>
+                            ${isLarge && place.desc ? `<p class="text-sm text-slate-200 mt-1">${place.desc}</p>` : ''}
+                        </div>
+                        <button class="save-btn absolute top-4 right-4 z-20 p-2 text-white bg-black/20 backdrop-blur-md rounded-full hover:bg-white hover:text-rose-500 transition" data-name="${place.name}">🤍</button>
+                    </div>
+                `;
+                canvas.insertAdjacentHTML('beforeend', html);
+            });
+
+            // Save button toggle
+            canvas.querySelectorAll('.save-btn').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    btn.textContent = btn.textContent === '🤍' ? '❤️' : '🤍';
+                    btn.classList.toggle('bg-white');
+                    btn.classList.toggle('text-rose-500');
+                });
+            });
+        }
+
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                filterBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                renderPlaces(btn.getAttribute('data-vibe'));
+            });
+        });
+
+        renderPlaces('All');
+    </script>
+</body>
+</html>

@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Traveloha - Checklist</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        // อัปเดต Color Palette ตาม Design Concept
+        tailwind.config = { 
+            darkMode: 'class', 
+            theme: { 
+                extend: { 
+                    colors: { 
+                        brand: { 
+                            50: '#f4f5f4', 
+                            100: '#e6e9e6', 
+                            500: '#8ba888', /* Sage Green (สีหลักเอิร์ธโทน) */
+                            600: '#6b8a68', 
+                            900: '#3a4a39' 
+                        } 
+                    } 
+                } 
+            } 
+        }
+    </script>
+    <script>if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) document.documentElement.classList.add('dark'); else document.documentElement.classList.remove('dark');</script>
+    <style>
+        /* CSS Toggle สวิตช์อวกาศ (เหมือนเดิม) */
+        * { box-sizing: border-box; } #hide-checkbox { opacity: 0; height: 0; width: 0; position: absolute; } .toggle { position: relative; cursor: pointer; display: inline-block; width: 200px; height: 100px; background: #211042; border-radius: 50px; transition: 500ms; overflow: hidden; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.3); } .toggle-button { position: absolute; display: inline-block; top: 7px; left: 6px; width: 86px; height: 86px; border-radius: 50%; background: #FAEAF1; overflow: hidden; box-shadow: 0 0 35px 4px rgba(255, 255, 255); transition: all 500ms ease-out; z-index: 10; } .crater { position: absolute; display: inline-block; background: #FAEAF1; border-radius: 50%; transition: 500ms; } .crater-1 { background: #FFFFF9; width: 86px; height: 86px; left: 10px; bottom: 10px; } .crater-2 { width: 20px; height: 20px; top: -7px; left: 44px; } .crater-3 { width: 16px; height: 16px; top: 20px; right: -4px; } .crater-4 { width: 10px; height: 10px; top: 24px; left: 30px; } .crater-5 { width: 15px; height: 15px; top: 40px; left: 48px; } .crater-6 { width: 10px; height: 10px; top: 48px; left: 20px; } .crater-7 { width: 12px; height: 12px; bottom: 5px; left: 35px; } .star { position: absolute; display: inline-block; border-radius: 50%; background: #FFF; box-shadow: 1px 0 2px 2px rgba(255, 255, 255); } .star-1 { width: 6px; height: 6px; right: 90px; bottom: 40px; } .star-2 { width: 8px; height: 8px; right: 70px; top: 10px; } .star-3 { width: 5px; height: 5px; right: 60px; bottom: 15px; } .star-4 { width: 3px; height: 3px; right: 40px; bottom: 50px; } .star-5 { width: 4px; height: 4px; right: 10px; bottom: 35px; } .star-6, .star-7, .star-8 { width: 10px; height: 2px; border-radius: 2px; transform: rotate(-45deg); box-shadow: 5px 0px 4px 1px #FFF; animation-name: travel; animation-duration: 1.5s; animation-timing-function: ease-out; animation-iteration-count: infinite; } .star-6 { right: 30px; bottom: 30px; animation-delay: -2s; } .star-7 { right: 50px; bottom: 60px; } .star-8 { right: 90px; top: 10px; animation-delay: -4s; } @keyframes travel { 0% { transform: rotate(-45deg) translateX(70px); } 50% { transform: rotate(-45deg) translateX(-20px); box-shadow: 5px 0px 6px 1px #FFF; } 100% { transform: rotate(-45deg) translateX(-30px); width: 2px; height: 2px; opacity: 0; box-shadow: none; } } #hide-checkbox:checked + .toggle { background: #24D7F7; } #hide-checkbox:checked + .toggle .toggle-button { background: #F7FFFF; transform: translateX(102px); box-shadow: 0 0 35px 5px rgba(255, 255, 255); }
+        
+        /* 💎 พัฒนา Glassmorphism ให้ดูแพงและ Minimal ขึ้น */
+        .glass-panel { 
+            background: rgba(255, 255, 255, 0.65); 
+            backdrop-filter: blur(16px); 
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.5); 
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
+        } 
+        /* โหมดมืดเปลี่ยนใช้สี zinc-900 เพื่อความสบายตา */
+        .dark .glass-panel { 
+            background: rgba(24, 24, 27, 0.7); 
+            border: 1px solid rgba(255, 255, 255, 0.08); 
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+        }
+        ::-webkit-scrollbar { width: 6px; height: 6px; } ::-webkit-scrollbar-thumb { background-color: #d4d4d8; border-radius: 10px; } .dark ::-webkit-scrollbar-thumb { background-color: #3f3f46; }
+        .scrollbar-hide::-webkit-scrollbar { display: none; } .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+
+        /* 🌿 Beautiful Earth-tone Background */
+        body {
+            background-color: #f2efe8;
+            background-image:
+                radial-gradient(ellipse 90% 70% at 10% 30%, rgba(139, 168, 136, 0.22) 0%, transparent 55%),
+                radial-gradient(ellipse 70% 60% at 90% 10%, rgba(196, 181, 148, 0.18) 0%, transparent 50%),
+                radial-gradient(ellipse 80% 70% at 50% 90%, rgba(152, 186, 148, 0.15) 0%, transparent 55%),
+                radial-gradient(ellipse 50% 40% at 75% 55%, rgba(210, 200, 175, 0.12) 0%, transparent 40%);
+        }
+        html.dark body {
+            background-color: #111912;
+            background-image:
+                radial-gradient(ellipse 90% 70% at 10% 30%, rgba(58, 74, 57, 0.4) 0%, transparent 55%),
+                radial-gradient(ellipse 70% 60% at 90% 10%, rgba(35, 55, 35, 0.3) 0%, transparent 50%),
+                radial-gradient(ellipse 80% 70% at 50% 90%, rgba(45, 65, 42, 0.25) 0%, transparent 55%);
+        }
+    </style>
+</head>
+<body class="text-zinc-800 dark:text-zinc-300 transition-colors duration-500 pb-20">
+
+    <nav class="sticky top-4 z-50 glass-panel shadow-sm flex justify-between items-center max-w-7xl mx-auto px-6 py-4 rounded-3xl transition-all duration-500">
+        <div class="flex items-center gap-3">
+            <img src="src/logo.png" alt="Travelaroha Logo" class="w-10 h-10 rounded-full object-cover border-2 border-brand-500 shadow-sm bg-white">
+            <div class="font-bold text-brand-600 dark:text-brand-500 text-2xl tracking-tight">Travelaroha</div>
+        </div>
+        
+        <div class="hidden md:flex gap-8 font-medium text-zinc-500 dark:text-zinc-400">
+            <a href="index.html" class="relative group px-1 py-2 hover:text-zinc-900 dark:hover:text-white transition-colors">
+                DISCOVERY
+                <span class="absolute -bottom-1 left-0 w-0 h-[2px] bg-zinc-300 dark:bg-zinc-600 rounded-full transition-all duration-300 group-hover:w-full"></span>
+            </a>
+            <a href="storyboard.html" class="relative group px-1 py-2 hover:text-zinc-900 dark:hover:text-white transition-colors">
+                TRIP STORYBOARD
+                <span class="absolute -bottom-1 left-0 w-0 h-[2px] bg-zinc-300 dark:bg-zinc-600 rounded-full transition-all duration-300 group-hover:w-full"></span>
+            </a>
+            <a href="dashboard.html" class="relative group px-1 py-2 hover:text-zinc-900 dark:hover:text-white transition-colors">
+                DASHBOARD
+                <span class="absolute -bottom-1 left-0 w-0 h-[2px] bg-zinc-300 dark:bg-zinc-600 rounded-full transition-all duration-300 group-hover:w-full"></span>
+            </a>
+            <a href="checklist.html" class="relative px-1 py-2 text-zinc-900 dark:text-white font-bold transition-colors">
+                CHECKLIST
+                <span class="absolute -bottom-1 left-0 w-full h-[2px] bg-zinc-900 dark:bg-white rounded-full"></span>
+            </a>
+        </div>
+        
+        <div class="flex items-center gap-4">
+            <div class="w-[80px] h-[40px] flex items-center justify-center overflow-hidden">
+                <div style="transform: scale(0.4); transform-origin: center;">
+                    <input type="checkbox" id="hide-checkbox" class="theme-toggle">
+                    <label for="hide-checkbox" class="toggle m-0"><span class="toggle-button"><span class="crater crater-1"></span></span><span class="star star-1"></span></label>
+                </div>
+            </div>
+            <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=100&q=80" alt="Profile" class="w-10 h-10 rounded-full object-cover shadow-md border-2 border-white dark:border-zinc-800 cursor-pointer hover:scale-105 transition-transform">
+        </div>
+    </nav>
+
+    <main class="max-w-4xl mx-auto mt-12 p-4 space-y-8">
+        <div class="w-full h-48 md:h-64 rounded-3xl overflow-hidden relative shadow-lg group mb-8">
+            <img src="https://images.unsplash.com/photo-1488646953014-85cb44e25828?auto=format&fit=crop&w=1200&q=80" alt="Packing Luggage" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
+            <div class="absolute bottom-6 left-6 text-white z-10">
+                <h2 class="text-3xl md:text-4xl font-bold">Aesthetic Packing</h2>
+                <p class="text-sm md:text-base opacity-90 mt-2 flex items-center gap-2">
+                    <span class="bg-brand-500 px-3 py-1 rounded-full text-xs font-medium shadow-sm">Urban Adventure</span>
+                    เตรียมสัมภาระให้พร้อมสำหรับทริปของคุณ
+                </p>
+            </div>
+        </div>
+        <div class="flex justify-between items-center mb-8">
+            <h2 class="text-3xl font-bold">Aesthetic Packing</h2>
+            <div class="flex gap-2 bg-slate-200 dark:bg-slate-800 p-1 rounded-full">
+                <button class="px-5 py-2 bg-white dark:bg-slate-700 rounded-full text-sm font-medium shadow-sm">All Items</button>
+            </div>
+        </div>
+
+        <div class="glass-panel p-8 rounded-3xl shadow-sm border border-slate-200 dark:border-slate-700">
+            <h3 class="font-bold text-xl mb-4 text-brand-600 dark:text-brand-400">📄 เอกสารสำคัญ</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                <label class="flex items-center p-3 bg-white dark:bg-slate-800 rounded-2xl border border-slate-100 dark:border-slate-700 cursor-pointer hover:border-brand-300 transition-colors"><input type="checkbox" class="peer w-5 h-5 text-brand-600 rounded"><span class="ml-3 font-medium text-slate-700 dark:text-slate-300 peer-checked:line-through peer-checked:text-slate-400">พาสปอร์ต / วีซ่า</span></label>
+                <label class="flex items-center p-3 bg-white dark:bg-slate-800 rounded-2xl border border-slate-100 dark:border-slate-700 cursor-pointer hover:border-brand-300 transition-colors"><input type="checkbox" class="peer w-5 h-5 text-brand-600 rounded"><span class="ml-3 font-medium text-slate-700 dark:text-slate-300 peer-checked:line-through peer-checked:text-slate-400">ตั๋วเครื่องบิน / บัตรโดยสาร</span></label>
+                <label class="flex items-center p-3 bg-white dark:bg-slate-800 rounded-2xl border border-slate-100 dark:border-slate-700 cursor-pointer hover:border-brand-300 transition-colors"><input type="checkbox" class="peer w-5 h-5 text-brand-600 rounded"><span class="ml-3 font-medium text-slate-700 dark:text-slate-300 peer-checked:line-through peer-checked:text-slate-400">เอกสารจองที่พัก / โรงแรม</span></label>
+                <label class="flex items-center p-3 bg-white dark:bg-slate-800 rounded-2xl border border-slate-100 dark:border-slate-700 cursor-pointer hover:border-brand-300 transition-colors"><input type="checkbox" class="peer w-5 h-5 text-brand-600 rounded"><span class="ml-3 font-medium text-slate-700 dark:text-slate-300 peer-checked:line-through peer-checked:text-slate-400">กรมธรรม์ประกันการเดินทาง</span></label>
+                <label class="flex items-center p-3 bg-white dark:bg-slate-800 rounded-2xl border border-slate-100 dark:border-slate-700 cursor-pointer hover:border-brand-300 transition-colors"><input type="checkbox" class="peer w-5 h-5 text-brand-600 rounded"><span class="ml-3 font-medium text-slate-700 dark:text-slate-300 peer-checked:line-through peer-checked:text-slate-400">บัตรประชาชน / ใบขับขี่สากล</span></label>
+                <label class="flex items-center p-3 bg-white dark:bg-slate-800 rounded-2xl border border-slate-100 dark:border-slate-700 cursor-pointer hover:border-brand-300 transition-colors"><input type="checkbox" class="peer w-5 h-5 text-brand-600 rounded"><span class="ml-3 font-medium text-slate-700 dark:text-slate-300 peer-checked:line-through peer-checked:text-slate-400">บัตรเครดิต / เงินสด / Travel Card</span></label>
+            </div>
+        </div>
+
+        <div class="glass-panel p-8 rounded-3xl shadow-sm border border-slate-200 dark:border-slate-700">
+            <h3 class="font-bold text-xl mb-4 text-brand-600 dark:text-brand-400">💻 อุปกรณ์อิเล็กทรอนิกส์</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                <label class="flex items-center p-3 bg-white dark:bg-slate-800 rounded-2xl border border-slate-100 dark:border-slate-700 cursor-pointer hover:border-brand-300 transition-colors"><input type="checkbox" class="peer w-5 h-5 text-brand-600 rounded"><span class="ml-3 font-medium text-slate-700 dark:text-slate-300 peer-checked:line-through peer-checked:text-slate-400">สมาร์ทโฟน / แท็บเล็ต</span></label>
+                <label class="flex items-center p-3 bg-white dark:bg-slate-800 rounded-2xl border border-slate-100 dark:border-slate-700 cursor-pointer hover:border-brand-300 transition-colors"><input type="checkbox" class="peer w-5 h-5 text-brand-600 rounded"><span class="ml-3 font-medium text-slate-700 dark:text-slate-300 peer-checked:line-through peer-checked:text-slate-400">สายชาร์จและอแดปเตอร์</span></label>
+                <label class="flex items-center p-3 bg-white dark:bg-slate-800 rounded-2xl border border-slate-100 dark:border-slate-700 cursor-pointer hover:border-brand-300 transition-colors"><input type="checkbox" class="peer w-5 h-5 text-brand-600 rounded"><span class="ml-3 font-medium text-slate-700 dark:text-slate-300 peer-checked:line-through peer-checked:text-slate-400">พาวเวอร์แบงค์ (Power Bank)</span></label>
+                <label class="flex items-center p-3 bg-white dark:bg-slate-800 rounded-2xl border border-slate-100 dark:border-slate-700 cursor-pointer hover:border-brand-300 transition-colors"><input type="checkbox" class="peer w-5 h-5 text-brand-600 rounded"><span class="ml-3 font-medium text-slate-700 dark:text-slate-300 peer-checked:line-through peer-checked:text-slate-400">หูฟัง / In-Ear Monitors (IEMs)</span></label>
+                <label class="flex items-center p-3 bg-white dark:bg-slate-800 rounded-2xl border border-slate-100 dark:border-slate-700 cursor-pointer hover:border-brand-300 transition-colors"><input type="checkbox" class="peer w-5 h-5 text-brand-600 rounded"><span class="ml-3 font-medium text-slate-700 dark:text-slate-300 peer-checked:line-through peer-checked:text-slate-400">หัวแปลงปลั๊กไฟ (Universal Adapter)</span></label>
+                <label class="flex items-center p-3 bg-white dark:bg-slate-800 rounded-2xl border border-slate-100 dark:border-slate-700 cursor-pointer hover:border-brand-300 transition-colors"><input type="checkbox" class="peer w-5 h-5 text-brand-600 rounded"><span class="ml-3 font-medium text-slate-700 dark:text-slate-300 peer-checked:line-through peer-checked:text-slate-400">กล้องถ่ายรูป / เมมโมรี่การ์ด</span></label>
+                <label class="flex items-center p-3 bg-white dark:bg-slate-800 rounded-2xl border border-slate-100 dark:border-slate-700 cursor-pointer hover:border-brand-300 transition-colors"><input type="checkbox" class="peer w-5 h-5 text-brand-600 rounded"><span class="ml-3 font-medium text-slate-700 dark:text-slate-300 peer-checked:line-through peer-checked:text-slate-400">เข็มจิ้มซิม / ซิมการ์ดต่างประเทศ</span></label>
+            </div>
+        </div>
+
+        <div class="glass-panel p-8 rounded-3xl shadow-sm border border-slate-200 dark:border-slate-700">
+            <h3 class="font-bold text-xl mb-4 text-brand-600 dark:text-brand-400">👕 เสื้อผ้าและเครื่องแต่งกาย</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                <label class="flex items-center p-3 bg-white dark:bg-slate-800 rounded-2xl border border-slate-100 dark:border-slate-700 cursor-pointer hover:border-brand-300 transition-colors"><input type="checkbox" class="peer w-5 h-5 text-brand-600 rounded"><span class="ml-3 font-medium text-slate-700 dark:text-slate-300 peer-checked:line-through peer-checked:text-slate-400">เสื้อยืด / เสื้อเชิ้ต</span></label>
+                <label class="flex items-center p-3 bg-white dark:bg-slate-800 rounded-2xl border border-slate-100 dark:border-slate-700 cursor-pointer hover:border-brand-300 transition-colors"><input type="checkbox" class="peer w-5 h-5 text-brand-600 rounded"><span class="ml-3 font-medium text-slate-700 dark:text-slate-300 peer-checked:line-through peer-checked:text-slate-400">กางเกงขาสั้น / ขายาว</span></label>
+                <label class="flex items-center p-3 bg-white dark:bg-slate-800 rounded-2xl border border-slate-100 dark:border-slate-700 cursor-pointer hover:border-brand-300 transition-colors"><input type="checkbox" class="peer w-5 h-5 text-brand-600 rounded"><span class="ml-3 font-medium text-slate-700 dark:text-slate-300 peer-checked:line-through peer-checked:text-slate-400">ชุดนอน</span></label>
+                <label class="flex items-center p-3 bg-white dark:bg-slate-800 rounded-2xl border border-slate-100 dark:border-slate-700 cursor-pointer hover:border-brand-300 transition-colors"><input type="checkbox" class="peer w-5 h-5 text-brand-600 rounded"><span class="ml-3 font-medium text-slate-700 dark:text-slate-300 peer-checked:line-through peer-checked:text-slate-400">ชุดชั้นใน / กางเกงใน</span></label>
+                <label class="flex items-center p-3 bg-white dark:bg-slate-800 rounded-2xl border border-slate-100 dark:border-slate-700 cursor-pointer hover:border-brand-300 transition-colors"><input type="checkbox" class="peer w-5 h-5 text-brand-600 rounded"><span class="ml-3 font-medium text-slate-700 dark:text-slate-300 peer-checked:line-through peer-checked:text-slate-400">ถุงเท้า</span></label>
+                <label class="flex items-center p-3 bg-white dark:bg-slate-800 rounded-2xl border border-slate-100 dark:border-slate-700 cursor-pointer hover:border-brand-300 transition-colors"><input type="checkbox" class="peer w-5 h-5 text-brand-600 rounded"><span class="ml-3 font-medium text-slate-700 dark:text-slate-300 peer-checked:line-through peer-checked:text-slate-400">เสื้อกันหนาว / แจ็คเก็ต</span></label>
+                <label class="flex items-center p-3 bg-white dark:bg-slate-800 rounded-2xl border border-slate-100 dark:border-slate-700 cursor-pointer hover:border-brand-300 transition-colors"><input type="checkbox" class="peer w-5 h-5 text-brand-600 rounded"><span class="ml-3 font-medium text-slate-700 dark:text-slate-300 peer-checked:line-through peer-checked:text-slate-400">รองเท้าผ้าใบ (ใส่เดินสบาย)</span></label>
+                <label class="flex items-center p-3 bg-white dark:bg-slate-800 rounded-2xl border border-slate-100 dark:border-slate-700 cursor-pointer hover:border-brand-300 transition-colors"><input type="checkbox" class="peer w-5 h-5 text-brand-600 rounded"><span class="ml-3 font-medium text-slate-700 dark:text-slate-300 peer-checked:line-through peer-checked:text-slate-400">รองเท้าแตะ</span></label>
+                <label class="flex items-center p-3 bg-white dark:bg-slate-800 rounded-2xl border border-slate-100 dark:border-slate-700 cursor-pointer hover:border-brand-300 transition-colors"><input type="checkbox" class="peer w-5 h-5 text-brand-600 rounded"><span class="ml-3 font-medium text-slate-700 dark:text-slate-300 peer-checked:line-through peer-checked:text-slate-400">แว่นตากันแดด / หมวก</span></label>
+                <label class="flex items-center p-3 bg-white dark:bg-slate-800 rounded-2xl border border-slate-100 dark:border-slate-700 cursor-pointer hover:border-brand-300 transition-colors"><input type="checkbox" class="peer w-5 h-5 text-brand-600 rounded"><span class="ml-3 font-medium text-slate-700 dark:text-slate-300 peer-checked:line-through peer-checked:text-slate-400">กระเป๋าสะพายใบเล็ก / เป้</span></label>
+            </div>
+        </div>
+
+        <div class="glass-panel p-8 rounded-3xl shadow-sm border border-slate-200 dark:border-slate-700">
+            <h3 class="font-bold text-xl mb-4 text-brand-600 dark:text-brand-400">🧳 ของใช้ส่วนตัวและยา</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                <label class="flex items-center p-3 bg-white dark:bg-slate-800 rounded-2xl border border-slate-100 dark:border-slate-700 cursor-pointer hover:border-brand-300 transition-colors"><input type="checkbox" class="peer w-5 h-5 text-brand-600 rounded"><span class="ml-3 font-medium text-slate-700 dark:text-slate-300 peer-checked:line-through peer-checked:text-slate-400">แปรงสีฟัน / ยาสีฟัน</span></label>
+                <label class="flex items-center p-3 bg-white dark:bg-slate-800 rounded-2xl border border-slate-100 dark:border-slate-700 cursor-pointer hover:border-brand-300 transition-colors"><input type="checkbox" class="peer w-5 h-5 text-brand-600 rounded"><span class="ml-3 font-medium text-slate-700 dark:text-slate-300 peer-checked:line-through peer-checked:text-slate-400">ครีมอาบน้ำ / แชมพู (ขนาดพกพา)</span></label>
+                <label class="flex items-center p-3 bg-white dark:bg-slate-800 rounded-2xl border border-slate-100 dark:border-slate-700 cursor-pointer hover:border-brand-300 transition-colors"><input type="checkbox" class="peer w-5 h-5 text-brand-600 rounded"><span class="ml-3 font-medium text-slate-700 dark:text-slate-300 peer-checked:line-through peer-checked:text-slate-400">สกินแคร์ / ครีมกันแดด</span></label>
+                <label class="flex items-center p-3 bg-white dark:bg-slate-800 rounded-2xl border border-slate-100 dark:border-slate-700 cursor-pointer hover:border-brand-300 transition-colors"><input type="checkbox" class="peer w-5 h-5 text-brand-600 rounded"><span class="ml-3 font-medium text-slate-700 dark:text-slate-300 peer-checked:line-through peer-checked:text-slate-400">ยาประจำตัว</span></label>
+                <label class="flex items-center p-3 bg-white dark:bg-slate-800 rounded-2xl border border-slate-100 dark:border-slate-700 cursor-pointer hover:border-brand-300 transition-colors"><input type="checkbox" class="peer w-5 h-5 text-brand-600 rounded"><span class="ml-3 font-medium text-slate-700 dark:text-slate-300 peer-checked:line-through peer-checked:text-slate-400">ยาแก้ปวด / ยาแก้แพ้ / พลาสเตอร์</span></label>
+                <label class="flex items-center p-3 bg-white dark:bg-slate-800 rounded-2xl border border-slate-100 dark:border-slate-700 cursor-pointer hover:border-brand-300 transition-colors"><input type="checkbox" class="peer w-5 h-5 text-brand-600 rounded"><span class="ml-3 font-medium text-slate-700 dark:text-slate-300 peer-checked:line-through peer-checked:text-slate-400">ทิชชู่เปียก / ทิชชู่แห้ง</span></label>
+                <label class="flex items-center p-3 bg-white dark:bg-slate-800 rounded-2xl border border-slate-100 dark:border-slate-700 cursor-pointer hover:border-brand-300 transition-colors"><input type="checkbox" class="peer w-5 h-5 text-brand-600 rounded"><span class="ml-3 font-medium text-slate-700 dark:text-slate-300 peer-checked:line-through peer-checked:text-slate-400">หน้ากากอนามัย / เจลล้างมือ</span></label>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        const toggleInput = document.getElementById('hide-checkbox');
+        if (document.documentElement.classList.contains('dark')) toggleInput.checked = false; else toggleInput.checked = true;
+        toggleInput.addEventListener('change', (e) => {
+            if (e.target.checked) { document.documentElement.classList.remove('dark'); localStorage.setItem('theme', 'light'); } 
+            else { document.documentElement.classList.add('dark'); localStorage.setItem('theme', 'dark'); }
+        });
+    </script>
+</body>
+</html>

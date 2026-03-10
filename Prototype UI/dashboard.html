@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Traveloha - Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = { 
+            darkMode: 'class', 
+            theme: { 
+                extend: { 
+                    colors: { 
+                        brand: { 
+                            50: '#f4f5f4', 
+                            100: '#e6e9e6', 
+                            500: '#8ba888',
+                            600: '#6b8a68', 
+                            900: '#3a4a39' 
+                        } 
+                    } 
+                } 
+            } 
+        }
+    </script>
+    <script>if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) document.documentElement.classList.add('dark'); else document.documentElement.classList.remove('dark');</script>
+    <style>
+        * { box-sizing: border-box; } #hide-checkbox { opacity: 0; height: 0; width: 0; position: absolute; } .toggle { position: relative; cursor: pointer; display: inline-block; width: 200px; height: 100px; background: #211042; border-radius: 50px; transition: 500ms; overflow: hidden; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.3); } .toggle-button { position: absolute; display: inline-block; top: 7px; left: 6px; width: 86px; height: 86px; border-radius: 50%; background: #FAEAF1; overflow: hidden; box-shadow: 0 0 35px 4px rgba(255, 255, 255); transition: all 500ms ease-out; z-index: 10; } .crater { position: absolute; display: inline-block; background: #FAEAF1; border-radius: 50%; transition: 500ms; } .crater-1 { background: #FFFFF9; width: 86px; height: 86px; left: 10px; bottom: 10px; } .crater-2 { width: 20px; height: 20px; top: -7px; left: 44px; } .crater-3 { width: 16px; height: 16px; top: 20px; right: -4px; } .crater-4 { width: 10px; height: 10px; top: 24px; left: 30px; } .crater-5 { width: 15px; height: 15px; top: 40px; left: 48px; } .crater-6 { width: 10px; height: 10px; top: 48px; left: 20px; } .crater-7 { width: 12px; height: 12px; bottom: 5px; left: 35px; } .star { position: absolute; display: inline-block; border-radius: 50%; background: #FFF; box-shadow: 1px 0 2px 2px rgba(255, 255, 255); } .star-1 { width: 6px; height: 6px; right: 90px; bottom: 40px; } .star-2 { width: 8px; height: 8px; right: 70px; top: 10px; } .star-3 { width: 5px; height: 5px; right: 60px; bottom: 15px; } .star-4 { width: 3px; height: 3px; right: 40px; bottom: 50px; } .star-5 { width: 4px; height: 4px; right: 10px; bottom: 35px; } .star-6, .star-7, .star-8 { width: 10px; height: 2px; border-radius: 2px; transform: rotate(-45deg); box-shadow: 5px 0px 4px 1px #FFF; animation-name: travel; animation-duration: 1.5s; animation-timing-function: ease-out; animation-iteration-count: infinite; } .star-6 { right: 30px; bottom: 30px; animation-delay: -2s; } .star-7 { right: 50px; bottom: 60px; } .star-8 { right: 90px; top: 10px; animation-delay: -4s; } @keyframes travel { 0% { transform: rotate(-45deg) translateX(70px); } 50% { transform: rotate(-45deg) translateX(-20px); box-shadow: 5px 0px 6px 1px #FFF; } 100% { transform: rotate(-45deg) translateX(-30px); width: 2px; height: 2px; opacity: 0; box-shadow: none; } } #hide-checkbox:checked + .toggle { background: #24D7F7; } #hide-checkbox:checked + .toggle .toggle-button { background: #F7FFFF; transform: translateX(102px); box-shadow: 0 0 35px 5px rgba(255, 255, 255); }
+        
+        .glass-panel { 
+            background: rgba(255, 255, 255, 0.65); 
+            backdrop-filter: blur(16px); 
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.5); 
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
+        } 
+        .dark .glass-panel { 
+            background: rgba(24, 24, 27, 0.7); 
+            border: 1px solid rgba(255, 255, 255, 0.08); 
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+        }
+        ::-webkit-scrollbar { width: 6px; height: 6px; } ::-webkit-scrollbar-thumb { background-color: #d4d4d8; border-radius: 10px; } .dark ::-webkit-scrollbar-thumb { background-color: #3f3f46; }
+        .scrollbar-hide::-webkit-scrollbar { display: none; } .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+
+        /* 🌿 Beautiful Earth-tone Background */
+        body {
+            background-color: #f2efe8;
+            background-image:
+                radial-gradient(ellipse 90% 70% at 10% 30%, rgba(139, 168, 136, 0.22) 0%, transparent 55%),
+                radial-gradient(ellipse 70% 60% at 90% 10%, rgba(196, 181, 148, 0.18) 0%, transparent 50%),
+                radial-gradient(ellipse 80% 70% at 50% 90%, rgba(152, 186, 148, 0.15) 0%, transparent 55%),
+                radial-gradient(ellipse 50% 40% at 75% 55%, rgba(210, 200, 175, 0.12) 0%, transparent 40%);
+        }
+        html.dark body {
+            background-color: #111912;
+            background-image:
+                radial-gradient(ellipse 90% 70% at 10% 30%, rgba(58, 74, 57, 0.4) 0%, transparent 55%),
+                radial-gradient(ellipse 70% 60% at 90% 10%, rgba(35, 55, 35, 0.3) 0%, transparent 50%),
+                radial-gradient(ellipse 80% 70% at 50% 90%, rgba(45, 65, 42, 0.25) 0%, transparent 55%);
+        }
+
+        /* Stat bar animation */
+        .stat-bar { transition: width 1s ease-out; }
+
+        /* Checklist pulse */
+        @keyframes pulse-soft { 0%,100% { opacity:1; } 50% { opacity:.6; } }
+        .pulse-soft { animation: pulse-soft 2s ease-in-out infinite; }
+    </style>
+</head>
+<body class="text-zinc-800 dark:text-zinc-300 transition-colors duration-500 pb-20">
+
+    <nav class="sticky top-4 z-50 glass-panel shadow-sm flex justify-between items-center max-w-7xl mx-auto px-6 py-4 rounded-3xl transition-all duration-500">
+        <div class="flex items-center gap-3">
+            <img src="src/logo.png" alt="Travelaroha Logo" class="w-10 h-10 rounded-full object-cover border-2 border-brand-500 shadow-sm bg-white">
+            <div class="font-bold text-brand-600 dark:text-brand-500 text-2xl tracking-tight">Travelaroha</div>
+        </div>
+        
+        <div class="hidden md:flex gap-8 font-medium text-zinc-500 dark:text-zinc-400">
+            <a href="index.html" class="relative group px-1 py-2 hover:text-zinc-900 dark:hover:text-white transition-colors">
+                DISCOVERY
+                <span class="absolute -bottom-1 left-0 w-0 h-[2px] bg-zinc-300 dark:bg-zinc-600 rounded-full transition-all duration-300 group-hover:w-full"></span>
+            </a>
+            <a href="storyboard.html" class="relative group px-1 py-2 hover:text-zinc-900 dark:hover:text-white transition-colors">
+                TRIP STORYBOARD
+                <span class="absolute -bottom-1 left-0 w-0 h-[2px] bg-zinc-300 dark:bg-zinc-600 rounded-full transition-all duration-300 group-hover:w-full"></span>
+            </a>
+            <a href="dashboard.html" class="relative px-1 py-2 text-zinc-900 dark:text-white font-bold transition-colors">
+                DASHBOARD
+                <span class="absolute -bottom-1 left-0 w-full h-[2px] bg-zinc-900 dark:bg-white rounded-full"></span>
+            </a>
+            <a href="checklist.html" class="relative group px-1 py-2 hover:text-zinc-900 dark:hover:text-white transition-colors">
+                CHECKLIST
+                <span class="absolute -bottom-1 left-0 w-0 h-[2px] bg-zinc-300 dark:bg-zinc-600 rounded-full transition-all duration-300 group-hover:w-full"></span>
+            </a>
+        </div>
+        
+        <div class="flex items-center gap-4">
+            <div class="w-[80px] h-[40px] flex items-center justify-center overflow-hidden">
+                <div style="transform: scale(0.4); transform-origin: center;">
+                    <input type="checkbox" id="hide-checkbox" class="theme-toggle">
+                    <label for="hide-checkbox" class="toggle m-0"><span class="toggle-button"><span class="crater crater-1"></span></span><span class="star star-1"></span></label>
+                </div>
+            </div>
+            <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=100&q=80" alt="Profile" class="w-10 h-10 rounded-full object-cover shadow-md border-2 border-white dark:border-zinc-800 cursor-pointer hover:scale-105 transition-transform">
+        </div>
+    </nav>
+
+    <main class="max-w-4xl mx-auto mt-12 p-4 space-y-6">
+
+        <!-- Country Selector Header -->
+        <div class="flex flex-col md:flex-row justify-between items-center glass-panel p-4 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-700">
+            <h1 class="text-2xl font-bold mb-4 md:mb-0">Dashboard</h1>
+            <div class="relative w-full md:w-64">
+                <select id="country-select" class="w-full appearance-none bg-slate-100 dark:bg-slate-700 border border-slate-200 dark:border-slate-600 text-zinc-700 dark:text-zinc-200 pl-4 pr-10 py-3 rounded-xl focus:outline-none focus:ring-2 focus:ring-brand-500 transition-all cursor-pointer font-medium">
+                    <option value="Japan">🇯🇵 ญี่ปุ่น (Japan)</option>
+                    <option value="France">🇫🇷 ฝรั่งเศส (France)</option>
+                    <option value="Thailand">🇹🇭 ไทย (Thailand)</option>
+                    <option value="SouthKorea">🇰🇷 เกาหลีใต้ (South Korea)</option>
+                    <option value="USA">🇺🇸 สหรัฐอเมริกา (USA)</option>
+                    <option value="UK">🇬🇧 สหราชอาณาจักร (UK)</option>
+                    <option value="Italy">🇮🇹 อิตาลี (Italy)</option>
+                    <option value="Switzerland">🇨🇭 สวิตเซอร์แลนด์ (Switzerland)</option>
+                    <option value="Taiwan">🇹🇼 ไต้หวัน (Taiwan)</option>
+                    <option value="China">🇨🇳 จีน (China)</option>
+                    <option value="UAE">🇦🇪 UAE (Dubai)</option>
+                    <option value="Singapore">🇸🇬 สิงคโปร์ (Singapore)</option>
+                    <option value="Vietnam">🇻🇳 เวียดนาม (Vietnam)</option>
+                    <option value="Maldives">🇲🇻 มัลดีฟส์ (Maldives)</option>
+                    <option value="Australia">🇦🇺 ออสเตรเลีย (Australia)</option>
+                </select>
+                <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-slate-500">
+                    <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
+                </div>
+            </div>
+        </div>
+
+        <!-- Weather + Currency -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="relative overflow-hidden rounded-3xl p-8 shadow-lg text-white group h-64">
+                <img id="bg-img" src="https://images.unsplash.com/photo-1490806843957-31f4c9a91c65?auto=format&fit=crop&w=800&q=80" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" style="transition: opacity 0.3s;">
+                <div class="absolute inset-0 bg-gradient-to-br from-black/80 via-black/40 to-transparent"></div>
+                <div class="relative z-10 h-full flex flex-col justify-between">
+                    <p id="location-name" class="text-lg font-bold opacity-90 tracking-wide">โตเกียว, ญี่ปุ่น</p>
+                    <div>
+                        <h2 id="temp-text" class="text-6xl font-bold my-2">15°C ⛅</h2>
+                        <p id="weather-desc" class="text-md mt-2 font-medium">อากาศเย็นสบาย เหมาะแก่การเดินเล่น</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="glass-panel rounded-3xl p-8 shadow-sm flex flex-col justify-center h-64 border-t-4 border-brand-500">
+                <h3 class="text-slate-500 dark:text-slate-400 font-medium mb-2 flex items-center gap-2">
+                    <span>💱</span> อัตราแลกเปลี่ยน (อ้างอิง THB)
+                </h3>
+                <div id="currency-base" class="text-5xl font-bold text-slate-800 dark:text-white mt-2">100 JPY</div>
+                <div id="currency-thb" class="text-2xl font-bold text-brand-500 mt-4 bg-brand-50 dark:bg-brand-900/30 w-fit px-4 py-2 rounded-xl border border-brand-100 dark:border-brand-800">= 23.50 THB</div>
+            </div>
+        </div>
+
+        <!-- ✨ Quick Trip Summary -->
+        <div class="glass-panel rounded-3xl p-6 shadow-sm border border-slate-200 dark:border-slate-700">
+            <div class="flex items-center justify-between mb-6">
+                <h2 class="text-xl font-bold flex items-center gap-2">
+                    <span class="text-2xl">🗺️</span> Quick Trip Summary
+                </h2>
+                <span id="summary-country-badge" class="text-xs font-bold px-3 py-1.5 bg-brand-100 text-brand-700 dark:bg-brand-900/40 dark:text-brand-300 rounded-full">🇯🇵 ญี่ปุ่น</span>
+            </div>
+
+            <!-- Stat cards row -->
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-6">
+                <div class="bg-white dark:bg-slate-800/80 rounded-2xl p-4 border border-slate-100 dark:border-slate-700 text-center shadow-sm">
+                    <div class="text-3xl mb-1" id="summary-icon">✈️</div>
+                    <div class="text-2xl font-bold text-zinc-800 dark:text-white" id="summary-days">7</div>
+                    <div class="text-xs text-slate-500 mt-0.5">วันแนะนำ</div>
+                </div>
+                <div class="bg-white dark:bg-slate-800/80 rounded-2xl p-4 border border-slate-100 dark:border-slate-700 text-center shadow-sm">
+                    <div class="text-3xl mb-1">💰</div>
+                    <div class="text-lg font-bold text-zinc-800 dark:text-white leading-tight" id="summary-budget">35k–70k</div>
+                    <div class="text-xs text-slate-500 mt-0.5">งบ (THB/คน)</div>
+                </div>
+                <div class="bg-white dark:bg-slate-800/80 rounded-2xl p-4 border border-slate-100 dark:border-slate-700 text-center shadow-sm">
+                    <div class="text-3xl mb-1">🌡️</div>
+                    <div class="text-2xl font-bold text-zinc-800 dark:text-white" id="summary-temp">15°C</div>
+                    <div class="text-xs text-slate-500 mt-0.5">อุณหภูมิเฉลี่ย</div>
+                </div>
+                <div class="bg-white dark:bg-slate-800/80 rounded-2xl p-4 border border-slate-100 dark:border-slate-700 text-center shadow-sm">
+                    <div class="text-3xl mb-1">🗣️</div>
+                    <div class="text-lg font-bold text-zinc-800 dark:text-white leading-tight" id="summary-lang">ญี่ปุ่น</div>
+                    <div class="text-xs text-slate-500 mt-0.5">ภาษาหลัก</div>
+                </div>
+            </div>
+
+            <!-- Must-do highlights -->
+            <div class="mb-5">
+                <h4 class="text-sm font-semibold text-slate-600 dark:text-slate-400 mb-3 flex items-center gap-1.5">
+                    <span>⭐</span> Must-Do Highlights
+                </h4>
+                <ul id="summary-highlights" class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                    <!-- filled by JS -->
+                </ul>
+            </div>
+
+            <!-- Best time to visit + Visa pill -->
+            <div class="flex flex-wrap gap-3">
+                <div class="flex items-center gap-2 bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800 px-4 py-2 rounded-xl text-sm">
+                    <span>📅</span>
+                    <span class="text-amber-800 dark:text-amber-300 font-medium">ช่วงดีที่สุด: <span id="summary-season" class="font-bold">มี.ค.–พ.ค. / ก.ย.–พ.ย.</span></span>
+                </div>
+                <div id="summary-visa" class="flex items-center gap-2 bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 px-4 py-2 rounded-xl text-sm">
+                    <span>🛂</span>
+                    <span class="text-green-800 dark:text-green-300 font-medium">ฟรีวีซ่า 30 วัน</span>
+                </div>
+                <div class="flex items-center gap-2 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 px-4 py-2 rounded-xl text-sm">
+                    <span>⏱️</span>
+                    <span class="text-blue-800 dark:text-blue-300 font-medium">บินจากกรุงเทพฯ: <span id="summary-flight" class="font-bold">~7 ชม.</span></span>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <script>
+        const toggleInput = document.getElementById('hide-checkbox');
+        if (document.documentElement.classList.contains('dark')) toggleInput.checked = false; else toggleInput.checked = true;
+        toggleInput.addEventListener('change', (e) => {
+            if (e.target.checked) { document.documentElement.classList.remove('dark'); localStorage.setItem('theme', 'light'); } 
+            else { document.documentElement.classList.add('dark'); localStorage.setItem('theme', 'dark'); }
+        });
+
+        const countryData = {
+            'Japan':       { name: 'โตเกียว, ญี่ปุ่น',        temp: '15°C ⛅', desc: 'อากาศเย็นสบาย เหมาะแก่การเดินเล่น', img: 'https://images.unsplash.com/photo-1490806843957-31f4c9a91c65?auto=format&fit=crop&w=800&q=80', base: '100 JPY', thb: '= 23.50 THB',
+                badge: '🇯🇵 ญี่ปุ่น', days: '7', budget: '35k–70k', tempAvg: '15°C', lang: 'ญี่ปุ่น', season: 'มี.ค.–พ.ค. / ก.ย.–พ.ย.', visa: '🛂 ฟรีวีซ่า 30 วัน', flight: '~7 ชม.', icon: '⛩️',
+                highlights: ['ชมซากุระที่อุเอโนะ', 'เดินย่านชิบุย่า คอสซิ่ง', 'ชิมราเมนต้นตำรับ', 'ขึ้นหอคอยสกายทรี'] },
+            'France':      { name: 'ปารีส, ฝรั่งเศส',        temp: '12°C 🌥️', desc: 'มีเมฆบางส่วน อากาศโรแมนติก', img: 'https://images.unsplash.com/photo-1499856871958-5b9627545d1a?auto=format&fit=crop&w=800&q=80', base: '1 EUR', thb: '= 39.15 THB',
+                badge: '🇫🇷 ฝรั่งเศส', days: '6', budget: '60k–120k', tempAvg: '12°C', lang: 'ฝรั่งเศส', season: 'เม.ย.–มิ.ย. / ก.ย.–ต.ค.', visa: '🛂 ต้องทำ Schengen Visa', flight: '~11 ชม.', icon: '🗼',
+                highlights: ['ชมหอไอเฟิลยามค่ำ', 'ล่องเรือแม่น้ำแซน', 'เยี่ยมพิพิธภัณฑ์ลูฟวร์', 'ชิมครัวซองต์สดๆ'] },
+            'Thailand':    { name: 'กรุงเทพฯ, ไทย',          temp: '33°C ☀️', desc: 'แดดแรง อากาศร้อนจัด', img: 'https://images.unsplash.com/photo-1508009603885-50cf7c579365?auto=format&fit=crop&w=800&q=80', base: '100 THB', thb: '= 100.00 THB',
+                badge: '🇹🇭 ไทย', days: '5', budget: '8k–20k', tempAvg: '33°C', lang: 'ไทย', season: 'พ.ย.–ก.พ.', visa: '✅ ไม่ต้องวีซ่า (คนไทย)', flight: 'เมืองในประเทศ', icon: '🛕',
+                highlights: ['เที่ยววัดพระแก้ว', 'กินมะม่วงข้าวเหนียวริมถนน', 'ช้อปปิ้งตลาดจตุจักร', 'ล่องเรือแม่น้ำเจ้าพระยา'] },
+            'SouthKorea':  { name: 'โซล, เกาหลีใต้',          temp: '8°C 🌬️', desc: 'ลมแรง ค่อนข้างหนาว', img: 'https://images.unsplash.com/photo-1517154421773-0529f29ea451?auto=format&fit=crop&w=800&q=80', base: '1,000 KRW', thb: '= 26.80 THB',
+                badge: '🇰🇷 เกาหลีใต้', days: '6', budget: '30k–60k', tempAvg: '8°C', lang: 'เกาหลี', season: 'มี.ค.–พ.ค. / ก.ย.–พ.ย.', visa: '🛂 ฟรีวีซ่า 30 วัน', flight: '~5.5 ชม.', icon: '🏯',
+                highlights: ['เดินย่านอีแทวอน', 'ชมพระราชวังคยองบกกุง', 'ชิม K-BBQ แท้ๆ', 'ช้อปปิ้งเมียงดง'] },
+            'USA':         { name: 'นิวยอร์ก, สหรัฐอเมริกา', temp: '18°C 🌤️', desc: 'อากาศสดใส กำลังดี', img: 'https://images.unsplash.com/photo-1496442226666-8d4d0e62e6e9?auto=format&fit=crop&w=800&q=80', base: '1 USD', thb: '= 36.20 THB',
+                badge: '🇺🇸 สหรัฐฯ', days: '10', budget: '80k–180k', tempAvg: '18°C', lang: 'อังกฤษ', season: 'เม.ย.–มิ.ย. / ก.ย.–ต.ค.', visa: '🛂 ต้องขอ US Visa', flight: '~17 ชม.', icon: '🗽',
+                highlights: ['เดินเซ็นทรัลพาร์ก', 'ชมไทม์สแควร์ยามค่ำ', 'เที่ยวบรูคลินบริดจ์', 'ชิม NY Pizza ต้นตำรับ'] },
+            'UK':          { name: 'ลอนดอน, สหราชอาณาจักร',  temp: '10°C 🌧️', desc: 'มีฝนตกปรอยๆ พกร่มด้วยนะ', img: 'https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?auto=format&fit=crop&w=800&q=80', base: '1 GBP', thb: '= 45.80 THB',
+                badge: '🇬🇧 UK', days: '7', budget: '70k–150k', tempAvg: '10°C', lang: 'อังกฤษ', season: 'มิ.ย.–ส.ค.', visa: '🛂 ต้องขอ UK Visa', flight: '~12 ชม.', icon: '🎡',
+                highlights: ['ชมบัคกิงแฮมพาเลซ', 'ไปแกลเลอรีเทต โมเดิร์น', 'นั่งรถไฟใต้ดินเก่าแก่', 'ชิม Fish and Chips'] },
+            'Italy':       { name: 'โรม, อิตาลี',             temp: '22°C ☀️', desc: 'ท้องฟ้าโปร่ง เที่ยวสนุก', img: 'https://images.unsplash.com/photo-1552832230-c0197dd311b5?auto=format&fit=crop&w=800&q=80', base: '1 EUR', thb: '= 39.15 THB',
+                badge: '🇮🇹 อิตาลี', days: '8', budget: '55k–110k', tempAvg: '22°C', lang: 'อิตาลี', season: 'เม.ย.–มิ.ย. / ก.ย.–ต.ค.', visa: '🛂 ต้องทำ Schengen Visa', flight: '~11 ชม.', icon: '🏛️',
+                highlights: ['เยี่ยมโคลอสเซียม', 'ชิมเจลาโต้ต้นตำรับ', 'โยน Coin ที่น้ำพุเทรวี', 'ขึ้นโบสถ์เซนต์ปีเตอร์'] },
+            'Switzerland': { name: 'ซูริค, สวิตเซอร์แลนด์',  temp: '5°C 🌨️', desc: 'หนาวจัด อาจมีหิมะตก', img: 'https://images.unsplash.com/photo-1528702748617-c64d49f918af?auto=format&fit=crop&w=800&q=80', base: '1 CHF', thb: '= 40.50 THB',
+                badge: '🇨🇭 สวิส', days: '6', budget: '90k–200k', tempAvg: '5°C', lang: 'เยอรมัน/ฝรั่งเศส', season: 'ธ.ค.–ก.พ. (หิมะ) / มิ.ย.–ส.ค.', visa: '🛂 ต้องทำ Schengen Visa', flight: '~11.5 ชม.', icon: '🏔️',
+                highlights: ['เล่นสกีที่อินเตอร์ลาเคน', 'นั่งรถไฟชม Jungfrau', 'ชิมชีสและช็อกโกแลต', 'ล่องเรือทะเลสาบเจนีวา'] },
+            'Taiwan':      { name: 'ไทเป, ไต้หวัน',           temp: '25°C ⛅', desc: 'อากาศอบอุ่น เดินชิลล์ได้', img: 'https://images.unsplash.com/photo-1550951298-5c7b95a66bfc?auto=format&fit=crop&w=800&q=80', base: '100 TWD', thb: '= 115.40 THB',
+                badge: '🇹🇼 ไต้หวัน', days: '5', budget: '20k–45k', tempAvg: '25°C', lang: 'จีน (แมนดาริน)', season: 'ต.ค.–ธ.ค. / มี.ค.–เม.ย.', visa: '🛂 ฟรีวีซ่า 30 วัน', flight: '~3.5 ชม.', icon: '🏮',
+                highlights: ['เดินตลาดกลางคืนซื่อหลิน', 'ขึ้นตึกไทเป 101', 'ชิม Stinky Tofu ทำใจ', 'ปั่นจักรยานรอบเมือง'] },
+            'China':       { name: 'ปักกิ่ง, จีน',            temp: '14°C ☁️', desc: 'มีเมฆมาก อากาศเย็น', img: 'https://images.unsplash.com/photo-1508804185872-d7badad00f7d?auto=format&fit=crop&w=800&q=80', base: '10 CNY', thb: '= 50.30 THB',
+                badge: '🇨🇳 จีน', days: '8', budget: '25k–60k', tempAvg: '14°C', lang: 'จีน (แมนดาริน)', season: 'เม.ย.–พ.ค. / ก.ย.–ต.ค.', visa: '🛂 ต้องขอวีซ่าจีน', flight: '~4.5 ชม.', icon: '🏯',
+                highlights: ['เดินกำแพงเมืองจีน', 'เที่ยวพระราชวังต้องห้าม', 'ชิม Peking Duck แท้ๆ', 'ชมวัด Temple of Heaven'] },
+            'UAE':         { name: 'ดูไบ, UAE',                temp: '35°C 🏜️', desc: 'ร้อนและแห้ง', img: 'https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=800&q=80', base: '10 AED', thb: '= 98.50 THB',
+                badge: '🇦🇪 UAE', days: '5', budget: '50k–120k', tempAvg: '35°C', lang: 'อาหรับ / อังกฤษ', season: 'พ.ย.–เม.ย.', visa: '✅ Visa on Arrival 30 วัน', flight: '~6.5 ชม.', icon: '🏙️',
+                highlights: ['ขึ้นชม Burj Khalifa', 'ช้อปปิ้ง Dubai Mall', 'ขับรถ Dune Bashing', 'ดูน้ำพุดูไบยามค่ำ'] },
+            'Singapore':   { name: 'สิงคโปร์',                 temp: '30°C 🌦️', desc: 'ร้อนชื้น อาจมีฝนตกชุก', img: 'https://images.unsplash.com/photo-1525625293386-3f8f99389edd?auto=format&fit=crop&w=800&q=80', base: '1 SGD', thb: '= 26.90 THB',
+                badge: '🇸🇬 สิงคโปร์', days: '4', budget: '30k–70k', tempAvg: '30°C', lang: 'อังกฤษ / จีน', season: 'ตลอดปี (หลีกเลี่ยง ธ.ค.–ม.ค.)', visa: '✅ ฟรีวีซ่า 30 วัน', flight: '~2.5 ชม.', icon: '🦁',
+                highlights: ['ชม Gardens by the Bay', 'เดินย่าน Chinatown', 'ชิม Chilli Crab', 'ขึ้น Marina Bay Sands'] },
+            'Vietnam':     { name: 'ดานัง, เวียดนาม',          temp: '28°C ⛅', desc: 'อากาศดี ลมทะเลพัดเย็น', img: 'https://images.unsplash.com/photo-1559592413-7cec4d0cae2b?auto=format&fit=crop&w=800&q=80', base: '10,000 VND', thb: '= 14.80 THB',
+                badge: '🇻🇳 เวียดนาม', days: '6', budget: '15k–35k', tempAvg: '28°C', lang: 'เวียดนาม', season: 'ม.ค.–เม.ย.', visa: '🛂 ฟรีวีซ่า 45 วัน', flight: '~2 ชม.', icon: '🏖️',
+                highlights: ['เที่ยวอ่าวฮาลอง', 'เดินเมืองเก่าฮอยอัน', 'ชิม Pho ต้นตำรับ', 'ขี่มอเตอร์ไซค์ชมเมือง'] },
+            'Maldives':    { name: 'มาเล่, มัลดีฟส์',          temp: '29°C 🏝️', desc: 'แดดแรง น้ำทะเลใสปิ๊ง', img: 'https://images.unsplash.com/photo-1510414842594-a61c69b5ae57?auto=format&fit=crop&w=800&q=80', base: '10 MVR', thb: '= 23.50 THB',
+                badge: '🇲🇻 มัลดีฟส์', days: '5', budget: '80k–200k+', tempAvg: '29°C', lang: 'ดิเวฮิ / อังกฤษ', season: 'พ.ย.–เม.ย.', visa: '✅ Visa on Arrival 30 วัน', flight: '~3 ชม.', icon: '🐠',
+                highlights: ['พักรีสอร์ทบนน้ำ', 'ดำน้ำดูฉลามวาฬ', 'ชม Bioluminescent Plankton', 'นั่งเรือชม Sunset'] },
+            'Australia':   { name: 'ซิดนีย์, ออสเตรเลีย',    temp: '24°C ☀️', desc: 'อากาศแจ่มใสสุดๆ', img: 'https://images.unsplash.com/photo-1506973035872-a4ec16b8e8d9?auto=format&fit=crop&w=800&q=80', base: '1 AUD', thb: '= 23.80 THB',
+                badge: '🇦🇺 ออสเตรเลีย', days: '10', budget: '60k–130k', tempAvg: '24°C', lang: 'อังกฤษ', season: 'ก.ย.–พ.ย. / มี.ค.–พ.ค.', visa: '🛂 ต้องขอ ETA', flight: '~9.5 ชม.', icon: '🦘',
+                highlights: ['ชม Sydney Opera House', 'เดิน Bondi Beach', 'เยี่ยม Blue Mountains', 'ดู Kangaroo/Koala'] },
+        };
+
+        const select = document.getElementById('country-select');
+        const bgImg = document.getElementById('bg-img');
+
+        function updateDashboard(key) {
+            const c = countryData[key];
+            if (!c) return;
+            bgImg.style.opacity = '0';
+            setTimeout(() => {
+                bgImg.src = c.img;
+                document.getElementById('location-name').innerText = c.name;
+                document.getElementById('temp-text').innerText = c.temp;
+                document.getElementById('weather-desc').innerText = c.desc;
+                document.getElementById('currency-base').innerText = c.base;
+                document.getElementById('currency-thb').innerText = c.thb;
+                // Summary
+                document.getElementById('summary-country-badge').innerText = c.badge;
+                document.getElementById('summary-days').innerText = c.days;
+                document.getElementById('summary-budget').innerText = c.budget;
+                document.getElementById('summary-temp').innerText = c.tempAvg;
+                document.getElementById('summary-lang').innerText = c.lang;
+                document.getElementById('summary-season').innerText = c.season;
+                document.getElementById('summary-visa').innerHTML = `<span>🛂</span><span class="text-green-800 dark:text-green-300 font-medium">${c.visa}</span>`;
+                document.getElementById('summary-flight').innerText = c.flight;
+                document.getElementById('summary-icon').innerText = c.icon;
+                // Highlights
+                const ul = document.getElementById('summary-highlights');
+                ul.innerHTML = c.highlights.map(h => `
+                    <li class="flex items-center gap-2 bg-white dark:bg-slate-800/80 rounded-xl px-3 py-2 border border-slate-100 dark:border-slate-700 text-sm text-zinc-700 dark:text-zinc-300 shadow-sm">
+                        <span class="w-1.5 h-1.5 rounded-full bg-brand-500 flex-shrink-0"></span>${h}
+                    </li>`).join('');
+                bgImg.style.opacity = '1';
+            }, 300);
+        }
+
+        select.addEventListener('change', (e) => updateDashboard(e.target.value));
+        updateDashboard('Japan');
+    </script>
+</body>
+</html>
