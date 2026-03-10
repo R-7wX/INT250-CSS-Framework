@@ -7,6 +7,7 @@
     <link rel="icon" type="image/png" href="src/favicon.png">
     <script src="https://cdn.tailwindcss.com"></script>
     <script>tailwind.config={darkMode:'class',theme:{extend:{colors:{brand:{50:'#f4f5f4',100:'#e6e9e6',500:'#8ba888',600:'#6b8a68',900:'#3a4a39'}}}}}</script>
+    <script src="lang.js"></script>
     <script>if(localStorage.theme==='dark'||(!('theme'in localStorage)&&window.matchMedia('(prefers-color-scheme: dark)').matches))document.documentElement.classList.add('dark');else document.documentElement.classList.remove('dark');</script>
     <style>
         *{box-sizing:border-box;}
@@ -30,9 +31,9 @@
             <div class="font-bold text-brand-600 dark:text-brand-500 text-2xl tracking-tight">Travelaroha</div>
         </div>
         <div class="hidden md:flex gap-8 font-medium text-zinc-500 dark:text-zinc-400">
-            <a href="index.html" class="relative px-1 py-2 text-zinc-900 dark:text-white font-bold">DISCOVERY<span class="absolute -bottom-1 left-0 w-full h-[2px] bg-zinc-900 dark:bg-white rounded-full"></span></a>
-            <a href="storyboard.html" class="relative group px-1 py-2 hover:text-zinc-900 dark:hover:text-white transition-colors">TRIP STORYBOARD<span class="absolute -bottom-1 left-0 w-0 h-[2px] bg-zinc-300 dark:bg-zinc-600 rounded-full transition-all duration-300 group-hover:w-full"></span></a>
-            <a href="dashboard.html" class="relative group px-1 py-2 hover:text-zinc-900 dark:hover:text-white transition-colors">DASHBOARD<span class="absolute -bottom-1 left-0 w-0 h-[2px] bg-zinc-300 dark:bg-zinc-600 rounded-full transition-all duration-300 group-hover:w-full"></span></a>
+            <a href="index.html" class="relative px-1 py-2 text-zinc-900 dark:text-white font-bold"><span data-i18n="nav_discovery">DISCOVERY</span><span class="absolute -bottom-1 left-0 w-full h-[2px] bg-zinc-900 dark:bg-white rounded-full"></span></a>
+            <a href="storyboard.html" class="relative group px-1 py-2 hover:text-zinc-900 dark:hover:text-white transition-colors"><span data-i18n="nav_storyboard">TRIP STORYBOARD</span><span class="absolute -bottom-1 left-0 w-0 h-[2px] bg-zinc-300 dark:bg-zinc-600 rounded-full transition-all duration-300 group-hover:w-full"></span></a>
+            <a href="dashboard.html" class="relative group px-1 py-2 hover:text-zinc-900 dark:hover:text-white transition-colors"><span data-i18n="nav_dashboard">DASHBOARD</span><span class="absolute -bottom-1 left-0 w-0 h-[2px] bg-zinc-300 dark:bg-zinc-600 rounded-full transition-all duration-300 group-hover:w-full"></span></a>
         </div>
         <div class="flex items-center gap-4">
             <div class="w-[80px] h-[40px] flex items-center justify-center overflow-hidden">
@@ -41,6 +42,7 @@
                     <label for="hide-checkbox" class="toggle m-0"><span class="toggle-button"><span class="crater crater-1"></span></span><span class="star star-1"></span></label>
                 </div>
             </div>
+            <div id="lang-slot"></div>
             <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=100&q=80" class="w-10 h-10 rounded-full object-cover shadow-md border-2 border-white dark:border-zinc-800 cursor-pointer hover:scale-105 transition-transform">
         </div>
     </nav>
@@ -50,20 +52,20 @@
         <!-- Header row -->
         <div class="flex items-start justify-between flex-wrap gap-3">
             <div>
-                <h2 class="text-3xl font-bold">Discover Vibes</h2>
-                <p class="text-slate-500 dark:text-slate-400 mt-1">หาแรงบันดาลใจและบันทึกสถานที่ที่คุณชอบ</p>
+                <h2 class="text-3xl font-bold" data-i18n="idx_title">Discover Vibes</h2>
+                <p class="text-slate-500 dark:text-slate-400 mt-1" data-i18n="idx_sub">หาแรงบันดาลใจและบันทึกสถานที่ที่คุณชอบ</p>
             </div>
             <!-- Saved Vibes toggle button -->
             <button id="show-saved-btn" class="flex items-center gap-2 px-4 py-2.5 rounded-2xl border border-rose-200 dark:border-rose-800 bg-white dark:bg-zinc-800 text-rose-500 dark:text-rose-400 text-sm font-semibold shadow-sm hover:bg-rose-50 dark:hover:bg-rose-900/20 transition-all">
                 <span class="text-base">❤️</span>
-                <span id="show-saved-label">Saved Vibes</span>
+                <span id="show-saved-label" data-i18n="idx_saved_btn">Saved Vibes</span>
                 <span id="saved-count-pill" class="bg-rose-100 dark:bg-rose-900/40 text-rose-600 dark:text-rose-300 text-xs font-bold px-2 py-0.5 rounded-full min-w-[22px] text-center">0</span>
             </button>
         </div>
 
         <!-- Filter bar -->
         <div id="filter-container" class="flex gap-3 overflow-x-auto pb-2 scrollbar-hide">
-            <button data-vibe="All" class="filter-btn active px-5 py-2.5 rounded-full text-sm font-medium shadow-sm whitespace-nowrap transition-all border bg-white dark:bg-zinc-800 border-zinc-200 dark:border-zinc-700 text-zinc-600 dark:text-zinc-300 [&.active]:bg-brand-500 [&.active]:text-white [&.active]:border-brand-500">ทั้งหมด</button>
+            <button data-vibe="All" class="filter-btn active px-5 py-2.5 rounded-full text-sm font-medium shadow-sm whitespace-nowrap transition-all border bg-white dark:bg-zinc-800 border-zinc-200 dark:border-zinc-700 text-zinc-600 dark:text-zinc-300 [&.active]:bg-brand-500 [&.active]:text-white [&.active]:border-brand-500" data-i18n="idx_filter_all">ทั้งหมด</button>
             <button data-vibe="Urban Adventure" class="filter-btn px-5 py-2.5 rounded-full text-sm font-medium shadow-sm whitespace-nowrap transition-all border bg-white dark:bg-zinc-800 border-zinc-200 dark:border-zinc-700 text-zinc-600 dark:text-zinc-300 [&.active]:bg-slate-600 [&.active]:text-white [&.active]:border-slate-600">🏙️ Urban Adventure</button>
             <button data-vibe="Slow Living" class="filter-btn px-5 py-2.5 rounded-full text-sm font-medium shadow-sm whitespace-nowrap transition-all border bg-white dark:bg-zinc-800 border-zinc-200 dark:border-zinc-700 text-zinc-600 dark:text-zinc-300 [&.active]:bg-amber-600 [&.active]:text-white [&.active]:border-amber-600">☕ Slow Living</button>
             <button data-vibe="Nature Retreat" class="filter-btn px-5 py-2.5 rounded-full text-sm font-medium shadow-sm whitespace-nowrap transition-all border bg-white dark:bg-zinc-800 border-zinc-200 dark:border-zinc-700 text-zinc-600 dark:text-zinc-300 [&.active]:bg-emerald-600 [&.active]:text-white [&.active]:border-emerald-600">🌲 Nature Retreat</button>
@@ -75,9 +77,9 @@
         <div id="places-canvas" class="grid grid-cols-2 md:grid-cols-4 gap-4 auto-rows-[200px]"></div>
         <div id="empty-state" class="hidden flex-col items-center justify-center py-24 text-center gap-3">
             <div class="text-6xl">🗺️</div>
-            <h3 class="text-xl font-bold">ไม่พบสถานที่</h3>
-            <p class="text-slate-400 text-sm">ลองเลือก Vibe อื่น หรือกด ❤️ บนการ์ดก่อนนะ</p>
-            <button onclick="setSavedMode(false)" class="mt-2 px-4 py-2 rounded-xl bg-brand-500 text-white text-sm font-medium">ดูทั้งหมด</button>
+            <h3 class="text-xl font-bold" data-i18n="idx_empty_h">ไม่พบสถานที่</h3>
+            <p class="text-slate-400 text-sm" data-i18n="idx_empty_sub">ลองเลือก Vibe อื่น หรือกด ❤️ บนการ์ดก่อนนะ</p>
+            <button onclick="setSavedMode(false)" class="mt-2 px-4 py-2 rounded-xl bg-brand-500 text-white text-sm font-medium" data-i18n="idx_see_all">ดูทั้งหมด</button>
         </div>
 
     </main>
@@ -90,6 +92,14 @@
         </nav>
 
     <script>
+        // ── i18n init ──
+        renderLangSwitcher('lang-slot');
+        applyLang();
+        window.onLangChange = function() {
+            document.getElementById('show-saved-label').textContent = savedMode ? t('idx_saved_on') : t('idx_saved_btn');
+            updateBadge(); render();
+        };
+
         // ── Theme ──
         const toggleInput=document.getElementById('hide-checkbox');
         if(document.documentElement.classList.contains('dark'))toggleInput.checked=false;else toggleInput.checked=true;
@@ -142,7 +152,7 @@
             savedMode = on;
             savedBtn.classList.toggle('saved-mode-active', on);
             savedBtn.classList.toggle('bg-rose-50', on);
-            document.getElementById('show-saved-label').textContent = on ? 'แสดงอยู่: Saved' : 'Saved Vibes';
+            document.getElementById('show-saved-label').textContent = on ? t('idx_saved_on') : t('idx_saved_btn');
             // reset vibe filter to All when entering saved mode
             if(on){ document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active')); document.querySelector('[data-vibe="All"]').classList.add('active'); currentVibe='All'; }
             render();
@@ -202,7 +212,7 @@
         document.querySelectorAll('.filter-btn').forEach(btn=>{
             btn.addEventListener('click',()=>{
                 savedMode=false; savedBtn.classList.remove('saved-mode-active','bg-rose-50');
-                document.getElementById('show-saved-label').textContent='Saved Vibes';
+                document.getElementById('show-saved-label').textContent=t('idx_saved_btn');
                 document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
                 btn.classList.add('active');
                 currentVibe = btn.getAttribute('data-vibe');

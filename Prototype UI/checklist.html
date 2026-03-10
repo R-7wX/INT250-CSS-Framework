@@ -7,6 +7,7 @@
     <link rel="icon" type="image/png" href="src/favicon.png">
     <script src="https://cdn.tailwindcss.com"></script>
     <script>tailwind.config={darkMode:'class',theme:{extend:{colors:{brand:{50:'#f4f5f4',100:'#e6e9e6',500:'#8ba888',600:'#6b8a68',900:'#3a4a39'}}}}}</script>
+    <script src="lang.js"></script>
     <script>if(localStorage.theme==='dark'||(!('theme'in localStorage)&&window.matchMedia('(prefers-color-scheme: dark)').matches))document.documentElement.classList.add('dark');else document.documentElement.classList.remove('dark');</script>
     <style>
         *{box-sizing:border-box;}
@@ -33,9 +34,9 @@
             <div class="font-bold text-brand-600 dark:text-brand-500 text-2xl tracking-tight">Travelaroha</div>
         </div>
         <div class="hidden md:flex gap-8 font-medium text-zinc-500 dark:text-zinc-400">
-            <a href="index.html" class="relative group px-1 py-2 hover:text-zinc-900 dark:hover:text-white transition-colors">DISCOVERY<span class="absolute -bottom-1 left-0 w-0 h-[2px] bg-zinc-300 dark:bg-zinc-600 rounded-full transition-all duration-300 group-hover:w-full"></span></a>
-            <a href="storyboard.html" class="relative group px-1 py-2 hover:text-zinc-900 dark:hover:text-white transition-colors">TRIP STORYBOARD<span class="absolute -bottom-1 left-0 w-0 h-[2px] bg-zinc-300 dark:bg-zinc-600 rounded-full transition-all duration-300 group-hover:w-full"></span></a>
-            <a href="dashboard.html" class="relative group px-1 py-2 hover:text-zinc-900 dark:hover:text-white transition-colors">DASHBOARD<span class="absolute -bottom-1 left-0 w-0 h-[2px] bg-zinc-300 dark:bg-zinc-600 rounded-full transition-all duration-300 group-hover:w-full"></span></a>
+            <a href="index.html" class="relative group px-1 py-2 hover:text-zinc-900 dark:hover:text-white transition-colors"><span data-i18n="nav_discovery">DISCOVERY</span><span class="absolute -bottom-1 left-0 w-0 h-[2px] bg-zinc-300 dark:bg-zinc-600 rounded-full transition-all duration-300 group-hover:w-full"></span></a>
+            <a href="storyboard.html" class="relative group px-1 py-2 hover:text-zinc-900 dark:hover:text-white transition-colors"><span data-i18n="nav_storyboard">TRIP STORYBOARD</span><span class="absolute -bottom-1 left-0 w-0 h-[2px] bg-zinc-300 dark:bg-zinc-600 rounded-full transition-all duration-300 group-hover:w-full"></span></a>
+            <a href="dashboard.html" class="relative group px-1 py-2 hover:text-zinc-900 dark:hover:text-white transition-colors"><span data-i18n="nav_dashboard">DASHBOARD</span><span class="absolute -bottom-1 left-0 w-0 h-[2px] bg-zinc-300 dark:bg-zinc-600 rounded-full transition-all duration-300 group-hover:w-full"></span></a>
         </div>
         <div class="flex items-center gap-4">
             <div class="w-[80px] h-[40px] flex items-center justify-center overflow-hidden">
@@ -44,6 +45,7 @@
                     <label for="hide-checkbox" class="toggle m-0"><span class="toggle-button"><span class="crater crater-1"></span></span><span class="star star-1"></span></label>
                 </div>
             </div>
+            <div id="lang-slot"></div>
             <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=100&q=80" class="w-10 h-10 rounded-full object-cover shadow-md border-2 border-white dark:border-zinc-800 cursor-pointer hover:scale-105 transition-transform">
         </div>
     </nav>
@@ -55,8 +57,8 @@
             <img src="https://images.unsplash.com/photo-1488646953014-85cb44e25828?auto=format&fit=crop&w=1200&q=80" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
             <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
             <div class="absolute bottom-6 left-6 text-white z-10">
-                <h2 class="text-3xl md:text-4xl font-bold">Trip Checklist</h2>
-                <p id="hero-sub" class="text-sm md:text-base opacity-90 mt-2">เตรียมสัมภาระให้พร้อมก่อนออกเดินทาง ✈️</p>
+                <h2 class="text-3xl md:text-4xl font-bold" data-i18n="cl_title">Trip Checklist</h2>
+                <p id="hero-sub" class="text-sm md:text-base opacity-90 mt-2" data-i18n="cl_sub">เตรียมสัมภาระให้พร้อมก่อนออกเดินทาง ✈️</p>
             </div>
         </div>
 
@@ -64,7 +66,7 @@
         <div id="itinerary-section" class="hidden slide-in">
             <div class="glass-panel p-5 rounded-3xl border border-brand-200/60 dark:border-brand-800/60 shadow-sm">
                 <div class="flex items-center justify-between mb-4 flex-wrap gap-2">
-                    <h3 class="font-bold text-lg flex items-center gap-2">🗺️ แผนการเดินทางของคุณ</h3>
+                    <h3 class="font-bold text-lg flex items-center gap-2" data-i18n="cl_itin">🗺️ แผนการเดินทางของคุณ</h3>
                     <span id="itinerary-meta" class="text-xs text-slate-400 bg-slate-100 dark:bg-slate-800 px-3 py-1 rounded-full"></span>
                 </div>
                 <div id="itinerary-days" class="space-y-4"></div>
@@ -74,14 +76,14 @@
         <!-- ── PROGRESS ── -->
         <div class="glass-panel p-5 rounded-2xl border border-slate-200/60 dark:border-slate-700/60 shadow-sm">
             <div class="flex items-center justify-between mb-3">
-                <div class="flex items-center gap-2"><span class="text-xl">📦</span><span class="font-bold">ความคืบหน้า Packing</span></div>
+                <div class="flex items-center gap-2"><span class="text-xl">📦</span><span class="font-bold" data-i18n="cl_packing">ความคืบหน้า Packing</span></div>
                 <div class="flex items-center gap-3">
                     <span id="overall-text" class="text-sm font-semibold text-brand-600 dark:text-brand-400">0 / 0</span>
-                    <button id="reset-btn" class="text-xs text-slate-400 hover:text-rose-500 px-3 py-1.5 rounded-xl border border-slate-200 dark:border-slate-700 hover:border-rose-300 bg-white/50 dark:bg-slate-800/50 transition-colors">🔄 รีเซ็ต</button>
+                    <button id="reset-btn" class="text-xs text-slate-400 hover:text-rose-500 px-3 py-1.5 rounded-xl border border-slate-200 dark:border-slate-700 hover:border-rose-300 bg-white/50 dark:bg-slate-800/50 transition-colors" data-i18n="cl_reset">🔄 รีเซ็ต</button>
                 </div>
             </div>
             <div class="progress-bar"><div id="overall-fill" class="progress-fill" style="width:0%"></div></div>
-            <div id="done-msg" class="hidden mt-3 text-center text-sm font-bold text-brand-600 dark:text-brand-400">🎉 เก็บของครบแล้ว! พร้อมออกเดินทาง ✈️</div>
+            <div id="done-msg" class="hidden mt-3 text-center text-sm font-bold text-brand-600 dark:text-brand-400" data-i18n="cl_done">🎉 เก็บของครบแล้ว! พร้อมออกเดินทาง ✈️</div>
         </div>
 
         <!-- ── PACKING SECTIONS ── -->
@@ -90,15 +92,15 @@
         <!-- ── SAVE PLAN BUTTON (shown after all checked) ── -->
         <div id="save-plan-section" class="glass-panel p-6 rounded-3xl border border-brand-200 dark:border-brand-800 shadow-sm text-center space-y-4">
             <div class="text-4xl">🗂️</div>
-            <h3 class="font-bold text-xl">บันทึกแผนการเดินทาง</h3>
-            <p class="text-sm text-slate-500 dark:text-slate-400">ดาวน์โหลดแผนการเดินทางของคุณเป็นไฟล์ HTML สวยงาม</p>
+            <h3 class="font-bold text-xl" data-i18n="cl_save_title">บันทึกแผนการเดินทาง</h3>
+            <p class="text-sm text-slate-500 dark:text-slate-400" data-i18n="cl_save_sub">ดาวน์โหลดแผนการเดินทางของคุณเป็นไฟล์ HTML สวยงาม</p>
             <div class="flex flex-col sm:flex-row justify-center gap-3">
                 <button id="download-plan-btn" class="flex items-center justify-center gap-2 px-6 py-3 bg-brand-600 hover:bg-brand-700 text-white rounded-2xl font-bold shadow-lg hover:scale-105 transition-all">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
-                    ดาวน์โหลดแผนการเดินทาง
+                    <span data-i18n="cl_download">ดาวน์โหลดแผนการเดินทาง</span>
                 </button>
                 <a href="storyboard.html" class="flex items-center justify-center gap-2 px-6 py-3 border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 rounded-2xl font-medium hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors">
-                    ← กลับวางแผนใหม่
+                    <span data-i18n="cl_back">← กลับวางแผนใหม่</span>
                 </a>
             </div>
         </div>
@@ -113,6 +115,11 @@
     </nav>
 
 <script>
+// ── i18n init ──
+renderLangSwitcher('lang-slot');
+applyLang();
+window.onLangChange = function() { applyLang(); renderSections(); };
+
 // ── Theme ──
 const toggleInput = document.getElementById('hide-checkbox');
 if (document.documentElement.classList.contains('dark')) toggleInput.checked = false; else toggleInput.checked = true;
@@ -128,28 +135,28 @@ const LS_CHECK   = 'travelaroha_checklist';
 
 // ── Packing data ──
 const SECTIONS = [
-    { id:'docs', icon:'📄', title:'เอกสารสำคัญ', items:[
-        {id:'doc1',label:'พาสปอร์ต / วีซ่า'},{id:'doc2',label:'ตั๋วเครื่องบิน / บัตรโดยสาร'},
-        {id:'doc3',label:'เอกสารจองที่พัก'},{id:'doc4',label:'กรมธรรม์ประกันการเดินทาง'},
-        {id:'doc5',label:'บัตรประชาชน / ใบขับขี่สากล'},{id:'doc6',label:'บัตรเครดิต / เงินสด'},
+    { id:'docs', icon:'📄', get title(){ return t('sec_docs'); }, items:[
+        {id:'doc1',get label(){ return t('doc1'); }},{id:'doc2',get label(){ return t('doc2'); }},
+        {id:'doc3',get label(){ return t('doc3'); }},{id:'doc4',get label(){ return t('doc4'); }},
+        {id:'doc5',get label(){ return t('doc5'); }},{id:'doc6',get label(){ return t('doc6'); }},
     ]},
-    { id:'elec', icon:'💻', title:'อุปกรณ์อิเล็กทรอนิกส์', items:[
-        {id:'el1',label:'สมาร์ทโฟน / แท็บเล็ต'},{id:'el2',label:'สายชาร์จและอแดปเตอร์'},
-        {id:'el3',label:'พาวเวอร์แบงค์'},{id:'el4',label:'หูฟัง / AirPods'},
-        {id:'el5',label:'กล้องถ่ายรูป / เมมโมรี่การ์ด'},{id:'el6',label:'ซิมการ์ดต่างประเทศ'},
+    { id:'elec', icon:'💻', get title(){ return t('sec_elec'); }, items:[
+        {id:'el1',get label(){ return t('el1'); }},{id:'el2',get label(){ return t('el2'); }},
+        {id:'el3',get label(){ return t('el3'); }},{id:'el4',get label(){ return t('el4'); }},
+        {id:'el5',get label(){ return t('el5'); }},{id:'el6',get label(){ return t('el6'); }},
     ]},
-    { id:'clothes', icon:'👕', title:'เสื้อผ้าและเครื่องแต่งกาย', items:[
-        {id:'cl1',label:'เสื้อยืด / เสื้อเชิ้ต'},{id:'cl2',label:'กางเกงขาสั้น / ขายาว'},
-        {id:'cl3',label:'ชุดนอน'},{id:'cl4',label:'ชุดชั้นใน / กางเกงใน'},
-        {id:'cl5',label:'ถุงเท้า'},{id:'cl6',label:'เสื้อกันหนาว / แจ็คเก็ต'},
-        {id:'cl7',label:'รองเท้าผ้าใบ'},{id:'cl8',label:'รองเท้าแตะ'},
-        {id:'cl9',label:'แว่นตากันแดด / หมวก'},{id:'cl10',label:'กระเป๋าสะพาย / เป้'},
+    { id:'clothes', icon:'👕', get title(){ return t('sec_clothes'); }, items:[
+        {id:'cl1',get label(){ return t('cl1'); }},{id:'cl2',get label(){ return t('cl2'); }},
+        {id:'cl3',get label(){ return t('cl3'); }},{id:'cl4',get label(){ return t('cl4'); }},
+        {id:'cl5',get label(){ return t('cl5'); }},{id:'cl6',get label(){ return t('cl6'); }},
+        {id:'cl7',get label(){ return t('cl7'); }},{id:'cl8',get label(){ return t('cl8'); }},
+        {id:'cl9',get label(){ return t('cl9'); }},{id:'cl10',get label(){ return t('cl10'); }},
     ]},
-    { id:'personal', icon:'🧳', title:'ของใช้ส่วนตัวและยา', items:[
-        {id:'pe1',label:'แปรงสีฟัน / ยาสีฟัน'},{id:'pe2',label:'ครีมอาบน้ำ / แชมพู (ขนาดพกพา)'},
-        {id:'pe3',label:'สกินแคร์ / ครีมกันแดด'},{id:'pe4',label:'ยาประจำตัว'},
-        {id:'pe5',label:'ยาแก้ปวด / ยาแก้แพ้'},{id:'pe6',label:'ทิชชู่เปียก / ทิชชู่แห้ง'},
-        {id:'pe7',label:'หน้ากากอนามัย / เจลล้างมือ'},
+    { id:'personal', icon:'🧳', get title(){ return t('sec_personal'); }, items:[
+        {id:'pe1',get label(){ return t('pe1'); }},{id:'pe2',get label(){ return t('pe2'); }},
+        {id:'pe3',get label(){ return t('pe3'); }},{id:'pe4',get label(){ return t('pe4'); }},
+        {id:'pe5',get label(){ return t('pe5'); }},{id:'pe6',get label(){ return t('pe6'); }},
+        {id:'pe7',get label(){ return t('pe7'); }},
     ]},
 ];
 
@@ -166,10 +173,9 @@ function renderItinerary(data) {
     exportData = data;
 
     const totalPlaces = data.days.reduce((s, d) => s + d.places.length, 0);
-    document.getElementById('hero-sub').textContent = `${data.days.length} วัน · ${totalPlaces} สถานที่ ✈️`;
+    document.getElementById('hero-sub').textContent = `${data.days.length} ${t('cl_days')} · ${totalPlaces} ${t('cl_places')} ✈️`; document.getElementById('hero-sub').removeAttribute('data-i18n');
 
-    document.getElementById('itinerary-meta').textContent =
-        `${data.days.length} วัน · ${totalPlaces} สถานที่ · สร้างเมื่อ ${new Date(data.exportedAt).toLocaleDateString('th-TH')}`;
+    document.getElementById('itinerary-meta').textContent = `${data.days.length} ${t('cl_days')} · ${totalPlaces} ${t('cl_places')} · ${new Date(data.exportedAt).toLocaleDateString()}`;
 
     const container = document.getElementById('itinerary-days');
     container.innerHTML = '';
@@ -193,7 +199,7 @@ function renderItinerary(data) {
                     </div>
                     <span class="text-xs font-medium bg-brand-50 dark:bg-brand-900/30 text-brand-600 dark:text-brand-400 px-2 py-1 rounded-lg flex-shrink-0">${p.start} – ${p.end}</span>
                 </div>`).join('')}</div>`
-            : `<div class="px-4 py-3 text-sm text-slate-400 italic">ยังไม่มีสถานที่</div>`;
+            : `<div class="px-4 py-3 text-sm text-slate-400 italic">${t("cl_no_places")}</div>`;
 
         div.innerHTML = header + places;
         container.appendChild(div);
@@ -239,7 +245,7 @@ function updateProgress() {
     const allCbs = document.querySelectorAll('.check-item');
     let total = allCbs.length, done = 0;
     allCbs.forEach(cb => { if (cb.checked) done++; });
-    document.getElementById('overall-text').textContent = `${done} / ${total} รายการ`;
+    document.getElementById('overall-text').textContent = `${done} / ${total} ${t('cl_items')}`;
     document.getElementById('overall-fill').style.width = total > 0 ? `${done/total*100}%` : '0%';
     document.getElementById('done-msg').classList.toggle('hidden', done < total);
 
@@ -250,7 +256,7 @@ function updateProgress() {
         let sDone = 0; sCbs.forEach(c => { if (c.checked) sDone++; });
         const countEl = div.querySelector('.sec-count');
         if (sDone === sCbs.length && sCbs.length > 0) {
-            countEl.textContent = '✓ ครบ!';
+            countEl.textContent = t('cl_sec_done');
             countEl.classList.add('bg-brand-500','text-white','border-brand-500');
         } else {
             countEl.textContent = `${sDone}/${sCbs.length}`;
@@ -395,7 +401,7 @@ document.getElementById('download-plan-btn').addEventListener('click', () => {
 
 // ── Reset btn ─────────────────────────────────────────────
 document.getElementById('reset-btn').addEventListener('click', () => {
-    if (!confirm('รีเซ็ต packing checklist?')) return;
+    if (!confirm(t('cl_reset_confirm'))) return;
     checked = {}; saveChecked();
     document.querySelectorAll('.check-item').forEach(cb => { cb.checked = false; });
     updateProgress();
