@@ -5,376 +5,385 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Traveloha - Storyboard</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = { 
-            darkMode: 'class', 
-            theme: { 
-                extend: { 
-                    colors: { 
-                        brand: { 
-                            50: '#f4f5f4', 
-                            100: '#e6e9e6', 
-                            500: '#8ba888',
-                            600: '#6b8a68', 
-                            900: '#3a4a39' 
-                        } 
-                    } 
-                } 
-            } 
-        }
-    </script>
-    <script>if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) document.documentElement.classList.add('dark'); else document.documentElement.classList.remove('dark');</script>
+    <script>tailwind.config={darkMode:'class',theme:{extend:{colors:{brand:{50:'#f4f5f4',100:'#e6e9e6',500:'#8ba888',600:'#6b8a68',900:'#3a4a39'}}}}}</script>
+    <script>if(localStorage.theme==='dark'||(!('theme'in localStorage)&&window.matchMedia('(prefers-color-scheme: dark)').matches))document.documentElement.classList.add('dark');else document.documentElement.classList.remove('dark');</script>
     <style>
-        * { box-sizing: border-box; } #hide-checkbox { opacity: 0; height: 0; width: 0; position: absolute; } .toggle { position: relative; cursor: pointer; display: inline-block; width: 200px; height: 100px; background: #211042; border-radius: 50px; transition: 500ms; overflow: hidden; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.3); } .toggle-button { position: absolute; display: inline-block; top: 7px; left: 6px; width: 86px; height: 86px; border-radius: 50%; background: #FAEAF1; overflow: hidden; box-shadow: 0 0 35px 4px rgba(255, 255, 255); transition: all 500ms ease-out; z-index: 10; } .crater { position: absolute; display: inline-block; background: #FAEAF1; border-radius: 50%; transition: 500ms; } .crater-1 { background: #FFFFF9; width: 86px; height: 86px; left: 10px; bottom: 10px; } .crater-2 { width: 20px; height: 20px; top: -7px; left: 44px; } .crater-3 { width: 16px; height: 16px; top: 20px; right: -4px; } .crater-4 { width: 10px; height: 10px; top: 24px; left: 30px; } .crater-5 { width: 15px; height: 15px; top: 40px; left: 48px; } .crater-6 { width: 10px; height: 10px; top: 48px; left: 20px; } .crater-7 { width: 12px; height: 12px; bottom: 5px; left: 35px; } .star { position: absolute; display: inline-block; border-radius: 50%; background: #FFF; box-shadow: 1px 0 2px 2px rgba(255, 255, 255); } .star-1 { width: 6px; height: 6px; right: 90px; bottom: 40px; } .star-2 { width: 8px; height: 8px; right: 70px; top: 10px; } .star-3 { width: 5px; height: 5px; right: 60px; bottom: 15px; } .star-4 { width: 3px; height: 3px; right: 40px; bottom: 50px; } .star-5 { width: 4px; height: 4px; right: 10px; bottom: 35px; } .star-6, .star-7, .star-8 { width: 10px; height: 2px; border-radius: 2px; transform: rotate(-45deg); box-shadow: 5px 0px 4px 1px #FFF; animation-name: travel; animation-duration: 1.5s; animation-timing-function: ease-out; animation-iteration-count: infinite; } .star-6 { right: 30px; bottom: 30px; animation-delay: -2s; } .star-7 { right: 50px; bottom: 60px; } .star-8 { right: 90px; top: 10px; animation-delay: -4s; } @keyframes travel { 0% { transform: rotate(-45deg) translateX(70px); } 50% { transform: rotate(-45deg) translateX(-20px); box-shadow: 5px 0px 6px 1px #FFF; } 100% { transform: rotate(-45deg) translateX(-30px); width: 2px; height: 2px; opacity: 0; box-shadow: none; } } #hide-checkbox:checked + .toggle { background: #24D7F7; } #hide-checkbox:checked + .toggle .toggle-button { background: #F7FFFF; transform: translateX(102px); box-shadow: 0 0 35px 5px rgba(255, 255, 255); }
-        
-        .glass-panel { 
-            background: rgba(255, 255, 255, 0.65); 
-            backdrop-filter: blur(16px); 
-            -webkit-backdrop-filter: blur(16px);
-            border: 1px solid rgba(255, 255, 255, 0.5); 
-            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
-        } 
-        .dark .glass-panel { 
-            background: rgba(24, 24, 27, 0.7); 
-            border: 1px solid rgba(255, 255, 255, 0.08); 
-            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
-        }
-        ::-webkit-scrollbar { width: 6px; height: 6px; } ::-webkit-scrollbar-thumb { background-color: #d4d4d8; border-radius: 10px; } .dark ::-webkit-scrollbar-thumb { background-color: #3f3f46; }
-        .scrollbar-hide::-webkit-scrollbar { display: none; } .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
-
-        /* 🌿 Beautiful Earth-tone Background */
-        body {
-            background-color: #f2efe8;
-            background-image:
-                radial-gradient(ellipse 90% 70% at 10% 30%, rgba(139, 168, 136, 0.22) 0%, transparent 55%),
-                radial-gradient(ellipse 70% 60% at 90% 10%, rgba(196, 181, 148, 0.18) 0%, transparent 50%),
-                radial-gradient(ellipse 80% 70% at 50% 90%, rgba(152, 186, 148, 0.15) 0%, transparent 55%),
-                radial-gradient(ellipse 50% 40% at 75% 55%, rgba(210, 200, 175, 0.12) 0%, transparent 40%);
-        }
-        html.dark body {
-            background-color: #111912;
-            background-image:
-                radial-gradient(ellipse 90% 70% at 10% 30%, rgba(58, 74, 57, 0.4) 0%, transparent 55%),
-                radial-gradient(ellipse 70% 60% at 90% 10%, rgba(35, 55, 35, 0.3) 0%, transparent 50%),
-                radial-gradient(ellipse 80% 70% at 50% 90%, rgba(45, 65, 42, 0.25) 0%, transparent 55%);
-        }
-
-        /* Editable day subtitle */
-        .day-subtitle {
-            outline: none;
-            border-bottom: 2px dashed rgba(107, 138, 104, 0.4);
-            padding: 0 4px 1px;
-            min-width: 80px;
-            display: inline-block;
-            cursor: text;
-            transition: border-color 0.2s;
-        }
-        .day-subtitle:focus {
-            border-bottom-color: #6b8a68;
-            border-bottom-style: solid;
-        }
-        .day-subtitle:empty::before {
-            content: attr(data-placeholder);
-            color: rgba(107, 138, 104, 0.45);
-            pointer-events: none;
-        }
+        *{box-sizing:border-box;}
+        #hide-checkbox{opacity:0;height:0;width:0;position:absolute;}.toggle{position:relative;cursor:pointer;display:inline-block;width:200px;height:100px;background:#211042;border-radius:50px;transition:500ms;overflow:hidden;box-shadow:0 10px 15px -3px rgba(0,0,0,0.3);}.toggle-button{position:absolute;display:inline-block;top:7px;left:6px;width:86px;height:86px;border-radius:50%;background:#FAEAF1;overflow:hidden;box-shadow:0 0 35px 4px rgba(255,255,255);transition:all 500ms ease-out;z-index:10;}.crater{position:absolute;display:inline-block;background:#FAEAF1;border-radius:50%;transition:500ms;}.crater-1{background:#FFFFF9;width:86px;height:86px;left:10px;bottom:10px;}.crater-2{width:20px;height:20px;top:-7px;left:44px;}.crater-3{width:16px;height:16px;top:20px;right:-4px;}.crater-4{width:10px;height:10px;top:24px;left:30px;}.crater-5{width:15px;height:15px;top:40px;left:48px;}.crater-6{width:10px;height:10px;top:48px;left:20px;}.crater-7{width:12px;height:12px;bottom:5px;left:35px;}.star{position:absolute;display:inline-block;border-radius:50%;background:#FFF;box-shadow:1px 0 2px 2px rgba(255,255,255);}.star-1{width:6px;height:6px;right:90px;bottom:40px;}.star-2{width:8px;height:8px;right:70px;top:10px;}.star-3{width:5px;height:5px;right:60px;bottom:15px;}.star-4{width:3px;height:3px;right:40px;bottom:50px;}.star-5{width:4px;height:4px;right:10px;bottom:35px;}.star-6,.star-7,.star-8{width:10px;height:2px;border-radius:2px;transform:rotate(-45deg);box-shadow:5px 0px 4px 1px #FFF;animation-name:travel;animation-duration:1.5s;animation-timing-function:ease-out;animation-iteration-count:infinite;}.star-6{right:30px;bottom:30px;animation-delay:-2s;}.star-7{right:50px;bottom:60px;}.star-8{right:90px;top:10px;animation-delay:-4s;}@keyframes travel{0%{transform:rotate(-45deg) translateX(70px);}50%{transform:rotate(-45deg) translateX(-20px);box-shadow:5px 0px 6px 1px #FFF;}100%{transform:rotate(-45deg) translateX(-30px);width:2px;height:2px;opacity:0;box-shadow:none;}}#hide-checkbox:checked+.toggle{background:#24D7F7;}#hide-checkbox:checked+.toggle .toggle-button{background:#F7FFFF;transform:translateX(102px);box-shadow:0 0 35px 5px rgba(255,255,255);}
+        .glass-panel{background:rgba(255,255,255,0.65);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,0.5);box-shadow:0 4px 30px rgba(0,0,0,0.05);}.dark .glass-panel{background:rgba(24,24,27,0.7);border:1px solid rgba(255,255,255,0.08);box-shadow:0 4px 30px rgba(0,0,0,0.2);}
+        ::-webkit-scrollbar{width:6px;height:6px;}::-webkit-scrollbar-thumb{background-color:#d4d4d8;border-radius:10px;}.dark ::-webkit-scrollbar-thumb{background-color:#3f3f46;}.scrollbar-hide::-webkit-scrollbar{display:none;}.scrollbar-hide{-ms-overflow-style:none;scrollbar-width:none;}
+        body{background-color:#f2efe8;background-image:radial-gradient(ellipse 90% 70% at 10% 30%,rgba(139,168,136,0.22) 0%,transparent 55%),radial-gradient(ellipse 70% 60% at 90% 10%,rgba(196,181,148,0.18) 0%,transparent 50%),radial-gradient(ellipse 80% 70% at 50% 90%,rgba(152,186,148,0.15) 0%,transparent 55%);}
+        html.dark body{background-color:#111912;background-image:radial-gradient(ellipse 90% 70% at 10% 30%,rgba(58,74,57,0.4) 0%,transparent 55%),radial-gradient(ellipse 70% 60% at 90% 10%,rgba(35,55,35,0.3) 0%,transparent 50%),radial-gradient(ellipse 80% 70% at 50% 90%,rgba(45,65,42,0.25) 0%,transparent 55%);}
+        html.dark body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;opacity:0.04;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");background-size:180px 180px;}
+        .day-subtitle{outline:none;border-bottom:2px dashed rgba(107,138,104,0.4);padding:0 4px 1px;min-width:60px;display:inline-block;cursor:text;transition:border-color 0.2s;}
+        .day-subtitle:focus{border-bottom-color:#6b8a68;border-bottom-style:solid;}
+        .day-subtitle:empty::before{content:attr(data-placeholder);color:rgba(107,138,104,0.4);pointer-events:none;}
+        .time-input{background:rgba(241,245,249,0.8);border:1px solid rgba(203,213,225,0.8);border-radius:8px;padding:3px 8px;font-size:12px;color:#475569;cursor:pointer;outline:none;transition:border-color 0.2s;}
+        .time-input:focus{border-color:#8ba888;}
+        .dark .time-input{background:rgba(30,41,59,0.8);border-color:rgba(71,85,105,0.8);color:#94a3b8;}
     </style>
 </head>
-<body class="text-zinc-800 dark:text-zinc-300 transition-colors duration-500 pb-20">
+<body class="text-zinc-800 dark:text-zinc-300 transition-colors duration-500 pb-24 md:pb-20">
 
-    <nav class="sticky top-4 z-50 glass-panel shadow-sm flex justify-between items-center max-w-7xl mx-auto px-6 py-4 rounded-3xl transition-all duration-500">
+    <nav class="sticky top-4 z-50 glass-panel shadow-sm flex justify-between items-center max-w-7xl mx-auto px-6 py-4 rounded-3xl">
         <div class="flex items-center gap-3">
-            <img src="src/logo.png" alt="Travelaroha Logo" class="w-10 h-10 rounded-full object-cover border-2 border-brand-500 shadow-sm bg-white">
+            <img src="src/logo.png" alt="Travelaroha" class="w-10 h-10 rounded-full object-cover border-2 border-brand-500 shadow-sm bg-white">
             <div class="font-bold text-brand-600 dark:text-brand-500 text-2xl tracking-tight">Travelaroha</div>
         </div>
-        
         <div class="hidden md:flex gap-8 font-medium text-zinc-500 dark:text-zinc-400">
-            <a href="index.html" class="relative group px-1 py-2 hover:text-zinc-900 dark:hover:text-white transition-colors">
-                DISCOVERY
-                <span class="absolute -bottom-1 left-0 w-0 h-[2px] bg-zinc-300 dark:bg-zinc-600 rounded-full transition-all duration-300 group-hover:w-full"></span>
-            </a>
-            <a href="storyboard.html" class="relative px-1 py-2 text-zinc-900 dark:text-white font-bold transition-colors">
-                TRIP STORYBOARD
-                <span class="absolute -bottom-1 left-0 w-full h-[2px] bg-zinc-900 dark:bg-white rounded-full"></span>
-            </a>
-            <a href="dashboard.html" class="relative group px-1 py-2 hover:text-zinc-900 dark:hover:text-white transition-colors">
-                DASHBOARD
-                <span class="absolute -bottom-1 left-0 w-0 h-[2px] bg-zinc-300 dark:bg-zinc-600 rounded-full transition-all duration-300 group-hover:w-full"></span>
-            </a>
-            <a href="checklist.html" class="relative group px-1 py-2 hover:text-zinc-900 dark:hover:text-white transition-colors">
-                CHECKLIST
-                <span class="absolute -bottom-1 left-0 w-0 h-[2px] bg-zinc-300 dark:bg-zinc-600 rounded-full transition-all duration-300 group-hover:w-full"></span>
-            </a>
+            <a href="index.html" class="relative group px-1 py-2 hover:text-zinc-900 dark:hover:text-white transition-colors">DISCOVERY<span class="absolute -bottom-1 left-0 w-0 h-[2px] bg-zinc-300 dark:bg-zinc-600 rounded-full transition-all duration-300 group-hover:w-full"></span></a>
+            <a href="storyboard.html" class="relative px-1 py-2 text-zinc-900 dark:text-white font-bold">TRIP STORYBOARD<span class="absolute -bottom-1 left-0 w-full h-[2px] bg-zinc-900 dark:bg-white rounded-full"></span></a>
+            <a href="dashboard.html" class="relative group px-1 py-2 hover:text-zinc-900 dark:hover:text-white transition-colors">DASHBOARD<span class="absolute -bottom-1 left-0 w-0 h-[2px] bg-zinc-300 dark:bg-zinc-600 rounded-full transition-all duration-300 group-hover:w-full"></span></a>
+            <a href="checklist.html" class="relative group px-1 py-2 hover:text-zinc-900 dark:hover:text-white transition-colors">CHECKLIST<span class="absolute -bottom-1 left-0 w-0 h-[2px] bg-zinc-300 dark:bg-zinc-600 rounded-full transition-all duration-300 group-hover:w-full"></span></a>
         </div>
-        
         <div class="flex items-center gap-4">
             <div class="w-[80px] h-[40px] flex items-center justify-center overflow-hidden">
-                <div style="transform: scale(0.4); transform-origin: center;">
-                    <input type="checkbox" id="hide-checkbox" class="theme-toggle">
+                <div style="transform:scale(0.4);transform-origin:center;">
+                    <input type="checkbox" id="hide-checkbox">
                     <label for="hide-checkbox" class="toggle m-0"><span class="toggle-button"><span class="crater crater-1"></span></span><span class="star star-1"></span></label>
                 </div>
             </div>
-            <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=100&q=80" alt="Profile" class="w-10 h-10 rounded-full object-cover shadow-md border-2 border-white dark:border-zinc-800 cursor-pointer hover:scale-105 transition-transform">
+            <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=100&q=80" class="w-10 h-10 rounded-full object-cover shadow-md border-2 border-white dark:border-zinc-800 cursor-pointer hover:scale-105 transition-transform">
         </div>
     </nav>
 
     <main class="max-w-7xl mx-auto mt-12 p-4 space-y-6">
-        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-end mb-2 gap-4">
+        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-4">
             <div>
                 <h2 class="text-3xl font-bold">My Trip Storyboard</h2>
-                <p class="text-slate-500 dark:text-slate-400 mt-1 text-sm">คลิกที่ชื่อหลัง Day เพื่อแก้ไข · ลากสถานที่จากซ้ายมาวางได้เลย</p>
+                <p class="text-slate-500 dark:text-slate-400 mt-1 text-sm">คลิกชื่อหลัง Day เพื่อแก้ไข · ลากการ์ดเข้า Day · ตั้งเวลา · ข้อมูลจะถูกบันทึกอัตโนมัติ 💾</p>
             </div>
-            <button id="add-day-btn" class="px-5 py-2.5 bg-brand-600 hover:bg-brand-700 text-white rounded-xl text-sm font-bold shadow-md transition-transform hover:scale-105">+ เพิ่มวัน (Add Day)</button>
+            <div class="flex items-center gap-3">
+                <button id="clear-btn" class="px-4 py-2.5 border border-rose-200 dark:border-rose-800 text-rose-500 rounded-xl text-sm font-medium hover:bg-rose-50 dark:hover:bg-rose-900/20 transition-colors">🗑️ ล้างทั้งหมด</button>
+                <button id="add-day-btn" class="px-5 py-2.5 bg-brand-600 hover:bg-brand-700 text-white rounded-xl text-sm font-bold shadow-md transition-transform hover:scale-105">+ เพิ่มวัน</button>
+            </div>
         </div>
-        
+
         <div class="flex flex-col lg:flex-row gap-8">
-            
-            <!-- Saved Vibes Sidebar — 20 items -->
+
+            <!-- SIDEBAR -->
             <div class="w-full lg:w-1/3 glass-panel p-6 rounded-3xl shadow-lg h-fit lg:sticky lg:top-28">
-                <h3 class="font-bold text-lg mb-5 flex justify-between items-center">
+                <h3 class="font-bold text-lg mb-1 flex justify-between items-center">
                     Saved Vibes
                     <span class="bg-brand-100 text-brand-700 dark:bg-brand-900/50 dark:text-brand-300 text-xs px-3 py-1 rounded-full">ลากไปมาได้</span>
                 </h3>
-                
-                <div id="sidebar-zone" class="drop-zone space-y-3 min-h-[200px] max-h-[640px] overflow-y-auto pr-2 rounded-xl transition-colors duration-300 pb-10">
-
-                    <!-- 1 ดูไบ -->
-                    <div draggable="true" class="draggable-item flex items-center p-3 bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-700 cursor-grab active:cursor-grabbing hover:-translate-y-1 transition-all z-10 relative">
-                        <img src="https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=100&q=80" class="w-14 h-14 rounded-xl object-cover mr-3 pointer-events-none">
-                        <div class="flex-1 pointer-events-none"><h4 class="font-bold text-sm">ดูไบ, UAE</h4><p class="text-xs text-slate-500">Urban Adventure</p></div>
-                    </div>
-                    <!-- 2 ปารีส -->
-                    <div draggable="true" class="draggable-item flex items-center p-3 bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-700 cursor-grab active:cursor-grabbing hover:-translate-y-1 transition-all z-10 relative">
-                        <img src="https://images.unsplash.com/photo-1499856871958-5b9627545d1a?auto=format&fit=crop&w=100&q=80" class="w-14 h-14 rounded-xl object-cover mr-3 pointer-events-none">
-                        <div class="flex-1 pointer-events-none"><h4 class="font-bold text-sm">ปารีส, ฝรั่งเศส</h4><p class="text-xs text-slate-500">Urban Adventure</p></div>
-                    </div>
-                    <!-- 3 กรุงเทพฯ -->
-                    <div draggable="true" class="draggable-item flex items-center p-3 bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-700 cursor-grab active:cursor-grabbing hover:-translate-y-1 transition-all z-10 relative">
-                        <img src="https://images.unsplash.com/photo-1508009603885-50cf7c579365?auto=format&fit=crop&w=100&q=80" class="w-14 h-14 rounded-xl object-cover mr-3 pointer-events-none">
-                        <div class="flex-1 pointer-events-none"><h4 class="font-bold text-sm">กรุงเทพฯ, ไทย</h4><p class="text-xs text-slate-500">Urban Adventure</p></div>
-                    </div>
-                    <!-- 4 โซล -->
-                    <div draggable="true" class="draggable-item flex items-center p-3 bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-700 cursor-grab active:cursor-grabbing hover:-translate-y-1 transition-all z-10 relative">
-                        <img src="https://images.unsplash.com/photo-1517154421773-0529f29ea451?auto=format&fit=crop&w=100&q=80" class="w-14 h-14 rounded-xl object-cover mr-3 pointer-events-none">
-                        <div class="flex-1 pointer-events-none"><h4 class="font-bold text-sm">โซล, เกาหลีใต้</h4><p class="text-xs text-slate-500">Urban Adventure</p></div>
-                    </div>
-                    <!-- 5 นิวยอร์ก -->
-                    <div draggable="true" class="draggable-item flex items-center p-3 bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-700 cursor-grab active:cursor-grabbing hover:-translate-y-1 transition-all z-10 relative">
-                        <img src="https://images.unsplash.com/photo-1496442226666-8d4d0e62e6e9?auto=format&fit=crop&w=100&q=80" class="w-14 h-14 rounded-xl object-cover mr-3 pointer-events-none">
-                        <div class="flex-1 pointer-events-none"><h4 class="font-bold text-sm">นิวยอร์ก, USA</h4><p class="text-xs text-slate-500">Urban Adventure</p></div>
-                    </div>
-                    <!-- 6 ลอนดอน -->
-                    <div draggable="true" class="draggable-item flex items-center p-3 bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-700 cursor-grab active:cursor-grabbing hover:-translate-y-1 transition-all z-10 relative">
-                        <img src="https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?auto=format&fit=crop&w=100&q=80" class="w-14 h-14 rounded-xl object-cover mr-3 pointer-events-none">
-                        <div class="flex-1 pointer-events-none"><h4 class="font-bold text-sm">ลอนดอน, UK</h4><p class="text-xs text-slate-500">Urban Adventure</p></div>
-                    </div>
-                    <!-- 7 ปักกิ่ง -->
-                    <div draggable="true" class="draggable-item flex items-center p-3 bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-700 cursor-grab active:cursor-grabbing hover:-translate-y-1 transition-all z-10 relative">
-                        <img src="https://images.unsplash.com/photo-1508804185872-d7badad00f7d?auto=format&fit=crop&w=100&q=80" class="w-14 h-14 rounded-xl object-cover mr-3 pointer-events-none">
-                        <div class="flex-1 pointer-events-none"><h4 class="font-bold text-sm">ปักกิ่ง, จีน</h4><p class="text-xs text-slate-500">Urban Adventure</p></div>
-                    </div>
-                    <!-- 8 สิงคโปร์ -->
-                    <div draggable="true" class="draggable-item flex items-center p-3 bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-700 cursor-grab active:cursor-grabbing hover:-translate-y-1 transition-all z-10 relative">
-                        <img src="https://images.unsplash.com/photo-1525625293386-3f8f99389edd?auto=format&fit=crop&w=100&q=80" class="w-14 h-14 rounded-xl object-cover mr-3 pointer-events-none">
-                        <div class="flex-1 pointer-events-none"><h4 class="font-bold text-sm">สิงคโปร์</h4><p class="text-xs text-slate-500">Urban Adventure</p></div>
-                    </div>
-                    <!-- 9 ฟูจิ -->
-                    <div draggable="true" class="draggable-item flex items-center p-3 bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-700 cursor-grab active:cursor-grabbing hover:-translate-y-1 transition-all z-10 relative">
-                        <img src="https://images.unsplash.com/photo-1490806843957-31f4c9a91c65?auto=format&fit=crop&w=100&q=80" class="w-14 h-14 rounded-xl object-cover mr-3 pointer-events-none">
-                        <div class="flex-1 pointer-events-none"><h4 class="font-bold text-sm">ภูเขาไฟฟูจิ, ญี่ปุ่น</h4><p class="text-xs text-slate-500">Nature Retreat</p></div>
-                    </div>
-                    <!-- 10 เกียวโต -->
-                    <div draggable="true" class="draggable-item flex items-center p-3 bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-700 cursor-grab active:cursor-grabbing hover:-translate-y-1 transition-all z-10 relative">
-                        <img src="https://images.unsplash.com/photo-1528360983277-13d401cdc186?auto=format&fit=crop&w=100&q=80" class="w-14 h-14 rounded-xl object-cover mr-3 pointer-events-none">
-                        <div class="flex-1 pointer-events-none"><h4 class="font-bold text-sm">เกียวโต, ญี่ปุ่น</h4><p class="text-xs text-slate-500">Slow Living</p></div>
-                    </div>
-                    <!-- 11 ทะเลสาบโคโม่ -->
-                    <div draggable="true" class="draggable-item flex items-center p-3 bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-700 cursor-grab active:cursor-grabbing hover:-translate-y-1 transition-all z-10 relative">
-                        <img src="https://images.unsplash.com/photo-1542259009477-d625272157b7?auto=format&fit=crop&w=100&q=80" class="w-14 h-14 rounded-xl object-cover mr-3 pointer-events-none">
-                        <div class="flex-1 pointer-events-none"><h4 class="font-bold text-sm">ทะเลสาบโคโม่, อิตาลี</h4><p class="text-xs text-slate-500">Slow Living</p></div>
-                    </div>
-                    <!-- 12 ซูริค -->
-                    <div draggable="true" class="draggable-item flex items-center p-3 bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-700 cursor-grab active:cursor-grabbing hover:-translate-y-1 transition-all z-10 relative">
-                        <img src="https://images.unsplash.com/photo-1528702748617-c64d49f918af?auto=format&fit=crop&w=100&q=80" class="w-14 h-14 rounded-xl object-cover mr-3 pointer-events-none">
-                        <div class="flex-1 pointer-events-none"><h4 class="font-bold text-sm">ซูริค, สวิตเซอร์แลนด์</h4><p class="text-xs text-slate-500">Slow Living</p></div>
-                    </div>
-                    <!-- 13 โรม -->
-                    <div draggable="true" class="draggable-item flex items-center p-3 bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-700 cursor-grab active:cursor-grabbing hover:-translate-y-1 transition-all z-10 relative">
-                        <img src="https://images.unsplash.com/photo-1552832230-c0197dd311b5?auto=format&fit=crop&w=100&q=80" class="w-14 h-14 rounded-xl object-cover mr-3 pointer-events-none">
-                        <div class="flex-1 pointer-events-none"><h4 class="font-bold text-sm">โรม, อิตาลี</h4><p class="text-xs text-slate-500">Urban Adventure</p></div>
-                    </div>
-                    <!-- 14 นิวซีแลนด์ -->
-                    <div draggable="true" class="draggable-item flex items-center p-3 bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-700 cursor-grab active:cursor-grabbing hover:-translate-y-1 transition-all z-10 relative">
-                        <img src="https://images.unsplash.com/photo-1469521669194-babb45599def?auto=format&fit=crop&w=100&q=80" class="w-14 h-14 rounded-xl object-cover mr-3 pointer-events-none">
-                        <div class="flex-1 pointer-events-none"><h4 class="font-bold text-sm">นิวซีแลนด์</h4><p class="text-xs text-slate-500">Nature Retreat</p></div>
-                    </div>
-                    <!-- 15 ไทเป -->
-                    <div draggable="true" class="draggable-item flex items-center p-3 bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-700 cursor-grab active:cursor-grabbing hover:-translate-y-1 transition-all z-10 relative">
-                        <img src="https://images.unsplash.com/photo-1550951298-5c7b95a66bfc?auto=format&fit=crop&w=100&q=80" class="w-14 h-14 rounded-xl object-cover mr-3 pointer-events-none">
-                        <div class="flex-1 pointer-events-none"><h4 class="font-bold text-sm">ไทเป, ไต้หวัน</h4><p class="text-xs text-slate-500">Foodie Tour</p></div>
-                    </div>
-                    <!-- 16 โอซาก้า -->
-                    <div draggable="true" class="draggable-item flex items-center p-3 bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-700 cursor-grab active:cursor-grabbing hover:-translate-y-1 transition-all z-10 relative">
-                        <img src="https://images.unsplash.com/photo-1589308078059-be1415eab4c3?auto=format&fit=crop&w=100&q=80" class="w-14 h-14 rounded-xl object-cover mr-3 pointer-events-none">
-                        <div class="flex-1 pointer-events-none"><h4 class="font-bold text-sm">โอซาก้า, ญี่ปุ่น</h4><p class="text-xs text-slate-500">Foodie Tour</p></div>
-                    </div>
-                    <!-- 17 มัลดีฟส์ -->
-                    <div draggable="true" class="draggable-item flex items-center p-3 bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-700 cursor-grab active:cursor-grabbing hover:-translate-y-1 transition-all z-10 relative">
-                        <img src="https://images.unsplash.com/photo-1510414842594-a61c69b5ae57?auto=format&fit=crop&w=100&q=80" class="w-14 h-14 rounded-xl object-cover mr-3 pointer-events-none">
-                        <div class="flex-1 pointer-events-none"><h4 class="font-bold text-sm">มัลดีฟส์</h4><p class="text-xs text-slate-500">Beach Getaway</p></div>
-                    </div>
-                    <!-- 18 ดานัง -->
-                    <div draggable="true" class="draggable-item flex items-center p-3 bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-700 cursor-grab active:cursor-grabbing hover:-translate-y-1 transition-all z-10 relative">
-                        <img src="https://images.unsplash.com/photo-1559592413-7cec4d0cae2b?auto=format&fit=crop&w=100&q=80" class="w-14 h-14 rounded-xl object-cover mr-3 pointer-events-none">
-                        <div class="flex-1 pointer-events-none"><h4 class="font-bold text-sm">ดานัง, เวียดนาม</h4><p class="text-xs text-slate-500">Beach Getaway</p></div>
-                    </div>
-                    <!-- 19 ซิดนีย์ -->
-                    <div draggable="true" class="draggable-item flex items-center p-3 bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-700 cursor-grab active:cursor-grabbing hover:-translate-y-1 transition-all z-10 relative">
-                        <img src="https://images.unsplash.com/photo-1506973035872-a4ec16b8e8d9?auto=format&fit=crop&w=100&q=80" class="w-14 h-14 rounded-xl object-cover mr-3 pointer-events-none">
-                        <div class="flex-1 pointer-events-none"><h4 class="font-bold text-sm">ซิดนีย์, ออสเตรเลีย</h4><p class="text-xs text-slate-500">Beach Getaway</p></div>
-                    </div>
-                    <!-- 20 บาหลี -->
-                    <div draggable="true" class="draggable-item flex items-center p-3 bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-700 cursor-grab active:cursor-grabbing hover:-translate-y-1 transition-all z-10 relative">
-                        <img src="https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=100&q=80" class="w-14 h-14 rounded-xl object-cover mr-3 pointer-events-none">
-                        <div class="flex-1 pointer-events-none"><h4 class="font-bold text-sm">บาหลี, อินโดนีเซีย</h4><p class="text-xs text-slate-500">Beach Getaway</p></div>
-                    </div>
-
+                <p class="text-xs text-slate-400 mb-3">แสดงเฉพาะที่คุณกด ❤️ ในหน้า Discovery</p>
+                <!-- Empty sidebar hint -->
+                <div id="sidebar-empty" class="hidden flex-col items-center justify-center py-8 text-center gap-2">
+                    <div class="text-4xl">💔</div>
+                    <p class="text-sm text-slate-400">ยังไม่มี Saved Vibes</p>
+                    <a href="index.html" class="mt-1 text-xs text-brand-600 dark:text-brand-400 underline underline-offset-2">ไปกด ❤️ ในหน้า Discovery</a>
                 </div>
+                <div id="sidebar-zone" class="drop-zone space-y-2.5 min-h-[80px] max-h-[560px] overflow-y-auto pr-1 rounded-xl transition-colors duration-300 pb-2"></div>
             </div>
 
-            <!-- Day Boards -->
-            <div class="w-full lg:w-2/3 flex flex-col min-h-full">
-                
-                <div id="boards-container" class="space-y-6 flex-1">
-                    <div class="glass-panel p-6 rounded-3xl shadow-md border border-slate-200 dark:border-slate-700 min-h-[300px]">
-                        <h3 class="font-bold text-xl mb-5 text-brand-600 dark:text-brand-400 flex justify-between items-center">
-                            <span>Day 1: <span 
-                                contenteditable="true" 
-                                spellcheck="false"
-                                class="day-subtitle"
-                                data-placeholder="ชื่อกิจกรรม...">City Walk</span>
-                            </span>
-                        </h3>
-                        <div class="drop-zone grid grid-cols-1 sm:grid-cols-2 gap-4 min-h-[180px] border-2 border-dashed border-slate-300 dark:border-slate-600 bg-slate-50/50 dark:bg-slate-800/50 rounded-2xl transition-colors duration-300 p-4">
-                            <div class="placeholder-text col-span-1 sm:col-span-2 flex flex-col items-center justify-center text-slate-400 pointer-events-none py-8">
-                                <span class="text-4xl mb-2">+</span><span class="text-sm font-medium">ลากสถานที่มาจัดทริปตรงนี้</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
+            <!-- BOARDS -->
+            <div class="w-full lg:w-2/3 flex flex-col">
+                <div id="boards-container" class="space-y-6 flex-1"></div>
                 <div class="flex justify-end mt-8">
                     <a href="checklist.html" class="bg-slate-900 dark:bg-white text-white dark:text-slate-900 px-8 py-4 rounded-2xl font-bold shadow-xl hover:-translate-y-1 hover:shadow-2xl transition-all flex items-center gap-3">
                         ✨ Generate Checklist
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
                     </a>
                 </div>
-
             </div>
         </div>
     </main>
 
-    <script>
-        const toggleInput = document.getElementById('hide-checkbox');
-        if (document.documentElement.classList.contains('dark')) toggleInput.checked = false; else toggleInput.checked = true;
-        toggleInput.addEventListener('change', (e) => {
-            if (e.target.checked) { document.documentElement.classList.remove('dark'); localStorage.setItem('theme', 'light'); } 
-            else { document.documentElement.classList.add('dark'); localStorage.setItem('theme', 'dark'); }
+    <!-- Mobile Bottom Nav -->
+    <nav class="fixed bottom-0 left-0 right-0 z-50 md:hidden glass-panel border-t border-slate-200/60 dark:border-slate-700/60 flex justify-around items-center py-2 px-2">
+        <a href="index.html" class="flex flex-col items-center gap-0.5 px-3 py-1.5 rounded-2xl text-slate-400 min-w-[56px]"><span class="text-xl">🔍</span><span class="text-[10px] font-medium">Discover</span></a>
+        <a href="storyboard.html" class="flex flex-col items-center gap-0.5 px-3 py-1.5 rounded-2xl bg-brand-500/10 text-brand-600 dark:text-brand-400 min-w-[56px]"><span class="text-xl">🗺️</span><span class="text-[10px] font-bold">Storyboard</span></a>
+        <a href="dashboard.html" class="flex flex-col items-center gap-0.5 px-3 py-1.5 rounded-2xl text-slate-400 min-w-[56px]"><span class="text-xl">📊</span><span class="text-[10px] font-medium">Dashboard</span></a>
+        <a href="checklist.html" class="flex flex-col items-center gap-0.5 px-3 py-1.5 rounded-2xl text-slate-400 min-w-[56px]"><span class="text-xl">✅</span><span class="text-[10px] font-medium">Checklist</span></a>
+    </nav>
+
+<script>
+// ── Theme ──
+const toggleInput=document.getElementById('hide-checkbox');
+if(document.documentElement.classList.contains('dark'))toggleInput.checked=false;else toggleInput.checked=true;
+toggleInput.addEventListener('change',(e)=>{if(e.target.checked){document.documentElement.classList.remove('dark');localStorage.setItem('theme','light');}else{document.documentElement.classList.add('dark');localStorage.setItem('theme','dark');}});
+
+// ── localStorage keys ──
+const LS_SAVED  = 'travelaroha_saved';    // string[] — place names saved from Discovery
+const LS_BOARD  = 'travelaroha_storyboard'; // {days:[{subtitle,places:[{name,start,end}]}]}
+
+// ── All places metadata ──
+const ALL_PLACES = [
+    {name:'ปารีส, ฝรั่งเศส',    vibe:'Urban Adventure', img:'https://images.unsplash.com/photo-1499856871958-5b9627545d1a?auto=format&fit=crop&w=100&q=80'},
+    {name:'ดูไบ, UAE',           vibe:'Urban Adventure', img:'https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=100&q=80'},
+    {name:'กรุงเทพฯ, ไทย',       vibe:'Urban Adventure', img:'https://images.unsplash.com/photo-1508009603885-50cf7c579365?auto=format&fit=crop&w=100&q=80'},
+    {name:'โซล, เกาหลีใต้',      vibe:'Urban Adventure', img:'https://images.unsplash.com/photo-1517154421773-0529f29ea451?auto=format&fit=crop&w=100&q=80'},
+    {name:'นิวยอร์ก, USA',       vibe:'Urban Adventure', img:'https://images.unsplash.com/photo-1496442226666-8d4d0e62e6e9?auto=format&fit=crop&w=100&q=80'},
+    {name:'ลอนดอน, UK',          vibe:'Urban Adventure', img:'https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?auto=format&fit=crop&w=100&q=80'},
+    {name:'ปักกิ่ง, จีน',        vibe:'Urban Adventure', img:'https://images.unsplash.com/photo-1508804185872-d7badad00f7d?auto=format&fit=crop&w=100&q=80'},
+    {name:'สิงคโปร์',            vibe:'Urban Adventure', img:'https://images.unsplash.com/photo-1525625293386-3f8f99389edd?auto=format&fit=crop&w=100&q=80'},
+    {name:'ภูเขาไฟฟูจิ, ญี่ปุ่น',vibe:'Nature Retreat',  img:'https://images.unsplash.com/photo-1490806843957-31f4c9a91c65?auto=format&fit=crop&w=100&q=80'},
+    {name:'เกียวโต, ญี่ปุ่น',    vibe:'Slow Living',     img:'https://images.unsplash.com/photo-1528360983277-13d401cdc186?auto=format&fit=crop&w=100&q=80'},
+    {name:'ทะเลสาบโคโม่, อิตาลี',vibe:'Slow Living',     img:'https://images.unsplash.com/photo-1542259009477-d625272157b7?auto=format&fit=crop&w=100&q=80'},
+    {name:'ซูริค, สวิตเซอร์แลนด์',vibe:'Slow Living',    img:'https://images.unsplash.com/photo-1528702748617-c64d49f918af?auto=format&fit=crop&w=100&q=80'},
+    {name:'โรม, อิตาลี',         vibe:'Urban Adventure', img:'https://images.unsplash.com/photo-1552832230-c0197dd311b5?auto=format&fit=crop&w=100&q=80'},
+    {name:'นิวซีแลนด์',          vibe:'Nature Retreat',  img:'https://images.unsplash.com/photo-1469521669194-babb45599def?auto=format&fit=crop&w=100&q=80'},
+    {name:'ไทเป, ไต้หวัน',        vibe:'Foodie Tour',     img:'https://images.unsplash.com/photo-1550951298-5c7b95a66bfc?auto=format&fit=crop&w=100&q=80'},
+    {name:'โอซาก้า, ญี่ปุ่น',    vibe:'Foodie Tour',     img:'https://images.unsplash.com/photo-1589308078059-be1415eab4c3?auto=format&fit=crop&w=100&q=80'},
+    {name:'มัลดีฟส์',            vibe:'Beach Getaway',   img:'https://images.unsplash.com/photo-1510414842594-a61c69b5ae57?auto=format&fit=crop&w=100&q=80'},
+    {name:'ดานัง, เวียดนาม',      vibe:'Beach Getaway',   img:'https://images.unsplash.com/photo-1559592413-7cec4d0cae2b?auto=format&fit=crop&w=100&q=80'},
+    {name:'ซิดนีย์, ออสเตรเลีย', vibe:'Beach Getaway',   img:'https://images.unsplash.com/photo-1506973035872-a4ec16b8e8d9?auto=format&fit=crop&w=100&q=80'},
+    {name:'บาหลี, อินโดนีเซีย',  vibe:'Beach Getaway',   img:'https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=100&q=80'},
+];
+const PLACE_MAP = Object.fromEntries(ALL_PLACES.map(p=>[p.name,p]));
+
+// ── State ──
+let savedNames = JSON.parse(localStorage.getItem(LS_SAVED)||'[]');
+let boardState = null; // loaded below
+let dayCount = 0;
+let draggedItem = null;
+
+// ── Persist board state ──
+function serializeBoard(){
+    const days=[];
+    document.querySelectorAll('.day-board').forEach(board=>{
+        const subtitle = board.querySelector('.day-subtitle')?.textContent?.trim()||'';
+        const places=[];
+        board.querySelectorAll('.sb-card').forEach(card=>{
+            places.push({
+                name: card.dataset.name,
+                start: card.querySelector('.time-start')?.value||'09:00',
+                end:   card.querySelector('.time-end')?.value||'11:00',
+            });
         });
+        days.push({subtitle,places});
+    });
+    // sidebar remaining
+    const sidebarPlaces=[];
+    document.querySelectorAll('#sidebar-zone .sb-card').forEach(c=>sidebarPlaces.push(c.dataset.name));
+    localStorage.setItem(LS_BOARD, JSON.stringify({days, sidebarPlaces}));
+}
 
-        // Drag & Drop
-        let draggedItem = null;
-        const boardsContainer = document.getElementById('boards-container');
-        const addDayBtn = document.getElementById('add-day-btn');
-        let dayCount = 1;
+// ── Duration helper ──
+function calcDuration(s,e){
+    const[sh,sm]=s.split(':').map(Number),[eh,em]=e.split(':').map(Number);
+    const d=(eh*60+em)-(sh*60+sm);
+    if(d<=0)return'—';
+    const h=Math.floor(d/60),m=d%60;
+    return h>0?(m>0?`${h} ชม. ${m} น.`:`${h} ชม.`):`${m} น.`;
+}
 
-        function handleDragStart(e) {
-            draggedItem = this;
-            setTimeout(() => this.classList.add('opacity-50', 'scale-95', 'dragging'), 0);
-        }
-        function handleDragEnd(e) {
-            this.classList.remove('opacity-50', 'scale-95', 'dragging');
-            draggedItem = null;
-            checkAllBoardsEmpty();
-        }
-        function handleDragOver(e) {
-            e.preventDefault();
-            this.classList.add('border-brand-500', 'bg-brand-50', 'dark:bg-brand-900/20');
-        }
-        function handleDragLeave(e) {
-            this.classList.remove('border-brand-500', 'bg-brand-50', 'dark:bg-brand-900/20');
-        }
-        function handleDrop(e) {
-            e.preventDefault();
-            this.classList.remove('border-brand-500', 'bg-brand-50', 'dark:bg-brand-900/20');
-            if (draggedItem) {
-                if (this.id !== 'sidebar-zone') {
-                    this.classList.remove('border-dashed', 'border-2', 'bg-slate-50/50', 'dark:bg-slate-800/50');
-                    this.classList.add('border-transparent', 'bg-transparent');
-                }
-                this.appendChild(draggedItem);
-                checkAllBoardsEmpty();
-            }
-        }
+// ── Build one sidebar card element ──
+function buildCard(name, inBoard=false, start='09:00', end='11:00'){
+    const p = PLACE_MAP[name]; if(!p) return null;
+    const el = document.createElement('div');
+    el.draggable=true;
+    el.dataset.name=name;
+    el.className='sb-card bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-700 cursor-grab active:cursor-grabbing hover:-translate-y-0.5 transition-all overflow-hidden';
+    el.innerHTML=`
+      <div class="card-top flex items-center p-3 gap-3">
+        <img src="${p.img}" class="w-12 h-12 rounded-xl object-cover flex-shrink-0 pointer-events-none" loading="lazy">
+        <div class="flex-1 min-w-0 pointer-events-none">
+          <h4 class="font-bold text-sm truncate">${p.name}</h4>
+          <p class="text-xs text-slate-500 truncate">${p.vibe}</p>
+        </div>
+        <button class="return-btn ${inBoard?'flex':'hidden'} w-7 h-7 flex-shrink-0 items-center justify-center rounded-full bg-slate-100 dark:bg-slate-700 text-slate-500 hover:bg-rose-100 hover:text-rose-500 dark:hover:bg-rose-900/40 transition-colors text-sm" title="คืนกลับ sidebar">↩</button>
+      </div>
+      <div class="time-row ${inBoard?'block':'hidden'} px-3 pb-3 -mt-1">
+        <div class="flex items-center gap-1.5 flex-wrap border-t border-slate-100 dark:border-slate-600/50 pt-2">
+          <span class="text-xs text-slate-400">🕐</span>
+          <input type="time" value="${start}" class="time-start time-input" draggable="false">
+          <span class="text-xs text-slate-400">–</span>
+          <input type="time" value="${end}" class="time-end time-input" draggable="false">
+          <span class="time-dur text-xs font-semibold text-brand-600 dark:text-brand-400 bg-brand-50 dark:bg-brand-900/30 px-2 py-0.5 rounded-full">${calcDuration(start,end)}</span>
+        </div>
+      </div>`;
 
-        function initDragAndDrop() {
-            document.querySelectorAll('.draggable-item').forEach(item => {
-                item.removeEventListener('dragstart', handleDragStart);
-                item.removeEventListener('dragend', handleDragEnd);
-                item.addEventListener('dragstart', handleDragStart);
-                item.addEventListener('dragend', handleDragEnd);
-            });
-            document.querySelectorAll('.drop-zone').forEach(zone => {
-                zone.removeEventListener('dragover', handleDragOver);
-                zone.removeEventListener('dragleave', handleDragLeave);
-                zone.removeEventListener('drop', handleDrop);
-                zone.addEventListener('dragover', handleDragOver);
-                zone.addEventListener('dragleave', handleDragLeave);
-                zone.addEventListener('drop', handleDrop);
-            });
-        }
+    // Time change listeners
+    const ts=el.querySelector('.time-start'), te=el.querySelector('.time-end'), td=el.querySelector('.time-dur');
+    [ts,te].forEach(inp=>{
+        inp.addEventListener('mousedown',e=>e.stopPropagation());
+        inp.addEventListener('touchstart',e=>e.stopPropagation(),{passive:true});
+        inp.addEventListener('change',()=>{ td.textContent=calcDuration(ts.value,te.value); updateSummaries(); serializeBoard(); });
+    });
 
-        function checkAllBoardsEmpty() {
-            document.querySelectorAll('.drop-zone').forEach(zone => {
-                if (zone.id === 'sidebar-zone') return;
-                const items = zone.querySelectorAll('.draggable-item').length;
-                const placeholder = zone.querySelector('.placeholder-text');
-                if (items > 0 && placeholder) {
-                    placeholder.classList.add('hidden');
-                } else if (items === 0 && placeholder) {
-                    placeholder.classList.remove('hidden');
-                    zone.classList.add('border-dashed', 'border-2', 'bg-slate-50/50', 'dark:bg-slate-800/50');
-                    zone.classList.remove('border-transparent', 'bg-transparent');
-                }
-            });
-        }
+    // Return btn
+    el.querySelector('.return-btn').addEventListener('click',e=>{
+        e.stopPropagation();
+        moveToDidebar(el);
+    });
 
-        // Add Day — with editable subtitle
-        addDayBtn.addEventListener('click', () => {
-            dayCount++;
-            const newDayHTML = `
-                <div class="glass-panel p-6 rounded-3xl shadow-md border border-slate-200 dark:border-slate-700 min-h-[300px]">
-                    <h3 class="font-bold text-xl mb-5 text-brand-600 dark:text-brand-400 flex justify-between items-center">
-                        <span>Day ${dayCount}: <span 
-                            contenteditable="true" 
-                            spellcheck="false"
-                            class="day-subtitle"
-                            data-placeholder="ชื่อกิจกรรม..."></span>
-                        </span>
-                        <button class="text-rose-500 text-sm hover:underline font-medium" onclick="this.closest('.glass-panel').remove()">ลบวัน</button>
-                    </h3>
-                    <div class="drop-zone grid grid-cols-1 sm:grid-cols-2 gap-4 min-h-[180px] border-2 border-dashed border-slate-300 dark:border-slate-600 bg-slate-50/50 dark:bg-slate-800/50 rounded-2xl transition-colors duration-300 p-4">
-                        <div class="placeholder-text col-span-1 sm:col-span-2 flex flex-col items-center justify-center text-slate-400 pointer-events-none py-8">
-                            <span class="text-4xl mb-2">+</span><span class="text-sm font-medium">ลากสถานที่มาจัดทริปตรงนี้</span>
-                        </div>
-                    </div>
-                </div>
-            `;
-            boardsContainer.insertAdjacentHTML('beforeend', newDayHTML);
-            initDragAndDrop();
+    // Drag
+    el.addEventListener('dragstart',()=>{ draggedItem=el; setTimeout(()=>el.classList.add('opacity-50','scale-95'),0); });
+    el.addEventListener('dragend',()=>{ el.classList.remove('opacity-50','scale-95'); draggedItem=null; updateSummaries(); serializeBoard(); checkPlaceholders(); });
+
+    return el;
+}
+
+function moveToDidebar(el){
+    el.querySelector('.return-btn').classList.replace('flex','hidden');
+    el.querySelector('.time-row').classList.add('hidden');
+    document.getElementById('sidebar-zone').appendChild(el);
+    checkPlaceholders(); updateSummaries(); serializeBoard();
+}
+
+function enterBoard(el){
+    el.querySelector('.return-btn').classList.replace('hidden','flex');
+    el.querySelector('.time-row').classList.remove('hidden');
+}
+
+// ── Summary ──
+function updateSummaries(){
+    document.querySelectorAll('.day-board').forEach(board=>{
+        const cards=board.querySelectorAll('.sb-card');
+        const sumEl=board.querySelector('.day-summary');
+        if(!sumEl)return;
+        if(cards.length===0){sumEl.textContent='';return;}
+        let mins=0;
+        cards.forEach(c=>{
+            const s=c.querySelector('.time-start')?.value,e=c.querySelector('.time-end')?.value;
+            if(s&&e){const[sh,sm]=s.split(':').map(Number),[eh,em]=e.split(':').map(Number);const d=(eh*60+em)-(sh*60+sm);if(d>0)mins+=d;}
         });
+        const h=Math.floor(mins/60),m=mins%60;
+        const dur=mins>0?` · ${h>0?h+' ชม.':''}${m>0?' '+m+' น.':''}`.trimEnd():'';
+        sumEl.textContent=`${cards.length} สถานที่${dur}`;
+    });
+}
 
-        initDragAndDrop();
-    </script>
+// ── Placeholders ──
+function checkPlaceholders(){
+    document.querySelectorAll('.day-board').forEach(board=>{
+        const zone=board.querySelector('.drop-zone-inner');
+        const ph=board.querySelector('.ph');
+        const count=zone?zone.querySelectorAll('.sb-card').length:0;
+        if(ph) ph.classList.toggle('hidden',count>0);
+        if(zone){
+            if(count===0){zone.classList.add('border-dashed','border-2','bg-slate-50/50','dark:bg-slate-800/30');zone.classList.remove('border-transparent','bg-transparent');}
+        }
+    });
+    // sidebar empty
+    const sCount=document.querySelectorAll('#sidebar-zone .sb-card').length;
+    const sEmpty=document.getElementById('sidebar-empty');
+    if(sEmpty){sEmpty.classList.toggle('hidden',sCount>0);sEmpty.classList.toggle('flex',sCount===0);}
+}
+
+// ── Drag drop zones ──
+function attachZone(zone){
+    zone.addEventListener('dragover',e=>{e.preventDefault();zone.classList.add('border-brand-500','bg-brand-50/60','dark:bg-brand-900/20');});
+    zone.addEventListener('dragleave',()=>{zone.classList.remove('border-brand-500','bg-brand-50/60','dark:bg-brand-900/20');});
+    zone.addEventListener('drop',e=>{
+        e.preventDefault();
+        zone.classList.remove('border-brand-500','bg-brand-50/60','dark:bg-brand-900/20');
+        if(!draggedItem)return;
+        const isSidebar=zone.id==='sidebar-zone';
+        if(!isSidebar){
+            zone.classList.remove('border-dashed','border-2','bg-slate-50/50','dark:bg-slate-800/30');
+            zone.classList.add('border-transparent','bg-transparent');
+            enterBoard(draggedItem);
+        } else {
+            moveToDidebar(draggedItem); return;
+        }
+        zone.appendChild(draggedItem);
+        checkPlaceholders(); updateSummaries(); serializeBoard();
+    });
+}
+
+// ── Build day board ──
+function buildDayBoard(subtitle='', places=[]){
+    dayCount++;
+    const board = document.createElement('div');
+    board.className='day-board glass-panel p-6 rounded-3xl shadow-md border border-slate-200/60 dark:border-slate-700/60 min-h-[240px]';
+    board.innerHTML=`
+      <div class="flex justify-between items-center mb-4 flex-wrap gap-2">
+        <h3 class="font-bold text-xl text-brand-600 dark:text-brand-400 flex items-baseline gap-2 flex-wrap">
+          <span>Day ${dayCount}:</span>
+          <span contenteditable="true" spellcheck="false" class="day-subtitle" data-placeholder="ชื่อกิจกรรม...">${subtitle}</span>
+          <span class="day-summary text-xs font-normal text-slate-400 ml-1"></span>
+        </h3>
+        <button class="del-day text-rose-400 hover:text-rose-600 text-sm font-medium transition-colors">✕ ลบ</button>
+      </div>
+      <div class="drop-zone-inner grid grid-cols-1 sm:grid-cols-2 gap-3 min-h-[120px] border-2 border-dashed border-slate-300 dark:border-slate-600 bg-slate-50/50 dark:bg-slate-800/30 rounded-2xl p-3 transition-colors duration-300">
+        <div class="ph col-span-1 sm:col-span-2 flex flex-col items-center justify-center text-slate-400 pointer-events-none py-5">
+          <div class="text-3xl mb-2">📍</div>
+          <p class="text-sm">ลากสถานที่มาวางตรงนี้</p>
+        </div>
+      </div>`;
+
+    board.querySelector('.del-day').addEventListener('click',()=>{
+        // return all items back to sidebar
+        board.querySelectorAll('.sb-card').forEach(c=>moveToDidebar(c));
+        board.remove(); updateSummaries(); serializeBoard(); checkPlaceholders();
+    });
+    board.querySelector('.day-subtitle').addEventListener('input',()=>serializeBoard());
+
+    attachZone(board.querySelector('.drop-zone-inner'));
+
+    // Add pre-saved places
+    places.forEach(({name,start,end})=>{
+        const card=buildCard(name,true,start,end);
+        if(card){
+            const zone=board.querySelector('.drop-zone-inner');
+            zone.classList.remove('border-dashed','border-2','bg-slate-50/50','dark:bg-slate-800/30');
+            zone.classList.add('border-transparent','bg-transparent');
+            zone.appendChild(card);
+        }
+    });
+
+    document.getElementById('boards-container').appendChild(board);
+    checkPlaceholders(); updateSummaries();
+    return board;
+}
+
+// ── Populate sidebar ──
+function buildSidebar(placedNames=[]){
+    const zone=document.getElementById('sidebar-zone');
+    zone.innerHTML='';
+    // Only show places saved in Discovery
+    savedNames.forEach(name=>{
+        if(!placedNames.includes(name)){
+            const card=buildCard(name,false);
+            if(card) zone.appendChild(card);
+        }
+    });
+    attachZone(zone);
+    checkPlaceholders();
+}
+
+// ── Load or init ──
+function loadState(){
+    const raw=localStorage.getItem(LS_BOARD);
+    if(raw){
+        try{
+            const state=JSON.parse(raw);
+            // Collect all names placed in boards
+            const placedNames=[];
+            (state.days||[]).forEach(d=>d.places.forEach(p=>placedNames.push(p.name)));
+            buildSidebar(placedNames);
+            (state.days||[]).forEach(d=>buildDayBoard(d.subtitle, d.places));
+            return;
+        }catch(e){}
+    }
+    // Default: 1 empty day
+    buildSidebar([]);
+    buildDayBoard('Arrival Day',[]);
+}
+
+// ── Add Day btn ──
+document.getElementById('add-day-btn').addEventListener('click',()=>{
+    buildDayBoard('','[]');
+    serializeBoard();
+});
+
+// ── Clear btn ──
+document.getElementById('clear-btn').addEventListener('click',()=>{
+    if(!confirm('ล้างทุก Day Board?')) return;
+    document.querySelectorAll('.day-board').forEach(b=>{
+        b.querySelectorAll('.sb-card').forEach(c=>moveToDidebar(c));
+        b.remove();
+    });
+    dayCount=0;
+    buildDayBoard('Arrival Day',[]);
+    serializeBoard();
+    checkPlaceholders();
+});
+
+loadState();
+</script>
 </body>
 </html>
