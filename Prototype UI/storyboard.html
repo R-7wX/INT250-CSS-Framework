@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Traveloha - Storyboard</title>
-    <link rel="icon" type="image/png" href="src/favicon.png">
     <script src="https://cdn.tailwindcss.com"></script>
     <script>tailwind.config={darkMode:'class',theme:{extend:{colors:{brand:{50:'#f4f5f4',100:'#e6e9e6',500:'#8ba888',600:'#6b8a68',900:'#3a4a39'}}}}}</script>
     <script>if(localStorage.theme==='dark'||(!('theme'in localStorage)&&window.matchMedia('(prefers-color-scheme: dark)').matches))document.documentElement.classList.add('dark');else document.documentElement.classList.remove('dark');</script>
@@ -16,15 +15,34 @@
         body{background-color:#f2efe8;background-image:radial-gradient(ellipse 90% 70% at 10% 30%,rgba(139,168,136,0.22) 0%,transparent 55%),radial-gradient(ellipse 70% 60% at 90% 10%,rgba(196,181,148,0.18) 0%,transparent 50%),radial-gradient(ellipse 80% 70% at 50% 90%,rgba(152,186,148,0.15) 0%,transparent 55%);}
         html.dark body{background-color:#111912;background-image:radial-gradient(ellipse 90% 70% at 10% 30%,rgba(58,74,57,0.4) 0%,transparent 55%),radial-gradient(ellipse 70% 60% at 90% 10%,rgba(35,55,35,0.3) 0%,transparent 50%),radial-gradient(ellipse 80% 70% at 50% 90%,rgba(45,65,42,0.25) 0%,transparent 55%);}
         html.dark body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;opacity:0.04;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");background-size:180px 180px;}
-        .day-subtitle{outline:none;border-bottom:2px dashed rgba(107,138,104,0.4);padding:0 4px 1px;min-width:60px;display:inline-block;cursor:text;transition:border-color 0.2s;}
+        .day-subtitle{outline:none;border-bottom:2px dashed rgba(107,138,104,0.4);padding:0 4px 1px;min-width:60px;display:inline-block;cursor:text;}
         .day-subtitle:focus{border-bottom-color:#6b8a68;border-bottom-style:solid;}
         .day-subtitle:empty::before{content:attr(data-placeholder);color:rgba(107,138,104,0.4);pointer-events:none;}
         .time-input{background:rgba(241,245,249,0.8);border:1px solid rgba(203,213,225,0.8);border-radius:8px;padding:3px 8px;font-size:12px;color:#475569;cursor:pointer;outline:none;transition:border-color 0.2s;}
         .time-input:focus{border-color:#8ba888;}
         .dark .time-input{background:rgba(30,41,59,0.8);border-color:rgba(71,85,105,0.8);color:#94a3b8;}
+        /* drop-zone highlight */
+        .dz-active{border-color:#8ba888 !important;background:rgba(139,168,136,0.08) !important;}
+        /* day picker popup */
+        #day-picker{position:fixed;z-index:9999;background:white;border-radius:20px;box-shadow:0 16px 48px rgba(0,0,0,0.25);border:1px solid rgba(0,0,0,0.08);width:calc(100vw - 32px);max-width:300px;padding:16px;max-height:65vh;display:flex;flex-direction:column;}
+        #day-picker-list{overflow-y:auto;flex:1;}
+        .dark #day-picker{background:#1e293b;border-color:rgba(255,255,255,0.12);}
+        @keyframes popIn{from{opacity:0;transform:translateY(8px)scale(.95)}to{opacity:1;transform:none}}
+        #day-picker{animation:popIn 0.18s ease;}
+        /* + btn: ALWAYS hidden; show on mobile only via .mob-vis */
+        .add-to-day-btn{display:none !important;}
+        @media(max-width:767px){.add-to-day-btn.mob-vis{display:flex !important;}}
     </style>
 </head>
 <body class="text-zinc-800 dark:text-zinc-300 transition-colors duration-500 pb-24 md:pb-20">
+
+<!-- Day picker popup (mobile tap) -->
+<div id="day-picker" class="hidden">
+    <p class="text-xs font-semibold text-slate-400 uppercase tracking-wide mb-2 px-1">เลือก Day ที่จะใส่</p>
+    <div id="day-picker-list" class="space-y-1.5"></div>
+    <button onclick="closeDayPicker()" class="mt-3 w-full text-center text-xs text-slate-400 hover:text-rose-500 transition-colors py-1">ยกเลิก</button>
+</div>
+<div id="picker-backdrop" class="hidden fixed inset-0 z-[199]" onclick="closeDayPicker()"></div>
 
     <nav class="sticky top-4 z-50 glass-panel shadow-sm flex justify-between items-center max-w-7xl mx-auto px-6 py-4 rounded-3xl">
         <div class="flex items-center gap-3">
@@ -35,7 +53,6 @@
             <a href="index.html" class="relative group px-1 py-2 hover:text-zinc-900 dark:hover:text-white transition-colors">DISCOVERY<span class="absolute -bottom-1 left-0 w-0 h-[2px] bg-zinc-300 dark:bg-zinc-600 rounded-full transition-all duration-300 group-hover:w-full"></span></a>
             <a href="storyboard.html" class="relative px-1 py-2 text-zinc-900 dark:text-white font-bold">TRIP STORYBOARD<span class="absolute -bottom-1 left-0 w-full h-[2px] bg-zinc-900 dark:bg-white rounded-full"></span></a>
             <a href="dashboard.html" class="relative group px-1 py-2 hover:text-zinc-900 dark:hover:text-white transition-colors">DASHBOARD<span class="absolute -bottom-1 left-0 w-0 h-[2px] bg-zinc-300 dark:bg-zinc-600 rounded-full transition-all duration-300 group-hover:w-full"></span></a>
-            <a href="checklist.html" class="relative group px-1 py-2 hover:text-zinc-900 dark:hover:text-white transition-colors">CHECKLIST<span class="absolute -bottom-1 left-0 w-0 h-[2px] bg-zinc-300 dark:bg-zinc-600 rounded-full transition-all duration-300 group-hover:w-full"></span></a>
         </div>
         <div class="flex items-center gap-4">
             <div class="w-[80px] h-[40px] flex items-center justify-center overflow-hidden">
@@ -48,143 +65,184 @@
         </div>
     </nav>
 
-    <main class="max-w-7xl mx-auto mt-12 p-4 space-y-6">
+    <main class="max-w-7xl mx-auto mt-10 p-4 space-y-6">
         <div class="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-4">
             <div>
                 <h2 class="text-3xl font-bold">My Trip Storyboard</h2>
-                <p class="text-slate-500 dark:text-slate-400 mt-1 text-sm">คลิกชื่อหลัง Day เพื่อแก้ไข · ลากการ์ดเข้า Day · ตั้งเวลา · ข้อมูลจะถูกบันทึกอัตโนมัติ 💾</p>
+                <p class="text-slate-500 dark:text-slate-400 mt-1 text-sm">แก้ชื่อวัน · ลากสถานที่ · ตั้งเวลา · บันทึกอัตโนมัติ 💾</p>
             </div>
-            <div class="flex items-center gap-3">
-                <button id="clear-btn" class="px-4 py-2.5 border border-rose-200 dark:border-rose-800 text-rose-500 rounded-xl text-sm font-medium hover:bg-rose-50 dark:hover:bg-rose-900/20 transition-colors">🗑️ ล้างทั้งหมด</button>
-                <button id="add-day-btn" class="px-5 py-2.5 bg-brand-600 hover:bg-brand-700 text-white rounded-xl text-sm font-bold shadow-md transition-transform hover:scale-105">+ เพิ่มวัน</button>
+            <div class="flex items-center gap-3 flex-shrink-0">
+                <button id="clear-btn" class="px-4 py-2.5 border border-rose-200 dark:border-rose-800 text-rose-500 rounded-xl text-sm font-medium hover:bg-rose-50 dark:hover:bg-rose-900/20 transition-colors">🗑️ ล้าง</button>
+                <button id="add-day-btn" class="px-5 py-2.5 bg-brand-600 hover:bg-brand-700 text-white rounded-xl text-sm font-bold shadow-md transition-all hover:scale-105">+ เพิ่มวัน</button>
             </div>
         </div>
 
         <div class="flex flex-col lg:flex-row gap-8">
-
             <!-- SIDEBAR -->
-            <div class="w-full lg:w-1/3 glass-panel p-6 rounded-3xl shadow-lg h-fit lg:sticky lg:top-28">
+            <div class="w-full lg:w-1/3 glass-panel p-5 rounded-3xl shadow-lg lg:sticky lg:top-24 h-fit">
                 <h3 class="font-bold text-lg mb-1 flex justify-between items-center">
                     Saved Vibes
-                    <span class="bg-brand-100 text-brand-700 dark:bg-brand-900/50 dark:text-brand-300 text-xs px-3 py-1 rounded-full">ลากไปมาได้</span>
+                    <span class="bg-brand-100 text-brand-700 dark:bg-brand-900/50 dark:text-brand-300 text-xs px-2.5 py-1 rounded-full">ลากหรือกด +</span>
                 </h3>
-                <p class="text-xs text-slate-400 mb-3">แสดงเฉพาะที่คุณกด ❤️ ในหน้า Discovery</p>
-                <!-- Empty sidebar hint -->
-                <div id="sidebar-empty" class="hidden flex-col items-center justify-center py-8 text-center gap-2">
-                    <div class="text-4xl">💔</div>
-                    <p class="text-sm text-slate-400">ยังไม่มี Saved Vibes</p>
-                    <a href="index.html" class="mt-1 text-xs text-brand-600 dark:text-brand-400 underline underline-offset-2">ไปกด ❤️ ในหน้า Discovery</a>
+                <p class="text-xs text-slate-400 mb-3">แสดงเฉพาะที่กด ❤️ ในหน้า Discovery</p>
+                <div id="sidebar-zone" class="space-y-2.5 min-h-[180px] max-h-[520px] overflow-y-auto pr-1 rounded-xl pb-2 border-2 border-dashed border-slate-200 dark:border-slate-700 transition-colors duration-200">
+                    <div id="sidebar-empty" class="hidden flex-col items-center justify-center py-10 text-center gap-2 pointer-events-none select-none">
+                        <div class="text-4xl">💔</div>
+                        <p class="text-sm text-slate-400">ยังไม่มี Saved Vibes</p>
+                        <a href="index.html" class="mt-1 text-xs text-brand-600 dark:text-brand-400 underline underline-offset-2 pointer-events-auto">ไปกด ❤️ ในหน้า Discovery</a>
+                    </div>
                 </div>
-                <div id="sidebar-zone" class="drop-zone space-y-2.5 min-h-[80px] max-h-[560px] overflow-y-auto pr-1 rounded-xl transition-colors duration-300 pb-2"></div>
             </div>
 
             <!-- BOARDS -->
-            <div class="w-full lg:w-2/3 flex flex-col">
-                <div id="boards-container" class="space-y-6 flex-1"></div>
-                <div class="flex justify-end mt-8">
-                    <a href="checklist.html" class="bg-slate-900 dark:bg-white text-white dark:text-slate-900 px-8 py-4 rounded-2xl font-bold shadow-xl hover:-translate-y-1 hover:shadow-2xl transition-all flex items-center gap-3">
+            <div class="w-full lg:w-2/3 flex flex-col gap-6">
+                <div id="boards-container"></div>
+
+                <!-- Generate button -->
+                <div class="flex justify-end mt-2">
+                    <button id="generate-btn" class="bg-slate-900 dark:bg-white text-white dark:text-slate-900 px-8 py-4 rounded-2xl font-bold shadow-xl hover:-translate-y-1 hover:shadow-2xl transition-all flex items-center gap-3">
                         ✨ Generate Checklist
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
-                    </a>
+                    </button>
                 </div>
             </div>
         </div>
     </main>
 
-    <!-- Mobile Bottom Nav -->
+    <!-- Mobile Bottom Nav (no Checklist) -->
     <nav class="fixed bottom-0 left-0 right-0 z-50 md:hidden glass-panel border-t border-slate-200/60 dark:border-slate-700/60 flex justify-around items-center py-2 px-2">
         <a href="index.html" class="flex flex-col items-center gap-0.5 px-3 py-1.5 rounded-2xl text-slate-400 min-w-[56px]"><span class="text-xl">🔍</span><span class="text-[10px] font-medium">Discover</span></a>
         <a href="storyboard.html" class="flex flex-col items-center gap-0.5 px-3 py-1.5 rounded-2xl bg-brand-500/10 text-brand-600 dark:text-brand-400 min-w-[56px]"><span class="text-xl">🗺️</span><span class="text-[10px] font-bold">Storyboard</span></a>
         <a href="dashboard.html" class="flex flex-col items-center gap-0.5 px-3 py-1.5 rounded-2xl text-slate-400 min-w-[56px]"><span class="text-xl">📊</span><span class="text-[10px] font-medium">Dashboard</span></a>
-        <a href="checklist.html" class="flex flex-col items-center gap-0.5 px-3 py-1.5 rounded-2xl text-slate-400 min-w-[56px]"><span class="text-xl">✅</span><span class="text-[10px] font-medium">Checklist</span></a>
     </nav>
 
 <script>
-// ── Theme ──
-const toggleInput=document.getElementById('hide-checkbox');
-if(document.documentElement.classList.contains('dark'))toggleInput.checked=false;else toggleInput.checked=true;
-toggleInput.addEventListener('change',(e)=>{if(e.target.checked){document.documentElement.classList.remove('dark');localStorage.setItem('theme','light');}else{document.documentElement.classList.add('dark');localStorage.setItem('theme','dark');}});
+// ─── Theme ───────────────────────────────────────────────
+const toggleInput = document.getElementById('hide-checkbox');
+if (document.documentElement.classList.contains('dark')) toggleInput.checked = false;
+else toggleInput.checked = true;
+toggleInput.addEventListener('change', e => {
+    if (e.target.checked) { document.documentElement.classList.remove('dark'); localStorage.setItem('theme','light'); }
+    else { document.documentElement.classList.add('dark'); localStorage.setItem('theme','dark'); }
+});
 
-// ── localStorage keys ──
-const LS_SAVED  = 'travelaroha_saved';    // string[] — place names saved from Discovery
-const LS_BOARD  = 'travelaroha_storyboard'; // {days:[{subtitle,places:[{name,start,end}]}]}
+// ─── Storage keys ────────────────────────────────────────
+const LS_SAVED  = 'travelaroha_saved';
+const LS_BOARD  = 'travelaroha_storyboard';
+const LS_EXPORT = 'travelaroha_export';
 
-// ── All places metadata ──
-const ALL_PLACES = [
-    {name:'ปารีส, ฝรั่งเศส',    vibe:'Urban Adventure', img:'https://images.unsplash.com/photo-1499856871958-5b9627545d1a?auto=format&fit=crop&w=100&q=80'},
-    {name:'ดูไบ, UAE',           vibe:'Urban Adventure', img:'https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=100&q=80'},
-    {name:'กรุงเทพฯ, ไทย',       vibe:'Urban Adventure', img:'https://images.unsplash.com/photo-1508009603885-50cf7c579365?auto=format&fit=crop&w=100&q=80'},
-    {name:'โซล, เกาหลีใต้',      vibe:'Urban Adventure', img:'https://images.unsplash.com/photo-1517154421773-0529f29ea451?auto=format&fit=crop&w=100&q=80'},
-    {name:'นิวยอร์ก, USA',       vibe:'Urban Adventure', img:'https://images.unsplash.com/photo-1496442226666-8d4d0e62e6e9?auto=format&fit=crop&w=100&q=80'},
-    {name:'ลอนดอน, UK',          vibe:'Urban Adventure', img:'https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?auto=format&fit=crop&w=100&q=80'},
-    {name:'ปักกิ่ง, จีน',        vibe:'Urban Adventure', img:'https://images.unsplash.com/photo-1508804185872-d7badad00f7d?auto=format&fit=crop&w=100&q=80'},
-    {name:'สิงคโปร์',            vibe:'Urban Adventure', img:'https://images.unsplash.com/photo-1525625293386-3f8f99389edd?auto=format&fit=crop&w=100&q=80'},
-    {name:'ภูเขาไฟฟูจิ, ญี่ปุ่น',vibe:'Nature Retreat',  img:'https://images.unsplash.com/photo-1490806843957-31f4c9a91c65?auto=format&fit=crop&w=100&q=80'},
-    {name:'เกียวโต, ญี่ปุ่น',    vibe:'Slow Living',     img:'https://images.unsplash.com/photo-1528360983277-13d401cdc186?auto=format&fit=crop&w=100&q=80'},
-    {name:'ทะเลสาบโคโม่, อิตาลี',vibe:'Slow Living',     img:'https://images.unsplash.com/photo-1542259009477-d625272157b7?auto=format&fit=crop&w=100&q=80'},
-    {name:'ซูริค, สวิตเซอร์แลนด์',vibe:'Slow Living',    img:'https://images.unsplash.com/photo-1528702748617-c64d49f918af?auto=format&fit=crop&w=100&q=80'},
-    {name:'โรม, อิตาลี',         vibe:'Urban Adventure', img:'https://images.unsplash.com/photo-1552832230-c0197dd311b5?auto=format&fit=crop&w=100&q=80'},
-    {name:'นิวซีแลนด์',          vibe:'Nature Retreat',  img:'https://images.unsplash.com/photo-1469521669194-babb45599def?auto=format&fit=crop&w=100&q=80'},
-    {name:'ไทเป, ไต้หวัน',        vibe:'Foodie Tour',     img:'https://images.unsplash.com/photo-1550951298-5c7b95a66bfc?auto=format&fit=crop&w=100&q=80'},
-    {name:'โอซาก้า, ญี่ปุ่น',    vibe:'Foodie Tour',     img:'https://images.unsplash.com/photo-1589308078059-be1415eab4c3?auto=format&fit=crop&w=100&q=80'},
-    {name:'มัลดีฟส์',            vibe:'Beach Getaway',   img:'https://images.unsplash.com/photo-1510414842594-a61c69b5ae57?auto=format&fit=crop&w=100&q=80'},
-    {name:'ดานัง, เวียดนาม',      vibe:'Beach Getaway',   img:'https://images.unsplash.com/photo-1559592413-7cec4d0cae2b?auto=format&fit=crop&w=100&q=80'},
-    {name:'ซิดนีย์, ออสเตรเลีย', vibe:'Beach Getaway',   img:'https://images.unsplash.com/photo-1506973035872-a4ec16b8e8d9?auto=format&fit=crop&w=100&q=80'},
-    {name:'บาหลี, อินโดนีเซีย',  vibe:'Beach Getaway',   img:'https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=100&q=80'},
-];
-const PLACE_MAP = Object.fromEntries(ALL_PLACES.map(p=>[p.name,p]));
+// ─── All places metadata ─────────────────────────────────
+const ALL_PLACES = {
+    'ปารีส, ฝรั่งเศส':    {vibe:'Urban Adventure', img:'https://images.unsplash.com/photo-1499856871958-5b9627545d1a?auto=format&fit=crop&w=100&q=80'},
+    'ดูไบ, UAE':           {vibe:'Urban Adventure', img:'https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=100&q=80'},
+    'กรุงเทพฯ, ไทย':       {vibe:'Urban Adventure', img:'https://images.unsplash.com/photo-1508009603885-50cf7c579365?auto=format&fit=crop&w=100&q=80'},
+    'โซล, เกาหลีใต้':      {vibe:'Urban Adventure', img:'https://images.unsplash.com/photo-1517154421773-0529f29ea451?auto=format&fit=crop&w=100&q=80'},
+    'นิวยอร์ก, สหรัฐฯ':    {vibe:'Urban Adventure', img:'https://images.unsplash.com/photo-1496442226666-8d4d0e62e6e9?auto=format&fit=crop&w=100&q=80'},
+    'ลอนดอน, UK':          {vibe:'Urban Adventure', img:'https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?auto=format&fit=crop&w=100&q=80'},
+    'ปักกิ่ง, จีน':        {vibe:'Urban Adventure', img:'https://images.unsplash.com/photo-1508804185872-d7badad00f7d?auto=format&fit=crop&w=100&q=80'},
+    'สิงคโปร์':            {vibe:'Urban Adventure', img:'https://images.unsplash.com/photo-1525625293386-3f8f99389edd?auto=format&fit=crop&w=100&q=80'},
+    'ภูเขาไฟฟูจิ, ญี่ปุ่น':{vibe:'Nature Retreat',  img:'https://images.unsplash.com/photo-1490806843957-31f4c9a91c65?auto=format&fit=crop&w=100&q=80'},
+    'เกียวโต, ญี่ปุ่น':    {vibe:'Slow Living',     img:'https://images.unsplash.com/photo-1528360983277-13d401cdc186?auto=format&fit=crop&w=100&q=80'},
+    'ทะเลสาบโคโม่, อิตาลี':{vibe:'Slow Living',     img:'https://images.unsplash.com/photo-1542259009477-d625272157b7?auto=format&fit=crop&w=100&q=80'},
+    'ซูริค, สวิตเซอร์แลนด์':{vibe:'Slow Living',    img:'https://images.unsplash.com/photo-1528702748617-c64d49f918af?auto=format&fit=crop&w=100&q=80'},
+    'โรม, อิตาลี':         {vibe:'Urban Adventure', img:'https://images.unsplash.com/photo-1552832230-c0197dd311b5?auto=format&fit=crop&w=100&q=80'},
+    'นิวซีแลนด์':          {vibe:'Nature Retreat',  img:'https://images.unsplash.com/photo-1469521669194-babb45599def?auto=format&fit=crop&w=100&q=80'},
+    'ไทเป, ไต้หวัน':        {vibe:'Foodie Tour',    img:'https://images.unsplash.com/photo-1550951298-5c7b95a66bfc?auto=format&fit=crop&w=100&q=80'},
+    'โอซาก้า, ญี่ปุ่น':    {vibe:'Foodie Tour',     img:'https://images.unsplash.com/photo-1589308078059-be1415eab4c3?auto=format&fit=crop&w=100&q=80'},
+    'มัลดีฟส์':            {vibe:'Beach Getaway',   img:'https://images.unsplash.com/photo-1510414842594-a61c69b5ae57?auto=format&fit=crop&w=100&q=80'},
+    'ดานัง, เวียดนาม':      {vibe:'Beach Getaway',   img:'https://images.unsplash.com/photo-1559592413-7cec4d0cae2b?auto=format&fit=crop&w=100&q=80'},
+    'ซิดนีย์, ออสเตรเลีย': {vibe:'Beach Getaway',   img:'https://images.unsplash.com/photo-1506973035872-a4ec16b8e8d9?auto=format&fit=crop&w=100&q=80'},
+    'บาหลี, อินโดนีเซีย':  {vibe:'Beach Getaway',   img:'https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=100&q=80'},
+};
 
-// ── State ──
-let savedNames = JSON.parse(localStorage.getItem(LS_SAVED)||'[]');
-let boardState = null; // loaded below
+// ─── State ──────────────────────────────────────────────
+let savedNames = JSON.parse(localStorage.getItem(LS_SAVED) || '[]');
 let dayCount = 0;
 let draggedItem = null;
+let pendingMobileCard = null; // for day-picker
 
-// ── Persist board state ──
-function serializeBoard(){
-    const days=[];
-    document.querySelectorAll('.day-board').forEach(board=>{
-        const subtitle = board.querySelector('.day-subtitle')?.textContent?.trim()||'';
-        const places=[];
-        board.querySelectorAll('.sb-card').forEach(card=>{
-            places.push({
-                name: card.dataset.name,
-                start: card.querySelector('.time-start')?.value||'09:00',
-                end:   card.querySelector('.time-end')?.value||'11:00',
-            });
+// ─── Helpers ────────────────────────────────────────────
+function calcDuration(s, e) {
+    const [sh,sm] = s.split(':').map(Number), [eh,em] = e.split(':').map(Number);
+    const d = (eh*60+em) - (sh*60+sm);
+    if (d <= 0) return '—';
+    const h = Math.floor(d/60), m = d%60;
+    return h > 0 ? (m > 0 ? `${h}ชม. ${m}น.` : `${h}ชม.`) : `${m}น.`;
+}
+
+function updateSummaries() {
+    document.querySelectorAll('.day-board').forEach(board => {
+        const cards = board.querySelectorAll('.sb-card');
+        const sumEl = board.querySelector('.day-summary');
+        if (!sumEl) return;
+        if (cards.length === 0) { sumEl.textContent = ''; return; }
+        let mins = 0;
+        cards.forEach(c => {
+            const s = c.querySelector('.time-start')?.value;
+            const e = c.querySelector('.time-end')?.value;
+            if (s && e) { const d=(parseInt(e)-parseInt(s.replace(':','')))||0; const diff=((+e.split(':')[0]*60+ +e.split(':')[1]))-((+s.split(':')[0]*60+ +s.split(':')[1])); if(diff>0) mins+=diff; }
         });
-        days.push({subtitle,places});
+        const h=Math.floor(mins/60),m=mins%60;
+        const dur = mins>0 ? ` · ${h>0?h+'ชม.':''}${m>0?' '+m+'น.':''}`.trimEnd() : '';
+        sumEl.textContent = `${cards.length} สถานที่${dur}`;
     });
-    // sidebar remaining
-    const sidebarPlaces=[];
-    document.querySelectorAll('#sidebar-zone .sb-card').forEach(c=>sidebarPlaces.push(c.dataset.name));
-    localStorage.setItem(LS_BOARD, JSON.stringify({days, sidebarPlaces}));
 }
 
-// ── Duration helper ──
-function calcDuration(s,e){
-    const[sh,sm]=s.split(':').map(Number),[eh,em]=e.split(':').map(Number);
-    const d=(eh*60+em)-(sh*60+sm);
-    if(d<=0)return'—';
-    const h=Math.floor(d/60),m=d%60;
-    return h>0?(m>0?`${h} ชม. ${m} น.`:`${h} ชม.`):`${m} น.`;
+function checkPlaceholders() {
+    document.querySelectorAll('.day-board').forEach(board => {
+        const zone = board.querySelector('.board-drop-zone');
+        if (!zone) return;
+        const count = zone.querySelectorAll('.sb-card').length;
+        const ph = zone.querySelector('.ph');
+        if (ph) ph.classList.toggle('hidden', count > 0);
+        if (count === 0) { zone.classList.add('border-dashed','border-2'); zone.classList.remove('border-transparent'); }
+        else { zone.classList.remove('border-dashed','border-2'); zone.classList.add('border-transparent'); }
+    });
+    // sidebar
+    const sCount = document.querySelectorAll('#sidebar-zone .sb-card').length;
+    const sEmpty = document.getElementById('sidebar-empty');
+    const sZone  = document.getElementById('sidebar-zone');
+    if (sCount === 0) {
+        sEmpty.classList.remove('hidden'); sEmpty.classList.add('flex');
+        sZone.classList.add('border-dashed'); sZone.classList.remove('border-transparent');
+    } else {
+        sEmpty.classList.add('hidden'); sEmpty.classList.remove('flex');
+        sZone.classList.remove('border-dashed'); sZone.classList.add('border-transparent');
+    }
 }
 
-// ── Build one sidebar card element ──
-function buildCard(name, inBoard=false, start='09:00', end='11:00'){
-    const p = PLACE_MAP[name]; if(!p) return null;
+function serializeBoard() {
+    const days = [];
+    document.querySelectorAll('.day-board').forEach(board => {
+        const subtitle = board.querySelector('.day-subtitle')?.innerText?.trim() || '';
+        const places = [];
+        board.querySelectorAll('.sb-card').forEach(c => {
+            places.push({ name: c.dataset.name, start: c.querySelector('.time-start')?.value||'09:00', end: c.querySelector('.time-end')?.value||'11:00' });
+        });
+        days.push({ subtitle, places });
+    });
+    const sidebarPlaces = [...document.querySelectorAll('#sidebar-zone .sb-card')].map(c=>c.dataset.name);
+    localStorage.setItem(LS_BOARD, JSON.stringify({ days, sidebarPlaces }));
+}
+
+// ─── Build card DOM ──────────────────────────────────────
+function buildCard(name, inBoard=false, start='09:00', end='11:00') {
+    const p = ALL_PLACES[name]; if (!p) return null;
     const el = document.createElement('div');
-    el.draggable=true;
-    el.dataset.name=name;
-    el.className='sb-card bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-700 cursor-grab active:cursor-grabbing hover:-translate-y-0.5 transition-all overflow-hidden';
-    el.innerHTML=`
+    el.draggable = true;
+    el.dataset.name = name;
+    el.className = 'sb-card bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-700 cursor-grab active:cursor-grabbing hover:-translate-y-0.5 transition-all overflow-hidden select-none';
+    el.innerHTML = `
       <div class="card-top flex items-center p-3 gap-3">
         <img src="${p.img}" class="w-12 h-12 rounded-xl object-cover flex-shrink-0 pointer-events-none" loading="lazy">
         <div class="flex-1 min-w-0 pointer-events-none">
-          <h4 class="font-bold text-sm truncate">${p.name}</h4>
+          <h4 class="font-bold text-sm truncate">${name}</h4>
           <p class="text-xs text-slate-500 truncate">${p.vibe}</p>
         </div>
-        <button class="return-btn ${inBoard?'flex':'hidden'} w-7 h-7 flex-shrink-0 items-center justify-center rounded-full bg-slate-100 dark:bg-slate-700 text-slate-500 hover:bg-rose-100 hover:text-rose-500 dark:hover:bg-rose-900/40 transition-colors text-sm" title="คืนกลับ sidebar">↩</button>
+        <!-- Mobile add btn (sidebar only) -->
+        <button class="add-to-day-btn ${inBoard?'':' mob-vis'} w-8 h-8 flex-shrink-0 items-center justify-center rounded-full bg-brand-100 dark:bg-brand-900/40 text-brand-600 dark:text-brand-400 font-bold text-sm hover:bg-brand-200 transition-colors" title="เพิ่มเข้า Day">＋</button>
+        <!-- Return btn (board only) -->
+        <button class="return-btn ${inBoard?'flex':'hidden'} w-7 h-7 flex-shrink-0 items-center justify-center rounded-full bg-slate-100 dark:bg-slate-700 text-slate-500 hover:bg-rose-100 hover:text-rose-500 transition-colors text-sm" title="คืนกลับ">↩</button>
       </div>
       <div class="time-row ${inBoard?'block':'hidden'} px-3 pb-3 -mt-1">
         <div class="flex items-center gap-1.5 flex-wrap border-t border-slate-100 dark:border-slate-600/50 pt-2">
@@ -196,194 +254,242 @@ function buildCard(name, inBoard=false, start='09:00', end='11:00'){
         </div>
       </div>`;
 
-    // Time change listeners
-    const ts=el.querySelector('.time-start'), te=el.querySelector('.time-end'), td=el.querySelector('.time-dur');
-    [ts,te].forEach(inp=>{
-        inp.addEventListener('mousedown',e=>e.stopPropagation());
-        inp.addEventListener('touchstart',e=>e.stopPropagation(),{passive:true});
-        inp.addEventListener('change',()=>{ td.textContent=calcDuration(ts.value,te.value); updateSummaries(); serializeBoard(); });
+    // time listeners
+    const ts = el.querySelector('.time-start'), te = el.querySelector('.time-end'), td = el.querySelector('.time-dur');
+    [ts, te].forEach(inp => {
+        inp.addEventListener('mousedown', e => e.stopPropagation());
+        inp.addEventListener('touchstart', e => e.stopPropagation(), {passive:true});
+        inp.addEventListener('change', () => { td.textContent = calcDuration(ts.value, te.value); updateSummaries(); serializeBoard(); });
     });
 
-    // Return btn
-    el.querySelector('.return-btn').addEventListener('click',e=>{
+    // return btn
+    el.querySelector('.return-btn').addEventListener('click', e => {
         e.stopPropagation();
-        moveToDidebar(el);
+        moveToSidebar(el);
     });
 
-    // Drag
-    el.addEventListener('dragstart',()=>{ draggedItem=el; setTimeout(()=>el.classList.add('opacity-50','scale-95'),0); });
-    el.addEventListener('dragend',()=>{ el.classList.remove('opacity-50','scale-95'); draggedItem=null; updateSummaries(); serializeBoard(); checkPlaceholders(); });
+    // mobile add btn
+    el.querySelector('.add-to-day-btn').addEventListener('click', e => {
+        e.stopPropagation();
+        openDayPicker(el, e);
+    });
+
+    // drag events
+    el.addEventListener('dragstart', () => {
+        draggedItem = el;
+        setTimeout(() => el.classList.add('opacity-50','scale-95'), 0);
+    });
+    el.addEventListener('dragend', () => {
+        el.classList.remove('opacity-50','scale-95');
+        draggedItem = null;
+        updateSummaries(); serializeBoard(); checkPlaceholders();
+    });
 
     return el;
 }
 
-function moveToDidebar(el){
+// ─── Move helpers ────────────────────────────────────────
+function moveToSidebar(el) {
     el.querySelector('.return-btn').classList.replace('flex','hidden');
     el.querySelector('.time-row').classList.add('hidden');
+    el.querySelector('.add-to-day-btn').classList.add('mob-vis');
     document.getElementById('sidebar-zone').appendChild(el);
     checkPlaceholders(); updateSummaries(); serializeBoard();
 }
 
-function enterBoard(el){
+function moveToBoard(el, boardZone) {
     el.querySelector('.return-btn').classList.replace('hidden','flex');
     el.querySelector('.time-row').classList.remove('hidden');
+    el.querySelector('.add-to-day-btn').classList.remove('mob-vis');
+    boardZone.classList.remove('border-dashed','border-2');
+    boardZone.classList.add('border-transparent');
+    boardZone.appendChild(el);
+    checkPlaceholders(); updateSummaries(); serializeBoard();
 }
 
-// ── Summary ──
-function updateSummaries(){
-    document.querySelectorAll('.day-board').forEach(board=>{
-        const cards=board.querySelectorAll('.sb-card');
-        const sumEl=board.querySelector('.day-summary');
-        if(!sumEl)return;
-        if(cards.length===0){sumEl.textContent='';return;}
-        let mins=0;
-        cards.forEach(c=>{
-            const s=c.querySelector('.time-start')?.value,e=c.querySelector('.time-end')?.value;
-            if(s&&e){const[sh,sm]=s.split(':').map(Number),[eh,em]=e.split(':').map(Number);const d=(eh*60+em)-(sh*60+sm);if(d>0)mins+=d;}
+// ─── Drop zone ───────────────────────────────────────────
+function attachDropZone(zone, isSidebar=false) {
+    zone.addEventListener('dragover', e => { e.preventDefault(); zone.classList.add('dz-active'); });
+    zone.addEventListener('dragleave', () => zone.classList.remove('dz-active'));
+    zone.addEventListener('drop', e => {
+        e.preventDefault(); zone.classList.remove('dz-active');
+        if (!draggedItem) return;
+        if (isSidebar) moveToSidebar(draggedItem);
+        else moveToBoard(draggedItem, zone);
+    });
+}
+
+// ─── Mobile Day Picker ───────────────────────────────────
+function openDayPicker(card, event) {
+    pendingMobileCard = card;
+    const boards = document.querySelectorAll('.day-board');
+    if (boards.length === 0) { alert('เพิ่มวันก่อนนะ กด "+ เพิ่มวัน"'); return; }
+
+    const picker = document.getElementById('day-picker');
+    const list = document.getElementById('day-picker-list');
+    list.innerHTML = '';
+
+    boards.forEach((board, i) => {
+        const subtitle = board.querySelector('.day-subtitle')?.innerText?.trim();
+        const label = `Day ${i+1}${subtitle ? ': '+subtitle : ''}`;
+        const btn = document.createElement('button');
+        btn.className = 'w-full text-left px-3 py-2.5 rounded-xl hover:bg-brand-50 dark:hover:bg-brand-900/30 text-sm font-medium text-zinc-700 dark:text-zinc-200 transition-colors flex items-center gap-2';
+        btn.innerHTML = `<span class="text-base">📍</span>${label}`;
+        btn.addEventListener('click', () => {
+            const zone = board.querySelector('.board-drop-zone');
+            moveToBoard(pendingMobileCard, zone);
+            closeDayPicker();
         });
-        const h=Math.floor(mins/60),m=mins%60;
-        const dur=mins>0?` · ${h>0?h+' ชม.':''}${m>0?' '+m+' น.':''}`.trimEnd():'';
-        sumEl.textContent=`${cards.length} สถานที่${dur}`;
+        list.appendChild(btn);
+    });
+
+    picker.classList.remove('hidden');
+    document.getElementById('picker-backdrop').classList.remove('hidden');
+    requestAnimationFrame(() => {
+        const rect = event.target.getBoundingClientRect();
+        const pw = picker.offsetWidth, ph = picker.offsetHeight;
+        const vw = window.innerWidth,  vh = window.innerHeight;
+        let left = rect.right - pw;
+        if (left < 8) left = 8;
+        if (left + pw > vw - 8) left = vw - pw - 8;
+        const top = (vh - rect.bottom - 12 >= ph)
+            ? rect.bottom + window.scrollY + 8
+            : Math.max(window.scrollY + 8, rect.top + window.scrollY - ph - 8);
+        picker.style.left = left + 'px';
+        picker.style.top  = top  + 'px';
     });
 }
 
-// ── Placeholders ──
-function checkPlaceholders(){
-    document.querySelectorAll('.day-board').forEach(board=>{
-        const zone=board.querySelector('.drop-zone-inner');
-        const ph=board.querySelector('.ph');
-        const count=zone?zone.querySelectorAll('.sb-card').length:0;
-        if(ph) ph.classList.toggle('hidden',count>0);
-        if(zone){
-            if(count===0){zone.classList.add('border-dashed','border-2','bg-slate-50/50','dark:bg-slate-800/30');zone.classList.remove('border-transparent','bg-transparent');}
-        }
-    });
-    // sidebar empty
-    const sCount=document.querySelectorAll('#sidebar-zone .sb-card').length;
-    const sEmpty=document.getElementById('sidebar-empty');
-    if(sEmpty){sEmpty.classList.toggle('hidden',sCount>0);sEmpty.classList.toggle('flex',sCount===0);}
-}
+window.closeDayPicker = function() {
+    document.getElementById('day-picker').classList.add('hidden');
+    document.getElementById('picker-backdrop').classList.add('hidden');
+    pendingMobileCard = null;
+};
 
-// ── Drag drop zones ──
-function attachZone(zone){
-    zone.addEventListener('dragover',e=>{e.preventDefault();zone.classList.add('border-brand-500','bg-brand-50/60','dark:bg-brand-900/20');});
-    zone.addEventListener('dragleave',()=>{zone.classList.remove('border-brand-500','bg-brand-50/60','dark:bg-brand-900/20');});
-    zone.addEventListener('drop',e=>{
-        e.preventDefault();
-        zone.classList.remove('border-brand-500','bg-brand-50/60','dark:bg-brand-900/20');
-        if(!draggedItem)return;
-        const isSidebar=zone.id==='sidebar-zone';
-        if(!isSidebar){
-            zone.classList.remove('border-dashed','border-2','bg-slate-50/50','dark:bg-slate-800/30');
-            zone.classList.add('border-transparent','bg-transparent');
-            enterBoard(draggedItem);
-        } else {
-            moveToDidebar(draggedItem); return;
-        }
-        zone.appendChild(draggedItem);
-        checkPlaceholders(); updateSummaries(); serializeBoard();
-    });
-}
-
-// ── Build day board ──
-function buildDayBoard(subtitle='', places=[]){
+// ─── Build day board ─────────────────────────────────────
+function buildDayBoard(subtitle = '', places = []) {
     dayCount++;
+    const n = dayCount;
     const board = document.createElement('div');
-    board.className='day-board glass-panel p-6 rounded-3xl shadow-md border border-slate-200/60 dark:border-slate-700/60 min-h-[240px]';
-    board.innerHTML=`
-      <div class="flex justify-between items-center mb-4 flex-wrap gap-2">
-        <h3 class="font-bold text-xl text-brand-600 dark:text-brand-400 flex items-baseline gap-2 flex-wrap">
-          <span>Day ${dayCount}:</span>
+    board.className = 'day-board glass-panel p-5 rounded-3xl shadow-md border border-slate-200/60 dark:border-slate-700/60';
+    board.innerHTML = `
+      <div class="flex justify-between items-start mb-3 gap-2">
+        <h3 class="font-bold text-lg text-brand-600 dark:text-brand-400 flex items-baseline gap-2 flex-wrap">
+          <span class="flex-shrink-0">Day ${n}:</span>
           <span contenteditable="true" spellcheck="false" class="day-subtitle" data-placeholder="ชื่อกิจกรรม...">${subtitle}</span>
-          <span class="day-summary text-xs font-normal text-slate-400 ml-1"></span>
+          <span class="day-summary text-xs font-normal text-slate-400"></span>
         </h3>
-        <button class="del-day text-rose-400 hover:text-rose-600 text-sm font-medium transition-colors">✕ ลบ</button>
+        <button class="del-day flex-shrink-0 text-rose-400 hover:text-rose-600 text-xs font-medium transition-colors mt-1 px-2 py-1 rounded-lg hover:bg-rose-50 dark:hover:bg-rose-900/20">✕ ลบ</button>
       </div>
-      <div class="drop-zone-inner grid grid-cols-1 sm:grid-cols-2 gap-3 min-h-[120px] border-2 border-dashed border-slate-300 dark:border-slate-600 bg-slate-50/50 dark:bg-slate-800/30 rounded-2xl p-3 transition-colors duration-300">
-        <div class="ph col-span-1 sm:col-span-2 flex flex-col items-center justify-center text-slate-400 pointer-events-none py-5">
-          <div class="text-3xl mb-2">📍</div>
-          <p class="text-sm">ลากสถานที่มาวางตรงนี้</p>
+      <div class="board-drop-zone grid grid-cols-1 sm:grid-cols-2 gap-2.5 min-h-[100px] border-2 border-dashed border-slate-300 dark:border-slate-600 bg-slate-50/50 dark:bg-slate-800/30 rounded-2xl p-3 transition-colors duration-200">
+        <div class="ph col-span-1 sm:col-span-2 flex flex-col items-center justify-center text-slate-400 pointer-events-none py-4 gap-2">
+          <div class="text-3xl">📍</div>
+          <p class="text-sm">ลากสถานที่มาวาง <span class="md:hidden">หรือกด ＋ บนการ์ด</span></p>
         </div>
       </div>`;
 
-    board.querySelector('.del-day').addEventListener('click',()=>{
-        // return all items back to sidebar
-        board.querySelectorAll('.sb-card').forEach(c=>moveToDidebar(c));
-        board.remove(); updateSummaries(); serializeBoard(); checkPlaceholders();
+    board.querySelector('.del-day').addEventListener('click', () => {
+        board.querySelectorAll('.sb-card').forEach(c => moveToSidebar(c));
+        board.remove();
+        updateSummaries(); serializeBoard(); checkPlaceholders();
     });
-    board.querySelector('.day-subtitle').addEventListener('input',()=>serializeBoard());
+    board.querySelector('.day-subtitle').addEventListener('input', () => serializeBoard());
 
-    attachZone(board.querySelector('.drop-zone-inner'));
+    const zone = board.querySelector('.board-drop-zone');
+    attachDropZone(zone, false);
 
-    // Add pre-saved places
-    places.forEach(({name,start,end})=>{
-        const card=buildCard(name,true,start,end);
-        if(card){
-            const zone=board.querySelector('.drop-zone-inner');
-            zone.classList.remove('border-dashed','border-2','bg-slate-50/50','dark:bg-slate-800/30');
-            zone.classList.add('border-transparent','bg-transparent');
-            zone.appendChild(card);
-        }
-    });
+    // Pre-fill places
+    if (Array.isArray(places) && places.length > 0) {
+        places.forEach(({ name, start, end }) => {
+            const card = buildCard(name, true, start||'09:00', end||'11:00');
+            if (card) {
+                zone.classList.remove('border-dashed','border-2');
+                zone.classList.add('border-transparent');
+                zone.appendChild(card);
+            }
+        });
+    }
 
     document.getElementById('boards-container').appendChild(board);
-    checkPlaceholders(); updateSummaries();
     return board;
 }
 
-// ── Populate sidebar ──
-function buildSidebar(placedNames=[]){
-    const zone=document.getElementById('sidebar-zone');
-    zone.innerHTML='';
-    // Only show places saved in Discovery
-    savedNames.forEach(name=>{
-        if(!placedNames.includes(name)){
-            const card=buildCard(name,false);
-            if(card) zone.appendChild(card);
+// ─── Sidebar populate ────────────────────────────────────
+function buildSidebar(alreadyPlacedNames = []) {
+    const zone = document.getElementById('sidebar-zone');
+    zone.querySelectorAll('.sb-card').forEach(c => c.remove()); // keep #sidebar-empty
+    savedNames.forEach(name => {
+        if (!alreadyPlacedNames.includes(name)) {
+            const card = buildCard(name, false);
+            if (card) zone.appendChild(card);
         }
     });
-    attachZone(zone);
+    attachDropZone(zone, true);
     checkPlaceholders();
 }
 
-// ── Load or init ──
-function loadState(){
-    const raw=localStorage.getItem(LS_BOARD);
-    if(raw){
-        try{
-            const state=JSON.parse(raw);
-            // Collect all names placed in boards
-            const placedNames=[];
-            (state.days||[]).forEach(d=>d.places.forEach(p=>placedNames.push(p.name)));
+// ─── Load / Save ─────────────────────────────────────────
+function loadState() {
+    const raw = localStorage.getItem(LS_BOARD);
+    if (raw) {
+        try {
+            const state = JSON.parse(raw);
+            const placedNames = (state.days||[]).flatMap(d => d.places.map(p=>p.name));
             buildSidebar(placedNames);
-            (state.days||[]).forEach(d=>buildDayBoard(d.subtitle, d.places));
-            return;
-        }catch(e){}
+            (state.days||[]).forEach(d => buildDayBoard(d.subtitle||'', d.places||[]));
+            if (dayCount === 0) buildDayBoard('Arrival Day', []);
+            checkPlaceholders(); updateSummaries(); return;
+        } catch(e) {}
     }
-    // Default: 1 empty day
     buildSidebar([]);
-    buildDayBoard('Arrival Day',[]);
+    buildDayBoard('Arrival Day', []);
+    checkPlaceholders();
 }
 
-// ── Add Day btn ──
-document.getElementById('add-day-btn').addEventListener('click',()=>{
-    buildDayBoard('','[]');
+// ─── Buttons ─────────────────────────────────────────────
+document.getElementById('add-day-btn').addEventListener('click', () => {
+    buildDayBoard('', []);
     serializeBoard();
+    checkPlaceholders();
 });
 
-// ── Clear btn ──
-document.getElementById('clear-btn').addEventListener('click',()=>{
-    if(!confirm('ล้างทุก Day Board?')) return;
-    document.querySelectorAll('.day-board').forEach(b=>{
-        b.querySelectorAll('.sb-card').forEach(c=>moveToDidebar(c));
+document.getElementById('clear-btn').addEventListener('click', () => {
+    if (!confirm('ล้างทุก Day Board?')) return;
+    document.querySelectorAll('.day-board').forEach(b => {
+        b.querySelectorAll('.sb-card').forEach(c => moveToSidebar(c));
         b.remove();
     });
-    dayCount=0;
-    buildDayBoard('Arrival Day',[]);
-    serializeBoard();
-    checkPlaceholders();
+    dayCount = 0;
+    buildDayBoard('Arrival Day', []);
+    serializeBoard(); checkPlaceholders();
 });
 
+// ─── Generate → Checklist ────────────────────────────────
+document.getElementById('generate-btn').addEventListener('click', () => {
+    // Collect export data
+    const days = [];
+    document.querySelectorAll('.day-board').forEach((board, i) => {
+        const subtitle = board.querySelector('.day-subtitle')?.innerText?.trim() || '';
+        const places = [];
+        board.querySelectorAll('.sb-card').forEach(c => {
+            places.push({
+                name: c.dataset.name,
+                img: ALL_PLACES[c.dataset.name]?.img || '',
+                vibe: ALL_PLACES[c.dataset.name]?.vibe || '',
+                start: c.querySelector('.time-start')?.value || '09:00',
+                end: c.querySelector('.time-end')?.value || '11:00',
+            });
+        });
+        days.push({ dayNum: i+1, subtitle, places });
+    });
+
+    // Save export data
+    localStorage.setItem(LS_EXPORT, JSON.stringify({ days, exportedAt: new Date().toISOString() }));
+    // Navigate (storyboard will be reset AFTER checklist reads it)
+    window.location.href = 'checklist.html';
+});
+
+// ─── Init ────────────────────────────────────────────────
 loadState();
 </script>
 </body>

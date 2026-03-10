@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Traveloha - Dashboard</title>
-    <link rel="icon" type="image/png" href="src/favicon.png">
     <script src="https://cdn.tailwindcss.com"></script>
     <script>tailwind.config={darkMode:'class',theme:{extend:{colors:{brand:{50:'#f4f5f4',100:'#e6e9e6',500:'#8ba888',600:'#6b8a68',900:'#3a4a39'}}}}}</script>
     <script>if(localStorage.theme==='dark'||(!('theme'in localStorage)&&window.matchMedia('(prefers-color-scheme: dark)').matches))document.documentElement.classList.add('dark');else document.documentElement.classList.remove('dark');</script>
@@ -41,7 +40,6 @@
             <a href="index.html" class="relative group px-1 py-2 hover:text-zinc-900 dark:hover:text-white transition-colors">DISCOVERY<span class="absolute -bottom-1 left-0 w-0 h-[2px] bg-zinc-300 dark:bg-zinc-600 rounded-full transition-all duration-300 group-hover:w-full"></span></a>
             <a href="storyboard.html" class="relative group px-1 py-2 hover:text-zinc-900 dark:hover:text-white transition-colors">TRIP STORYBOARD<span class="absolute -bottom-1 left-0 w-0 h-[2px] bg-zinc-300 dark:bg-zinc-600 rounded-full transition-all duration-300 group-hover:w-full"></span></a>
             <a href="dashboard.html" class="relative px-1 py-2 text-zinc-900 dark:text-white font-bold">DASHBOARD<span class="absolute -bottom-1 left-0 w-full h-[2px] bg-zinc-900 dark:bg-white rounded-full"></span></a>
-            <a href="checklist.html" class="relative group px-1 py-2 hover:text-zinc-900 dark:hover:text-white transition-colors">CHECKLIST<span class="absolute -bottom-1 left-0 w-0 h-[2px] bg-zinc-300 dark:bg-zinc-600 rounded-full transition-all duration-300 group-hover:w-full"></span></a>
         </div>
         <div class="flex items-center gap-4">
             <div class="w-[80px] h-[40px] flex items-center justify-center overflow-hidden">
@@ -210,8 +208,7 @@
         <a href="index.html" class="flex flex-col items-center gap-0.5 px-3 py-1.5 rounded-2xl text-slate-400 min-w-[56px]"><span class="text-xl">🔍</span><span class="text-[10px] font-medium">Discover</span></a>
         <a href="storyboard.html" class="flex flex-col items-center gap-0.5 px-3 py-1.5 rounded-2xl text-slate-400 min-w-[56px]"><span class="text-xl">🗺️</span><span class="text-[10px] font-medium">Storyboard</span></a>
         <a href="dashboard.html" class="flex flex-col items-center gap-0.5 px-3 py-1.5 rounded-2xl bg-brand-500/10 text-brand-600 dark:text-brand-400 min-w-[56px]"><span class="text-xl">📊</span><span class="text-[10px] font-bold">Dashboard</span></a>
-        <a href="checklist.html" class="flex flex-col items-center gap-0.5 px-3 py-1.5 rounded-2xl text-slate-400 min-w-[56px]"><span class="text-xl">✅</span><span class="text-[10px] font-medium">Checklist</span></a>
-    </nav>
+        </nav>
 
 <script>
 // ── Theme ──

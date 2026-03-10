@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Traveloha - Checklist</title>
-    <link rel="icon" type="image/png" href="src/favicon.png">
     <script src="https://cdn.tailwindcss.com"></script>
     <script>tailwind.config={darkMode:'class',theme:{extend:{colors:{brand:{50:'#f4f5f4',100:'#e6e9e6',500:'#8ba888',600:'#6b8a68',900:'#3a4a39'}}}}}</script>
     <script>if(localStorage.theme==='dark'||(!('theme'in localStorage)&&window.matchMedia('(prefers-color-scheme: dark)').matches))document.documentElement.classList.add('dark');else document.documentElement.classList.remove('dark');</script>
@@ -18,15 +17,14 @@
         html.dark body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;opacity:0.04;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");background-size:180px 180px;}
         .progress-bar{height:10px;border-radius:999px;background:rgba(139,168,136,0.15);}
         .progress-fill{height:100%;border-radius:999px;background:linear-gradient(90deg,#8ba888,#6b8a68);transition:width 0.5s ease;}
-        /* strikethrough when checked */
         label:has(input[type=checkbox]:checked) .item-label{text-decoration:line-through;color:#94a3b8;}
         @keyframes checkPop{0%{transform:scale(1);}40%{transform:scale(1.15);}100%{transform:scale(1);}}
         input[type=checkbox]:checked{animation:checkPop 0.2s ease;}
-        @keyframes confetti{0%{opacity:1;transform:translateY(0) rotate(0);}100%{opacity:0;transform:translateY(-40px) rotate(180deg);}}
-        .confetti-dot{position:absolute;width:8px;height:8px;border-radius:2px;animation:confetti 0.6s ease forwards;}
+        @keyframes slideDown{from{opacity:0;transform:translateY(-10px)}to{opacity:1;transform:translateY(0)}}
+        .slide-in{animation:slideDown 0.3s ease both;}
     </style>
 </head>
-<body class="text-zinc-800 dark:text-zinc-300 transition-colors duration-500 pb-24 md:pb-8">
+<body class="text-zinc-800 dark:text-zinc-300 transition-colors duration-500 pb-28 md:pb-10">
 
     <nav class="sticky top-4 z-50 glass-panel shadow-sm flex justify-between items-center max-w-7xl mx-auto px-6 py-4 rounded-3xl">
         <div class="flex items-center gap-3">
@@ -37,7 +35,6 @@
             <a href="index.html" class="relative group px-1 py-2 hover:text-zinc-900 dark:hover:text-white transition-colors">DISCOVERY<span class="absolute -bottom-1 left-0 w-0 h-[2px] bg-zinc-300 dark:bg-zinc-600 rounded-full transition-all duration-300 group-hover:w-full"></span></a>
             <a href="storyboard.html" class="relative group px-1 py-2 hover:text-zinc-900 dark:hover:text-white transition-colors">TRIP STORYBOARD<span class="absolute -bottom-1 left-0 w-0 h-[2px] bg-zinc-300 dark:bg-zinc-600 rounded-full transition-all duration-300 group-hover:w-full"></span></a>
             <a href="dashboard.html" class="relative group px-1 py-2 hover:text-zinc-900 dark:hover:text-white transition-colors">DASHBOARD<span class="absolute -bottom-1 left-0 w-0 h-[2px] bg-zinc-300 dark:bg-zinc-600 rounded-full transition-all duration-300 group-hover:w-full"></span></a>
-            <a href="checklist.html" class="relative px-1 py-2 text-zinc-900 dark:text-white font-bold">CHECKLIST<span class="absolute -bottom-1 left-0 w-full h-[2px] bg-zinc-900 dark:bg-white rounded-full"></span></a>
         </div>
         <div class="flex items-center gap-4">
             <div class="w-[80px] h-[40px] flex items-center justify-center overflow-hidden">
@@ -50,206 +47,374 @@
         </div>
     </nav>
 
-    <main class="max-w-4xl mx-auto mt-12 p-4 space-y-6">
+    <main class="max-w-4xl mx-auto mt-10 p-4 space-y-6">
 
         <!-- Hero -->
-        <div class="w-full h-48 md:h-64 rounded-3xl overflow-hidden relative shadow-lg group">
+        <div class="w-full h-48 md:h-60 rounded-3xl overflow-hidden relative shadow-lg group">
             <img src="https://images.unsplash.com/photo-1488646953014-85cb44e25828?auto=format&fit=crop&w=1200&q=80" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
             <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
             <div class="absolute bottom-6 left-6 text-white z-10">
-                <h2 class="text-3xl md:text-4xl font-bold">Aesthetic Packing</h2>
-                <p class="text-sm md:text-base opacity-90 mt-2">เตรียมสัมภาระให้พร้อมก่อนออกเดินทาง ✈️</p>
+                <h2 class="text-3xl md:text-4xl font-bold">Trip Checklist</h2>
+                <p id="hero-sub" class="text-sm md:text-base opacity-90 mt-2">เตรียมสัมภาระให้พร้อมก่อนออกเดินทาง ✈️</p>
             </div>
         </div>
 
-        <!-- Overall Progress -->
-        <div class="glass-panel p-5 rounded-2xl border border-slate-200/60 dark:border-slate-700/60 shadow-sm relative overflow-hidden">
+        <!-- ── ITINERARY from storyboard ── -->
+        <div id="itinerary-section" class="hidden slide-in">
+            <div class="glass-panel p-5 rounded-3xl border border-brand-200/60 dark:border-brand-800/60 shadow-sm">
+                <div class="flex items-center justify-between mb-4 flex-wrap gap-2">
+                    <h3 class="font-bold text-lg flex items-center gap-2">🗺️ แผนการเดินทางของคุณ</h3>
+                    <span id="itinerary-meta" class="text-xs text-slate-400 bg-slate-100 dark:bg-slate-800 px-3 py-1 rounded-full"></span>
+                </div>
+                <div id="itinerary-days" class="space-y-4"></div>
+            </div>
+        </div>
+
+        <!-- ── PROGRESS ── -->
+        <div class="glass-panel p-5 rounded-2xl border border-slate-200/60 dark:border-slate-700/60 shadow-sm">
             <div class="flex items-center justify-between mb-3">
-                <div class="flex items-center gap-2"><span class="text-xl">📦</span><span class="font-bold">ความคืบหน้าทั้งหมด</span></div>
+                <div class="flex items-center gap-2"><span class="text-xl">📦</span><span class="font-bold">ความคืบหน้า Packing</span></div>
                 <div class="flex items-center gap-3">
                     <span id="overall-text" class="text-sm font-semibold text-brand-600 dark:text-brand-400">0 / 0</span>
-                    <button id="reset-btn" class="text-xs text-slate-400 hover:text-rose-500 transition-colors px-3 py-1.5 rounded-xl border border-slate-200 dark:border-slate-700 hover:border-rose-300 bg-white/50 dark:bg-slate-800/50 flex items-center gap-1">🔄 รีเซ็ต</button>
+                    <button id="reset-btn" class="text-xs text-slate-400 hover:text-rose-500 px-3 py-1.5 rounded-xl border border-slate-200 dark:border-slate-700 hover:border-rose-300 bg-white/50 dark:bg-slate-800/50 transition-colors">🔄 รีเซ็ต</button>
                 </div>
             </div>
-            <div class="progress-bar">
-                <div id="overall-fill" class="progress-fill" style="width:0%"></div>
-            </div>
-            <div id="done-msg" class="hidden mt-3 text-center text-sm font-bold text-brand-600 dark:text-brand-400">🎉 เก็บของครบแล้ว! พร้อมออกเดินทางได้เลย ✈️</div>
+            <div class="progress-bar"><div id="overall-fill" class="progress-fill" style="width:0%"></div></div>
+            <div id="done-msg" class="hidden mt-3 text-center text-sm font-bold text-brand-600 dark:text-brand-400">🎉 เก็บของครบแล้ว! พร้อมออกเดินทาง ✈️</div>
         </div>
 
-        <!-- Sections injected by JS -->
+        <!-- ── PACKING SECTIONS ── -->
         <div id="sections-container"></div>
+
+        <!-- ── SAVE PLAN BUTTON (shown after all checked) ── -->
+        <div id="save-plan-section" class="glass-panel p-6 rounded-3xl border border-brand-200 dark:border-brand-800 shadow-sm text-center space-y-4">
+            <div class="text-4xl">🗂️</div>
+            <h3 class="font-bold text-xl">บันทึกแผนการเดินทาง</h3>
+            <p class="text-sm text-slate-500 dark:text-slate-400">ดาวน์โหลดแผนการเดินทางของคุณเป็นไฟล์ HTML สวยงาม</p>
+            <div class="flex flex-col sm:flex-row justify-center gap-3">
+                <button id="download-plan-btn" class="flex items-center justify-center gap-2 px-6 py-3 bg-brand-600 hover:bg-brand-700 text-white rounded-2xl font-bold shadow-lg hover:scale-105 transition-all">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+                    ดาวน์โหลดแผนการเดินทาง
+                </button>
+                <a href="storyboard.html" class="flex items-center justify-center gap-2 px-6 py-3 border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 rounded-2xl font-medium hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors">
+                    ← กลับวางแผนใหม่
+                </a>
+            </div>
+        </div>
 
     </main>
 
-    <!-- Mobile Bottom Nav -->
+    <!-- Mobile Bottom Nav (no Checklist) -->
     <nav class="fixed bottom-0 left-0 right-0 z-50 md:hidden glass-panel border-t border-slate-200/60 dark:border-slate-700/60 flex justify-around items-center py-2 px-2">
         <a href="index.html" class="flex flex-col items-center gap-0.5 px-3 py-1.5 rounded-2xl text-slate-400 min-w-[56px]"><span class="text-xl">🔍</span><span class="text-[10px] font-medium">Discover</span></a>
         <a href="storyboard.html" class="flex flex-col items-center gap-0.5 px-3 py-1.5 rounded-2xl text-slate-400 min-w-[56px]"><span class="text-xl">🗺️</span><span class="text-[10px] font-medium">Storyboard</span></a>
         <a href="dashboard.html" class="flex flex-col items-center gap-0.5 px-3 py-1.5 rounded-2xl text-slate-400 min-w-[56px]"><span class="text-xl">📊</span><span class="text-[10px] font-medium">Dashboard</span></a>
-        <a href="checklist.html" class="flex flex-col items-center gap-0.5 px-3 py-1.5 rounded-2xl bg-brand-500/10 text-brand-600 dark:text-brand-400 min-w-[56px]"><span class="text-xl">✅</span><span class="text-[10px] font-bold">Checklist</span></a>
     </nav>
 
 <script>
 // ── Theme ──
-const toggleInput=document.getElementById('hide-checkbox');
-if(document.documentElement.classList.contains('dark'))toggleInput.checked=false;else toggleInput.checked=true;
-toggleInput.addEventListener('change',(e)=>{if(e.target.checked){document.documentElement.classList.remove('dark');localStorage.setItem('theme','light');}else{document.documentElement.classList.add('dark');localStorage.setItem('theme','dark');}});
+const toggleInput = document.getElementById('hide-checkbox');
+if (document.documentElement.classList.contains('dark')) toggleInput.checked = false; else toggleInput.checked = true;
+toggleInput.addEventListener('change', e => {
+    if (e.target.checked) { document.documentElement.classList.remove('dark'); localStorage.setItem('theme','light'); }
+    else { document.documentElement.classList.add('dark'); localStorage.setItem('theme','dark'); }
+});
 
-// ── localStorage key ──
-const LS_CHECK = 'travelaroha_checklist'; // {id: boolean}
+// ── Keys ──
+const LS_EXPORT  = 'travelaroha_export';
+const LS_BOARD   = 'travelaroha_storyboard';
+const LS_CHECK   = 'travelaroha_checklist';
 
-// ── Checklist data ──
+// ── Packing data ──
 const SECTIONS = [
-    {
-        id:'docs', icon:'📄', title:'เอกสารสำคัญ',
-        items:[
-            {id:'doc1',label:'พาสปอร์ต / วีซ่า'},
-            {id:'doc2',label:'ตั๋วเครื่องบิน / บัตรโดยสาร'},
-            {id:'doc3',label:'เอกสารจองที่พัก / โรงแรม'},
-            {id:'doc4',label:'กรมธรรม์ประกันการเดินทาง'},
-            {id:'doc5',label:'บัตรประชาชน / ใบขับขี่สากล'},
-            {id:'doc6',label:'บัตรเครดิต / เงินสด / Travel Card'},
-        ]
-    },
-    {
-        id:'elec', icon:'💻', title:'อุปกรณ์อิเล็กทรอนิกส์',
-        items:[
-            {id:'el1',label:'สมาร์ทโฟน / แท็บเล็ต'},
-            {id:'el2',label:'สายชาร์จและอแดปเตอร์'},
-            {id:'el3',label:'พาวเวอร์แบงค์ (Power Bank)'},
-            {id:'el4',label:'หูฟัง / AirPods'},
-            {id:'el5',label:'กล้องถ่ายรูป / เมมโมรี่การ์ด'},
-            {id:'el6',label:'เข็มจิ้มซิม / ซิมการ์ดต่างประเทศ'},
-        ]
-    },
-    {
-        id:'clothes', icon:'👕', title:'เสื้อผ้าและเครื่องแต่งกาย',
-        items:[
-            {id:'cl1',label:'เสื้อยืด / เสื้อเชิ้ต'},
-            {id:'cl2',label:'กางเกงขาสั้น / ขายาว'},
-            {id:'cl3',label:'ชุดนอน'},
-            {id:'cl4',label:'ชุดชั้นใน / กางเกงใน'},
-            {id:'cl5',label:'ถุงเท้า'},
-            {id:'cl6',label:'เสื้อกันหนาว / แจ็คเก็ต'},
-            {id:'cl7',label:'รองเท้าผ้าใบ (ใส่เดินสบาย)'},
-            {id:'cl8',label:'รองเท้าแตะ'},
-            {id:'cl9',label:'แว่นตากันแดด / หมวก'},
-            {id:'cl10',label:'กระเป๋าสะพายใบเล็ก / เป้'},
-        ]
-    },
-    {
-        id:'personal', icon:'🧳', title:'ของใช้ส่วนตัวและยา',
-        items:[
-            {id:'pe1',label:'แปรงสีฟัน / ยาสีฟัน'},
-            {id:'pe2',label:'ครีมอาบน้ำ / แชมพู (ขนาดพกพา)'},
-            {id:'pe3',label:'สกินแคร์ / ครีมกันแดด'},
-            {id:'pe4',label:'ยาประจำตัว'},
-            {id:'pe5',label:'ยาแก้ปวด / ยาแก้แพ้ / พลาสเตอร์'},
-            {id:'pe6',label:'ทิชชู่เปียก / ทิชชู่แห้ง'},
-            {id:'pe7',label:'หน้ากากอนามัย / เจลล้างมือ'},
-        ]
-    },
+    { id:'docs', icon:'📄', title:'เอกสารสำคัญ', items:[
+        {id:'doc1',label:'พาสปอร์ต / วีซ่า'},{id:'doc2',label:'ตั๋วเครื่องบิน / บัตรโดยสาร'},
+        {id:'doc3',label:'เอกสารจองที่พัก'},{id:'doc4',label:'กรมธรรม์ประกันการเดินทาง'},
+        {id:'doc5',label:'บัตรประชาชน / ใบขับขี่สากล'},{id:'doc6',label:'บัตรเครดิต / เงินสด'},
+    ]},
+    { id:'elec', icon:'💻', title:'อุปกรณ์อิเล็กทรอนิกส์', items:[
+        {id:'el1',label:'สมาร์ทโฟน / แท็บเล็ต'},{id:'el2',label:'สายชาร์จและอแดปเตอร์'},
+        {id:'el3',label:'พาวเวอร์แบงค์'},{id:'el4',label:'หูฟัง / AirPods'},
+        {id:'el5',label:'กล้องถ่ายรูป / เมมโมรี่การ์ด'},{id:'el6',label:'ซิมการ์ดต่างประเทศ'},
+    ]},
+    { id:'clothes', icon:'👕', title:'เสื้อผ้าและเครื่องแต่งกาย', items:[
+        {id:'cl1',label:'เสื้อยืด / เสื้อเชิ้ต'},{id:'cl2',label:'กางเกงขาสั้น / ขายาว'},
+        {id:'cl3',label:'ชุดนอน'},{id:'cl4',label:'ชุดชั้นใน / กางเกงใน'},
+        {id:'cl5',label:'ถุงเท้า'},{id:'cl6',label:'เสื้อกันหนาว / แจ็คเก็ต'},
+        {id:'cl7',label:'รองเท้าผ้าใบ'},{id:'cl8',label:'รองเท้าแตะ'},
+        {id:'cl9',label:'แว่นตากันแดด / หมวก'},{id:'cl10',label:'กระเป๋าสะพาย / เป้'},
+    ]},
+    { id:'personal', icon:'🧳', title:'ของใช้ส่วนตัวและยา', items:[
+        {id:'pe1',label:'แปรงสีฟัน / ยาสีฟัน'},{id:'pe2',label:'ครีมอาบน้ำ / แชมพู (ขนาดพกพา)'},
+        {id:'pe3',label:'สกินแคร์ / ครีมกันแดด'},{id:'pe4',label:'ยาประจำตัว'},
+        {id:'pe5',label:'ยาแก้ปวด / ยาแก้แพ้'},{id:'pe6',label:'ทิชชู่เปียก / ทิชชู่แห้ง'},
+        {id:'pe7',label:'หน้ากากอนามัย / เจลล้างมือ'},
+    ]},
 ];
 
 // ── State ──
 let checked = {};
+let exportData = null;
 
-function loadChecked(){
-    try { checked = JSON.parse(localStorage.getItem(LS_CHECK)||'{}'); } catch(e){ checked={}; }
-}
-function saveChecked(){
-    localStorage.setItem(LS_CHECK, JSON.stringify(checked));
+function loadChecked() { try { checked = JSON.parse(localStorage.getItem(LS_CHECK)||'{}'); } catch(e){ checked={}; } }
+function saveChecked() { localStorage.setItem(LS_CHECK, JSON.stringify(checked)); }
+
+// ── Itinerary section ────────────────────────────────────
+function renderItinerary(data) {
+    if (!data || !data.days || data.days.length === 0) return;
+    exportData = data;
+
+    const totalPlaces = data.days.reduce((s, d) => s + d.places.length, 0);
+    document.getElementById('hero-sub').textContent = `${data.days.length} วัน · ${totalPlaces} สถานที่ ✈️`;
+
+    document.getElementById('itinerary-meta').textContent =
+        `${data.days.length} วัน · ${totalPlaces} สถานที่ · สร้างเมื่อ ${new Date(data.exportedAt).toLocaleDateString('th-TH')}`;
+
+    const container = document.getElementById('itinerary-days');
+    container.innerHTML = '';
+    data.days.forEach(day => {
+        const div = document.createElement('div');
+        div.className = 'bg-white/60 dark:bg-slate-800/60 rounded-2xl border border-slate-100 dark:border-slate-700 overflow-hidden';
+
+        const header = `<div class="px-4 py-3 border-b border-slate-100 dark:border-slate-700 flex items-center gap-3">
+            <span class="w-8 h-8 rounded-xl bg-brand-100 dark:bg-brand-900/40 text-brand-700 dark:text-brand-300 font-bold text-sm flex items-center justify-center flex-shrink-0">${day.dayNum}</span>
+            <span class="font-bold text-sm">${day.subtitle||'Day '+day.dayNum}</span>
+            <span class="text-xs text-slate-400 ml-auto">${day.places.length} สถานที่</span>
+        </div>`;
+
+        const places = day.places.length > 0
+            ? `<div class="p-3 space-y-2">${day.places.map(p => `
+                <div class="flex items-center gap-3">
+                    <img src="${p.img}" class="w-10 h-10 rounded-xl object-cover flex-shrink-0">
+                    <div class="flex-1 min-w-0">
+                        <p class="font-semibold text-sm truncate">${p.name}</p>
+                        <p class="text-xs text-slate-400">${p.vibe}</p>
+                    </div>
+                    <span class="text-xs font-medium bg-brand-50 dark:bg-brand-900/30 text-brand-600 dark:text-brand-400 px-2 py-1 rounded-lg flex-shrink-0">${p.start} – ${p.end}</span>
+                </div>`).join('')}</div>`
+            : `<div class="px-4 py-3 text-sm text-slate-400 italic">ยังไม่มีสถานที่</div>`;
+
+        div.innerHTML = header + places;
+        container.appendChild(div);
+    });
+
+    document.getElementById('itinerary-section').classList.remove('hidden');
 }
 
-// ── Render sections ──
-function renderSections(){
+// ── Packing sections ─────────────────────────────────────
+function renderSections() {
     const container = document.getElementById('sections-container');
     container.innerHTML = '';
-    SECTIONS.forEach(sec=>{
+    SECTIONS.forEach(sec => {
         const div = document.createElement('div');
-        div.className='glass-panel p-6 rounded-3xl shadow-sm border border-slate-200/60 dark:border-slate-700/60';
+        div.className = 'glass-panel p-6 rounded-3xl shadow-sm border border-slate-200/60 dark:border-slate-700/60';
         div.dataset.secId = sec.id;
-        div.innerHTML=`
+        div.innerHTML = `
           <div class="flex items-center justify-between mb-4">
             <h3 class="font-bold text-xl text-brand-600 dark:text-brand-400">${sec.icon} ${sec.title}</h3>
             <span class="sec-count text-xs font-medium bg-brand-50 dark:bg-brand-900/30 text-brand-600 dark:text-brand-400 px-2.5 py-1 rounded-full border border-brand-100 dark:border-brand-800 transition-all">0/${sec.items.length}</span>
           </div>
           <div class="grid grid-cols-1 md:grid-cols-2 gap-3">${
-              sec.items.map(item=>`
-                <label class="flex items-center p-3 bg-white dark:bg-slate-800 rounded-2xl border border-slate-100 dark:border-slate-700 cursor-pointer hover:border-brand-300 transition-colors gap-3" data-item-id="${item.id}">
-                  <input type="checkbox" data-id="${item.id}" class="check-item w-4.5 h-4.5 accent-brand-600 flex-shrink-0" style="width:1.1rem;height:1.1rem;" ${checked[item.id]?'checked':''}>
+              sec.items.map(item => `
+                <label class="flex items-center p-3 bg-white dark:bg-slate-800 rounded-2xl border border-slate-100 dark:border-slate-700 cursor-pointer hover:border-brand-300 transition-colors gap-3">
+                  <input type="checkbox" data-id="${item.id}" class="check-item flex-shrink-0" style="width:1.1rem;height:1.1rem;accent-color:#6b8a68;" ${checked[item.id]?'checked':''}>
                   <span class="item-label font-medium text-slate-700 dark:text-slate-300 text-sm">${item.label}</span>
                 </label>`).join('')
           }</div>`;
         container.appendChild(div);
     });
 
-    // Attach listeners
-    document.querySelectorAll('.check-item').forEach(cb=>{
-        cb.addEventListener('change', ()=>{
+    document.querySelectorAll('.check-item').forEach(cb => {
+        cb.addEventListener('change', () => {
             checked[cb.dataset.id] = cb.checked;
             saveChecked();
             updateProgress();
-            if(cb.checked) spawnConfetti(cb);
         });
     });
     updateProgress();
 }
 
-// ── Progress ──
-function updateProgress(){
+function updateProgress() {
     const allCbs = document.querySelectorAll('.check-item');
-    let total=allCbs.length, done=0;
-    allCbs.forEach(cb=>{ if(cb.checked) done++; });
+    let total = allCbs.length, done = 0;
+    allCbs.forEach(cb => { if (cb.checked) done++; });
     document.getElementById('overall-text').textContent = `${done} / ${total} รายการ`;
-    document.getElementById('overall-fill').style.width = total>0?`${done/total*100}%`:'0%';
-    document.getElementById('done-msg').classList.toggle('hidden', done<total);
+    document.getElementById('overall-fill').style.width = total > 0 ? `${done/total*100}%` : '0%';
+    document.getElementById('done-msg').classList.toggle('hidden', done < total);
 
-    // Per-section
-    SECTIONS.forEach(sec=>{
+    SECTIONS.forEach(sec => {
         const div = document.querySelector(`[data-sec-id="${sec.id}"]`);
-        if(!div) return;
+        if (!div) return;
         const sCbs = div.querySelectorAll('.check-item');
-        let sDone=0; sCbs.forEach(c=>{ if(c.checked) sDone++; });
+        let sDone = 0; sCbs.forEach(c => { if (c.checked) sDone++; });
         const countEl = div.querySelector('.sec-count');
-        if(sDone===sCbs.length && sCbs.length>0){
-            countEl.textContent='✓ ครบ!';
+        if (sDone === sCbs.length && sCbs.length > 0) {
+            countEl.textContent = '✓ ครบ!';
             countEl.classList.add('bg-brand-500','text-white','border-brand-500');
-            countEl.classList.remove('text-brand-600','bg-brand-50','dark:bg-brand-900/30','dark:text-brand-400','border-brand-100','dark:border-brand-800');
         } else {
-            countEl.textContent=`${sDone}/${sCbs.length}`;
+            countEl.textContent = `${sDone}/${sCbs.length}`;
             countEl.classList.remove('bg-brand-500','text-white','border-brand-500');
-            countEl.classList.add('text-brand-600','bg-brand-50','dark:bg-brand-900/30','dark:text-brand-400','border-brand-100','dark:border-brand-800');
         }
     });
 }
 
-// ── Confetti micro-animation ──
-function spawnConfetti(el){
-    const rect = el.getBoundingClientRect();
-    const colors = ['#8ba888','#6b8a68','#fbbf24','#34d399','#60a5fa'];
-    for(let i=0;i<5;i++){
-        const dot = document.createElement('div');
-        dot.className='confetti-dot';
-        dot.style.cssText=`left:${rect.left+rect.width/2+Math.random()*30-15}px;top:${rect.top+window.scrollY}px;background:${colors[i]};position:absolute;z-index:9999;animation-delay:${i*0.06}s`;
-        document.body.appendChild(dot);
-        setTimeout(()=>dot.remove(), 700);
+// ── Download plan ────────────────────────────────────────
+// NOTE: All closing HTML tags inside JS strings use <\/ to prevent
+// the browser's HTML parser from terminating the <script> block early.
+function buildPlanHTML() {
+    const data = exportData;
+    const now = new Date().toLocaleDateString('th-TH', {year:'numeric',month:'long',day:'numeric'});
+    const totalDays = data ? data.days.length : 0;
+    const totalPlaces = data ? data.days.reduce((s,d)=>s+d.places.length,0) : 0;
+
+    // ── Itinerary rows ──
+    let itineraryHtml = '';
+    if (data && data.days.length > 0) {
+        data.days.forEach(day => {
+            let placesHtml = '';
+            if (day.places.length > 0) {
+                day.places.forEach(p => {
+                    placesHtml += '<div class="place-row">'
+                        + '<div class="place-info">'
+                        + '<div class="place-name">' + p.name + '<\/div>'
+                        + '<div class="place-vibe">' + p.vibe + '<\/div>'
+                        + '<\/div>'
+                        + '<div class="place-time">' + p.start + ' – ' + p.end + '<\/div>'
+                        + '<\/div>';
+                });
+                placesHtml = '<div class="places">' + placesHtml + '<\/div>';
+            } else {
+                placesHtml = '<div class="no-place">ยังไม่มีสถานที่<\/div>';
+            }
+            itineraryHtml += '<div class="day-card">'
+                + '<div class="day-header">'
+                + '<div class="day-num">Day ' + day.dayNum + '<\/div>'
+                + '<div class="day-title">' + (day.subtitle || 'Day ' + day.dayNum) + '<\/div>'
+                + '<div class="day-count">' + day.places.length + ' สถานที่<\/div>'
+                + '<\/div>'
+                + placesHtml
+                + '<\/div>';
+        });
+    } else {
+        itineraryHtml = '<p style="color:#94a3b8;text-align:center;">ไม่มีข้อมูล Storyboard<\/p>';
     }
+
+    // ── Packing checklist rows ──
+    let packingHtml = '';
+    SECTIONS.forEach(sec => {
+        let itemsHtml = '';
+        sec.items.forEach(item => {
+            const done = checked[item.id] ? ' done' : '';
+            const mark = checked[item.id] ? '✓' : '○';
+            itemsHtml += '<div class="item' + done + '">'
+                + '<span class="checkbox">' + mark + '<\/span>'
+                + item.label
+                + '<\/div>';
+        });
+        packingHtml += '<div class="section">'
+            + '<h3>' + sec.icon + ' ' + sec.title + '<\/h3>'
+            + '<div class="items">' + itemsHtml + '<\/div>'
+            + '<\/div>';
+    });
+
+    // ── CSS (no closing tags that could break parser) ──
+    const css = [
+        '*{box-sizing:border-box;margin:0;padding:0;}',
+        'body{font-family:"Segoe UI",system-ui,sans-serif;background:#f8f9fa;color:#1e293b;padding:24px;max-width:860px;margin:0 auto;}',
+        '.header{background:linear-gradient(135deg,#3a4a39,#6b8a68);color:white;border-radius:20px;padding:32px;margin-bottom:28px;text-align:center;}',
+        '.header h1{font-size:2rem;font-weight:800;margin-bottom:8px;}',
+        '.header p{opacity:0.85;font-size:0.95rem;}',
+        '.stats{display:flex;gap:16px;justify-content:center;margin-top:16px;flex-wrap:wrap;}',
+        '.stat{background:rgba(255,255,255,0.2);border-radius:12px;padding:10px 20px;font-weight:600;font-size:0.9rem;}',
+        'h2{font-size:1.4rem;font-weight:700;color:#3a4a39;margin:28px 0 16px;}',
+        '.day-card{background:white;border-radius:16px;margin-bottom:16px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,0.06);}',
+        '.day-header{display:flex;align-items:center;gap:12px;padding:14px 18px;background:#f1f5f1;border-bottom:1px solid #e8ede8;}',
+        '.day-num{width:36px;height:36px;background:#6b8a68;color:white;border-radius:10px;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:0.85rem;flex-shrink:0;}',
+        '.day-title{font-weight:700;font-size:1rem;flex:1;}',
+        '.day-count{font-size:0.8rem;color:#6b8a68;font-weight:600;background:#e8f0e8;padding:4px 10px;border-radius:20px;}',
+        '.places{padding:12px 18px;display:flex;flex-direction:column;gap:10px;}',
+        '.place-row{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 12px;background:#fafbfa;border-radius:10px;border:1px solid #edf0ed;}',
+        '.place-info{flex:1;min-width:0;}',
+        '.place-name{font-weight:600;font-size:0.9rem;margin-bottom:2px;}',
+        '.place-vibe{font-size:0.75rem;color:#8ba888;}',
+        '.place-time{font-size:0.82rem;font-weight:600;color:#6b8a68;background:#e8f0e8;padding:5px 10px;border-radius:8px;flex-shrink:0;white-space:nowrap;}',
+        '.no-place{padding:12px 18px;color:#94a3b8;font-style:italic;font-size:0.9rem;}',
+        '.section{background:white;border-radius:16px;margin-bottom:16px;padding:20px;box-shadow:0 2px 8px rgba(0,0,0,0.06);}',
+        '.section h3{font-size:1.05rem;font-weight:700;color:#3a4a39;margin-bottom:14px;}',
+        '.items{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:8px;}',
+        '.item{display:flex;align-items:center;gap:8px;padding:8px 12px;border-radius:10px;border:1px solid #e2e8f0;font-size:0.88rem;background:#fafbfa;}',
+        '.item.done{background:#f0faf0;border-color:#c6dfc6;color:#4a7a4a;text-decoration:line-through;}',
+        '.checkbox{width:18px;height:18px;border-radius:4px;border:1.5px solid #8ba888;display:flex;align-items:center;justify-content:center;font-size:0.7rem;font-weight:700;color:#6b8a68;flex-shrink:0;}',
+        '.item.done .checkbox{background:#6b8a68;color:white;border-color:#6b8a68;}',
+        '.footer{text-align:center;margin-top:32px;padding:20px;color:#94a3b8;font-size:0.8rem;border-top:1px solid #e2e8f0;}',
+        '@media print{body{padding:0;}}'
+    ].join('\n');
+
+    // ── Assemble full HTML using array join (no literal </tag> in source) ──
+    const parts = [
+        '<!DOCTYPE html>',
+        '<html lang="th">',
+        '<head>',
+        '<meta charset="UTF-8">',
+        '<meta name="viewport" content="width=device-width,initial-scale=1">',
+        '<title>แผนการเดินทาง — Travelaroha<\/title>',
+        '<style>' + css + '<\/style>',
+        '<\/head>',
+        '<body>',
+        '<div class="header">',
+        '<h1>🗺️ แผนการเดินทาง<\/h1>',
+        '<p>สร้างด้วย Travelaroha · ' + now + '<\/p>',
+        '<div class="stats">',
+        '<div class="stat">✈️ ' + totalDays + ' วัน<\/div>',
+        '<div class="stat">📍 ' + totalPlaces + ' สถานที่<\/div>',
+        '<\/div><\/div>',
+        '<h2>📅 ตารางการเดินทาง<\/h2>',
+        itineraryHtml,
+        '<h2>🧳 Packing Checklist<\/h2>',
+        packingHtml,
+        '<div class="footer">สร้างจาก Travelaroha · ' + now + '<\/div>',
+        '<\/body>',
+        '<\/html>'
+    ];
+    return parts.join('\n');
 }
 
-// ── Reset ──
-document.getElementById('reset-btn').addEventListener('click',()=>{
-    if(!confirm('รีเซ็ตทุกรายการ?')) return;
-    checked={};
-    saveChecked();
-    document.querySelectorAll('.check-item').forEach(cb=>{ cb.checked=false; });
+document.getElementById('download-plan-btn').addEventListener('click', () => {
+    const html = buildPlanHTML();
+    const blob = new Blob([html], { type: 'text/html;charset=utf-8' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'travelaroha-plan-' + new Date().toISOString().slice(0,10) + '.html';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+});
+
+// ── Reset btn ─────────────────────────────────────────────
+document.getElementById('reset-btn').addEventListener('click', () => {
+    if (!confirm('รีเซ็ต packing checklist?')) return;
+    checked = {}; saveChecked();
+    document.querySelectorAll('.check-item').forEach(cb => { cb.checked = false; });
     updateProgress();
 });
 
-// ── Init ──
+// ── Init ─────────────────────────────────────────────────
 loadChecked();
 renderSections();
+
+// Load export from storyboard
+const rawExport = localStorage.getItem(LS_EXPORT);
+if (rawExport) {
+    try {
+        const data = JSON.parse(rawExport);
+        renderItinerary(data);
+        // Reset storyboard AFTER reading (clear board state, keep sidebar saves)
+        localStorage.removeItem(LS_BOARD);
+        localStorage.removeItem(LS_EXPORT);
+    } catch(e) {}
+}
 </script>
 </body>
 </html>
