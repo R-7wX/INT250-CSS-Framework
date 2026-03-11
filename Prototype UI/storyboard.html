@@ -553,6 +553,10 @@ function applyLang() {
     if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') el.placeholder = val;
     else el.textContent = val;
   });
+  // Update CSS ::before placeholder for contenteditable
+  document.querySelectorAll('[data-i18n-ph]').forEach(el => {
+    el.setAttribute('data-placeholder', t(el.getAttribute('data-i18n-ph')));
+  });
 }
 
 // ─── Language switcher ───────────────────────────────────────────────────────
@@ -650,9 +654,9 @@ window._toggleLangMenu = function() {
         #day-picker-list{overflow-y:auto;flex:1;}
         .dark #day-picker{background:#1e293b;border-color:rgba(255,255,255,0.12);}
         @keyframes popIn{from{opacity:0;transform:translateY(8px)scale(.95)}to{opacity:1;transform:none}}
-        /* + btn: ALWAYS hidden; show on mobile only via .mob-vis */
+        /* + btn: ALWAYS hidden; show on mobile + tablet (<1024px) via .mob-vis */
         .add-to-day-btn{display:none !important;}
-        @media(max-width:767px){.add-to-day-btn.mob-vis{display:flex !important;}}
+        @media(max-width:1023px){.add-to-day-btn.mob-vis{display:flex !important;}}
     </style>
 </head>
 <body class="text-zinc-800 dark:text-zinc-300 transition-colors duration-500 pb-24 md:pb-20">
@@ -665,25 +669,25 @@ window._toggleLangMenu = function() {
 </div>
 <div id="picker-backdrop" style="display:none;position:fixed;inset:0;z-index:9998;" onclick="closeDayPicker()"></div>
 
-    <nav class="sticky top-4 z-50 glass-panel shadow-sm flex justify-between items-center max-w-7xl mx-auto px-6 py-4 rounded-3xl">
-        <div class="flex items-center gap-3">
-            <img src="src/logo.png" alt="Travelaroha" class="w-10 h-10 rounded-full object-cover border-2 border-brand-500 shadow-sm bg-white">
-            <div class="font-bold text-brand-600 dark:text-brand-500 text-2xl tracking-tight">Travelaroha</div>
+    <nav class="sticky top-4 z-50 glass-panel shadow-sm flex justify-between items-center max-w-7xl mx-auto px-3 md:px-6 py-2.5 md:py-4 rounded-3xl gap-2">
+        <div class="flex items-center gap-2 flex-shrink-0">
+            <img src="src/logo.png" alt="Travelaroha" class="w-8 h-8 md:w-10 md:h-10 rounded-full object-cover border-2 border-brand-500 shadow-sm bg-white">
+            <div class="font-bold text-brand-600 dark:text-brand-500 text-base md:text-2xl tracking-tight hidden sm:block">Travelaroha</div>
         </div>
-        <div class="hidden md:flex gap-8 font-medium text-zinc-500 dark:text-zinc-400">
-            <a href="index.html" class="relative group px-1 py-2 hover:text-zinc-900 dark:hover:text-white transition-colors"><span data-i18n="nav_discovery">DISCOVERY</span><span class="absolute -bottom-1 left-0 w-0 h-[2px] bg-zinc-300 dark:bg-zinc-600 rounded-full transition-all duration-300 group-hover:w-full"></span></a>
-            <a href="storyboard.html" class="relative px-1 py-2 text-zinc-900 dark:text-white font-bold"><span data-i18n="nav_storyboard">TRIP STORYBOARD</span><span class="absolute -bottom-1 left-0 w-full h-[2px] bg-zinc-900 dark:bg-white rounded-full"></span></a>
-            <a href="dashboard.html" class="relative group px-1 py-2 hover:text-zinc-900 dark:hover:text-white transition-colors"><span data-i18n="nav_dashboard">DASHBOARD</span><span class="absolute -bottom-1 left-0 w-0 h-[2px] bg-zinc-300 dark:bg-zinc-600 rounded-full transition-all duration-300 group-hover:w-full"></span></a>
+        <div class="hidden sm:flex gap-1 md:gap-6 font-medium text-zinc-500 dark:text-zinc-400 flex-1 justify-center">
+            <a href="index.html" class="relative group px-2 py-2 hover:text-zinc-900 dark:hover:text-white transition-colors text-[11px] md:text-sm whitespace-nowrap"><span data-i18n="nav_discovery">DISCOVERY</span><span class="absolute -bottom-1 left-0 w-0 h-[2px] bg-zinc-300 dark:bg-zinc-600 rounded-full transition-all duration-300 group-hover:w-full"></span></a>
+            <a href="storyboard.html" class="relative px-2 py-2 text-zinc-900 dark:text-white font-bold text-[11px] md:text-sm whitespace-nowrap"><span data-i18n="nav_storyboard">TRIP STORYBOARD</span><span class="absolute -bottom-1 left-0 w-full h-[2px] bg-zinc-900 dark:bg-white rounded-full"></span></a>
+            <a href="dashboard.html" class="relative group px-2 py-2 hover:text-zinc-900 dark:hover:text-white transition-colors text-[11px] md:text-sm whitespace-nowrap"><span data-i18n="nav_dashboard">DASHBOARD</span><span class="absolute -bottom-1 left-0 w-0 h-[2px] bg-zinc-300 dark:bg-zinc-600 rounded-full transition-all duration-300 group-hover:w-full"></span></a>
         </div>
-        <div class="flex items-center gap-4">
-            <div class="hidden md:flex w-[80px] h-[40px] items-center justify-center overflow-hidden">
-                <div style="transform:scale(0.4);transform-origin:center;">
+        <div class="flex items-center gap-1.5 md:gap-4 flex-shrink-0">
+            <div class="hidden sm:flex w-[50px] md:w-[80px] h-[26px] md:h-[40px] items-center justify-center overflow-hidden">
+                <div style="transform:scale(0.25);transform-origin:center;">
                     <input type="checkbox" id="hide-checkbox">
                     <label for="hide-checkbox" class="toggle m-0"><span class="toggle-button"><span class="crater crater-1"></span></span><span class="star star-1"></span></label>
                 </div>
             </div>
             <div id="lang-slot"></div>
-            <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=100&q=80" class="w-10 h-10 rounded-full object-cover shadow-md border-2 border-white dark:border-zinc-800 cursor-pointer hover:scale-105 transition-transform">
+            <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=100&q=80" class="w-8 h-8 rounded-full object-cover shadow-md border-2 border-white dark:border-zinc-800 cursor-pointer hover:scale-105 transition-transform">
         </div>
     </nav>
 
@@ -694,7 +698,7 @@ window._toggleLangMenu = function() {
                 <p class="text-slate-500 dark:text-slate-400 mt-1 text-sm" data-i18n="sb_sub">แก้ชื่อวัน · ลากสถานที่ · ตั้งเวลา · บันทึกอัตโนมัติ 💾</p>
             </div>
             <div class="flex items-center gap-3 flex-shrink-0">
-                <button id="clear-btn" class="px-4 py-2.5 border border-rose-200 dark:border-rose-800 text-rose-500 rounded-xl text-sm font-medium hover:bg-rose-50 dark:hover:bg-rose-900/20 transition-colors" data-i18n="sb_clear">🗑️ ล้าง</button>
+                <button id="clear-btn" class="px-4 py-2.5 border border-rose-200 dark:border-rose-800 text-rose-500 rounded-xl text-sm font-medium hover:bg-rose-50 dark:hover:bg-rose-900/20 transition-colors" data-i18n="sb_clear"><svg class="w-4 h-4 mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></svg><span data-i18n="sb_clear">ล้าง</span></button>
                 <button id="add-day-btn" class="px-5 py-2.5 bg-brand-600 hover:bg-brand-700 text-white rounded-xl text-sm font-bold shadow-md transition-all hover:scale-105" data-i18n="sb_add_day">+ เพิ่มวัน</button>
             </div>
         </div>
@@ -709,7 +713,7 @@ window._toggleLangMenu = function() {
                 <p class="text-xs text-slate-400 mb-3" data-i18n="sb_sidebar_sub">แสดงเฉพาะที่กด ❤️ ในหน้า Discovery</p>
                 <div id="sidebar-zone" class="space-y-2.5 min-h-[180px] max-h-[520px] overflow-y-auto pr-1 rounded-xl pb-2 border-2 border-dashed border-slate-200 dark:border-slate-700 transition-colors duration-200">
                     <div id="sidebar-empty" class="hidden flex-col items-center justify-center py-10 text-center gap-2 pointer-events-none select-none">
-                        <div class="text-4xl">💔</div>
+                        <svg class="w-10 h-10 text-slate-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>
                         <p class="text-sm text-slate-400" data-i18n="sb_no_saved">ยังไม่มี Saved Vibes</p>
                         <a href="index.html" class="mt-1 text-xs text-brand-600 dark:text-brand-400 underline underline-offset-2 pointer-events-auto" data-i18n="sb_go_discover">ไปกด ❤️ ในหน้า Discovery</a>
                     </div>
@@ -723,7 +727,7 @@ window._toggleLangMenu = function() {
                 <!-- Generate button -->
                 <div class="flex justify-end mt-2">
                     <button id="generate-btn" class="bg-slate-900 dark:bg-white text-white dark:text-slate-900 px-8 py-4 rounded-2xl font-bold shadow-xl hover:-translate-y-1 hover:shadow-2xl transition-all flex items-center gap-3">
-                        <span data-i18n="sb_generate">✨ Generate Checklist</span>
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/></svg><span data-i18n="sb_generate">Generate Checklist</span>
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
                     </button>
                 </div>
@@ -732,11 +736,11 @@ window._toggleLangMenu = function() {
     </main>
 
     <!-- Mobile Bottom Nav (no Checklist) -->
-    <nav class="fixed bottom-0 left-0 right-0 z-50 md:hidden glass-panel border-t border-slate-200/60 dark:border-slate-700/60 flex justify-around items-center py-2 px-2">
-        <a href="index.html" class="flex flex-col items-center gap-0.5 px-3 py-1.5 rounded-2xl text-slate-400 min-w-[56px]"><span class="text-xl">🔍</span><span class="text-[10px] font-medium" data-i18n="mob_discover">Discover</span></a>
-        <a href="storyboard.html" class="flex flex-col items-center gap-0.5 px-3 py-1.5 rounded-2xl bg-brand-500/10 text-brand-600 dark:text-brand-400 min-w-[56px]"><span class="text-xl">🗺️</span><span class="text-[10px] font-bold" data-i18n="mob_storyboard">Storyboard</span></a>
-        <a href="dashboard.html" class="flex flex-col items-center gap-0.5 px-3 py-1.5 rounded-2xl text-slate-400 min-w-[56px]"><span class="text-xl">📊</span><span class="text-[10px] font-medium" data-i18n="mob_dashboard">Dashboard</span></a>
-        <button id="mob-theme-btn" onclick="_toggleTheme()" class="flex flex-col items-center gap-0.5 px-3 py-1.5 rounded-2xl text-slate-400 min-w-[56px]"><span id="mob-theme-icon" class="text-xl">☀️</span><span class="text-[10px] font-medium" data-i18n="mob_theme">Theme</span></button>
+    <nav class="fixed bottom-0 left-0 right-0 z-50 sm:hidden glass-panel border-t border-slate-200/60 dark:border-slate-700/60 flex justify-around items-center py-2 px-2">
+        <a href="index.html" class="flex flex-col items-center gap-0.5 px-3 py-1.5 rounded-2xl text-slate-400 min-w-[56px]"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg><span class="text-[10px] font-medium" data-i18n="mob_discover">Discover</span></a>
+        <a href="storyboard.html" class="flex flex-col items-center gap-0.5 px-3 py-1.5 rounded-2xl bg-brand-500/10 text-brand-600 dark:text-brand-400 min-w-[56px]"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"/></svg><span class="text-[10px] font-bold" data-i18n="mob_storyboard">Storyboard</span></a>
+        <a href="dashboard.html" class="flex flex-col items-center gap-0.5 px-3 py-1.5 rounded-2xl text-slate-400 min-w-[56px]"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg><span class="text-[10px] font-medium" data-i18n="mob_dashboard">Dashboard</span></a>
+        <button id="mob-theme-btn" onclick="_toggleTheme()" class="flex flex-col items-center gap-0.5 px-3 py-1.5 rounded-2xl text-slate-400 min-w-[56px]"><span id="mob-theme-icon" class="w-5 h-5 flex items-center justify-center"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/></svg></span><span class="text-[10px] font-medium" data-i18n="mob_theme">Theme</span></button>
     </nav>
 
 <script>
@@ -751,7 +755,9 @@ function _syncThemeUI() {
     const dark = document.documentElement.classList.contains('dark');
     if(toggleInput) toggleInput.checked = !dark;
     const icon = document.getElementById('mob-theme-icon');
-    if(icon) icon.textContent = dark ? '☀️' : '🌙';
+    const SVG_SUN_SB = `<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/></svg>`;
+    const SVG_MOON_SB = `<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/></svg>`;
+    if(icon) icon.innerHTML = dark ? SVG_SUN_SB : SVG_MOON_SB;
 }
 window._toggleTheme = function() {
     const dark = document.documentElement.classList.contains('dark');
@@ -823,7 +829,7 @@ function updateSummaries() {
             if (s && e) { const d=(parseInt(e)-parseInt(s.replace(':','')))||0; const diff=((+e.split(':')[0]*60+ +e.split(':')[1]))-((+s.split(':')[0]*60+ +s.split(':')[1])); if(diff>0) mins+=diff; }
         });
         const h=Math.floor(mins/60),m=mins%60;
-        const dur = mins>0 ? ` · ${h>0?h+'ชม.':''}${m>0?' '+m+'น.':''}`.trimEnd() : '';
+        const dur = mins>0 ? ` · ${h>0?h+t('dur_hr'):''}${m>0?' '+m+t('dur_min'):''}`.trimEnd() : '';
         sumEl.textContent = `${cards.length} ${t('sb_places_unit')}${dur}`;
     });
 }
@@ -880,9 +886,9 @@ function buildCard(name, inBoard=false, start='09:00', end='11:00') {
           <p class="text-xs text-slate-500 truncate">${p.vibe}</p>
         </div>
         <!-- Mobile add btn (sidebar only) -->
-        <button class="add-to-day-btn ${inBoard?'':' mob-vis'} w-8 h-8 flex-shrink-0 items-center justify-center rounded-full bg-brand-100 dark:bg-brand-900/40 text-brand-600 dark:text-brand-400 font-bold text-sm hover:bg-brand-200 transition-colors" title="เพิ่มเข้า Day">＋</button>
+        <button class="add-to-day-btn ${inBoard?'':' mob-vis'} w-8 h-8 flex-shrink-0 items-center justify-center rounded-full bg-brand-100 dark:bg-brand-900/40 text-brand-600 dark:text-brand-400 font-bold text-sm hover:bg-brand-200 transition-colors" title="เพิ่มเข้า Day"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 4v16m8-8H4"/></svg></button>
         <!-- Return btn (board only) -->
-        <button class="return-btn ${inBoard?'flex':'hidden'} w-7 h-7 flex-shrink-0 items-center justify-center rounded-full bg-slate-100 dark:bg-slate-700 text-slate-500 hover:bg-rose-100 hover:text-rose-500 transition-colors text-sm" title="คืนกลับ">↩</button>
+        <button class="return-btn ${inBoard?'flex':'hidden'} w-7 h-7 flex-shrink-0 items-center justify-center rounded-full bg-slate-100 dark:bg-slate-700 text-slate-500 hover:bg-rose-100 hover:text-rose-500 transition-colors text-sm" title="คืนกลับ"><svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h10a8 8 0 018 8v2M3 10l6 6m-6-6l6-6"/></svg></button>
       </div>
       <div class="time-row ${inBoard?'block':'hidden'} px-3 pb-3 -mt-1">
         <div class="flex items-center gap-1.5 flex-wrap border-t border-slate-100 dark:border-slate-600/50 pt-2">
@@ -1016,15 +1022,15 @@ function buildDayBoard(subtitle = '', places = []) {
       <div class="flex justify-between items-start mb-3 gap-2">
         <h3 class="font-bold text-lg text-brand-600 dark:text-brand-400 flex items-baseline gap-2 flex-wrap">
           <span class="flex-shrink-0">Day ${n}:</span>
-          <span contenteditable="true" spellcheck="false" class="day-subtitle" data-i18n-ph="sb_placeholder" data-placeholder="ชื่อกิจกรรม...">${subtitle}</span>
+          <span contenteditable="true" spellcheck="false" class="day-subtitle" data-i18n-ph="sb_placeholder" data-placeholder="${t('sb_placeholder')}">${subtitle}</span>
           <span class="day-summary text-xs font-normal text-slate-400"></span>
         </h3>
-        <button class="del-day flex-shrink-0 text-rose-400 hover:text-rose-600 text-xs font-medium transition-colors mt-1 px-2 py-1 rounded-lg hover:bg-rose-50 dark:hover:bg-rose-900/20" data-i18n="sb_del_day">✕ ลบ</button>
+        <button class="del-day flex-shrink-0 text-rose-400 hover:text-rose-600 text-xs font-medium transition-colors mt-1 px-2 py-1 rounded-lg hover:bg-rose-50 dark:hover:bg-rose-900/20" data-i18n="sb_del_day">${t('sb_del_day')}</button>
       </div>
       <div class="board-drop-zone grid grid-cols-1 sm:grid-cols-2 gap-2.5 min-h-[100px] border-2 border-dashed border-slate-300 dark:border-slate-600 bg-slate-50/50 dark:bg-slate-800/30 rounded-2xl p-3 transition-colors duration-200">
         <div class="ph col-span-1 sm:col-span-2 flex flex-col items-center justify-center text-slate-400 pointer-events-none py-4 gap-2">
           <div class="text-3xl">📍</div>
-          <p class="text-sm"><span data-i18n="sb_drop_hint">ลากสถานที่มาวาง</span> <span class="md:hidden" data-i18n="sb_drop_mob">หรือกด ＋ บนการ์ด</span></p>
+          <p class="text-sm"><span data-i18n="sb_drop_hint">${t('sb_drop_hint')}</span> <span class="md:hidden" data-i18n="sb_drop_mob">${t('sb_drop_mob')}</span></p>
         </div>
       </div>`;
 

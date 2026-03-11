@@ -28,12 +28,12 @@
 </head>
 <body class="text-zinc-800 dark:text-zinc-300 transition-colors duration-500 pb-28 md:pb-10">
 
-    <nav class="sticky top-4 z-50 glass-panel shadow-sm flex justify-between items-center max-w-7xl mx-auto px-6 py-4 rounded-3xl">
+    <nav class="sticky top-4 z-50 glass-panel shadow-sm flex justify-between items-center max-w-7xl mx-auto px-4 md:px-6 py-3 md:py-4 rounded-3xl">
         <div class="flex items-center gap-3">
             <img src="src/logo.png" alt="Travelaroha" class="w-10 h-10 rounded-full object-cover border-2 border-brand-500 shadow-sm bg-white">
             <div class="font-bold text-brand-600 dark:text-brand-500 text-2xl tracking-tight">Travelaroha</div>
         </div>
-        <div class="hidden md:flex gap-8 font-medium text-zinc-500 dark:text-zinc-400">
+        <div class="hidden sm:flex gap-4 md:gap-8 font-medium text-zinc-500 dark:text-zinc-400">
             <a href="index.html" class="relative group px-1 py-2 hover:text-zinc-900 dark:hover:text-white transition-colors"><span data-i18n="nav_discovery">DISCOVERY</span><span class="absolute -bottom-1 left-0 w-0 h-[2px] bg-zinc-300 dark:bg-zinc-600 rounded-full transition-all duration-300 group-hover:w-full"></span></a>
             <a href="storyboard.html" class="relative group px-1 py-2 hover:text-zinc-900 dark:hover:text-white transition-colors"><span data-i18n="nav_storyboard">TRIP STORYBOARD</span><span class="absolute -bottom-1 left-0 w-0 h-[2px] bg-zinc-300 dark:bg-zinc-600 rounded-full transition-all duration-300 group-hover:w-full"></span></a>
             <a href="dashboard.html" class="relative group px-1 py-2 hover:text-zinc-900 dark:hover:text-white transition-colors"><span data-i18n="nav_dashboard">DASHBOARD</span><span class="absolute -bottom-1 left-0 w-0 h-[2px] bg-zinc-300 dark:bg-zinc-600 rounded-full transition-all duration-300 group-hover:w-full"></span></a>
@@ -108,10 +108,10 @@
     </main>
 
     <!-- Mobile Bottom Nav (no Checklist) -->
-    <nav class="fixed bottom-0 left-0 right-0 z-50 md:hidden glass-panel border-t border-slate-200/60 dark:border-slate-700/60 flex justify-around items-center py-2 px-2">
-        <a href="index.html" class="flex flex-col items-center gap-0.5 px-3 py-1.5 rounded-2xl text-slate-400 min-w-[56px]"><span class="text-xl">🔍</span><span class="text-[10px] font-medium" data-i18n="mob_discover">Discover</span></a>
-        <a href="storyboard.html" class="flex flex-col items-center gap-0.5 px-3 py-1.5 rounded-2xl text-slate-400 min-w-[56px]"><span class="text-xl">🗺️</span><span class="text-[10px] font-medium" data-i18n="mob_storyboard">Storyboard</span></a>
-        <a href="dashboard.html" class="flex flex-col items-center gap-0.5 px-3 py-1.5 rounded-2xl text-slate-400 min-w-[56px]"><span class="text-xl">📊</span><span class="text-[10px] font-medium" data-i18n="mob_dashboard">Dashboard</span></a>
+    <nav class="fixed bottom-0 left-0 right-0 z-50 sm:hidden glass-panel border-t border-slate-200/60 dark:border-slate-700/60 flex justify-around items-center py-2 px-2">
+        <a href="index.html" class="flex flex-col items-center gap-0.5 px-3 py-1.5 rounded-2xl text-slate-400 min-w-[56px]"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg><span class="text-[10px] font-medium" data-i18n="mob_discover">Discover</span></a>
+        <a href="storyboard.html" class="flex flex-col items-center gap-0.5 px-3 py-1.5 rounded-2xl text-slate-400 min-w-[56px]"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"/></svg><span class="text-[10px] font-medium" data-i18n="mob_storyboard">Storyboard</span></a>
+        <a href="dashboard.html" class="flex flex-col items-center gap-0.5 px-3 py-1.5 rounded-2xl text-slate-400 min-w-[56px]"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg><span class="text-[10px] font-medium" data-i18n="mob_dashboard">Dashboard</span></a>
     </nav>
 
 <script>
