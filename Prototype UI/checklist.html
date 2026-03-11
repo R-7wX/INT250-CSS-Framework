@@ -109,9 +109,9 @@
 
     <!-- Mobile Bottom Nav (no Checklist) -->
     <nav class="fixed bottom-0 left-0 right-0 z-50 md:hidden glass-panel border-t border-slate-200/60 dark:border-slate-700/60 flex justify-around items-center py-2 px-2">
-        <a href="index.html" class="flex flex-col items-center gap-0.5 px-3 py-1.5 rounded-2xl text-slate-400 min-w-[56px]"><span class="text-xl">🔍</span><span class="text-[10px] font-medium">Discover</span></a>
-        <a href="storyboard.html" class="flex flex-col items-center gap-0.5 px-3 py-1.5 rounded-2xl text-slate-400 min-w-[56px]"><span class="text-xl">🗺️</span><span class="text-[10px] font-medium">Storyboard</span></a>
-        <a href="dashboard.html" class="flex flex-col items-center gap-0.5 px-3 py-1.5 rounded-2xl text-slate-400 min-w-[56px]"><span class="text-xl">📊</span><span class="text-[10px] font-medium">Dashboard</span></a>
+        <a href="index.html" class="flex flex-col items-center gap-0.5 px-3 py-1.5 rounded-2xl text-slate-400 min-w-[56px]"><span class="text-xl">🔍</span><span class="text-[10px] font-medium" data-i18n="mob_discover">Discover</span></a>
+        <a href="storyboard.html" class="flex flex-col items-center gap-0.5 px-3 py-1.5 rounded-2xl text-slate-400 min-w-[56px]"><span class="text-xl">🗺️</span><span class="text-[10px] font-medium" data-i18n="mob_storyboard">Storyboard</span></a>
+        <a href="dashboard.html" class="flex flex-col items-center gap-0.5 px-3 py-1.5 rounded-2xl text-slate-400 min-w-[56px]"><span class="text-xl">📊</span><span class="text-[10px] font-medium" data-i18n="mob_dashboard">Dashboard</span></a>
     </nav>
 
 <script>
@@ -186,7 +186,7 @@ function renderItinerary(data) {
         const header = `<div class="px-4 py-3 border-b border-slate-100 dark:border-slate-700 flex items-center gap-3">
             <span class="w-8 h-8 rounded-xl bg-brand-100 dark:bg-brand-900/40 text-brand-700 dark:text-brand-300 font-bold text-sm flex items-center justify-center flex-shrink-0">${day.dayNum}</span>
             <span class="font-bold text-sm">${day.subtitle||'Day '+day.dayNum}</span>
-            <span class="text-xs text-slate-400 ml-auto">${day.places.length} สถานที่</span>
+            <span class="text-xs text-slate-400 ml-auto">${day.places.length} ${t('sb_places_unit')}</span>
         </div>`;
 
         const places = day.places.length > 0
@@ -194,7 +194,7 @@ function renderItinerary(data) {
                 <div class="flex items-center gap-3">
                     <img src="${p.img}" class="w-10 h-10 rounded-xl object-cover flex-shrink-0">
                     <div class="flex-1 min-w-0">
-                        <p class="font-semibold text-sm truncate">${p.name}</p>
+                        <p class="font-semibold text-sm truncate">${getPlaceName(p.name)}</p>
                         <p class="text-xs text-slate-400">${p.vibe}</p>
                     </div>
                     <span class="text-xs font-medium bg-brand-50 dark:bg-brand-900/30 text-brand-600 dark:text-brand-400 px-2 py-1 rounded-lg flex-shrink-0">${p.start} – ${p.end}</span>
@@ -270,7 +270,7 @@ function updateProgress() {
 // the browser's HTML parser from terminating the <script> block early.
 function buildPlanHTML() {
     const data = exportData;
-    const now = new Date().toLocaleDateString('th-TH', {year:'numeric',month:'long',day:'numeric'});
+    const now = new Date().toLocaleDateString(undefined, {year:'numeric',month:'long',day:'numeric'});
     const totalDays = data ? data.days.length : 0;
     const totalPlaces = data ? data.days.reduce((s,d)=>s+d.places.length,0) : 0;
 
@@ -283,7 +283,7 @@ function buildPlanHTML() {
                 day.places.forEach(p => {
                     placesHtml += '<div class="place-row">'
                         + '<div class="place-info">'
-                        + '<div class="place-name">' + p.name + '<\/div>'
+                        + '<div class="place-name">' + getPlaceName(p.name) + '<\/div>'
                         + '<div class="place-vibe">' + p.vibe + '<\/div>'
                         + '<\/div>'
                         + '<div class="place-time">' + p.start + ' – ' + p.end + '<\/div>'
@@ -291,19 +291,19 @@ function buildPlanHTML() {
                 });
                 placesHtml = '<div class="places">' + placesHtml + '<\/div>';
             } else {
-                placesHtml = '<div class="no-place">ยังไม่มีสถานที่<\/div>';
+                placesHtml = '<div class="no-place">' + t('plan_no_places') + '<\/div>';
             }
             itineraryHtml += '<div class="day-card">'
                 + '<div class="day-header">'
                 + '<div class="day-num">Day ' + day.dayNum + '<\/div>'
                 + '<div class="day-title">' + (day.subtitle || 'Day ' + day.dayNum) + '<\/div>'
-                + '<div class="day-count">' + day.places.length + ' สถานที่<\/div>'
+                + '<div class="day-count">' + day.places.length + ' ' + t('sb_places_unit') + '<\/div>'
                 + '<\/div>'
                 + placesHtml
                 + '<\/div>';
         });
     } else {
-        itineraryHtml = '<p style="color:#94a3b8;text-align:center;">ไม่มีข้อมูล Storyboard<\/p>';
+        itineraryHtml = '<p style="color:#94a3b8;text-align:center;">' + t('plan_no_data') + '<\/p>';
     }
 
     // ── Packing checklist rows ──
@@ -364,22 +364,22 @@ function buildPlanHTML() {
         '<head>',
         '<meta charset="UTF-8">',
         '<meta name="viewport" content="width=device-width,initial-scale=1">',
-        '<title>แผนการเดินทาง — Travelaroha<\/title>',
+        '<title>' + t('plan_title') + ' — Travelaroha<\/title>',
         '<style>' + css + '<\/style>',
         '<\/head>',
         '<body>',
         '<div class="header">',
-        '<h1>🗺️ แผนการเดินทาง<\/h1>',
-        '<p>สร้างด้วย Travelaroha · ' + now + '<\/p>',
+        '<h1>🗺️ ' + t('plan_title') + '<\/h1>',
+        '<p>' + t('plan_by') + ' · ' + now + '<\/p>',
         '<div class="stats">',
-        '<div class="stat">✈️ ' + totalDays + ' วัน<\/div>',
-        '<div class="stat">📍 ' + totalPlaces + ' สถานที่<\/div>',
+        '<div class="stat">✈️ ' + totalDays + ' ' + t('cl_days') + '<\/div>',
+        '<div class="stat">📍 ' + totalPlaces + ' ' + t('sb_places_unit') + '<\/div>',
         '<\/div><\/div>',
-        '<h2>📅 ตารางการเดินทาง<\/h2>',
+        '<h2>' + t('plan_itinerary') + '<\/h2>',
         itineraryHtml,
-        '<h2>🧳 Packing Checklist<\/h2>',
+        '<h2>' + t('plan_packing') + '<\/h2>',
         packingHtml,
-        '<div class="footer">สร้างจาก Travelaroha · ' + now + '<\/div>',
+        '<div class="footer">' + t('plan_by') + ' · ' + now + '<\/div>',
         '<\/body>',
         '<\/html>'
     ];

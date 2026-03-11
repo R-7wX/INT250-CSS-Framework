@@ -19,6 +19,7 @@ const I18N = {
   mob_discover:   {th:'Discover',        en:'Discover',       zh:'发现',      es:'Descubrir', ar:'اكتشاف',      fr:'Découvrir'},
   mob_storyboard: {th:'Storyboard',      en:'Storyboard',     zh:'行程',      es:'Viaje',     ar:'رحلتي',       fr:'Voyage'},
   mob_dashboard:  {th:'Dashboard',       en:'Dashboard',      zh:'仪表板',    es:'Dashboard', ar:'لوحة',        fr:'Tableau'},
+  mob_theme:      {th:'ธีม',             en:'Theme',          zh:'主题',      es:'Tema',      ar:'السمة',       fr:'Thème'},
 
   // INDEX
   idx_title:      {th:'Discover Vibes',  en:'Discover Vibes', zh:'发现旅行灵感',es:'Descubre Vibes',ar:'اكتشف أجواء',fr:'Découvrez les ambiances'},
@@ -26,6 +27,11 @@ const I18N = {
   idx_saved_btn:  {th:'Saved Vibes',     en:'Saved Vibes',    zh:'已收藏',    es:'Guardados', ar:'المحفوظات',   fr:'Favoris'},
   idx_saved_on:   {th:'แสดงอยู่: Saved',en:'Showing: Saved', zh:'显示收藏',  es:'Viendo: Guardados',ar:'عرض المحفوظات',fr:'Afficher: Favoris'},
   idx_filter_all: {th:'ทั้งหมด',         en:'All',             zh:'全部',      es:'Todo',      ar:'الكل',        fr:'Tout'},
+  idx_vibe_urban: {th:'🏙️ Urban Adventure',en:'🏙️ Urban Adventure',zh:'🏙️ 城市探险',es:'🏙️ Aventura Urbana',ar:'🏙️ مغامرة حضرية',fr:'🏙️ Aventure Urbaine'},
+  idx_vibe_slow:  {th:'☕ Slow Living',    en:'☕ Slow Living',   zh:'☕ 慢生活',   es:'☕ Vida Pausada',   ar:'☕ حياة هادئة',   fr:'☕ Vie Tranquille'},
+  idx_vibe_nature:{th:'🌲 Nature Retreat', en:'🌲 Nature Retreat', zh:'🌲 自然度假',  es:'🌲 Retiro Natural',ar:'🌲 ملجأ الطبيعة',  fr:'🌲 Retraite Nature'},
+  idx_vibe_foodie:{th:'🍣 Foodie Tour',    en:'🍣 Foodie Tour',   zh:'🍣 美食之旅',  es:'🍣 Ruta Gastronómica',ar:'🍣 جولة الطعام',fr:'🍣 Tour Gastronomique'},
+  idx_vibe_beach: {th:'🏖️ Beach Getaway', en:'🏖️ Beach Getaway', zh:'🏖️ 海滩度假', es:'🏖️ Escapada Playera',ar:'🏖️ عطلة الشاطئ',fr:'🏖️ Escapade Plage'},
   idx_empty_h:    {th:'ไม่พบสถานที่',    en:'No places found', zh:'未找到地点', es:'Sin resultados',ar:'لا توجد أماكن',fr:'Aucun endroit trouvé'},
   idx_empty_sub:  {th:'ลองเลือก Vibe อื่น หรือกด ❤️ บนการ์ดก่อนนะ',en:'Try another vibe or save some places first',zh:'试试其他类别，或先收藏一些地方',es:'Prueba otro estilo o guarda lugares primero',ar:'جرب نمطًا آخر أو احفظ بعض الأماكن أولاً',fr:"Essayez une autre ambiance ou sauvegardez d'abord"},
   idx_see_all:    {th:'ดูทั้งหมด',       en:'See All',          zh:'查看全部',  es:'Ver Todo',  ar:'عرض الكل',   fr:'Tout voir'},
@@ -54,7 +60,8 @@ const I18N = {
 
   // DASHBOARD labels
   db_title:       {th:'Dashboard',        en:'Dashboard',       zh:'仪表板',    es:'Dashboard', ar:'لوحة التحكم',fr:'Tableau de bord'},
-  db_exchange:    {th:'💱 อัตราแลกเปลี่ยน vs THB',en:'💱 Exchange Rate vs THB',zh:'💱 汇率 vs 泰铢',es:'💱 Tipo de cambio vs THB',ar:'💱 سعر الصرف مقابل THB',fr:'💱 Taux de change vs THB'},
+  db_exchange:    {th:'💱 อัตราแลกเปลี่ยน',en:'💱 Exchange Rate',zh:'💱 汇率',    es:'💱 Tipo de cambio',ar:'💱 سعر الصرف',fr:'💱 Taux de change'},
+  db_exchange_to: {th:'เปลี่ยนเป็น',      en:'Convert to',      zh:'换算为',    es:'Convertir a',ar:'تحويل إلى',   fr:'Convertir en'},
   db_loading:     {th:'กำลังโหลด...',      en:'Loading...',       zh:'加载中...',  es:'Cargando...',ar:'جاري التحميل...',fr:'Chargement...'},
   db_refresh:     {th:'รีเฟรช',            en:'Refresh',          zh:'刷新',      es:'Refrescar', ar:'تحديث',      fr:'Actualiser'},
   db_local_curr:  {th:'สกุลเงินท้องถิ่น', en:'Local currency',   zh:'本地货币',  es:'Moneda local',ar:'العملة المحلية',fr:'Monnaie locale'},
@@ -149,6 +156,14 @@ const I18N = {
   pe6: {th:'ทิชชู่เปียก / ทิชชู่แห้ง',    en:'Wet wipes / Tissues',           zh:'湿纸巾 / 纸巾',  es:'Toallitas húmedas / Pañuelos', ar:'مناديل مبللة / مناديل جافة',  fr:'Lingettes / Mouchoirs'},
   pe7: {th:'หน้ากากอนามัย / เจลล้างมือ',  en:'Face mask / Hand sanitizer',    zh:'口罩 / 洗手液',  es:'Mascarilla / Gel desinfectante',ar:'كمامة / جل تعقيم اليدين',     fr:'Masque / Gel hydroalcoolique'},
 
+  // Dashboard extra
+  db_rate_updated: {th:'อัปเดต',       en:'Updated',       zh:'更新于',    es:'Actualizado', ar:'تحديث',      fr:'Mis à jour'},
+  db_rate_source:  {th:'frankfurter',   en:'frankfurter',   zh:'frankfurter',es:'frankfurter', ar:'frankfurter',fr:'frankfurter'},
+
+  // Duration units
+  dur_hr:  {th:'ชม.', en:'hr',  zh:'小时', es:'h',   ar:'س',   fr:'h'},
+  dur_min: {th:'น.',  en:'min', zh:'分',   es:'min', ar:'د',   fr:'min'},
+
   // Downloaded plan strings
   plan_title:    {th:'แผนการเดินทาง',      en:'Travel Plan',      zh:'旅行计划',  es:'Plan de Viaje',ar:'خطة السفر',  fr:'Plan de voyage'},
   plan_by:       {th:'สร้างด้วย Travelaroha',en:'Created with Travelaroha',zh:'由 Travelaroha 创建',es:'Creado con Travelaroha',ar:'أُنشئ بواسطة Travelaroha',fr:'Créé avec Travelaroha'},
@@ -157,6 +172,349 @@ const I18N = {
   plan_no_places:{th:'ยังไม่มีสถานที่',    en:'No places yet',    zh:'暂无地点',  es:'Sin lugares',   ar:'لا توجد أماكن',fr:'Pas de lieux'},
   plan_no_data:  {th:'ไม่มีข้อมูล Storyboard',en:'No Storyboard data',zh:'无行程数据',es:'Sin datos del plan',ar:'لا توجد بيانات',fr:'Pas de données de plan'},
 };
+
+// ─── Duration units ───────────────────────────────────────────────────────────
+const DUR_UNITS = {
+  dur_hr:  {th:'ชม.', en:'hr',  zh:'小时', es:'h',   ar:'س',   fr:'h'},
+  dur_min: {th:'น.',  en:'min', zh:'分',   es:'min', ar:'د',   fr:'min'},
+};
+
+// ─── Place name translations (key = Thai name stored in localStorage) ─────────
+const PLACE_NAMES = {
+  'ปารีส, ฝรั่งเศส':      {en:'Paris, France',       zh:'巴黎，法国',          es:'París, Francia',           ar:'باريس، فرنسا',               fr:'Paris, France'},
+  'ดูไบ, UAE':             {en:'Dubai, UAE',           zh:'迪拜，阿联酋',         es:'Dubái, EAU',               ar:'دبي، الإمارات',              fr:'Dubaï, EAU'},
+  'กรุงเทพฯ, ไทย':         {en:'Bangkok, Thailand',    zh:'曼谷，泰国',           es:'Bangkok, Tailandia',       ar:'بانكوك، تايلاند',            fr:'Bangkok, Thaïlande'},
+  'โซล, เกาหลีใต้':        {en:'Seoul, South Korea',   zh:'首尔，韩国',           es:'Seúl, Corea del Sur',      ar:'سيئول، كوريا الجنوبية',      fr:'Séoul, Corée du Sud'},
+  'นิวยอร์ก, สหรัฐฯ':      {en:'New York, USA',        zh:'纽约，美国',           es:'Nueva York, EE.UU.',       ar:'نيويورك، الولايات المتحدة',  fr:'New York, États-Unis'},
+  'ลอนดอน, UK':            {en:'London, UK',           zh:'伦敦，英国',           es:'Londres, Reino Unido',     ar:'لندن، المملكة المتحدة',      fr:'Londres, Royaume-Uni'},
+  'ปักกิ่ง, จีน':          {en:'Beijing, China',       zh:'北京，中国',           es:'Pekín, China',             ar:'بكين، الصين',                fr:'Pékin, Chine'},
+  'สิงคโปร์':              {en:'Singapore',            zh:'新加坡',               es:'Singapur',                 ar:'سنغافورة',                   fr:'Singapour'},
+  'ทะเลสาบโคโม่, อิตาลี':  {en:'Lake Como, Italy',     zh:'科莫湖，意大利',       es:'Lago de Como, Italia',     ar:'بحيرة كومو، إيطاليا',        fr:'Lac de Côme, Italie'},
+  'เกียวโต, ญี่ปุ่น':      {en:'Kyoto, Japan',         zh:'京都，日本',           es:'Kioto, Japón',             ar:'كيوتو، اليابان',             fr:'Kyoto, Japon'},
+  'ซูริค, สวิตเซอร์แลนด์': {en:'Zurich, Switzerland',  zh:'苏黎世，瑞士',         es:'Zúrich, Suiza',            ar:'زيورخ، سويسرا',              fr:'Zurich, Suisse'},
+  'ภูเขาไฟฟูจิ, ญี่ปุ่น':  {en:'Mt. Fuji, Japan',      zh:'富士山，日本',         es:'Monte Fuji, Japón',        ar:'جبل فوجي، اليابان',          fr:'Mont Fuji, Japon'},
+  'ป่าสนแบล็คฟอเรสต์':     {en:'Black Forest, Germany',zh:'黑森林，德国',         es:'Selva Negra, Alemania',    ar:'الغابة السوداء، ألمانيا',    fr:'Forêt-Noire, Allemagne'},
+  'นิวซีแลนด์':             {en:'New Zealand',          zh:'新西兰',               es:'Nueva Zelanda',            ar:'نيوزيلندا',                  fr:'Nouvelle-Zélande'},
+  'ไทเป, ไต้หวัน':          {en:'Taipei, Taiwan',       zh:'台北，台湾',           es:'Taipéi, Taiwán',           ar:'تايبيه، تايوان',             fr:'Taipei, Taïwan'},
+  'โอซาก้า, ญี่ปุ่น':      {en:'Osaka, Japan',         zh:'大阪，日本',           es:'Osaka, Japón',             ar:'أوساكا، اليابان',            fr:'Osaka, Japon'},
+  'ดานัง, เวียดนาม':        {en:'Da Nang, Vietnam',     zh:'岘港，越南',           es:'Da Nang, Vietnam',         ar:'دا نانغ، فيتنام',            fr:'Da Nang, Viêt Nam'},
+  'มัลดีฟส์':               {en:'Maldives',             zh:'马尔代夫',             es:'Maldivas',                 ar:'جزر المالديف',               fr:'Maldives'},
+  'ซิดนีย์, ออสเตรเลีย':   {en:'Sydney, Australia',    zh:'悉尼，澳大利亚',       es:'Sídney, Australia',        ar:'سيدني، أستراليا',            fr:'Sydney, Australie'},
+  'บาหลี, อินโดนีเซีย':    {en:'Bali, Indonesia',      zh:'巴厘岛，印度尼西亚',   es:'Bali, Indonesia',          ar:'بالي، إندونيسيا',            fr:'Bali, Indonésie'},
+};
+
+// ─── Place description translations ───────────────────────────────────────────
+const PLACE_DESCS = {
+  'ปารีส, ฝรั่งเศส':      {th:'ริมแม่น้ำแซน กาแฟร้อน และแสงยามเย็นที่จำไม่ลืม',                                         en:'Sunset on the Seine, croissants in hand — no itinerary needed',                       zh:'塞纳河边的金色傍晚，随走随发现的巴黎',                 es:'Atardeceres en el Sena, croissants y callejones que sorprenden',           ar:'غروب على السين، كرواسون ولحظات لا تُنسى',              fr:'Couchers de soleil sur la Seine, croissants et rues qui surprennent'},
+  'ดูไบ, UAE':             {th:'ตึกระฟ้าสุดขอบฟ้า ทะเลทรายสีทอง และมอลล์ที่ไม่มีวันจบ',                                  en:'Desert heat, sky-high everything, and malls that never end',                          zh:'沙漠金光、摩天大楼与永无止境的购物体验',               es:'Calor del desierto, rascacielos y centros comerciales infinitos',          ar:'صحراء ذهبية، ناطحات سحاب وتجربة تسوق لا تنتهي',       fr:'Chaleur du désert, gratte-ciel et shopping sans fin'},
+  'กรุงเทพฯ, ไทย':         {th:'สตรีทฟู้ดตีสอง วัดตีห้า ไม่มีทางเบื่อ',                                                   en:'Street food at midnight, temples at dawn — never boring',                              zh:'午夜街头美食、黎明寺庙，曼谷从不无聊',                 es:'Comida callejera a medianoche, templos al amanecer — nunca aburre',        ar:'أكل شعبي في منتصف الليل، معابد عند الفجر',             fr:'Street food à minuit, temples à l\'aube — jamais ennuyeux'},
+  'โซล, เกาหลีใต้':        {th:'K-culture ตึกระฟ้า และหมูย่างตีสองที่ดีที่สุดในโลก',                                      en:'K-culture, BBQ at 2am, and neighbourhoods that keep surprising you',                   zh:'K-culture、深夜烤肉与不断惊喜的街区',                 es:'K-culture, barbacoa a las 2am y barrios que siempre sorprenden',           ar:'ثقافة K-pop وشواء في منتصف الليل وأحياء لا تتوقع',     fr:'K-culture, barbecue à 2h du matin et quartiers toujours surprenants'},
+  'นิวยอร์ก, สหรัฐฯ':      {th:'เมืองที่ไม่มีคำว่า "ปิด" ในพจนานุกรม',                                                    en:'The city that never sleeps — and means every word of it',                              zh:'这座城市从不关门，每一秒都充满可能',                   es:'La ciudad que nunca duerme — y lo dice en serio',                          ar:'المدينة التي لا تنام — وتعني ذلك حقاً',                fr:'La ville qui ne dort jamais — et elle le prouve'},
+  'ลอนดอน, UK':            {th:'ประวัติศาสตร์ ฝน พับที่อบอุ่น และทุกอย่างก็งาม',                                           en:'History, rain, great pubs — and somehow it all works',                                 zh:'历史、雨天与温暖的酒吧，伦敦就是这样迷人',             es:'Historia, lluvia y buenos pubs — y todo encaja perfecto',                  ar:'تاريخ وأمطار وحانات دافئة — وبطريقة ما يعمل معاً',     fr:'Histoire, pluie et bons pubs — et tout s\'emboîte parfaitement'},
+  'ปักกิ่ง, จีน':          {th:'กำแพงเมืองจีน หู่ทง และอาหารที่อิ่มแล้วยังอยากสั่งอีก',                                   en:'The Great Wall, old hutongs, and food that keeps you ordering more',                   zh:'长城、胡同与令人欲罢不能的北京美食',                   es:'Gran Muralla, hutongs y comida que nunca te cansas de pedir',              ar:'سور الصين العظيم والأحياء القديمة وطعام لا تشبع منه',  fr:'Grande Muraille, hutongs et cuisine qui fait toujours commander davantage'},
+  'สิงคโปร์':              {th:'สะอาด มีระเบียบ อร่อยเกินคาด',                                                             en:'Spotless, efficient, and genuinely delicious',                                         zh:'整洁、高效，出乎意料地美味',                           es:'Impecable, eficiente y sorprendentemente delicioso',                       ar:'نظيف، منظم ولذيذ بشكل مدهش',                           fr:'Propre, efficace et vraiment délicieux'},
+  'ทะเลสาบโคโม่, อิตาลี':  {th:'เช้าช้าๆ ล่องเรือ และวิวที่หยุดหายใจได้ทุกมุม',                                           en:'Slow mornings, boat rides, and views that stop you mid-sentence',                      zh:'慵懒的清晨、湖上游船与让人屏息的美景',                 es:'Mañanas tranquilas, paseos en bote y vistas que cortan la respiración',    ar:'صباحات هادئة وجولات بالقوارب ومناظر تسرق الأنفاس',    fr:'Matins lents, balades en bateau et paysages à couper le souffle'},
+  'เกียวโต, ญี่ปุ่น':      {th:'ป่าไผ่ มัตชะ และญี่ปุ่นที่คุณจินตนาการไว้ก่อนมาถึง',                                      en:'Bamboo groves, matcha, and the Japan you imagined before you arrived',                  zh:'竹林、抹茶与你想象中的日本',                           es:'Bosques de bambú, matcha y el Japón que imaginabas',                       ar:'غابات الخيزران والماتشا واليابان التي تخيلتها',         fr:'Forêts de bambous, matcha et le Japon que vous imaginiez'},
+  'ซูริค, สวิตเซอร์แลนด์': {th:'อากาศดี ทิวเขา และช็อกโกแลตที่ทำให้ทุกอย่างดูดีขึ้น',                                    en:'Clean air, mountain views, and chocolate that ruins everything else',                   zh:'清新空气、山景与让所有巧克力黯然失色的瑞士巧克力',   es:'Aire puro, vistas a la montaña y chocolate que lo arruina todo',           ar:'هواء نقي ومناظر جبلية وشوكولاتة تفسد كل ما بعدها',    fr:'Air pur, vues sur les montagnes et chocolat qui gâte tout le reste'},
+  'ภูเขาไฟฟูจิ, ญี่ปุ่น':  {th:'ขอบฟ้าที่โด่งดังที่สุดของญี่ปุ่น คุ้มทุกก้าวที่ปีน',                                     en:'Japan\'s most iconic horizon — worth every single step',                                zh:'日本最具标志性的地平线，每一步都值得',                 es:'El horizonte más icónico de Japón — vale cada paso',                       ar:'الأفق الأكثر شهرة في اليابان — يستحق كل خطوة',         fr:'L\'horizon le plus emblématique du Japon — chaque pas en vaut la peine'},
+  'ป่าสนแบล็คฟอเรสต์':     {th:'ป่าเงียบ ทางเดินในหมอก และเค้กที่คิดถึงหลังกลับบ้าน',                                     en:'Dark pines, misty trails, and cake you\'ll still think about back home',               zh:'深色松林、薄雾小径与回家后仍念念不忘的蛋糕',         es:'Pinos oscuros, senderos brumosos y pastel que recuerdas al volver a casa', ar:'أشجار صنوبر داكنة ومسارات ضبابية وكعكة لا تُنسى',      fr:'Pins sombres, sentiers brumeux et gâteau dont vous vous souviendrez'},
+  'นิวซีแลนด์':             {th:'ทุกมุมถ่ายรูปได้เลย ไม่ต้องปรับแต่ง',                                                     en:'Every corner looks like it was designed for a movie',                                  zh:'每个转角都像是为电影量身定制的场景',                   es:'Cada rincón parece diseñado para una película',                            ar:'كل زاوية تبدو وكأنها صُممت لفيلم',                     fr:'Chaque coin ressemble à un décor de film'},
+  'ไทเป, ไต้หวัน':          {th:'ตลาดกลางคืน ชาไข่มุก และเกี๊ยวทุกมื้อก็ยังไม่พอ',                                         en:'Night markets, bubble tea, and dumplings for every meal — still not enough',           zh:'夜市、珍珠奶茶与每顿都吃不腻的饺子',                   es:'Mercados nocturnos, té de burbujas y dumplings en cada comida',            ar:'أسواق ليلية وشاي الفقاعات ولا تشبع من الزلابية',        fr:'Marchés nocturnes, bubble tea et dim sum à chaque repas'},
+  'โอซาก้า, ญี่ปุ่น':      {th:'เมืองหลวงแห่งอาหารอร่อยของญี่ปุ่น ใครๆ ก็รู้',                                            en:'Japan\'s food capital, and everyone who goes there knows why',                          zh:'日本美食之都，去过的人都明白为什么',                   es:'La capital culinaria de Japón — y quien la visita lo entiende',            ar:'عاصمة الطعام في اليابان، ومن زارها يعرف السبب',         fr:'La capitale gastronomique du Japon — et tous les visiteurs le comprennent'},
+  'ดานัง, เวียดนาม':        {th:'ทะเลสะอาด อาหารทะเลสด และเมืองที่ยังไม่โอเวอร์ทัวริสม์',                                  en:'Fresh seafood, white sand, and a city that hasn\'t overdone the tourism yet',          zh:'新鲜海鲜、白色沙滩与尚未过度开发的城市',             es:'Marisco fresco, arena blanca y una ciudad aún sin masificar',              ar:'مأكولات بحرية طازجة ورمال بيضاء ومدينة لم تتأثر بالسياحة بعد', fr:'Fruits de mer frais, sable blanc et ville pas encore envahie par le tourisme'},
+  'มัลดีฟส์':               {th:'น้ำทะเลใสจนแยกไม่ออกว่าฟ้าหรือน้ำ',                                                       en:'Water so clear you can\'t tell where the ocean ends and the sky begins',               zh:'海水清澈到分不清哪里是海，哪里是天空',               es:'Agua tan clara que no distingues el mar del cielo',                        ar:'مياه صافية لدرجة لا تعرف أين ينتهي البحر ويبدأ السماء', fr:'Eau si claire qu\'on ne sait plus où finit la mer et où commence le ciel'},
+  'ซิดนีย์, ออสเตรเลีย':   {th:'วิวอ่าว กาแฟดีเกิน และวัฒนธรรมชายหาดที่ใช้ชีวิตได้จริง',                                  en:'Harbour views, exceptional coffee, and beach culture that\'s actually liveable',       zh:'海湾美景、优质咖啡与真实可居的海滩文化',             es:'Vistas al puerto, café excepcional y cultura de playa de verdad',          ar:'إطلالات على الميناء وقهوة استثنائية وثقافة شاطئية حقيقية', fr:'Vue sur le port, café exceptionnel et culture de plage vraiment agréable'},
+  'บาหลี, อินโดนีเซีย':    {th:'นาข้าวขั้นบันได ควันธูปวัด และตะวันตกที่ทำให้อยู่ต่อทุกครั้ง',                              en:'Rice terraces, temple incense, and sunsets that make you extend your stay',            zh:'梯田、寺庙香烟与让你一再延长停留的落日',             es:'Terrazas de arroz, incienso de templos y atardeceres que alargan la estancia', ar:'مدرجات الأرز وعطر المعابد وغروب يجعلك تمدد إقامتك',   fr:'Rizières en terrasses, encens des temples et couchers de soleil qui prolongent le séjour'},
+};
+
+// ─── Helper: translate place name ──────────────────────────────────────────────
+function getPlaceName(thaiName) {
+  if (_lang === 'th') return thaiName;
+  return PLACE_NAMES[thaiName]?.[_lang] || PLACE_NAMES[thaiName]?.['en'] || thaiName;
+}
+
+// ─── Helper: translate place description ───────────────────────────────────────
+function getPlaceDesc(thaiName) {
+  const row = PLACE_DESCS[thaiName];
+  if (!row) return '';
+  return row[_lang] || row['en'] || '';
+}
+
+// ─── Dashboard country translations ───────────────────────────────────────────
+const DB_COUNTRIES = {
+  Japan: {
+    name: {th:'โตเกียว, ญี่ปุ่น',     en:'Tokyo, Japan',          zh:'东京，日本',           es:'Tokio, Japón',             ar:'طوكيو، اليابان',             fr:'Tokyo, Japon'},
+    desc: {th:'เย็นสบาย เหมาะเดินเที่ยวมาก',en:'Crisp and clear — perfect walking weather',zh:'清凉宜人，非常适合步行游览',es:'Fresco y despejado — ideal para caminar',ar:'طقس نقي ومناسب للمشي',fr:'Frais et dégagé — idéal pour se promener'},
+    badge:{th:'🇯🇵 ญี่ปุ่น',           en:'🇯🇵 Japan',              zh:'🇯🇵 日本',             es:'🇯🇵 Japón',                ar:'🇯🇵 اليابان',                fr:'🇯🇵 Japon'},
+    lang: {th:'ญี่ปุ่น',               en:'Japanese',              zh:'日语',                 es:'Japonés',                  ar:'اليابانية',                  fr:'Japonais'},
+    season:{th:'มี.ค.–พ.ค.',           en:'Mar–May',               zh:'3月–5月',              es:'Mar–May',                  ar:'مارس–مايو',                  fr:'Mars–Mai'},
+    visa: {th:'✅ ฟรีวีซ่า 30 วัน',    en:'✅ Visa-free 30 days',  zh:'✅ 免签30天',          es:'✅ Sin visa 30 días',       ar:'✅ بدون تأشيرة 30 يوماً',   fr:'✅ Sans visa 30 jours'},
+    flight:{th:'~7 ชม.',               en:'~7 hrs',                zh:'约7小时',              es:'~7 h',                     ar:'~7 س',                       fr:'~7 h'},
+    highlights:{
+      th:['ชมซากุระที่อุเอโนะ','เดินย่านชิบุย่า คอสซิ่ง','ชิมราเมนต้นตำรับ','ขึ้นหอคอยสกายทรี'],
+      en:['Cherry blossoms at Ueno Park','Shibuya Crossing at rush hour','Ramen that ruins instant noodles forever','Tokyo Skytree views'],
+      zh:['上野公园赏樱花','涩谷十字路口人流','让泡面相形见绌的拉面','东京晴空塔远眺'],
+      es:['Cerezos en flor en Ueno','Cruce de Shibuya en hora punta','Ramen que arruina los fideos instantáneos','Vistas desde Tokyo Skytree'],
+      ar:['أزهار الكرز في أويينو','تقاطع شيبويا وقت الذروة','لامان يجعل المعكرونة الفورية لا تكفي','إطلالات برج سكاي تري'],
+      fr:['Cerisiers en fleur à Ueno','Carrefour de Shibuya à l\'heure de pointe','Ramen qui rend les nouilles instantanées insuffisantes','Vue depuis Tokyo Skytree'],
+    },
+  },
+  France: {
+    name: {th:'ปารีส, ฝรั่งเศส',       en:'Paris, France',         zh:'巴黎，法国',           es:'París, Francia',           ar:'باريس، فرنسا',               fr:'Paris, France'},
+    desc: {th:'มีเมฆบ้าง อากาศโรแมนติก',en:'Partly cloudy and moody',zh:'多云，浪漫气氛',      es:'Parcialmente nublado y con encanto',ar:'غيوم جزئية وجو رومانسي',fr:'Partiellement nuageux et romantique'},
+    badge:{th:'🇫🇷 ฝรั่งเศส',           en:'🇫🇷 France',             zh:'🇫🇷 法国',            es:'🇫🇷 Francia',              ar:'🇫🇷 فرنسا',                  fr:'🇫🇷 France'},
+    lang: {th:'ฝรั่งเศส',              en:'French',                zh:'法语',                 es:'Francés',                  ar:'الفرنسية',                   fr:'Français'},
+    season:{th:'เม.ย.–มิ.ย.',           en:'Apr–Jun',               zh:'4月–6月',              es:'Abr–Jun',                  ar:'أبريل–يونيو',                fr:'Avr–Juin'},
+    visa: {th:'🛂 Schengen Visa',       en:'🛂 Schengen Visa',      zh:'🛂 申根签证',          es:'🛂 Visado Schengen',       ar:'🛂 تأشيرة شنغن',             fr:'🛂 Visa Schengen'},
+    flight:{th:'~11 ชม.',              en:'~11 hrs',               zh:'约11小时',             es:'~11 h',                    ar:'~11 س',                      fr:'~11 h'},
+    highlights:{
+      th:['ชมหอไอเฟิลยามค่ำ','ล่องเรือแม่น้ำแซน','เยี่ยมพิพิธภัณฑ์ลูฟวร์','ชิมครัวซองต์สดๆ'],
+      en:['Eiffel Tower after dark','Seine river cruise','The Louvre (just a few rooms — it\'s huge)','Fresh croissant from a boulangerie'],
+      zh:['夜晚的埃菲尔铁塔','塞纳河游船','卢浮宫（只逛几个厅就够了，太大）','面包店的新鲜可颂'],
+      es:['Torre Eiffel de noche','Crucero por el Sena','El Louvre (solo unas salas — es enorme)','Cruasán fresco de la boulangerie'],
+      ar:['برج إيفل بعد حلول الظلام','جولة في نهر السين','متحف اللوفر (بضع قاعات فقط — إنه ضخم)','كرواسون طازج من المخبز'],
+      fr:['La Tour Eiffel après la tombée de la nuit','Croisière sur la Seine','Le Louvre (quelques salles — c\'est immense)','Croissant frais de la boulangerie'],
+    },
+  },
+  Thailand: {
+    name: {th:'กรุงเทพฯ, ไทย',         en:'Bangkok, Thailand',     zh:'曼谷，泰国',           es:'Bangkok, Tailandia',       ar:'بانكوك، تايلاند',            fr:'Bangkok, Thaïlande'},
+    desc: {th:'ร้อนจัด อย่าลืมดื่มน้ำ', en:'Hot and sunny — stay hydrated',zh:'炎热晴朗，记得多喝水',es:'Caluroso — mantente hidratado',ar:'حار ومشمس — اشرب الماء كثيراً',fr:'Chaud et ensoleillé — hydratez-vous'},
+    badge:{th:'🇹🇭 ไทย',               en:'🇹🇭 Thailand',          zh:'🇹🇭 泰国',            es:'🇹🇭 Tailandia',            ar:'🇹🇭 تايلاند',                fr:'🇹🇭 Thaïlande'},
+    lang: {th:'ไทย',                   en:'Thai',                  zh:'泰语',                 es:'Tailandés',                ar:'التايلاندية',                 fr:'Thaï'},
+    season:{th:'พ.ย.–ก.พ.',            en:'Nov–Feb',               zh:'11月–2月',             es:'Nov–Feb',                  ar:'نوفمبر–فبراير',              fr:'Nov–Fév'},
+    visa: {th:'✅ ไม่ต้องวีซ่า',        en:'✅ No visa required',   zh:'✅ 无需签证',          es:'✅ Sin visa',               ar:'✅ لا تأشيرة مطلوبة',        fr:'✅ Sans visa'},
+    flight:{th:'ในประเทศ',             en:'Domestic',              zh:'国内',                 es:'Doméstico',                ar:'محلي',                       fr:'Vol intérieur'},
+    highlights:{
+      th:['เที่ยววัดพระแก้ว','กินมะม่วงข้าวเหนียว','ช้อปปิ้งจตุจักร','ล่องเรือแม่น้ำเจ้าพระยา'],
+      en:['Wat Phra Kaew temple complex','Mango sticky rice — anywhere, anytime','Chatuchak Weekend Market','Chao Phraya river boat'],
+      zh:['玉佛寺建筑群','随时随地的芒果糯米饭','恰图恰周末市集','昭披耶河游船'],
+      es:['Templo Wat Phra Kaew','Arroz con mango — donde sea, cuando sea','Mercado Chatuchak de fin de semana','Paseo en bote por el Chao Phraya'],
+      ar:['معبد وات فرا كيو','أرز مانجو لزج — في أي وقت وأي مكان','سوق تشاتوتشاك في عطلة نهاية الأسبوع','رحلة قارب في نهر شاو برايا'],
+      fr:['Temple de Wat Phra Kaew','Riz gluant à la mangue — partout, à toute heure','Marché du Week-end de Chatuchak','Bateau sur le Chao Phraya'],
+    },
+  },
+  SouthKorea: {
+    name: {th:'โซล, เกาหลีใต้',        en:'Seoul, South Korea',    zh:'首尔，韩国',           es:'Seúl, Corea del Sur',      ar:'سيئول، كوريا الجنوبية',      fr:'Séoul, Corée du Sud'},
+    desc: {th:'ลมแรง หนาว ใส่แจ็คเก็ตด้วย',en:'Windy and cold — layer up',zh:'风大且冷，多穿几层',es:'Ventoso y frío — abrígate bien',ar:'رياح قوية وبرد — ارتدِ طبقات',fr:'Venteux et froid — superposez les couches'},
+    badge:{th:'🇰🇷 เกาหลีใต้',          en:'🇰🇷 South Korea',       zh:'🇰🇷 韩国',            es:'🇰🇷 Corea del Sur',        ar:'🇰🇷 كوريا الجنوبية',         fr:'🇰🇷 Corée du Sud'},
+    lang: {th:'เกาหลี',                en:'Korean',                zh:'韩语',                 es:'Coreano',                  ar:'الكورية',                    fr:'Coréen'},
+    season:{th:'มี.ค.–พ.ค.',           en:'Mar–May',               zh:'3月–5月',              es:'Mar–May',                  ar:'مارس–مايو',                  fr:'Mars–Mai'},
+    visa: {th:'✅ ฟรีวีซ่า 30 วัน',    en:'✅ Visa-free 30 days',  zh:'✅ 免签30天',          es:'✅ Sin visa 30 días',       ar:'✅ بدون تأشيرة 30 يوماً',   fr:'✅ Sans visa 30 jours'},
+    flight:{th:'~5.5 ชม.',             en:'~5.5 hrs',              zh:'约5.5小时',            es:'~5.5 h',                   ar:'~5.5 س',                     fr:'~5.5 h'},
+    highlights:{
+      th:['เดินย่านอีแทวอน','ชมพระราชวังคยองบกกุง','ชิม K-BBQ แท้ๆ','ช้อปปิ้งเมียงดง'],
+      en:['Itaewon for nightlife and food','Gyeongbokgung Palace at sunrise','K-BBQ — the real thing','Myeongdong for street food and shopping'],
+      zh:['梨泰院的夜生活和美食','黎明时分的景福宫','正宗韩式烤肉','明洞的街头小吃和购物'],
+      es:['Itaewon para vida nocturna y comida','Palacio Gyeongbokgung al amanecer','K-BBQ auténtico','Myeongdong para comida callejera y compras'],
+      ar:['إيتاوون للحياة الليلية والطعام','قصر كيونغبوكغونغ عند الفجر','الشواء الكوري الحقيقي','ميونغدونغ للأكل الشعبي والتسوق'],
+      fr:['Itaewon pour la vie nocturne et la gastronomie','Palais Gyeongbokgung au lever du soleil','K-BBQ authentique','Myeongdong pour street food et shopping'],
+    },
+  },
+  USA: {
+    name: {th:'นิวยอร์ก, สหรัฐฯ',      en:'New York, USA',         zh:'纽约，美国',           es:'Nueva York, EE.UU.',       ar:'نيويورك، الولايات المتحدة',  fr:'New York, États-Unis'},
+    desc: {th:'อากาศดี แดดออกกำลังดี', en:'Sunny and mild — a great day out',zh:'晴朗温和，适合外出游玩',es:'Soleado y agradable — perfecto para salir',ar:'مشمس ومعتدل — يوم رائع للخروج',fr:'Ensoleillé et doux — parfait pour sortir'},
+    badge:{th:'🇺🇸 สหรัฐฯ',             en:'🇺🇸 USA',               zh:'🇺🇸 美国',            es:'🇺🇸 EE.UU.',               ar:'🇺🇸 الولايات المتحدة',       fr:'🇺🇸 États-Unis'},
+    lang: {th:'อังกฤษ',               en:'English',               zh:'英语',                 es:'Inglés',                   ar:'الإنجليزية',                 fr:'Anglais'},
+    season:{th:'เม.ย.–มิ.ย.',           en:'Apr–Jun',               zh:'4月–6月',              es:'Abr–Jun',                  ar:'أبريل–يونيو',                fr:'Avr–Juin'},
+    visa: {th:'🛂 US Visa',             en:'🛂 US Visa required',   zh:'🛂 需美国签证',        es:'🛂 Visa de EE.UU.',        ar:'🛂 تأشيرة أمريكية مطلوبة',  fr:'🛂 Visa américain requis'},
+    flight:{th:'~17 ชม.',              en:'~17 hrs',               zh:'约17小时',             es:'~17 h',                    ar:'~17 س',                      fr:'~17 h'},
+    highlights:{
+      th:['เดินเซ็นทรัลพาร์ก','ชมไทม์สแควร์','เที่ยวบรูคลินบริดจ์','ชิม NY Pizza'],
+      en:['Central Park on a sunny afternoon','Times Square (once is enough)','Brooklyn Bridge walk','A proper New York slice'],
+      zh:['晴天漫步中央公园','时代广场（一次就够了）','布鲁克林大桥步行','正宗纽约比萨'],
+      es:['Central Park en una tarde soleada','Times Square (con una vez es suficiente)','Paseo por el Puente de Brooklyn','Una auténtica pizza neoyorquina'],
+      ar:['سنترال بارك في يوم مشمس','تايمز سكوير (مرة واحدة تكفي)','المشي على جسر بروكلين','شريحة بيتزا نيويوركية حقيقية'],
+      fr:['Central Park par beau temps','Times Square (une fois c\'est bien)','Traversée du pont de Brooklyn','Une vraie pizza new-yorkaise'],
+    },
+  },
+  UK: {
+    name: {th:'ลอนดอน, UK',             en:'London, UK',            zh:'伦敦，英国',           es:'Londres, Reino Unido',     ar:'لندن، المملكة المتحدة',      fr:'Londres, Royaume-Uni'},
+    desc: {th:'มีฝนปรอยๆ พกร่มเผื่อไว้', en:'Drizzly — grab an umbrella just in case',zh:'细雨蒙蒙，最好带把伞',es:'Llovizna — lleva un paraguas por si acaso',ar:'رذاذ خفيف — خذ مظلة احتياطاً',fr:'Bruine légère — prenez un parapluie au cas où'},
+    badge:{th:'🇬🇧 UK',                 en:'🇬🇧 UK',                zh:'🇬🇧 英国',            es:'🇬🇧 Reino Unido',          ar:'🇬🇧 المملكة المتحدة',        fr:'🇬🇧 Royaume-Uni'},
+    lang: {th:'อังกฤษ',               en:'English',               zh:'英语',                 es:'Inglés',                   ar:'الإنجليزية',                 fr:'Anglais'},
+    season:{th:'มิ.ย.–ส.ค.',            en:'Jun–Aug',               zh:'6月–8月',              es:'Jun–Ago',                  ar:'يونيو–أغسطس',                fr:'Juin–Août'},
+    visa: {th:'🛂 UK Visa',             en:'🛂 UK Visa required',   zh:'🛂 需英国签证',        es:'🛂 Visa del Reino Unido',  ar:'🛂 تأشيرة بريطانية مطلوبة', fr:'🛂 Visa britannique requis'},
+    flight:{th:'~12 ชม.',              en:'~12 hrs',               zh:'约12小时',             es:'~12 h',                    ar:'~12 س',                      fr:'~12 h'},
+    highlights:{
+      th:['ชมบัคกิงแฮมพาเลซ','ไปแกลเลอรีเทต โมเดิร์น','นั่งรถไฟใต้ดิน','ชิม Fish and Chips'],
+      en:['Buckingham Palace and the guards','Tate Modern for art and Thames views','The Tube (iconic — use it)','Fish and chips by the river'],
+      zh:['白金汉宫和卫兵换岗','泰特现代艺术馆与泰晤士河景','乘坐地铁（标志性体验）','泰晤士河边吃炸鱼薯条'],
+      es:['Palacio de Buckingham y los guardias','Tate Modern y vistas del Támesis','El metro (icónico — úsalo)','Fish and chips junto al río'],
+      ar:['قصر باكنغهام والحرس','تيت مودرن للفن وإطلالات التيمز','مترو أنفاق لندن (أيقوني — استخدمه)','سمك وبطاطس مقلية على ضفة النهر'],
+      fr:['Palais de Buckingham et la garde','Tate Modern pour l\'art et la Tamise','Le métro (iconique — utilisez-le)','Fish and chips au bord de l\'eau'],
+    },
+  },
+  Italy: {
+    name: {th:'โรม, อิตาลี',            en:'Rome, Italy',           zh:'罗马，意大利',         es:'Roma, Italia',             ar:'روما، إيطاليا',              fr:'Rome, Italie'},
+    desc: {th:'ท้องฟ้าโปร่ง เที่ยวสนุก', en:'Sunny skies — get outside and explore',zh:'晴空万里，适合出门探索',es:'Cielo despejado — sal a explorar',ar:'سماء مشرقة — اخرج واستكشف',fr:'Ciel dégagé — sortez et explorez'},
+    badge:{th:'🇮🇹 อิตาลี',             en:'🇮🇹 Italy',             zh:'🇮🇹 意大利',          es:'🇮🇹 Italia',               ar:'🇮🇹 إيطاليا',                fr:'🇮🇹 Italie'},
+    lang: {th:'อิตาลี',                en:'Italian',               zh:'意大利语',             es:'Italiano',                 ar:'الإيطالية',                  fr:'Italien'},
+    season:{th:'เม.ย.–มิ.ย.',           en:'Apr–Jun',               zh:'4月–6月',              es:'Abr–Jun',                  ar:'أبريل–يونيو',                fr:'Avr–Juin'},
+    visa: {th:'🛂 Schengen Visa',       en:'🛂 Schengen Visa',      zh:'🛂 申根签证',          es:'🛂 Visado Schengen',       ar:'🛂 تأشيرة شنغن',             fr:'🛂 Visa Schengen'},
+    flight:{th:'~11 ชม.',              en:'~11 hrs',               zh:'约11小时',             es:'~11 h',                    ar:'~11 س',                      fr:'~11 h'},
+    highlights:{
+      th:['เยี่ยมโคลอสเซียม','ชิมเจลาโต้ต้นตำรับ','โยน Coin ที่น้ำพุเทรวี','ขึ้นโบสถ์เซนต์ปีเตอร์'],
+      en:['The Colosseum — still breathtaking','Gelato from a proper gelateria','Toss a coin in the Trevi Fountain','Climb St. Peter\'s Basilica for the view'],
+      zh:['依旧令人屏息的罗马斗兽场','正宗冰淇淋店的冰淇淋','在特雷维喷泉投硬币','登上圣彼得大教堂俯瞰全景'],
+      es:['El Coliseo — impresionante aún','Gelato de una gelatería auténtica','Lanzar una moneda a la Fontana de Trevi','Subir a San Pedro para las vistas'],
+      ar:['المدرج الروماني — لا يزال يأخذ الأنفاس','جيلاتو من محل حقيقي','رمي عملة في نافورة تريفي','صعود كنيسة القديس بطرس للمنظر'],
+      fr:['Le Colisée — toujours saisissant','Gelato d\'une vraie gelateria','Jeter une pièce dans la fontaine de Trévi','Monter à la basilique Saint-Pierre'],
+    },
+  },
+  Switzerland: {
+    name: {th:'ซูริค, สวิตเซอร์แลนด์', en:'Zurich, Switzerland',   zh:'苏黎世，瑞士',         es:'Zúrich, Suiza',            ar:'زيورخ، سويسرا',              fr:'Zurich, Suisse'},
+    desc: {th:'หนาวจัด อาจมีหิมะตก',   en:'Freezing cold — snow is possible',zh:'严寒，可能有雪，做好保暖',es:'Muy frío — puede nevar, abrígate bien',ar:'برد شديد — قد يكون هناك ثلج',fr:'Très froid — il peut neiger, couvrez-vous'},
+    badge:{th:'🇨🇭 สวิส',               en:'🇨🇭 Switzerland',       zh:'🇨🇭 瑞士',            es:'🇨🇭 Suiza',                ar:'🇨🇭 سويسرا',                 fr:'🇨🇭 Suisse'},
+    lang: {th:'เยอรมัน / ฝรั่งเศส',    en:'German / French',       zh:'德语/法语',            es:'Alemán / Francés',         ar:'الألمانية / الفرنسية',       fr:'Allemand / Français'},
+    season:{th:'มิ.ย.–ส.ค.',            en:'Jun–Aug',               zh:'6月–8月',              es:'Jun–Ago',                  ar:'يونيو–أغسطس',                fr:'Juin–Août'},
+    visa: {th:'🛂 Schengen Visa',       en:'🛂 Schengen Visa',      zh:'🛂 申根签证',          es:'🛂 Visado Schengen',       ar:'🛂 تأشيرة شنغن',             fr:'🛂 Visa Schengen'},
+    flight:{th:'~11.5 ชม.',            en:'~11.5 hrs',             zh:'约11.5小时',           es:'~11.5 h',                  ar:'~11.5 س',                    fr:'~11.5 h'},
+    highlights:{
+      th:['เล่นสกีที่อินเตอร์ลาเคน','นั่งรถไฟ Jungfrau','ชิมชีสและช็อกโกแลต','ล่องเรือทะเลสาบเจนีวา'],
+      en:['Skiing or hiking in Interlaken','Jungfraujoch — the top of Europe','Swiss fondue and chocolate everywhere','Boat on Lake Geneva'],
+      zh:['因特拉肯滑雪或徒步','少女峰——欧洲之巅','无处不在的奶酪火锅和瑞士巧克力','日内瓦湖游船'],
+      es:['Esquiar o senderismo en Interlaken','Jungfraujoch — la cima de Europa','Fondue y chocolate suizo por todas partes','Barco en el lago Ginebra'],
+      ar:['التزلج أو المشي في إنترلاكن','يونغفراوخ — قمة أوروبا','فوندو الجبن والشوكولاتة السويسرية في كل مكان','قارب على بحيرة جنيف'],
+      fr:['Ski ou randonnée à Interlaken','Jungfraujoch — le toit de l\'Europe','Fondue et chocolat suisse partout','Bateau sur le lac Léman'],
+    },
+  },
+  Taiwan: {
+    name: {th:'ไทเป, ไต้หวัน',          en:'Taipei, Taiwan',        zh:'台北，台湾',           es:'Taipéi, Taiwán',           ar:'تايبيه، تايوان',             fr:'Taipei, Taïwan'},
+    desc: {th:'อบอุ่น เดินชิลล์ได้ทั้งวัน',en:'Warm and comfortable — easy all-day walking',zh:'温暖舒适，适合全天步行游览',es:'Cálido y cómodo — perfecto para caminar todo el día',ar:'دافئ ومريح — مناسب للتجول طوال اليوم',fr:'Chaud et agréable — idéal pour marcher toute la journée'},
+    badge:{th:'🇹🇼 ไต้หวัน',             en:'🇹🇼 Taiwan',            zh:'🇹🇼 台湾',            es:'🇹🇼 Taiwán',               ar:'🇹🇼 تايوان',                 fr:'🇹🇼 Taïwan'},
+    lang: {th:'จีน (แมนดาริน)',         en:'Mandarin Chinese',      zh:'普通话',               es:'Chino mandarín',           ar:'الصينية الماندرينية',        fr:'Mandarin'},
+    season:{th:'ต.ค.–ธ.ค.',             en:'Oct–Dec',               zh:'10月–12月',            es:'Oct–Dic',                  ar:'أكتوبر–ديسمبر',              fr:'Oct–Déc'},
+    visa: {th:'✅ ฟรีวีซ่า 30 วัน',    en:'✅ Visa-free 30 days',  zh:'✅ 免签30天',          es:'✅ Sin visa 30 días',       ar:'✅ بدون تأشيرة 30 يوماً',   fr:'✅ Sans visa 30 jours'},
+    flight:{th:'~3.5 ชม.',             en:'~3.5 hrs',              zh:'约3.5小时',            es:'~3.5 h',                   ar:'~3.5 س',                     fr:'~3.5 h'},
+    highlights:{
+      th:['เดินตลาดกลางคืนซื่อหลิน','ขึ้นตึกไทเป 101','ชิม Stinky Tofu','ปั่นจักรยานรอบเมือง'],
+      en:['Shilin Night Market for everything','Taipei 101 views from the top','Stinky tofu — brave it, it\'s worth it','Cycling the riverside paths'],
+      zh:['士林夜市的一切','登上台北101观景台','臭豆腐——勇敢尝试，值得一试','沿河岸骑自行车'],
+      es:['Mercado nocturno Shilin — para todo','Vistas desde lo alto del Taipei 101','Tofu apestoso — atrévete, vale la pena','Ciclismo por los caminos del río'],
+      ar:['سوق شيلين الليلي لكل شيء','إطلالات من قمة تايبيه 101','التوفو النتن — تجرأ عليه، يستحق','ركوب الدراجات على الممرات النهرية'],
+      fr:['Marché nocturne de Shilin — pour tout','Vue du haut de Taipei 101','Tofu fermenté — tentez l\'aventure','Vélo le long des berges'],
+    },
+  },
+  China: {
+    name: {th:'ปักกิ่ง, จีน',           en:'Beijing, China',        zh:'北京，中国',           es:'Pekín, China',             ar:'بكين، الصين',                fr:'Pékin, Chine'},
+    desc: {th:'มีเมฆ อากาศเย็น เตรียมแจ็คเก็ต',en:'Cloudy and cool — bring a jacket',zh:'多云且凉爽，记得带外套',es:'Nublado y fresco — lleva una chaqueta',ar:'غيوم وطقس بارد — أحضر سترة',fr:'Nuageux et frais — prenez une veste'},
+    badge:{th:'🇨🇳 จีน',                en:'🇨🇳 China',             zh:'🇨🇳 中国',            es:'🇨🇳 China',                ar:'🇨🇳 الصين',                  fr:'🇨🇳 Chine'},
+    lang: {th:'จีน (แมนดาริน)',         en:'Mandarin Chinese',      zh:'普通话',               es:'Chino mandarín',           ar:'الصينية الماندرينية',        fr:'Mandarin'},
+    season:{th:'เม.ย.–พ.ค.',            en:'Apr–May',               zh:'4月–5月',              es:'Abr–May',                  ar:'أبريل–مايو',                 fr:'Avr–Mai'},
+    visa: {th:'🛂 วีซ่าจีน',            en:'🛂 China Visa required',zh:'🛂 需中国签证',        es:'🛂 Visa China requerida',  ar:'🛂 تأشيرة صينية مطلوبة',    fr:'🛂 Visa chinois requis'},
+    flight:{th:'~4.5 ชม.',             en:'~4.5 hrs',              zh:'约4.5小时',            es:'~4.5 h',                   ar:'~4.5 س',                     fr:'~4.5 h'},
+    highlights:{
+      th:['เดินกำแพงเมืองจีน','เที่ยวพระราชวังต้องห้าม','ชิม Peking Duck','ชม Temple of Heaven'],
+      en:['Great Wall — pick a less-touristy section','Forbidden City (go early for fewer crowds)','Peking duck at a proper restaurant','Temple of Heaven in the morning'],
+      zh:['长城——选择游客较少的路段','故宫（早去避开人群）','正宗餐厅的北京烤鸭','清晨的天坛'],
+      es:['Gran Muralla — elige una sección menos turística','Ciudad Prohibida (llega temprano para evitar multitudes)','Pato Pekín en un restaurante auténtico','Templo del Cielo por la mañana'],
+      ar:['سور الصين العظيم — اختر قسماً أقل ازدحاماً','المدينة المحرمة (اذهب مبكراً لتفادي الحشود)','بط بكين في مطعم حقيقي','معبد السماء في الصباح'],
+      fr:['Grande Muraille — choisissez une section moins touristique','Cité Interdite (arrivez tôt pour éviter la foule)','Canard laqué dans un vrai restaurant','Temple du Ciel le matin'],
+    },
+  },
+  UAE: {
+    name: {th:'ดูไบ, UAE',              en:'Dubai, UAE',            zh:'迪拜，阿联酋',         es:'Dubái, EAU',               ar:'دبي، الإمارات',              fr:'Dubaï, EAU'},
+    desc: {th:'ร้อนและแห้งมาก ดื่มน้ำบ่อยๆ',en:'Blazing heat — drink water constantly',zh:'烈日炎炎，注意补水',es:'Calor abrasador — bebe agua constantemente',ar:'حرارة لاهبة — اشرب الماء باستمرار',fr:'Chaleur intense — buvez beaucoup d\'eau'},
+    badge:{th:'🇦🇪 UAE',               en:'🇦🇪 UAE',               zh:'🇦🇪 阿联酋',          es:'🇦🇪 EAU',                  ar:'🇦🇪 الإمارات',               fr:'🇦🇪 Émirats'},
+    lang: {th:'อาหรับ / อังกฤษ',       en:'Arabic / English',      zh:'阿拉伯语/英语',        es:'Árabe / Inglés',           ar:'العربية / الإنجليزية',       fr:'Arabe / Anglais'},
+    season:{th:'พ.ย.–เม.ย.',            en:'Nov–Apr',               zh:'11月–4月',             es:'Nov–Abr',                  ar:'نوفمبر–أبريل',               fr:'Nov–Avr'},
+    visa: {th:'✅ Visa on Arrival',     en:'✅ Visa on Arrival',    zh:'✅ 落地签',            es:'✅ Visa a la llegada',      ar:'✅ تأشيرة عند الوصول',       fr:'✅ Visa à l\'arrivée'},
+    flight:{th:'~6.5 ชม.',             en:'~6.5 hrs',              zh:'约6.5小时',            es:'~6.5 h',                   ar:'~6.5 س',                     fr:'~6.5 h'},
+    highlights:{
+      th:['ขึ้นชม Burj Khalifa','ช้อปปิ้ง Dubai Mall','ขับรถ Dune Bashing','ดูน้ำพุดูไบยามค่ำ'],
+      en:['Burj Khalifa — worth the queue','Dubai Mall (it has a ski slope inside)','Dune bashing at sunset','Dubai Fountain show at night'],
+      zh:['哈利法塔——值得排队','迪拜购物中心（里面有滑雪场）','日落时沙漠越野','夜晚的迪拜音乐喷泉表演'],
+      es:['Burj Khalifa — vale la espera','Dubai Mall (tiene una pista de esquí dentro)','Dune bashing al atardecer','Espectáculo de la fuente de Dubái de noche'],
+      ar:['برج خليفة — يستحق الانتظار','دبي مول (به منحدر تزلج داخلي)','التجوال على الكثبان عند الغروب','عرض نافورة دبي في الليل'],
+      fr:['Burj Khalifa — ça vaut l\'attente','Dubai Mall (avec une piste de ski intérieure)','Dune bashing au coucher du soleil','Spectacle de la fontaine de Dubaï le soir'],
+    },
+  },
+  Singapore: {
+    name: {th:'สิงคโปร์',               en:'Singapore',             zh:'新加坡',               es:'Singapur',                 ar:'سنغافورة',                   fr:'Singapour'},
+    desc: {th:'ร้อนชื้น อาจมีฝนช่วงบ่าย', en:'Hot and humid — afternoon showers likely',zh:'闷热潮湿，下午可能有阵雨',es:'Caluroso y húmedo — posibles lluvias por la tarde',ar:'حار ورطب — أمطار محتملة بعد الظهر',fr:'Chaud et humide — averses possibles l\'après-midi'},
+    badge:{th:'🇸🇬 สิงคโปร์',            en:'🇸🇬 Singapore',        zh:'🇸🇬 新加坡',          es:'🇸🇬 Singapur',             ar:'🇸🇬 سنغافورة',               fr:'🇸🇬 Singapour'},
+    lang: {th:'อังกฤษ / จีน',           en:'English / Chinese',     zh:'英语/华语',            es:'Inglés / Chino',           ar:'الإنجليزية / الصينية',       fr:'Anglais / Chinois'},
+    season:{th:'ตลอดปี',               en:'Year-round',             zh:'全年',                 es:'Todo el año',              ar:'طوال العام',                 fr:'Toute l\'année'},
+    visa: {th:'✅ ฟรีวีซ่า 30 วัน',    en:'✅ Visa-free 30 days',  zh:'✅ 免签30天',          es:'✅ Sin visa 30 días',       ar:'✅ بدون تأشيرة 30 يوماً',   fr:'✅ Sans visa 30 jours'},
+    flight:{th:'~2.5 ชม.',             en:'~2.5 hrs',              zh:'约2.5小时',            es:'~2.5 h',                   ar:'~2.5 س',                     fr:'~2.5 h'},
+    highlights:{
+      th:['ชม Gardens by the Bay','เดินย่าน Chinatown','ชิม Chilli Crab','ขึ้น Marina Bay Sands'],
+      en:['Gardens by the Bay — Supertrees at night','Chinatown for hawker food','Chilli crab at a hawker centre','Marina Bay Sands rooftop pool'],
+      zh:['滨海湾花园——夜晚的超级树','唐人街的小贩美食','小贩中心的辣椒螃蟹','滨海湾金沙天台泳池'],
+      es:['Gardens by the Bay — Supertrees de noche','Chinatown para comida en hawker centres','Cangrejo con chile en un hawker centre','Azotea de Marina Bay Sands'],
+      ar:['حدائق الخليج — الأشجار الخارقة في الليل','حي الصين للطعام الشعبي','سرطان البحر بالفلفل الحار في المركز الشعبي','حمام سباحة مارينا باي ساندز على السطح'],
+      fr:['Gardens by the Bay — Supertrees la nuit','Chinatown pour la street food','Crabe au piment dans un hawker centre','Piscine sur le toit du Marina Bay Sands'],
+    },
+  },
+  Vietnam: {
+    name: {th:'ดานัง, เวียดนาม',        en:'Da Nang, Vietnam',      zh:'岘港，越南',           es:'Da Nang, Vietnam',         ar:'دا نانغ، فيتنام',            fr:'Da Nang, Viêt Nam'},
+    desc: {th:'อากาศดี ลมทะเลเย็นสบาย', en:'Lovely sea breeze — nice and breezy',zh:'海风习习，天气宜人',es:'Brisa marina agradable — fresco y bonito',ar:'نسيم بحري لطيف — طقس منعش',fr:'Brise marine agréable — frais et plaisant'},
+    badge:{th:'🇻🇳 เวียดนาม',            en:'🇻🇳 Vietnam',           zh:'🇻🇳 越南',            es:'🇻🇳 Vietnam',              ar:'🇻🇳 فيتنام',                 fr:'🇻🇳 Viêt Nam'},
+    lang: {th:'เวียดนาม',              en:'Vietnamese',            zh:'越南语',               es:'Vietnamita',               ar:'الفيتنامية',                 fr:'Vietnamien'},
+    season:{th:'ม.ค.–เม.ย.',            en:'Jan–Apr',               zh:'1月–4月',              es:'Ene–Abr',                  ar:'يناير–أبريل',                fr:'Jan–Avr'},
+    visa: {th:'✅ ฟรีวีซ่า 45 วัน',    en:'✅ Visa-free 45 days',  zh:'✅ 免签45天',          es:'✅ Sin visa 45 días',       ar:'✅ بدون تأشيرة 45 يوماً',   fr:'✅ Sans visa 45 jours'},
+    flight:{th:'~2 ชม.',               en:'~2 hrs',                zh:'约2小时',              es:'~2 h',                     ar:'~2 س',                       fr:'~2 h'},
+    highlights:{
+      th:['เที่ยวอ่าวฮาลอง','เดินเมืองเก่าฮอยอัน','ชิม Pho ต้นตำรับ','ขี่มอเตอร์ไซค์ชมเมือง'],
+      en:['Ha Long Bay by overnight boat','Hoi An Ancient Town at dusk','Pho from a street cart','Rent a motorbike and go'],
+      zh:['乘夜船游下龙湾','黄昏时分的会安古镇','街头摊位的越南河粉','租辆摩托车随心出发'],
+      es:['Bahía de Ha Long en barco nocturno','Ciudad Antigua de Hoi An al atardecer','Pho de un carrito callejero','Alquila una moto y sal a explorar'],
+      ar:['خليج هالونغ على متن قارب ليلي','مدينة هوي أن القديمة عند الغسق','شوربة فو من عربة شارع','استأجر دراجة نارية وانطلق'],
+      fr:['Baie d\'Ha Long en bateau de nuit','Vieille ville de Hoi An au crépuscule','Pho d\'une charrette de rue','Louer une moto et partir'],
+    },
+  },
+  Maldives: {
+    name: {th:'มาเล่, มัลดีฟส์',        en:'Malé, Maldives',        zh:'马累，马尔代夫',       es:'Malé, Maldivas',           ar:'ماليه، المالديف',            fr:'Malé, Maldives'},
+    desc: {th:'แดดแรง น้ำทะเลใสมาก',   en:'Blazing sun and crystal-clear water',zh:'阳光灿烂，海水清澈见底',es:'Sol intenso y agua cristalina',ar:'شمس حارقة ومياه صافية كالكريستال',fr:'Soleil de plomb et eau cristalline'},
+    badge:{th:'🇲🇻 มัลดีฟส์',            en:'🇲🇻 Maldives',          zh:'🇲🇻 马尔代夫',        es:'🇲🇻 Maldivas',             ar:'🇲🇻 المالديف',               fr:'🇲🇻 Maldives'},
+    lang: {th:'ดิเวฮิ / อังกฤษ',        en:'Dhivehi / English',     zh:'迪维希语/英语',        es:'Divehi / Inglés',          ar:'الديفيهية / الإنجليزية',     fr:'Dhivehi / Anglais'},
+    season:{th:'พ.ย.–เม.ย.',            en:'Nov–Apr',               zh:'11月–4月',             es:'Nov–Abr',                  ar:'نوفمبر–أبريل',               fr:'Nov–Avr'},
+    visa: {th:'✅ Visa on Arrival',     en:'✅ Visa on Arrival',    zh:'✅ 落地签',            es:'✅ Visa a la llegada',      ar:'✅ تأشيرة عند الوصول',       fr:'✅ Visa à l\'arrivée'},
+    flight:{th:'~3 ชม.',               en:'~3 hrs',                zh:'约3小时',              es:'~3 h',                     ar:'~3 س',                       fr:'~3 h'},
+    highlights:{
+      th:['พักรีสอร์ทบนน้ำ','ดำน้ำดูฉลามวาฬ','ชม Bioluminescent Plankton','นั่งเรือชม Sunset'],
+      en:['Overwater bungalow — yes, this is real life','Snorkelling with whale sharks','Bioluminescent beach at night','Dhoni boat sunset cruise'],
+      zh:['水上屋——是的，这是真实生活','与鲸鲨一起浮潜','夜晚发光的海滩','多尼船夕阳游览'],
+      es:['Bungalow sobre el agua — sí, es vida real','Snorkel con tiburones ballena','Playa bioluminiscente de noche','Crucero al atardecer en barco dhoni'],
+      ar:['كوخ فوق الماء — نعم هذه حياة حقيقية','الغطس مع أسماك القرش الحوتية','شاطئ متوهج ليلاً','جولة غروب الشمس على قارب ذوني'],
+      fr:['Bungalow sur l\'eau — oui, c\'est réel','Snorkeling avec les requins baleines','Plage bioluminescente la nuit','Croisière au coucher du soleil en dhoni'],
+    },
+  },
+  Australia: {
+    name: {th:'ซิดนีย์, ออสเตรเลีย',   en:'Sydney, Australia',     zh:'悉尼，澳大利亚',       es:'Sídney, Australia',        ar:'سيدني، أستراليا',            fr:'Sydney, Australie'},
+    desc: {th:'แจ่มใส อากาศดีมาก',     en:'Bright and pleasant',   zh:'阳光明媚，天气宜人',   es:'Brillante y agradable',    ar:'مشرق ولطيف',                 fr:'Lumineux et agréable'},
+    badge:{th:'🇦🇺 ออสเตรเลีย',         en:'🇦🇺 Australia',         zh:'🇦🇺 澳大利亚',        es:'🇦🇺 Australia',            ar:'🇦🇺 أستراليا',               fr:'🇦🇺 Australie'},
+    lang: {th:'อังกฤษ',               en:'English',               zh:'英语',                 es:'Inglés',                   ar:'الإنجليزية',                 fr:'Anglais'},
+    season:{th:'ก.ย.–พ.ย.',            en:'Sep–Nov',               zh:'9月–11月',             es:'Sep–Nov',                  ar:'سبتمبر–نوفمبر',              fr:'Sep–Nov'},
+    visa: {th:'🛂 ETA',                en:'🛂 ETA required',       zh:'🛂 需电子旅行授权',    es:'🛂 ETA requerida',         ar:'🛂 تصريح ETA مطلوب',         fr:'🛂 Autorisation ETA requise'},
+    flight:{th:'~9.5 ชม.',             en:'~9.5 hrs',              zh:'约9.5小时',            es:'~9.5 h',                   ar:'~9.5 س',                     fr:'~9.5 h'},
+    highlights:{
+      th:['ชม Sydney Opera House','เดิน Bondi Beach','เยี่ยม Blue Mountains','ดู Kangaroo / Koala'],
+      en:['Sydney Opera House — iconic for a reason','Bondi Beach on a weekday morning','Blue Mountains day trip','Kangaroos and koalas up close'],
+      zh:['悉尼歌剧院——当之无愧的标志','工作日清晨的邦迪海滩','蓝山一日游','近距离接触袋鼠和考拉'],
+      es:['Opera de Sídney — icónica por algo','Bondi Beach un martes por la mañana','Excursión a las Montañas Azules','Canguros y koalas de cerca'],
+      ar:['دار الأوبرا في سيدني — أيقونة لها سبب','شاطئ بوندي صباح يوم عمل','رحلة يوم إلى الجبال الزرقاء','الكنغر والكوالا عن قرب'],
+      fr:['Opéra de Sydney — iconique pour une bonne raison','Bondi Beach un matin de semaine','Excursion aux Blue Mountains','Kangourous et koalas de près'],
+    },
+  },
+};
+
+// ─── Helper: get translated country fields ─────────────────────────────────────
+function getCountryI18n(key) {
+  const c = DB_COUNTRIES[key];
+  if (!c) return null;
+  const l = _lang;
+  return {
+    name:       c.name[l]       || c.name['en'],
+    desc:       c.desc[l]       || c.desc['en'],
+    badge:      c.badge[l]      || c.badge['en'],
+    lang:       c.lang[l]       || c.lang['en'],
+    season:     c.season[l]     || c.season['en'],
+    visa:       c.visa[l]       || c.visa['en'],
+    flight:     c.flight[l]     || c.flight['en'],
+    highlights: c.highlights[l] || c.highlights['en'],
+  };
+}
 
 // ─── Core i18n engine ────────────────────────────────────────────────────────
 let _lang = localStorage.getItem('travelaroha_lang') || 'th';
@@ -199,6 +557,11 @@ function renderLangSwitcher(containerId) {
   const wrap = document.getElementById(containerId);
   if (!wrap) return;
 
+  const isDark = document.documentElement.classList.contains('dark');
+  const menuBg     = isDark ? '#1a2420' : '#ffffff';
+  const menuBorder = isDark ? '1px solid rgba(255,255,255,0.1)' : '1px solid rgba(0,0,0,0.09)';
+  const menuColor  = isDark ? '#d4d4d8' : '#18181b';
+
   wrap.innerHTML = `
     <div id="lang-sw" style="position:relative;display:flex;align-items:center;">
       <button onclick="_toggleLangMenu()" style="
@@ -215,16 +578,16 @@ function renderLangSwitcher(containerId) {
       </button>
       <div id="lang-menu" style="
         display:none;position:absolute;top:calc(100% + 8px);right:0;
-        background:white;border:1px solid rgba(0,0,0,0.09);border-radius:16px;
-        box-shadow:0 8px 32px rgba(0,0,0,0.15);padding:6px;min-width:152px;z-index:10000;">
+        background:${menuBg};border:${menuBorder};border-radius:16px;color:${menuColor};
+        box-shadow:0 8px 32px rgba(0,0,0,0.2);padding:6px;min-width:152px;z-index:10000;">
         ${Object.entries(LANGS).map(([code, l]) => `
           <button onclick="setLang('${code}')" style="
             width:100%;text-align:start;padding:8px 12px;border-radius:10px;
             display:flex;align-items:center;gap:9px;font-size:13px;font-weight:500;
-            background:${code === _lang ? 'rgba(139,168,136,0.15)' : 'transparent'};
+            background:${code === _lang ? 'rgba(139,168,136,0.2)' : 'transparent'};
             cursor:pointer;color:inherit;border:none;transition:background 0.12s;"
-            onmouseover="this.style.background='rgba(139,168,136,0.13)'"
-            onmouseout="this.style.background='${code === _lang ? 'rgba(139,168,136,0.15)' : 'transparent'}'">
+            onmouseover="this.style.background='rgba(139,168,136,0.18)'"
+            onmouseout="this.style.background='${code === _lang ? 'rgba(139,168,136,0.2)' : 'transparent'}'">
             <span style="font-size:17px;line-height:1">${l.flag}</span>
             <span>${l.label}</span>
             ${code === _lang ? '<span style="margin-left:auto;color:#6b8a68;font-size:12px">✓</span>' : ''}
@@ -232,6 +595,7 @@ function renderLangSwitcher(containerId) {
       </div>
     </div>`;
 
+  // Close on outside click
   document.addEventListener('click', function _close(e) {
     const sw = document.getElementById('lang-sw');
     if (sw && !sw.contains(e.target)) {
@@ -240,6 +604,12 @@ function renderLangSwitcher(containerId) {
     }
   });
 }
+
+// Rebuild switcher when dark/light theme changes
+(function _watchTheme() {
+  const obs = new MutationObserver(() => _rebuildSwitcher());
+  obs.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
+})();
 
 window._toggleLangMenu = function() {
   const m = document.getElementById('lang-menu');
