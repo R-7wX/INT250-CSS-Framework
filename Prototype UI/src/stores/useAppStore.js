@@ -1,0 +1,104 @@
+import { defineStore } from 'pinia'
+import { ref, computed, watch } from 'vue'
+
+const LS_LANG    = 'travelaroha_lang'
+const LS_SAVED   = 'travelaroha_saved'
+const LS_BOARD   = 'travelaroha_storyboard'
+const LS_EXPORT  = 'travelaroha_export'
+const LS_CHECK   = 'travelaroha_checklist'
+const LS_TRIPNAME = 'travelaroha_tripname'
+
+export const useAppStore = defineStore('app', () => {
+  // ── Language ──
+  const lang = ref(localStorage.getItem(LS_LANG) || 'th')
+  watch(lang, v => localStorage.setItem(LS_LANG, v))
+
+  // ── Dark mode ──
+  const dark = ref(localStorage.getItem('theme') === 'dark')
+  watch(dark, v => {
+    if (v) document.documentElement.classList.add('dark')
+    else   document.documentElement.classList.remove('dark')
+    localStorage.setItem('theme', v ? 'dark' : 'light')
+  })
+  // init DOM
+  if (dark.value) document.documentElement.classList.add('dark')
+  else            document.documentElement.classList.remove('dark')
+
+  // ── Saved places ──
+  const savedPlaces = ref(
+    JSON.parse(localStorage.getItem(LS_SAVED) || '[]')
+  )
+  watch(savedPlaces, v => localStorage.setItem(LS_SAVED, JSON.stringify(v)), { deep: true })
+
+  function toggleSaved(name) {
+    const idx = savedPlaces.value.indexOf(name)
+    if (idx === -1) savedPlaces.value.push(name)
+    else savedPlaces.value.splice(idx, 1)
+  }
+  function isSaved(name) {
+    return savedPlaces.value.includes(name)
+  }
+
+  // ── Storyboard ──
+  const boardData = ref(
+    JSON.parse(localStorage.getItem(LS_BOARD) || 'null')
+  )
+  function saveBoard(data) {
+    boardData.value = data
+    localStorage.setItem(LS_BOARD, JSON.stringify(data))
+  }
+  function clearBoard() {
+    boardData.value = null
+    localStorage.removeItem(LS_BOARD)
+  }
+
+  // ── Export (storyboard → checklist) ──
+  const exportData = ref(null)
+  function setExport(data) {
+    exportData.value = data
+    localStorage.setItem(LS_EXPORT, JSON.stringify(data))
+  }
+  function loadExport() {
+    const raw = localStorage.getItem(LS_EXPORT)
+    if (raw) { try { exportData.value = JSON.parse(raw) } catch(e) {} }
+  }
+  function clearExport() {
+    exportData.value = null
+    localStorage.removeItem(LS_EXPORT)
+  }
+
+  // ── Checklist state ──
+  const checkState = ref(
+    JSON.parse(localStorage.getItem(LS_CHECK) || '{}')
+  )
+  watch(checkState, v => localStorage.setItem(LS_CHECK, JSON.stringify(v)), { deep: true })
+  function setChecked(id, val) {
+    checkState.value = { ...checkState.value, [id]: val }
+  }
+  function resetChecklist() {
+    checkState.value = {}
+  }
+
+  // ── Trip Name ──
+  const tripName = ref(localStorage.getItem(LS_TRIPNAME) || '')
+  watch(tripName, v => localStorage.setItem(LS_TRIPNAME, v))
+
+  return {
+    lang,
+    dark,
+    savedPlaces,
+    toggleSaved,
+    isSaved,
+    boardData,
+    saveBoard,
+    clearBoard,
+    exportData,
+    setExport,
+    loadExport,
+    clearExport,
+    checkState,
+    setChecked,
+    resetChecklist,
+    tripName,
+  }
+})
