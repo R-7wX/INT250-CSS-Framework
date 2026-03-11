@@ -6,7 +6,7 @@
     <title>Traveloha - Discovery</title>
     <link rel="icon" type="image/png" href="src/favicon.png">
     <script src="https://cdn.tailwindcss.com"></script>
-    <script>tailwind.config={darkMode:'class',theme:{extend:{colors:{brand:{50:'#f4f5f4',100:'#e6e9e6',500:'#8ba888',600:'#6b8a68',900:'#3a4a39'}}}}}</script>
+    <script>tailwind.config={darkMode:'class',theme:{extend:{colors:{brand:{50:'#f0fdfa',100:'#ccfbf1',200:'#99f6e4',300:'#5eead4',400:'#2dd4bf',500:'#14b8a6',600:'#0d9488',700:'#0f766e',800:'#115e59',900:'#134e4a'}}}}}</script>
     <script>
 // ─── Travelaroha i18n ─────────────────────────────────────────────────────────
 // 6 languages: th, en, zh, es, ar, fr
@@ -867,7 +867,7 @@ function renderLangSwitcher(containerId) {
             onmouseout="this.style.background='${code === _lang ? 'rgba(139,168,136,0.2)' : 'transparent'}'">
             <span style="font-size:17px;line-height:1">${l.flag}</span>
             <span>${l.label}</span>
-            ${code === _lang ? '<span style="margin-left:auto;color:#6b8a68;font-size:12px">✓</span>' : ''}
+            ${code === _lang ? '<span style="margin-left:auto;color:#0d9488;font-size:12px">✓</span>' : ''}
           </button>`).join('')}
       </div>
     </div>`;
@@ -900,8 +900,8 @@ window._toggleLangMenu = function() {
         #hide-checkbox{opacity:0;height:0;width:0;position:absolute;}.toggle{position:relative;cursor:pointer;display:inline-block;width:200px;height:100px;background:#211042;border-radius:50px;transition:500ms;overflow:hidden;box-shadow:0 10px 15px -3px rgba(0,0,0,0.3);}.toggle-button{position:absolute;display:inline-block;top:7px;left:6px;width:86px;height:86px;border-radius:50%;background:#FAEAF1;overflow:hidden;box-shadow:0 0 35px 4px rgba(255,255,255);transition:all 500ms ease-out;z-index:10;}.crater{position:absolute;display:inline-block;background:#FAEAF1;border-radius:50%;transition:500ms;}.crater-1{background:#FFFFF9;width:86px;height:86px;left:10px;bottom:10px;}.crater-2{width:20px;height:20px;top:-7px;left:44px;}.crater-3{width:16px;height:16px;top:20px;right:-4px;}.crater-4{width:10px;height:10px;top:24px;left:30px;}.crater-5{width:15px;height:15px;top:40px;left:48px;}.crater-6{width:10px;height:10px;top:48px;left:20px;}.crater-7{width:12px;height:12px;bottom:5px;left:35px;}.star{position:absolute;display:inline-block;border-radius:50%;background:#FFF;box-shadow:1px 0 2px 2px rgba(255,255,255);}.star-1{width:6px;height:6px;right:90px;bottom:40px;}.star-2{width:8px;height:8px;right:70px;top:10px;}.star-3{width:5px;height:5px;right:60px;bottom:15px;}.star-4{width:3px;height:3px;right:40px;bottom:50px;}.star-5{width:4px;height:4px;right:10px;bottom:35px;}.star-6,.star-7,.star-8{width:10px;height:2px;border-radius:2px;transform:rotate(-45deg);box-shadow:5px 0px 4px 1px #FFF;animation-name:travel;animation-duration:1.5s;animation-timing-function:ease-out;animation-iteration-count:infinite;}.star-6{right:30px;bottom:30px;animation-delay:-2s;}.star-7{right:50px;bottom:60px;}.star-8{right:90px;top:10px;animation-delay:-4s;}@keyframes travel{0%{transform:rotate(-45deg) translateX(70px);}50%{transform:rotate(-45deg) translateX(-20px);box-shadow:5px 0px 6px 1px #FFF;}100%{transform:rotate(-45deg) translateX(-30px);width:2px;height:2px;opacity:0;box-shadow:none;}}#hide-checkbox:checked+.toggle{background:#24D7F7;}#hide-checkbox:checked+.toggle .toggle-button{background:#F7FFFF;transform:translateX(102px);box-shadow:0 0 35px 5px rgba(255,255,255);}
         .glass-panel{background:rgba(255,255,255,0.65);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,0.5);box-shadow:0 4px 30px rgba(0,0,0,0.05);}.dark .glass-panel{background:rgba(24,24,27,0.7);border:1px solid rgba(255,255,255,0.08);box-shadow:0 4px 30px rgba(0,0,0,0.2);}
         ::-webkit-scrollbar{width:6px;height:6px;}::-webkit-scrollbar-thumb{background-color:#d4d4d8;border-radius:10px;}.dark ::-webkit-scrollbar-thumb{background-color:#3f3f46;}.scrollbar-hide::-webkit-scrollbar{display:none;}.scrollbar-hide{-ms-overflow-style:none;scrollbar-width:none;}
-        body{background-color:#f2efe8;background-image:radial-gradient(ellipse 90% 70% at 10% 30%,rgba(139,168,136,0.22) 0%,transparent 55%),radial-gradient(ellipse 70% 60% at 90% 10%,rgba(196,181,148,0.18) 0%,transparent 50%),radial-gradient(ellipse 80% 70% at 50% 90%,rgba(152,186,148,0.15) 0%,transparent 55%);}
-        html.dark body{background-color:#111912;background-image:radial-gradient(ellipse 90% 70% at 10% 30%,rgba(58,74,57,0.4) 0%,transparent 55%),radial-gradient(ellipse 70% 60% at 90% 10%,rgba(35,55,35,0.3) 0%,transparent 50%),radial-gradient(ellipse 80% 70% at 50% 90%,rgba(45,65,42,0.25) 0%,transparent 55%);}
+        body{background-color:#f8fafc;background-image:radial-gradient(ellipse 90% 70% at 10% 30%,rgba(20,184,166,0.15) 0%,transparent 55%),radial-gradient(ellipse 70% 60% at 90% 10%,rgba(13,148,136,0.12) 0%,transparent 50%),radial-gradient(ellipse 80% 70% at 50% 90%,rgba(45,212,191,0.10) 0%,transparent 55%);}
+        html.dark body{background-color:#0f172a;background-image:radial-gradient(ellipse 90% 70% at 10% 30%,rgba(15,118,110,0.35) 0%,transparent 55%),radial-gradient(ellipse 70% 60% at 90% 10%,rgba(17,94,89,0.25) 0%,transparent 50%),radial-gradient(ellipse 80% 70% at 50% 90%,rgba(19,78,74,0.20) 0%,transparent 55%);}
         html.dark body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;opacity:0.04;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");background-size:180px 180px;}
         @keyframes fadeInUp{from{opacity:0;transform:translateY(14px);}to{opacity:1;transform:translateY(0);}}
         .place-card{animation:fadeInUp 0.3s ease both;}
@@ -913,8 +913,8 @@ window._toggleLangMenu = function() {
 
     <nav class="sticky top-4 z-50 glass-panel shadow-sm flex justify-between items-center max-w-7xl mx-auto px-3 sm:px-4 md:px-6 py-2.5 md:py-3 rounded-2xl md:rounded-3xl transition-all duration-500 gap-2">
         <div class="flex items-center gap-1.5 sm:gap-2 md:gap-3 flex-shrink-0">
-            <img src="src/logo.png" alt="Travelaroha" class="w-7 h-7 sm:w-8 sm:h-8 md:w-10 md:h-10 rounded-full object-cover border-2 border-brand-500 shadow-sm bg-white">
-            <div class="font-bold text-brand-600 dark:text-brand-500 text-base sm:text-lg md:text-xl tracking-tight whitespace-nowrap">Travelaroha</div>
+            <img src="src/logo.png" alt="Travelaroha" class="w-7 h-7 sm:w-8 sm:h-8 md:w-10 md:h-10 rounded-full object-cover border-2 border-teal-500 shadow-sm bg-white">
+            <div class="font-bold text-teal-600 dark:text-teal-500 text-base sm:text-lg md:text-xl tracking-tight whitespace-nowrap">Travelaroha</div>
         </div>
         <!-- Desktop & Tablet nav — visible at sm+ -->
         <div class="hidden sm:flex gap-2 md:gap-5 lg:gap-8 font-medium text-zinc-500 dark:text-zinc-400 flex-1 justify-center min-w-0">
@@ -967,7 +967,7 @@ window._toggleLangMenu = function() {
 
         <!-- Filter bar -->
         <div id="filter-container" class="flex gap-3 overflow-x-auto pb-2 scrollbar-hide">
-            <button data-vibe="All" class="filter-btn active px-5 py-2.5 rounded-full text-sm font-medium shadow-sm whitespace-nowrap transition-all border bg-white dark:bg-zinc-800 border-zinc-200 dark:border-zinc-700 text-zinc-600 dark:text-zinc-300 [&.active]:bg-brand-500 [&.active]:text-white [&.active]:border-brand-500" data-i18n="idx_filter_all">ทั้งหมด</button>
+            <button data-vibe="All" class="filter-btn active px-5 py-2.5 rounded-full text-sm font-medium shadow-sm whitespace-nowrap transition-all border bg-white dark:bg-zinc-800 border-zinc-200 dark:border-zinc-700 text-zinc-600 dark:text-zinc-300 [&.active]:bg-orange-500 [&.active]:text-white [&.active]:border-orange-500" data-i18n="idx_filter_all">ทั้งหมด</button>
             <button data-vibe="Urban Adventure" class="filter-btn flex items-center gap-1.5 px-5 py-2.5 rounded-full text-sm font-medium shadow-sm whitespace-nowrap transition-all border bg-white dark:bg-zinc-800 border-zinc-200 dark:border-zinc-700 text-zinc-600 dark:text-zinc-300 [&.active]:bg-slate-600 [&.active]:text-white [&.active]:border-slate-600" data-i18n="idx_vibe_urban"><svg class="w-3.5 h-3.5 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24"><path d="M15 11V5l-3-3-3 3v2H3v14h18V11h-6zm-8 8H5v-2h2v2zm0-4H5v-2h2v2zm0-4H5v-2h2v2zm6 8h-2v-2h2v2zm0-4h-2v-2h2v2zm0-4h-2v-2h2v2zm0-4h-2V9h2v2zm6 12h-2v-2h2v2zm0-4h-2v-2h2v2z"/></svg>Urban Adventure</button>
             <button data-vibe="Slow Living" class="filter-btn flex items-center gap-1.5 px-5 py-2.5 rounded-full text-sm font-medium shadow-sm whitespace-nowrap transition-all border bg-white dark:bg-zinc-800 border-zinc-200 dark:border-zinc-700 text-zinc-600 dark:text-zinc-300 [&.active]:bg-amber-600 [&.active]:text-white [&.active]:border-amber-600" data-i18n="idx_vibe_slow"><svg class="w-3.5 h-3.5 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24"><path d="M18.5 3H6c-1.1 0-2 .9-2 2v5.71c0 3.83 2.95 7.18 6.78 7.29 3.96.12 7.22-3.06 7.22-7v-1h.5c1.93 0 3.5-1.57 3.5-3.5S20.43 3 18.5 3zM16 10c0 2.76-2.24 5-5 5s-5-2.24-5-5V5h10v5zm2.5-3H16V5h2.5c.83 0 1.5.67 1.5 1.5S19.33 7 18.5 7zM4 19h16v2H4z"/></svg>Slow Living</button>
             <button data-vibe="Nature Retreat" class="filter-btn flex items-center gap-1.5 px-5 py-2.5 rounded-full text-sm font-medium shadow-sm whitespace-nowrap transition-all border bg-white dark:bg-zinc-800 border-zinc-200 dark:border-zinc-700 text-zinc-600 dark:text-zinc-300 [&.active]:bg-emerald-600 [&.active]:text-white [&.active]:border-emerald-600" data-i18n="idx_vibe_nature"><svg class="w-3.5 h-3.5 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24"><path d="M17 8C8 10 5.9 16.17 3.82 21.34L5.71 22l1-2.3A4.49 4.49 0 008 20C17 20 22 3 22 3c-1 2-8 2-5 8"/></svg>Nature Retreat</button>
@@ -981,17 +981,17 @@ window._toggleLangMenu = function() {
             <div class="text-6xl">🗺️</div>
             <h3 class="text-xl font-bold" data-i18n="idx_empty_h">ไม่พบสถานที่</h3>
             <p class="text-slate-400 text-sm" data-i18n="idx_empty_sub">ลองเลือก Vibe อื่น หรือกด ❤️ บนการ์ดก่อนนะ</p>
-            <button onclick="setSavedMode(false)" class="mt-2 px-4 py-2 rounded-xl bg-brand-500 text-white text-sm font-medium" data-i18n="idx_see_all">ดูทั้งหมด</button>
+            <button onclick="setSavedMode(false)" class="mt-2 px-4 py-2 rounded-xl bg-orange-500 text-white text-sm font-medium" data-i18n="idx_see_all">ดูทั้งหมด</button>
         </div>
 
     </main>
 
     <!-- Mobile Bottom Nav (mobile only, hidden on sm+) -->
     <nav class="fixed bottom-0 left-0 right-0 z-50 sm:hidden glass-panel border-t border-slate-200/60 dark:border-slate-700/60 flex justify-around items-center py-2 px-2">
-        <a href="index.html" class="flex flex-col items-center gap-0.5 px-3 py-1.5 rounded-2xl bg-brand-500/10 text-brand-600 dark:text-brand-400 min-w-[56px]"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg><span class="text-[10px] font-bold" data-i18n="mob_discover">Discover</span></a>
+        <a href="index.html" class="flex flex-col items-center gap-0.5 px-3 py-1.5 rounded-2xl bg-teal-500/10 text-teal-600 dark:text-teal-400 min-w-[56px]"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg><span class="text-[10px] font-bold" data-i18n="mob_discover">Discover</span></a>
         <a href="storyboard.html" class="flex flex-col items-center gap-0.5 px-3 py-1.5 rounded-2xl text-slate-400 min-w-[56px]"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"/></svg><span class="text-[10px] font-medium" data-i18n="mob_storyboard">Storyboard</span></a>
         <a href="dashboard.html" class="flex flex-col items-center gap-0.5 px-3 py-1.5 rounded-2xl text-slate-400 min-w-[56px]"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg><span class="text-[10px] font-medium" data-i18n="mob_dashboard">Dashboard</span></a>
-        <button id="mob-theme-btn" onclick="_toggleTheme()" class="flex flex-col items-center gap-0.5 px-3 py-1.5 rounded-2xl text-slate-400 min-w-[56px]"><span id="mob-theme-icon" class="w-5 h-5 flex items-center justify-center"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/></svg></span><span class="text-[10px] font-medium" data-i18n="mob_theme">Theme</span></button>
+        
     </nav>
 
     <script>
@@ -1035,153 +1035,172 @@ window._toggleLangMenu = function() {
         const PLACES=[
           // ─── 🇯🇵 Japan ───────────────────────────────────────
           {name:'โตเกียว, ญี่ปุ่น',country:'Japan',vibe:'Urban Adventure',emoji:'🏙️',img:'https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?auto=format&fit=crop&w=800&q=80',desc:'ชิบุย่า คอสซิ่งและแสงนีออนที่ไม่มีที่ไหนเหมือน'},
-          {name:'เกียวโต, ญี่ปุ่น',country:'Japan',vibe:'Slow Living',emoji:'☕',img:'https://images.unsplash.com/photo-1528360983277-13d401cdc186?auto=format&fit=crop&w=800&q=80',desc:'วัด สวน และวิถีชีวิตแบบดั้งเดิม'},
-          {name:'ภูเขาไฟฟูจิ, ญี่ปุ่น',country:'Japan',vibe:'Nature Retreat',emoji:'🌲',img:'https://images.unsplash.com/photo-1490806843957-31f4c9a91c65?auto=format&fit=crop&w=800&q=80',desc:'ยอดเขาสูงสุดแห่งแดนอาทิตย์อุทัย'},
-          {name:'โอซาก้า, ญี่ปุ่น',country:'Japan',vibe:'Foodie Tour',emoji:'🍣',img:'https://images.unsplash.com/photo-1589308078059-be1415eab4c3?auto=format&fit=crop&w=800&q=80',desc:'เมืองหลวงแห่งอาหารอร่อยของญี่ปุ่น'},
-          {name:'โอกินาวา, ญี่ปุ่น',country:'Japan',vibe:'Beach Getaway',emoji:'🏖️',img:'https://images.unsplash.com/photo-1518509562904-e7ef99cdcc86?auto=format&fit=crop&w=800&q=80',desc:'ทะเลฟ้าใสและปะการังงามของญี่ปุ่น'},
-          {name:'นารา, ญี่ปุ่น',country:'Japan',vibe:'Slow Living',emoji:'☕',img:'https://picsum.photos/seed/nara-deer-japan/800/600',desc:'กวางเดินอิสระ วัดเก่าแก่และความสงบ'},
-          {name:'ฮากาตะ, ญี่ปุ่น',country:'Japan',vibe:'Foodie Tour',emoji:'🍣',img:'https://images.unsplash.com/photo-1617196034183-421b4040d20d?auto=format&fit=crop&w=800&q=80',desc:'ราเมนฮากาตะและตลาดอาหารทะเลสดของฟุกุโอกะ'},
-          // ─── 🇫🇷 France ──────────────────────────────────────
-          {name:'ปารีส, ฝรั่งเศส',country:'France',vibe:'Urban Adventure',emoji:'🏙️',img:'https://images.unsplash.com/photo-1499856871958-5b9627545d1a?auto=format&fit=crop&w=800&q=80',desc:'เดินเล่นริมแม่น้ำแซนและชมสถาปัตยกรรม'},
-          {name:'บอร์โดซ์, ฝรั่งเศส',country:'France',vibe:'Slow Living',emoji:'☕',img:'https://picsum.photos/seed/bordeaux-wine/800/600',desc:'ไวน์ชั้นเลิศและสถาปัตยกรรมคลาสสิก'},
-          {name:'แวร์ซาย, ฝรั่งเศส',country:'France',vibe:'Slow Living',emoji:'☕',img:'https://images.unsplash.com/photo-1541963463532-d68292c34b19?auto=format&fit=crop&w=800&q=80',desc:'พระราชวังและสวนที่งดงามที่สุดในยุโรป'},
-          {name:'นีส, ฝรั่งเศส',country:'France',vibe:'Beach Getaway',emoji:'🏖️',img:'https://images.unsplash.com/photo-1591825729269-caeb344f6df2?auto=format&fit=crop&w=800&q=80',desc:'ริเวียร่าฝรั่งเศส ทะเลสีฟ้าและบรรยากาศหรู'},
-          {name:'ลียง, ฝรั่งเศส',country:'France',vibe:'Foodie Tour',emoji:'🍣',img:'https://picsum.photos/seed/lyon-france/800/600',desc:'เมืองหลวงแห่งอาหารฝรั่งเศสตัวจริง'},
-          {name:'แอลป์ฝรั่งเศส',country:'France',vibe:'Nature Retreat',emoji:'🌲',img:'https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?auto=format&fit=crop&w=800&q=80',desc:'ภูเขาหิมะสูงตระหง่านและหมู่บ้านสกีระดับโลก'},
-          {name:'นอร์มังดี, ฝรั่งเศส',country:'France',vibe:'Nature Retreat',emoji:'🌲',img:'https://images.unsplash.com/photo-1594813980-47f56c4e7e0a?auto=format&fit=crop&w=800&q=80',desc:'หน้าผาสีขาวและชายหาดประวัติศาสตร์'},
-          // ─── 🇹🇭 Thailand ─────────────────────────────────────
-          {name:'กรุงเทพฯ, ไทย',country:'Thailand',vibe:'Urban Adventure',emoji:'🏙️',img:'https://images.unsplash.com/photo-1508009603885-50cf7c579365?auto=format&fit=crop&w=800&q=80',desc:'สตรีทฟู้ดและวัฒนธรรมที่ไม่มีที่ไหนเหมือน'},
-          {name:'เชียงใหม่, ไทย',country:'Thailand',vibe:'Slow Living',emoji:'☕',img:'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=800&q=80',desc:'วัดสวย กาแฟอร่อย ชีวิตช้าๆ ในเมืองเหนือ'},
-          {name:'ภูเก็ต, ไทย',country:'Thailand',vibe:'Beach Getaway',emoji:'🏖️',img:'https://images.unsplash.com/photo-1589394815804-964ed0be2eb5?auto=format&fit=crop&w=800&q=80',desc:'ทะเลอันดามันและหาดทรายขาวระดับโลก'},
-          {name:'กระบี่, ไทย',country:'Thailand',vibe:'Nature Retreat',emoji:'🌲',img:'https://images.unsplash.com/photo-1552465011-b4e21bf6e79a?auto=format&fit=crop&w=800&q=80',desc:'หน้าผาหินปูนสูงชัน ถ้ำและทะเลสีเขียวมรกต'},
-          {name:'เยาวราช, กรุงเทพฯ',country:'Thailand',vibe:'Foodie Tour',emoji:'🍣',img:'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=800&q=80',desc:'ถนนอาหารที่ดีที่สุดของกรุงเทพฯ'},
-          {name:'เกาะสมุย, ไทย',country:'Thailand',vibe:'Beach Getaway',emoji:'🏖️',img:'https://picsum.photos/seed/koh-samui-beach/800/600',desc:'หาดส่วนตัว รีสอร์ทหรูและพระอาทิตย์ตก'},
-          {name:'ปาย, ไทย',country:'Thailand',vibe:'Slow Living',emoji:'☕',img:'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=800&q=80',desc:'หุบเขาเย็นสบาย คาเฟ่ชิลล์และบรรยากาศโบฮีเมียน'},
-          // ─── 🇰🇷 South Korea ──────────────────────────────────
-          {name:'โซล, เกาหลีใต้',country:'SouthKorea',vibe:'Urban Adventure',emoji:'🏙️',img:'https://images.unsplash.com/photo-1517154421773-0529f29ea451?auto=format&fit=crop&w=800&q=80',desc:'K-culture ตึกระฟ้า และอาหารอร่อย'},
-          {name:'เกาะเชจู, เกาหลีใต้',country:'SouthKorea',vibe:'Nature Retreat',emoji:'🌲',img:'https://images.unsplash.com/photo-1569569970363-df7b6160d111?auto=format&fit=crop&w=800&q=80',desc:'ภูเขาไฟฮัลลาซันและทุ่งดอกไม้สีทอง'},
-          {name:'ปูซาน, เกาหลีใต้',country:'SouthKorea',vibe:'Beach Getaway',emoji:'🏖️',img:'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=80',desc:'หาดแฮอุนแดและตลาดปลาจากัลชี'},
-          {name:'คยองจู, เกาหลีใต้',country:'SouthKorea',vibe:'Slow Living',emoji:'☕',img:'https://images.unsplash.com/photo-1548013146-72479768bada?auto=format&fit=crop&w=800&q=80',desc:'เมืองหลวงเก่าแก่ สุสานและวัดพุทธ'},
-          {name:'จอนจู, เกาหลีใต้',country:'SouthKorea',vibe:'Foodie Tour',emoji:'🍣',img:'https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=800&q=80',desc:'บิบิมบับต้นตำรับและหมู่บ้านฮันอก'},
-          {name:'อินซาดง, โซล',country:'SouthKorea',vibe:'Slow Living',emoji:'☕',img:'https://images.unsplash.com/photo-1534430480872-3498386e7856?auto=format&fit=crop&w=800&q=80',desc:'ย่านศิลปะ ชาแบบดั้งเดิมและของที่ระลึกสวย'},
-          // ─── 🇺🇸 USA ──────────────────────────────────────────
-          {name:'นิวยอร์ก, สหรัฐฯ',country:'USA',vibe:'Urban Adventure',emoji:'🏙️',img:'https://images.unsplash.com/photo-1496442226666-8d4d0e62e6e9?auto=format&fit=crop&w=800&q=80',desc:'เมืองที่ไม่เคยหลับใหล'},
-          {name:'ลอสแอนเจลิส, สหรัฐฯ',country:'USA',vibe:'Urban Adventure',emoji:'🏙️',img:'https://images.unsplash.com/photo-1555400038-63f5ba517a47?auto=format&fit=crop&w=800&q=80',desc:'Hollywood ชายหาดและวัฒนธรรมป็อป'},
-          {name:'แกรนด์แคนยอน, สหรัฐฯ',country:'USA',vibe:'Nature Retreat',emoji:'🌲',img:'https://images.unsplash.com/photo-1474044159687-1ee9f3a51722?auto=format&fit=crop&w=800&q=80',desc:'แคนยอนสีแดงที่ยิ่งใหญ่ที่สุดในโลก'},
-          {name:'นิวออร์ลีนส์, สหรัฐฯ',country:'USA',vibe:'Foodie Tour',emoji:'🍣',img:'https://images.unsplash.com/photo-1570047484344-fef82dce7b9c?auto=format&fit=crop&w=800&q=80',desc:'แจ๊ส เคจัน และอาหารครีโอลที่เป็นเอกลักษณ์'},
-          {name:'ไมอามี, สหรัฐฯ',country:'USA',vibe:'Beach Getaway',emoji:'🏖️',img:'https://images.unsplash.com/photo-1506929562872-bb421503ef21?auto=format&fit=crop&w=800&q=80',desc:'Beach ไอคอนิก อาร์ตเดโคและไนต์ไลฟ์'},
-          {name:'ซานฟรานซิสโก, สหรัฐฯ',country:'USA',vibe:'Urban Adventure',emoji:'🏙️',img:'https://images.unsplash.com/photo-1449034446853-66c86144b0ad?auto=format&fit=crop&w=800&q=80',desc:'โกลเดนเกตบริดจ์และย่านเทคโนโลยีโลก'},
-          {name:'เยลโลว์สโตน, สหรัฐฯ',country:'USA',vibe:'Nature Retreat',emoji:'🌲',img:'https://images.unsplash.com/photo-1533167649158-6d508895b680?auto=format&fit=crop&w=800&q=80',desc:'ไกเซอร์น้ำพุร้อนและสัตว์ป่าในธรรมชาติ'},
-          // ─── 🇬🇧 UK ───────────────────────────────────────────
-          {name:'ลอนดอน, UK',country:'UK',vibe:'Urban Adventure',emoji:'🏙️',img:'https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?auto=format&fit=crop&w=800&q=80',desc:'ประวัติศาสตร์และวัฒนธรรมเก่าแก่'},
-          {name:'เอดินเบอระ, สกอตแลนด์',country:'UK',vibe:'Urban Adventure',emoji:'🏙️',img:'https://images.unsplash.com/photo-1559685959-ff5653f43c4f?auto=format&fit=crop&w=800&q=80',desc:'ปราสาทบนเนินหินและเทศกาลฟริงจ์ระดับโลก'},
-          {name:'คอตส์โวลด์, UK',country:'UK',vibe:'Slow Living',emoji:'☕',img:'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=800&q=80',desc:'หมู่บ้านหินทองและทุ่งหญ้าอังกฤษที่งดงาม'},
-          {name:'เลคดิสตริกต์, UK',country:'UK',vibe:'Nature Retreat',emoji:'🌲',img:'https://images.unsplash.com/photo-1489824904134-2fa20adf8f7d?auto=format&fit=crop&w=800&q=80',desc:'ทะเลสาบและเนินเขาที่สวยงามจนนักกวีหลงรัก'},
-          {name:'บาธ, UK',country:'UK',vibe:'Slow Living',emoji:'☕',img:'https://images.unsplash.com/photo-1547036967-23d11aacaee0?auto=format&fit=crop&w=800&q=80',desc:'โรมันบาธ สถาปัตยกรรมจอร์เจียนและชาน้ำยามบ่าย'},
-          {name:'ไฮแลนด์, สกอตแลนด์',country:'UK',vibe:'Nature Retreat',emoji:'🌲',img:'https://images.unsplash.com/photo-1518005068251-37900150dfca?auto=format&fit=crop&w=800&q=80',desc:'ทุ่งหิมะ ปราสาทในหมอกและทะเลสาบลอคเนส'},
-          // ─── 🇮🇹 Italy ───────────────────────────────────────
-          {name:'โรม, อิตาลี',country:'Italy',vibe:'Urban Adventure',emoji:'🏙️',img:'https://images.unsplash.com/photo-1552832230-c0197dd311b5?auto=format&fit=crop&w=800&q=80',desc:'โคลอสเซียมและถนนที่เดินไปหาประวัติศาสตร์ทุกก้าว'},
-          {name:'เวนิส, อิตาลี',country:'Italy',vibe:'Slow Living',emoji:'☕',img:'https://images.unsplash.com/photo-1523906834658-6e24ef2386f9?auto=format&fit=crop&w=800&q=80',desc:'คลองและโกนโดลาในเมืองที่ลอยอยู่บนน้ำ'},
-          {name:'ซินกเวแตร์เร, อิตาลี',country:'Italy',vibe:'Nature Retreat',emoji:'🌲',img:'https://images.unsplash.com/photo-1499678329028-101435549a4e?auto=format&fit=crop&w=800&q=80',desc:'หมู่บ้านสีสันบนหน้าผาริมทะเล'},
-          {name:'ทัสคานี, อิตาลี',country:'Italy',vibe:'Slow Living',emoji:'☕',img:'https://images.unsplash.com/photo-1467269204594-9661b134dd2b?auto=format&fit=crop&w=800&q=80',desc:'ทุ่งดอกทานตะวัน ไวน์คีอันติและฟาร์มสเตย์'},
-          {name:'อะมัลฟีโคสต์, อิตาลี',country:'Italy',vibe:'Beach Getaway',emoji:'🏖️',img:'https://images.unsplash.com/photo-1534430480872-3498386e7856?auto=format&fit=crop&w=800&q=80',desc:'ชายฝั่งหน้าผาที่สวยงามที่สุดในเมดิเตอร์เรเนียน'},
-          {name:'ฟลอเรนซ์, อิตาลี',country:'Italy',vibe:'Urban Adventure',emoji:'🏙️',img:'https://images.unsplash.com/photo-1516483638261-f4dbaf036963?auto=format&fit=crop&w=800&q=80',desc:'เมืองหลวงแห่งศิลปะยุคเรอเนซองส์'},
-          {name:'ซิซิลี, อิตาลี',country:'Italy',vibe:'Foodie Tour',emoji:'🍣',img:'https://images.unsplash.com/photo-1549989476-69a92fa57c36?auto=format&fit=crop&w=800&q=80',desc:'อาหารซิซิเลียนต้นตำรับและหาดทรายขาว'},
-          // ─── 🇨🇭 Switzerland ────────────────────────────────
-          {name:'ซูริค, สวิตเซอร์แลนด์',country:'Switzerland',vibe:'Slow Living',emoji:'☕',img:'https://images.unsplash.com/photo-1528702748617-c64d49f918af?auto=format&fit=crop&w=800&q=80',desc:'ทะเลสาบ คาเฟ่ชิลล์และช็อกโกแลต'},
-          {name:'อินเตอร์ลาเคน, สวิตเซอร์แลนด์',country:'Switzerland',vibe:'Nature Retreat',emoji:'🌲',img:'https://images.unsplash.com/photo-1527668752968-14dc70a27c95?auto=format&fit=crop&w=800&q=80',desc:'ระหว่างทะเลสาบสองแห่งกับยอดเขาจุงเฟรา'},
-          {name:'เซอร์แมทท์, สวิตเซอร์แลนด์',country:'Switzerland',vibe:'Nature Retreat',emoji:'🌲',img:'https://images.unsplash.com/photo-1531366936337-7c912a4589a7?auto=format&fit=crop&w=800&q=80',desc:'เงาของยอดแมทเทอร์ฮอร์นและสกีระดับโลก'},
-          {name:'ลูเซิร์น, สวิตเซอร์แลนด์',country:'Switzerland',vibe:'Slow Living',emoji:'☕',img:'https://picsum.photos/seed/lucerne-lake/800/600',desc:'สะพานไม้เก่าแก่และเมืองชิลล์ริมทะเลสาบ'},
-          {name:'เจนีวา, สวิตเซอร์แลนด์',country:'Switzerland',vibe:'Urban Adventure',emoji:'🏙️',img:'https://images.unsplash.com/photo-1563727626517-7f08d4fda228?auto=format&fit=crop&w=800&q=80',desc:'นาฬิกาหรู น้ำพุ Jet d\'Eau และอาหารนานาชาติ'},
-          {name:'เบิร์น, สวิตเซอร์แลนด์',country:'Switzerland',vibe:'Slow Living',emoji:'☕',img:'https://images.unsplash.com/photo-1562128755-1fe0f20ba10d?auto=format&fit=crop&w=800&q=80',desc:'เมืองหลวงเก่าแก่ หมีและช็อกโกแลตสวิส'},
-          // ─── 🇹🇼 Taiwan ─────────────────────────────────────
-          {name:'ไทเป, ไต้หวัน',country:'Taiwan',vibe:'Urban Adventure',emoji:'🏙️',img:'https://images.unsplash.com/photo-1550951298-5c7b95a66bfc?auto=format&fit=crop&w=800&q=80',desc:'ตลาดกลางคืนและอาหารต้นตำรับ'},
-          {name:'ทะเลสาบสุริยันจันทรา',country:'Taiwan',vibe:'Nature Retreat',emoji:'🌲',img:'https://images.unsplash.com/photo-1529259924913-f2c98379c5e0?auto=format&fit=crop&w=800&q=80',desc:'ทะเลสาบที่งดงามที่สุดของไต้หวัน'},
-          {name:'จิ่วเฟิน, ไต้หวัน',country:'Taiwan',vibe:'Slow Living',emoji:'☕',img:'https://images.unsplash.com/photo-1548013146-72479768bada?auto=format&fit=crop&w=800&q=80',desc:'เมืองหมอกบนเนินเขา แรงบันดาลใจของ Spirited Away'},
-          {name:'เขิ้นติง, ไต้หวัน',country:'Taiwan',vibe:'Beach Getaway',emoji:'🏖️',img:'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=80',desc:'อุทยานทางใต้สุดและหาดทรายสะอาด'},
-          {name:'ไถหนาน, ไต้หวัน',country:'Taiwan',vibe:'Foodie Tour',emoji:'🍣',img:'https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=800&q=80',desc:'เมืองอาหารเก่าแก่ที่สุดและวัฒนธรรมของไต้หวัน'},
-          {name:'อุทยานทาโรโกะ, ไต้หวัน',country:'Taiwan',vibe:'Nature Retreat',emoji:'🌲',img:'https://images.unsplash.com/photo-1525439457-e89fa88a1a41?auto=format&fit=crop&w=800&q=80',desc:'หุบเขาหินอ่อนและน้ำตกในอุทยานแห่งชาติ'},
-          // ─── 🇨🇳 China ───────────────────────────────────────
-          {name:'ปักกิ่ง, จีน',country:'China',vibe:'Urban Adventure',emoji:'🏙️',img:'https://images.unsplash.com/photo-1508804185872-d7badad00f7d?auto=format&fit=crop&w=800&q=80',desc:'กำแพงเมืองจีนและพระราชวังต้องห้าม'},
-          {name:'เซี่ยงไฮ้, จีน',country:'China',vibe:'Urban Adventure',emoji:'🏙️',img:'https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=800&q=80',desc:'ตึกระฟ้าสมัยใหม่ผสมอาคารอาณานิคม'},
-          {name:'กุ้ยหลิน, จีน',country:'China',vibe:'Nature Retreat',emoji:'🌲',img:'https://images.unsplash.com/photo-1559592413-7cec4d0cae2b?auto=format&fit=crop&w=800&q=80',desc:'เขาคาร์สต์สวยงามริมแม่น้ำหลีเจียง'},
-          {name:'เฉิงตู, จีน',country:'China',vibe:'Slow Living',emoji:'☕',img:'https://images.unsplash.com/photo-1608835291093-394b0c943a75?auto=format&fit=crop&w=800&q=80',desc:'นั่งดูหมีแพนด้าและชาอู่หลง'},
-          {name:'ฉงชิ่ง, จีน',country:'China',vibe:'Foodie Tour',emoji:'🍣',img:'https://picsum.photos/seed/chongqing-night/800/600',desc:'หม้อไฟสไตล์ฉงชิ่งที่เผ็ดที่สุดในโลก'},
-          {name:'จางเจียเจี้ย, จีน',country:'China',vibe:'Nature Retreat',emoji:'🌲',img:'https://images.unsplash.com/photo-1541411438265-4cb4687110f2?auto=format&fit=crop&w=800&q=80',desc:'เสาหินลอยฟ้าต้นแบบฉากใน Avatar'},
-          {name:'ซานย่า, จีน',country:'China',vibe:'Beach Getaway',emoji:'🏖️',img:'https://images.unsplash.com/photo-1510414842594-a61c69b5ae57?auto=format&fit=crop&w=800&q=80',desc:'ฮาวายของจีน หาดทรายขาวและน้ำทะเลใส'},
-          // ─── 🇦🇪 UAE ──────────────────────────────────────────
-          {name:'ดูไบ, UAE',country:'UAE',vibe:'Urban Adventure',emoji:'🏙️',img:'https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=800&q=80',desc:'แสงสียามค่ำคืนในมหานครสุดล้ำ'},
-          {name:'อาบูดาบี, UAE',country:'UAE',vibe:'Urban Adventure',emoji:'🏙️',img:'https://images.unsplash.com/photo-1545569341-9eb8b30979d9?auto=format&fit=crop&w=800&q=80',desc:'มัสยิดชีคซาเยด และมอเตอร์สปอร์ตระดับโลก'},
-          {name:'ทะเลทรายดูไบ',country:'UAE',vibe:'Nature Retreat',emoji:'🌲',img:'https://images.unsplash.com/photo-1547036967-23d11aacaee0?auto=format&fit=crop&w=800&q=80',desc:'Dune Bashing และค่ำคืนใต้ดาวในทะเลทราย'},
-          {name:'จุมไบราห์บีช, UAE',country:'UAE',vibe:'Beach Getaway',emoji:'🏖️',img:'https://images.unsplash.com/photo-1506973035872-a4ec16b8e8d9?auto=format&fit=crop&w=800&q=80',desc:'หาดทรายขาวพร้อมวิวเบิร์จอัลอาหรับ'},
-          {name:'ดีรา, ดูไบ',country:'UAE',vibe:'Slow Living',emoji:'☕',img:'https://images.unsplash.com/photo-1604537466608-109fa2f16c3b?auto=format&fit=crop&w=800&q=80',desc:'ย่านเก่าแก่ ตลาดทองและเรือ abra ข้ามคลอง'},
-          {name:'อาหารอาหรับ, ดูไบ',country:'UAE',vibe:'Foodie Tour',emoji:'🍣',img:'https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=800&q=80',desc:'Shawarma ฮุมมัสและอาหารอาหรับต้นตำรับ'},
-          // ─── 🇸🇬 Singapore ─────────────────────────────────
-          {name:'มารีน่าเบย์, สิงคโปร์',country:'Singapore',vibe:'Urban Adventure',emoji:'🏙️',img:'https://images.unsplash.com/photo-1525625293386-3f8f99389edd?auto=format&fit=crop&w=800&q=80',desc:'Marina Bay Sands และ Supertrees ยามค่ำ'},
-          {name:'ไชนาทาวน์, สิงคโปร์',country:'Singapore',vibe:'Foodie Tour',emoji:'🍣',img:'https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=800&q=80',desc:'Hawker centre และอาหารหลายเชื้อชาติ'},
-          {name:'เซนโตซ่า, สิงคโปร์',country:'Singapore',vibe:'Beach Getaway',emoji:'🏖️',img:'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=80',desc:'สวนสนุกและหาดทรายสวยในใจกลางเมือง'},
-          {name:'สวนพฤกษา, สิงคโปร์',country:'Singapore',vibe:'Nature Retreat',emoji:'🌲',img:'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=800&q=80',desc:'สวนมรดกโลกที่เขียวขจีกลางเมือง'},
-          {name:'ลิตเติ้ลอินเดีย, สิงคโปร์',country:'Singapore',vibe:'Foodie Tour',emoji:'🍣',img:'https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=800&q=80',desc:'อาหารอินเดียใต้และสีสันบนถนนเซรังกูน'},
-          {name:'การ์เดนส์บายเดอะเบย์',country:'Singapore',vibe:'Slow Living',emoji:'☕',img:'https://images.unsplash.com/photo-1565967511849-76a60a516170?auto=format&fit=crop&w=800&q=80',desc:'สวนดอกไม้ในโดมกระจกและโชว์แสงยามค่ำ'},
-          // ─── 🇻🇳 Vietnam ─────────────────────────────────────
-          {name:'ฮานอย, เวียดนาม',country:'Vietnam',vibe:'Urban Adventure',emoji:'🏙️',img:'https://images.unsplash.com/photo-1603117156560-74be4476bced?auto=format&fit=crop&w=800&q=80',desc:'เมืองเก่าอายุพันปีและกาแฟไข่ที่ไม่มีใครทำได้เหมือน'},
-          {name:'ฮอยอัน, เวียดนาม',country:'Vietnam',vibe:'Slow Living',emoji:'☕',img:'https://images.unsplash.com/photo-1528127269322-539801943592?auto=format&fit=crop&w=800&q=80',desc:'เมืองโคมไฟงดงามและเสื้อตัดเย็บในวันเดียว'},
-          {name:'อ่าวฮาลอง, เวียดนาม',country:'Vietnam',vibe:'Nature Retreat',emoji:'🌲',img:'https://images.unsplash.com/photo-1559592413-7cec4d0cae2b?auto=format&fit=crop&w=800&q=80',desc:'เขาหินปูนพุ่งขึ้นจากทะเลมรกต'},
-          {name:'ดานัง, เวียดนาม',country:'Vietnam',vibe:'Beach Getaway',emoji:'🏖️',img:'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=800&q=80',desc:'หาดทรายยาว น้ำทะเลใสและซีฟู้ดสด'},
-          {name:'โฮจิมินห์, เวียดนาม',country:'Vietnam',vibe:'Foodie Tour',emoji:'🍣',img:'https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=800&q=80',desc:'บั๋nh mì ผัดเส้นและอาหารเวียดนามใต้ต้นตำรับ'},
-          {name:'ซาปา, เวียดนาม',country:'Vietnam',vibe:'Nature Retreat',emoji:'🌲',img:'https://picsum.photos/seed/sapa-rice-terraces/800/600',desc:'นาขั้นบันไดสีเขียวและหมู่บ้านชาวเขา'},
-          {name:'ฟูก๊วก, เวียดนาม',country:'Vietnam',vibe:'Beach Getaway',emoji:'🏖️',img:'https://images.unsplash.com/photo-1510414842594-a61c69b5ae57?auto=format&fit=crop&w=800&q=80',desc:'เกาะสวรรค์ น้ำทะเลฟ้าใสและฟาร์มไข่มุก'},
-          // ─── 🇲🇻 Maldives ────────────────────────────────────
-          {name:'รีสอร์ทบนน้ำ, มัลดีฟส์',country:'Maldives',vibe:'Beach Getaway',emoji:'🏖️',img:'https://images.unsplash.com/photo-1573843981267-be1999ff37cd?auto=format&fit=crop&w=800&q=80',desc:'บังกะโลบนน้ำและทะเลสีฟิโรสตุสที่ไม่มีที่ไหนเหมือน'},
-          {name:'ดำน้ำ, มัลดีฟส์',country:'Maldives',vibe:'Nature Retreat',emoji:'🌲',img:'https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=800&q=80',desc:'ปะการังและฉลามวาฬใต้น้ำใสราวคริสตัล'},
-          {name:'มาเล่, มัลดีฟส์',country:'Maldives',vibe:'Urban Adventure',emoji:'🏙️',img:'https://images.unsplash.com/photo-1590523741831-ab7e8b8f9c73?auto=format&fit=crop&w=800&q=80',desc:'เมืองหลวงเล็กๆ สีสันของตลาดและสถาปัตยกรรมอิสลาม'},
-          {name:'ซันเซ็ตครูซ, มัลดีฟส์',country:'Maldives',vibe:'Slow Living',emoji:'☕',img:'https://images.unsplash.com/photo-1499678329028-101435549a4e?auto=format&fit=crop&w=800&q=80',desc:'ล่องเรือชมพระอาทิตย์ตกดินที่ขอบฟ้ากลางทะเล'},
-          {name:'หาดทรายขาว, มัลดีฟส์',country:'Maldives',vibe:'Beach Getaway',emoji:'🏖️',img:'https://images.unsplash.com/photo-1510414842594-a61c69b5ae57?auto=format&fit=crop&w=800&q=80',desc:'เกาะทรายเล็กๆ ที่สามารถเดินรอบได้ใน 5 นาที'},
-          {name:'ซีฟู้ดมาเล, มัลดีฟส์',country:'Maldives',vibe:'Foodie Tour',emoji:'🍣',img:'https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?auto=format&fit=crop&w=800&q=80',desc:'ปลาทูน่าสดและอาหารท้องถิ่นในเมืองหลวงมาเล'},
-          // ─── 🇦🇺 Australia ───────────────────────────────────
-          {name:'ซิดนีย์, ออสเตรเลีย',country:'Australia',vibe:'Urban Adventure',emoji:'🏙️',img:'https://images.unsplash.com/photo-1506973035872-a4ec16b8e8d9?auto=format&fit=crop&w=800&q=80',desc:'โอเปร่าเฮาส์และฮาร์เบอร์บริดจ์'},
-          {name:'เกรตแบร์ริเออร์รีฟ',country:'Australia',vibe:'Nature Retreat',emoji:'🌲',img:'https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=800&q=80',desc:'แนวปะการังที่ใหญ่ที่สุดในโลกและโลกใต้น้ำ'},
-          {name:'เมลเบิร์น, ออสเตรเลีย',country:'Australia',vibe:'Foodie Tour',emoji:'🍣',img:'https://images.unsplash.com/photo-1545044846-351ba102c47d?auto=format&fit=crop&w=800&q=80',desc:'กาแฟที่ดีที่สุดในโลกและตรอกศิลปะกราฟฟิตี้'},
-          {name:'อูลูรู, ออสเตรเลีย',country:'Australia',vibe:'Nature Retreat',emoji:'🌲',img:'https://picsum.photos/seed/uluru-australia/800/600',desc:'หินศักดิ์สิทธิ์อะบอริจินท่ามกลางทะเลทรายสีแดง'},
-          {name:'บายรอนเบย์, ออสเตรเลีย',country:'Australia',vibe:'Beach Getaway',emoji:'🏖️',img:'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=80',desc:'หาดเซิร์ฟและไลฟ์สไตล์โบฮีเมียน'},
-          {name:'โกลด์โคสต์, ออสเตรเลีย',country:'Australia',vibe:'Beach Getaway',emoji:'🏖️',img:'https://images.unsplash.com/photo-1510414842594-a61c69b5ae57?auto=format&fit=crop&w=800&q=80',desc:'หาดซูเฟอร์สพาราไดส์และสวนสนุก'},
-          {name:'เดนทรี, ออสเตรเลีย',country:'Australia',vibe:'Nature Retreat',emoji:'🌲',img:'https://images.unsplash.com/photo-1525459819925-3f8e4a77d8c3?auto=format&fit=crop&w=800&q=80',desc:'ป่าฝนเขตร้อนเก่าแก่ที่สุดในโลกที่ติดกับทะเล'},
-          // ─── 🇮🇩 Indonesia ──────────────────────────────────
-          {name:'บาหลี, อินโดนีเซีย',country:'Indonesia',vibe:'Beach Getaway',emoji:'🏖️',img:'https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=800&q=80',desc:'เกาะแห่งพระเจ้า วัฒนธรรมและทะเล'},
-          {name:'อูบุด, บาหลี',country:'Indonesia',vibe:'Slow Living',emoji:'☕',img:'https://images.unsplash.com/photo-1528702748617-c64d49f918af?auto=format&fit=crop&w=800&q=80',desc:'สวนนาขั้นบันได โยคะและอาหารบาหลีแท้'},
-          {name:'โยเกียการ์ตา, อินโดนีเซีย',country:'Indonesia',vibe:'Urban Adventure',emoji:'🏙️',img:'https://images.unsplash.com/photo-1563492065599-3520f775eeed?auto=format&fit=crop&w=800&q=80',desc:'บุโรพุทโธและปรัมบานัน มรดกโลกคู่บารมี'},
-          {name:'ราจาอัมปัต, อินโดนีเซีย',country:'Indonesia',vibe:'Nature Retreat',emoji:'🌲',img:'https://images.unsplash.com/photo-1559595500-d3b73e8ef5e8?auto=format&fit=crop&w=800&q=80',desc:'เกาะหินปูนและความหลากหลายทางทะเลระดับโลก'},
-          {name:'กีลีไอส์แลนด์, อินโดนีเซีย',country:'Indonesia',vibe:'Beach Getaway',emoji:'🏖️',img:'https://images.unsplash.com/photo-1506929562872-bb421503ef21?auto=format&fit=crop&w=800&q=80',desc:'หาดทรายขาวปลอดรถและดำน้ำตื้นกับเต่า'},
-          {name:'อาหารบาหลี, อินโดนีเซีย',country:'Indonesia',vibe:'Foodie Tour',emoji:'🍣',img:'https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=800&q=80',desc:'นาซีกอเร็ง ซาเตย์และลูวัคกาแฟแพงที่สุดในโลก'},
-          {name:'โคโมโด, อินโดนีเซีย',country:'Indonesia',vibe:'Nature Retreat',emoji:'🌲',img:'https://images.unsplash.com/photo-1523482580672-f109ba8cb9be?auto=format&fit=crop&w=800&q=80',desc:'มังกรโคโมโดและทะเลสีชมพูที่หาดพิงค์บีช'},
-          // ─── 🇮🇳 India ──────────────────────────────────────
-          {name:'เดลี, อินเดีย',country:'India',vibe:'Urban Adventure',emoji:'🏙️',img:'https://images.unsplash.com/photo-1524492412937-b28074a5d7da?auto=format&fit=crop&w=800&q=80',desc:'อินเดียเกตและถนนที่มีพลังชีวิตที่สุดในโลก'},
-          {name:'ราชาสถาน, อินเดีย',country:'India',vibe:'Slow Living',emoji:'☕',img:'https://images.unsplash.com/photo-1599661046289-e31897846e36?auto=format&fit=crop&w=800&q=80',desc:'พระราชวังสีชมพู เมืองสีน้ำเงินและทะเลทรายทาร์'},
-          {name:'เกรละ, อินเดีย',country:'India',vibe:'Nature Retreat',emoji:'🌲',img:'https://images.unsplash.com/photo-1602567208424-52d26e7efddb?auto=format&fit=crop&w=800&q=80',desc:'แบ็ควอเตอร์ทอดตัวสีเขียวและอายุรเวทแท้'},
-          {name:'มุมไบ, อินเดีย',country:'India',vibe:'Urban Adventure',emoji:'🏙️',img:'https://images.unsplash.com/photo-1529253355930-ddbe423a2ac7?auto=format&fit=crop&w=800&q=80',desc:'เมืองแห่งบอลลีวูดและอาหารริมทางที่เร้าใจ'},
-          {name:'กัว, อินเดีย',country:'India',vibe:'Beach Getaway',emoji:'🏖️',img:'https://images.unsplash.com/photo-1512343879784-a960bf40e7f2?auto=format&fit=crop&w=800&q=80',desc:'หาดทรายทองและบรรยากาศโปรตุเกสเก่าแก่'},
-          {name:'วาราณสี, อินเดีย',country:'India',vibe:'Slow Living',emoji:'☕',img:'https://images.unsplash.com/photo-1561361058-c24cecb75dca?auto=format&fit=crop&w=800&q=80',desc:'เมืองศักดิ์สิทธิ์แห่งแม่น้ำคงคาและพิธีกรรม'},
-          // ─── 🇪🇸 Spain ──────────────────────────────────────
-          {name:'บาร์เซโลนา, สเปน',country:'Spain',vibe:'Urban Adventure',emoji:'🏙️',img:'https://images.unsplash.com/photo-1523531294919-4bcd7c65e216?auto=format&fit=crop&w=800&q=80',desc:'ซากราดาฟามีเลียและสถาปัตยกรรมเกาดี'},
-          {name:'มาดริด, สเปน',country:'Spain',vibe:'Urban Adventure',emoji:'🏙️',img:'https://images.unsplash.com/photo-1539037116277-4db20889f2d4?auto=format&fit=crop&w=800&q=80',desc:'พิพิธภัณฑ์ปราโดและชีวิตยามค่ำที่ไม่สิ้นสุด'},
-          {name:'กรานาดา, สเปน',country:'Spain',vibe:'Slow Living',emoji:'☕',img:'https://images.unsplash.com/photo-1549989476-69a92fa57c36?auto=format&fit=crop&w=800&q=80',desc:'อัลฮัมบราและชาวัดอาหรับในอันดาลูซิอา'},
-          {name:'คอสตาเดลโซล, สเปน',country:'Spain',vibe:'Beach Getaway',emoji:'🏖️',img:'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=80',desc:'หาดทรายอบอุ่นและสังสรรค์ริมทะเลเมดิเตอร์เรเนียน'},
-          {name:'ซานเซบาสเตียน, สเปน',country:'Spain',vibe:'Foodie Tour',emoji:'🍣',img:'https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=800&q=80',desc:'เมืองพินโช้สและร้านอาหารมิชลินต่อตารางเมตรมากที่สุด'},
-          {name:'กาลีเซีย, สเปน',country:'Spain',vibe:'Nature Retreat',emoji:'🌲',img:'https://images.unsplash.com/photo-1558048026-b56e44f33f3e?auto=format&fit=crop&w=800&q=80',desc:'ริอัสและอ่าวสีเขียวขจีทางตะวันตกเฉียงเหนือ'},
-          // ─── 🇹🇷 Turkey ─────────────────────────────────────
-          {name:'อิสตันบูล, ตุรกี',country:'Turkey',vibe:'Urban Adventure',emoji:'🏙️',img:'https://images.unsplash.com/photo-1524231757912-21f4fe3a7200?auto=format&fit=crop&w=800&q=80',desc:'สองทวีปบนเมืองเดียว มัสยิดสีน้ำเงินและบาซาร์'},
-          {name:'คัปปาโดเกีย, ตุรกี',country:'Turkey',vibe:'Nature Retreat',emoji:'🌲',img:'https://images.unsplash.com/photo-1527838832700-5059252407fa?auto=format&fit=crop&w=800&q=80',desc:'บอลลูนเหนือสมรภูมิหินรูปเห็ดในตอนเช้า'},
-          {name:'ชายฝั่งตุรกีสีฟ้า',country:'Turkey',vibe:'Beach Getaway',emoji:'🏖️',img:'https://picsum.photos/seed/turkey-coast-blue/800/600',desc:'อ่าวเงียบสงัดและล่องเรือ Gulet ท่ามกลางหน้าผา'},
-          {name:'เอฟิซัส, ตุรกี',country:'Turkey',vibe:'Slow Living',emoji:'☕',img:'https://images.unsplash.com/photo-1566438480900-0609be27a4be?auto=format&fit=crop&w=800&q=80',desc:'เมืองโบราณกรีก-โรมันที่ยังคงยืนอยู่'},
-          {name:'โบดรัม, ตุรกี',country:'Turkey',vibe:'Beach Getaway',emoji:'🏖️',img:'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=80',desc:'ปราสาทอัศวินและไนต์ไลฟ์ริมทะเลอีเจียน'},
-          {name:'อิสตันบูลสตรีทฟู้ด',country:'Turkey',vibe:'Foodie Tour',emoji:'🍣',img:'https://images.unsplash.com/photo-1559628233-100c798642d7?auto=format&fit=crop&w=800&q=80',desc:'ซิมิต ดอนเนอร์ และบาคลาวาจากเตาอบโบราณ'},
-          // ─── 🇩🇪 Germany ────────────────────────────────────
-          {name:'เบอร์ลิน, เยอรมนี',country:'Germany',vibe:'Urban Adventure',emoji:'🏙️',img:'https://images.unsplash.com/photo-1560969184-10fe8719e047?auto=format&fit=crop&w=800&q=80',desc:'ศิลปะ ประวัติศาสตร์และคลับที่ดีที่สุดในโลก'},
-          {name:'บาวาเรีย, เยอรมนี',country:'Germany',vibe:'Nature Retreat',emoji:'🌲',img:'https://images.unsplash.com/photo-1527668752968-14dc70a27c95?auto=format&fit=crop&w=800&q=80',desc:'ปราสาทนอยชวานสไตน์และทุ่งหญ้าแอลป์'},
-          {name:'ป่าดำ, เยอรมนี',country:'Germany',vibe:'Nature Retreat',emoji:'🌲',img:'https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&w=800&q=80',desc:'ป่าสนเงียบ เค้กป่าดำและเส้นทางเดินป่า'},
-          {name:'ฮัมบูร์ก, เยอรมนี',country:'Germany',vibe:'Urban Adventure',emoji:'🏙️',img:'https://images.unsplash.com/photo-1508867396143-578a47b6cbe4?auto=format&fit=crop&w=800&q=80',desc:'ท่าเรือและย่านเก่าแก่ที่มีชีวิตชีวา'},
-          {name:'ไรน์แวลลีย์, เยอรมนี',country:'Germany',vibe:'Slow Living',emoji:'☕',img:'https://picsum.photos/seed/rhine-valley/800/600',desc:'ปราสาทยุคกลางและไร่ไวน์ริมแม่น้ำไรน์'},
-          {name:'มิวนิก, เยอรมนี',country:'Germany',vibe:'Foodie Tour',emoji:'🍣',img:'https://images.unsplash.com/photo-1595867818082-083862f3d630?auto=format&fit=crop&w=800&q=80',desc:'เบียร์สด ไส้กรอก Brezel และเบียร์การ์เดนดั้งเดิม'},
+  {name:'เกียวโต, ญี่ปุ่น',country:'Japan',vibe:'Slow Living',emoji:'☕',img:'https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&w=800&q=80',desc:'วัด สวน และวิถีชีวิตแบบดั้งเดิม'},
+  {name:'ภูเขาไฟฟูจิ, ญี่ปุ่น',country:'Japan',vibe:'Nature Retreat',emoji:'🌲',img:'https://images.unsplash.com/photo-1490806843957-31f4c9a91c65?auto=format&fit=crop&w=800&q=80',desc:'ยอดเขาสูงสุดแห่งแดนอาทิตย์อุทัย'},
+  {name:'โอซาก้า, ญี่ปุ่น',country:'Japan',vibe:'Foodie Tour',emoji:'🍱',img:'https://images.unsplash.com/photo-1590559899731-a382839e5549?auto=format&fit=crop&w=800&q=80',desc:'เมืองหลวงแห่งอาหารอร่อยของญี่ปุ่น'},
+  {name:'โอกินาวา, ญี่ปุ่น',country:'Japan',vibe:'Beach Getaway',emoji:'🏖️',img:'https://images.unsplash.com/photo-1535262412227-85541e910204?auto=format&fit=crop&w=800&q=80',desc:'ทะเลฟ้าใสและปะการังงามของญี่ปุ่น'},
+  {name:'นารา, ญี่ปุ่น',country:'Japan',vibe:'Slow Living',emoji:'🦌',img:'https://images.unsplash.com/photo-1570133435163-95240f59046c?auto=format&fit=crop&w=800&q=80',desc:'กวางเดินอิสระ วัดเก่าแก่และความสงบ'},
+  {name:'ฮากาตะ, ญี่ปุ่น',country:'Japan',vibe:'Foodie Tour',emoji:'🍜',img:'https://images.unsplash.com/photo-1582450871972-ab5ca641643d?auto=format&fit=crop&w=800&q=80',desc:'ราเมนฮากาตะและตลาดอาหารทะเลสดของฟุกุโอกะ'},
+
+  // ─── 🇫🇷 France ──────────────────────────────────────
+  {name:'ปารีส, ฝรั่งเศส',country:'France',vibe:'Urban Adventure',emoji:'🏙️',img:'https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&w=800&q=80',desc:'เดินเล่นริมแม่น้ำแซนและชมสถาปัตยกรรม'},
+  {name:'บอร์โดซ์, ฝรั่งเศส',country:'France',vibe:'Slow Living',emoji:'🍷',img:'https://images.unsplash.com/photo-1554131030-9076f87453d1?auto=format&fit=crop&w=800&q=80',desc:'ไวน์ชั้นเลิศและสถาปัตยกรรมคลาสสิก'},
+  {name:'แวร์ซาย, ฝรั่งเศส',country:'France',vibe:'Slow Living',emoji:'👑',img:'https://images.unsplash.com/photo-1508933391206-699709287313?auto=format&fit=crop&w=800&q=80',desc:'พระราชวังและสวนที่งดงามที่สุดในยุโรป'},
+  {name:'นีส, ฝรั่งเศส',country:'France',vibe:'Beach Getaway',emoji:'🏖️',img:'https://images.unsplash.com/photo-1533104816931-20fa691ff6ca?auto=format&fit=crop&w=800&q=80',desc:'ริเวียร่าฝรั่งเศส ทะเลสีฟ้าและบรรยากาศหรู'},
+  {name:'ลียง, ฝรั่งเศส',country:'France',vibe:'Foodie Tour',emoji:'🥘',img:'https://images.unsplash.com/photo-1528660544347-96a60967759b?auto=format&fit=crop&w=800&q=80',desc:'เมืองหลวงแห่งอาหารฝรั่งเศสตัวจริง'},
+  {name:'แอลป์ฝรั่งเศส',country:'France',vibe:'Nature Retreat',emoji:'🏔️',img:'https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?auto=format&fit=crop&w=800&q=80',desc:'ภูเขาหิมะสูงตระหง่านและหมู่บ้านสกีระดับโลก'},
+  {name:'นอร์มังดี, ฝรั่งเศส',country:'France',vibe:'Nature Retreat',emoji:'🌊',img:'https://images.unsplash.com/photo-1563220556-91e0a299d63c?auto=format&fit=crop&w=800&q=80',desc:'หน้าผาสีขาวและชายหาดประวัติศาสตร์'},
+
+  // ─── 🇹🇭 Thailand ─────────────────────────────────────
+  {name:'กรุงเทพฯ, ไทย',country:'Thailand',vibe:'Urban Adventure',emoji:'🏙️',img:'https://images.unsplash.com/photo-1508009603885-50cf7c579365?auto=format&fit=crop&w=800&q=80',desc:'สตรีทฟู้ดและวัฒนธรรมที่ไม่มีที่ไหนเหมือน'},
+  {name:'เชียงใหม่, ไทย',country:'Thailand',vibe:'Slow Living',emoji:'☕',img:'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=800&q=80',desc:'วัดสวย กาแฟอร่อย ชีวิตช้าๆ ในเมืองเหนือ'},
+  {name:'ภูเก็ต, ไทย',country:'Thailand',vibe:'Beach Getaway',emoji:'🏖️',img:'https://images.unsplash.com/photo-1589394815804-964ed0be2eb5?auto=format&fit=crop&w=800&q=80',desc:'ทะเลอันดามันและหาดทรายขาวระดับโลก'},
+  {name:'กระบี่, ไทย',country:'Thailand',vibe:'Nature Retreat',emoji:'🛶',img:'https://images.unsplash.com/photo-1552465011-b4e21bf6e79a?auto=format&fit=crop&w=800&q=80',desc:'หน้าผาหินปูนสูงชัน ถ้ำและทะเลสีเขียวมรกต'},
+  {name:'เยาวราช, กรุงเทพฯ',country:'Thailand',vibe:'Foodie Tour',emoji:'🥡',img:'https://images.unsplash.com/photo-1562602833-0f4ab2fc46e3?auto=format&fit=crop&w=800&q=80',desc:'ถนนอาหารที่ดีที่สุดของกรุงเทพฯ'},
+  {name:'เกาะสมุย, ไทย',country:'Thailand',vibe:'Beach Getaway',emoji:'🏝️',img:'https://images.unsplash.com/photo-1537953773345-d172ccf13cf4?auto=format&fit=crop&w=800&q=80',desc:'หาดส่วนตัว รีสอร์ทหรูและพระอาทิตย์ตก'},
+  {name:'ปาย, ไทย',country:'Thailand',vibe:'Slow Living',emoji:'⛰️',img:'https://images.unsplash.com/photo-1588411393572-3a3fe4a57896?auto=format&fit=crop&w=800&q=80',desc:'หุบเขาเย็นสบาย คาเฟ่ชิลล์และบรรยากาศโบฮีเมียน'},
+
+  // ─── 🇰🇷 South Korea ──────────────────────────────────
+  {name:'โซล, เกาหลีใต้',country:'SouthKorea',vibe:'Urban Adventure',emoji:'🏙️',img:'https://images.unsplash.com/photo-1517154421773-0529f29ea451?auto=format&fit=crop&w=800&q=80',desc:'K-culture ตึกระฟ้า และอาหารอร่อย'},
+  {name:'เกาะเชจู, เกาหลีใต้',country:'SouthKorea',vibe:'Nature Retreat',emoji:'🌋',img:'https://images.unsplash.com/photo-1623940141630-f370868aa2af?auto=format&fit=crop&w=800&q=80',desc:'ภูเขาไฟฮัลลาซันและทุ่งดอกไม้สีทอง'},
+  {name:'ปูซาน, เกาหลีใต้',country:'SouthKorea',vibe:'Beach Getaway',emoji:'⛱️',img:'https://images.unsplash.com/photo-1570116694158-fe0be306a928?auto=format&fit=crop&w=800&q=80',desc:'หาดแฮอุนแดและตลาดปลาจากัลชี'},
+  {name:'คยองจู, เกาหลีใต้',country:'SouthKorea',vibe:'Slow Living',emoji:'🎎',img:'https://images.unsplash.com/photo-1548013146-72479768bada?auto=format&fit=crop&w=800&q=80',desc:'เมืองหลวงเก่าแก่ สุสานและวัดพุทธ'},
+  {name:'จอนจู, เกาหลีใต้',country:'SouthKorea',vibe:'Foodie Tour',emoji:'🍲',img:'https://images.unsplash.com/photo-1621683416422-944203a936a2?auto=format&fit=crop&w=800&q=80',desc:'บิบิมบับต้นตำรับและหมู่บ้านฮันอก'},
+  {name:'อินซาดง, โซล',country:'SouthKorea',vibe:'Slow Living',emoji:'🍵',img:'https://images.unsplash.com/photo-1534430480872-3498386e7856?auto=format&fit=crop&w=800&q=80',desc:'ย่านศิลปะ ชาแบบดั้งเดิมและของที่ระลึกสวย'},
+
+  // ─── 🇺🇸 USA ──────────────────────────────────────────
+  {name:'นิวยอร์ก, สหรัฐฯ',country:'USA',vibe:'Urban Adventure',emoji:'🏙️',img:'https://images.unsplash.com/photo-1496442226666-8d4d0e62e6e9?auto=format&fit=crop&w=800&q=80',desc:'เมืองที่ไม่เคยหลับใหล'},
+  {name:'ลอสแอนเจลิส, สหรัฐฯ',country:'USA',vibe:'Urban Adventure',emoji:'🎬',img:'https://images.unsplash.com/photo-1515895309288-a3ff14b46f5e?auto=format&fit=crop&w=800&q=80',desc:'Hollywood ชายหาดและวัฒนธรรมป็อป'},
+  {name:'แกรนด์แคนยอน, สหรัฐฯ',country:'USA',vibe:'Nature Retreat',emoji:'🏜️',img:'https://images.unsplash.com/photo-1474044159687-1ee9f3a51722?auto=format&fit=crop&w=800&q=80',desc:'แคนยอนสีแดงที่ยิ่งใหญ่ที่สุดในโลก'},
+  {name:'นิวออร์ลีนส์, สหรัฐฯ',country:'USA',vibe:'Foodie Tour',emoji:'🎷',img:'https://images.unsplash.com/photo-1533042456011-e63079b768a4?auto=format&fit=crop&w=800&q=80',desc:'แจ๊ส เคจัน และอาหารครีโอลที่เป็นเอกลักษณ์'},
+  {name:'ไมอามี, สหรัฐฯ',country:'USA',vibe:'Beach Getaway',emoji:'🏖️',img:'https://images.unsplash.com/photo-1506929562872-bb421503ef21?auto=format&fit=crop&w=800&q=80',desc:'Beach ไอคอนิก อาร์ตเดโคและไนต์ไลฟ์'},
+  {name:'ซานฟรานซิสโก, สหรัฐฯ',country:'USA',vibe:'Urban Adventure',emoji:'🌉',img:'https://images.unsplash.com/photo-1501594907352-04cda38ebc29?auto=format&fit=crop&w=800&q=80',desc:'โกลเดนเกตบริดจ์และย่านเทคโนโลยีโลก'},
+  {name:'เยลโลว์สโตน, สหรัฐฯ',country:'USA',vibe:'Nature Retreat',emoji:'🐃',img:'https://images.unsplash.com/photo-1533167649158-6d508895b680?auto=format&fit=crop&w=800&q=80',desc:'ไกเซอร์น้ำพุร้อนและสัตว์ป่าในธรรมชาติ'},
+
+  // ─── 🇬🇧 UK ───────────────────────────────────────────
+  {name:'ลอนดอน, UK',country:'UK',vibe:'Urban Adventure',emoji:'🎡',img:'https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?auto=format&fit=crop&w=800&q=80',desc:'ประวัติศาสตร์และวัฒนธรรมเก่าแก่'},
+  {name:'เอดินเบอระ, สกอตแลนด์',country:'UK',vibe:'Urban Adventure',emoji:'🏰',img:'https://images.unsplash.com/photo-1559685959-ff5653f43c4f?auto=format&fit=crop&w=800&q=80',desc:'ปราสาทบนเนินหินและเทศกาลฟริงจ์ระดับโลก'},
+  {name:'คอตส์โวลด์, UK',country:'UK',vibe:'Slow Living',emoji:'🏡',img:'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=800&q=80',desc:'หมู่บ้านหินทองและทุ่งหญ้าอังกฤษที่งดงาม'},
+  {name:'เลคดิสตริกต์, UK',country:'UK',vibe:'Nature Retreat',emoji:'⛰️',img:'https://images.unsplash.com/photo-1489824904134-2fa20adf8f7d?auto=format&fit=crop&w=800&q=80',desc:'ทะเลสาบและเนินเขาที่สวยงามจนนักกวีหลงรัก'},
+  {name:'บาธ, UK',country:'UK',vibe:'Slow Living',emoji:'🛁',img:'https://images.unsplash.com/photo-1547036967-23d11aacaee0?auto=format&fit=crop&w=800&q=80',desc:'โรมันบาธ สถาปัตยกรรมจอร์เจียนและชาน้ำยามบ่าย'},
+  {name:'ไฮแลนด์, สกอตแลนด์',country:'UK',vibe:'Nature Retreat',emoji:'🦌',img:'https://images.unsplash.com/photo-1518005068251-37900150dfca?auto=format&fit=crop&w=800&q=80',desc:'ทุ่งหิมะ ปราสาทในหมอกและทะเลสาบลอคเนส'},
+
+  // ─── 🇮🇹 Italy ───────────────────────────────────────
+  {name:'โรม, อิตาลี',country:'Italy',vibe:'Urban Adventure',emoji:'🏛️',img:'https://images.unsplash.com/photo-1552832230-c0197dd311b5?auto=format&fit=crop&w=800&q=80',desc:'โคลอสเซียมและถนนที่เดินไปหาประวัติศาสตร์ทุกก้าว'},
+  {name:'เวนิส, อิตาลี',country:'Italy',vibe:'Slow Living',emoji:'🛶',img:'https://images.unsplash.com/photo-1523906834658-6e24ef2386f9?auto=format&fit=crop&w=800&q=80',desc:'คลองและโกนโดลาในเมืองที่ลอยอยู่บนน้ำ'},
+  {name:'ซินกเวแตร์เร, อิตาลี',country:'Italy',vibe:'Nature Retreat',emoji:'🏠',img:'https://images.unsplash.com/photo-1499678329028-101435549a4e?auto=format&fit=crop&w=800&q=80',desc:'หมู่บ้านสีสันบนหน้าผาริมทะเล'},
+  {name:'ทัสคานี, อิตาลี',country:'Italy',vibe:'Slow Living',emoji:'🍇',img:'https://images.unsplash.com/photo-1533031024653-e57469a4732b?auto=format&fit=crop&w=800&q=80',desc:'ทุ่งดอกทานตะวัน ไวน์คีอันติและฟาร์มสเตย์'},
+  {name:'อะมัลฟีโคสต์, อิตาลี',country:'Italy',vibe:'Beach Getaway',emoji:'🍋',img:'https://images.unsplash.com/photo-1516483638261-f4dbaf036963?auto=format&fit=crop&w=800&q=80',desc:'ชายฝั่งหน้าผาที่สวยงามที่สุดในเมดิเตอร์เรเนียน'},
+  {name:'ฟลอเรนซ์, อิตาลี',country:'Italy',vibe:'Urban Adventure',emoji:'🎨',img:'https://images.unsplash.com/photo-1534445012134-8c7c9cc67705?auto=format&fit=crop&w=800&q=80',desc:'เมืองหลวงแห่งศิลปะยุคเรอเนซองส์'},
+  {name:'ซิซิลี, อิตาลี',country:'Italy',vibe:'Foodie Tour',emoji:'🍝',img:'https://images.unsplash.com/photo-1549989476-69a92fa57c36?auto=format&fit=crop&w=800&q=80',desc:'อาหารซิซิเลียนต้นตำรับและหาดทรายขาว'},
+
+  // ─── 🇨🇭 Switzerland ────────────────────────────────
+  {name:'ซูริค, สวิตเซอร์แลนด์',country:'Switzerland',vibe:'Slow Living',emoji:'☕',img:'https://images.unsplash.com/photo-1528702748617-c64d49f918af?auto=format&fit=crop&w=800&q=80',desc:'ทะเลสาบ คาเฟ่ชิลล์และช็อกโกแลต'},
+  {name:'อินเตอร์ลาเคน, สวิตเซอร์แลนด์',country:'Switzerland',vibe:'Nature Retreat',emoji:'⛰️',img:'https://images.unsplash.com/photo-1534434484133-c1e95ec891a2?auto=format&fit=crop&w=800&q=80',desc:'ระหว่างทะเลสาบสองแห่งกับยอดเขาจุงเฟรา'},
+  {name:'เซอร์แมทท์, สวิตเซอร์แลนด์',country:'Switzerland',vibe:'Nature Retreat',emoji:'❄️',img:'https://images.unsplash.com/photo-1531366936337-7c912a4589a7?auto=format&fit=crop&w=800&q=80',desc:'เงาของยอดแมทเทอร์ฮอร์นและสกีระดับโลก'},
+  {name:'ลูเซิร์น, สวิตเซอร์แลนด์',country:'Switzerland',vibe:'Slow Living',emoji:'🌉',img:'https://images.unsplash.com/photo-1594467051905-4a3f8baa6046?auto=format&fit=crop&w=800&q=80',desc:'สะพานไม้เก่าแก่และเมืองชิลล์ริมทะเลสาบ'},
+  {name:'เจนีวา, สวิตเซอร์แลนด์',country:'Switzerland',vibe:'Urban Adventure',emoji:'⌚',img:'https://images.unsplash.com/photo-1563727626517-7f08d4fda228?auto=format&fit=crop&w=800&q=80',desc:'นาฬิกาหรู น้ำพุ Jet d\'Eau และอาหารนานาชาติ'},
+  {name:'เบิร์น, สวิตเซอร์แลนด์',country:'Switzerland',vibe:'Slow Living',emoji:'🐻',img:'https://images.unsplash.com/photo-1562128755-1fe0f20ba10d?auto=format&fit=crop&w=800&q=80',desc:'เมืองหลวงเก่าแก่ หมีและช็อกโกแลตสวิส'},
+
+  // ─── 🇹🇼 Taiwan ─────────────────────────────────────
+  {name:'ไทเป, ไต้หวัน',country:'Taiwan',vibe:'Urban Adventure',emoji:'🏙️',img:'https://images.unsplash.com/photo-1550951298-5c7b95a66bfc?auto=format&fit=crop&w=800&q=80',desc:'ตลาดกลางคืนและอาหารต้นตำรับ'},
+  {name:'ทะเลสาบสุริยันจันทรา',country:'Taiwan',vibe:'Nature Retreat',emoji:'🛶',img:'https://images.unsplash.com/photo-1529259924913-f2c98379c5e0?auto=format&fit=crop&w=800&q=80',desc:'ทะเลสาบที่งดงามที่สุดของไต้หวัน'},
+  {name:'จิ่วเฟิน, ไต้หวัน',country:'Taiwan',vibe:'Slow Living',emoji:'🏮',img:'https://images.unsplash.com/photo-1543160732-2372af194541?auto=format&fit=crop&w=800&q=80',desc:'เมืองหมอกบนเนินเขา แรงบันดาลใจของ Spirited Away'},
+  {name:'เขิ้นติง, ไต้หวัน',country:'Taiwan',vibe:'Beach Getaway',emoji:'🏖️',img:'https://images.unsplash.com/photo-1494894631469-51f147bd7d48?auto=format&fit=crop&w=800&q=80',desc:'อุทยานทางใต้สุดและหาดทรายสะอาด'},
+  {name:'ไถหนาน, ไต้หวัน',country:'Taiwan',vibe:'Foodie Tour',emoji:'🥣',img:'https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=800&q=80',desc:'เมืองอาหารเก่าแก่ที่สุดและวัฒนธรรมของไต้หวัน'},
+  {name:'อุทยานทาโรโกะ, ไต้หวัน',country:'Taiwan',vibe:'Nature Retreat',emoji:'⛰️',img:'https://images.unsplash.com/photo-1525439457-e89fa88a1a41?auto=format&fit=crop&w=800&q=80',desc:'หุบเขาหินอ่อนและน้ำตกในอุทยานแห่งชาติ'},
+
+  // ─── 🇨🇳 China ───────────────────────────────────────
+  {name:'ปักกิ่ง, จีน',country:'China',vibe:'Urban Adventure',emoji:'⛩️',img:'https://images.unsplash.com/photo-1508804185872-d7badad00f7d?auto=format&fit=crop&w=800&q=80',desc:'กำแพงเมืองจีนและพระราชวังต้องห้าม'},
+  {name:'เซี่ยงไฮ้, จีน',country:'China',vibe:'Urban Adventure',emoji:'🌃',img:'https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=800&q=80',desc:'ตึกระฟ้าสมัยใหม่ผสมอาคารอาณานิคม'},
+  {name:'กุ้ยหลิน, จีน',country:'China',vibe:'Nature Retreat',emoji:'🛶',img:'https://images.unsplash.com/photo-1559592413-7cec4d0cae2b?auto=format&fit=crop&w=800&q=80',desc:'เขาคาร์สต์สวยงามริมแม่น้ำหลีเจียง'},
+  {name:'เฉิงตู, จีน',country:'China',vibe:'Slow Living',emoji:'🐼',img:'https://images.unsplash.com/photo-1608835291093-394b0c943a75?auto=format&fit=crop&w=800&q=80',desc:'นั่งดูหมีแพนด้าและชาอู่หลง'},
+  {name:'ฉงชิ่ง, จีน',country:'China',vibe:'Foodie Tour',emoji:'🔥',img:'https://images.unsplash.com/photo-1559628233-100c798642d7?auto=format&fit=crop&w=800&q=80',desc:'หม้อไฟสไตล์ฉงชิ่งที่เผ็ดที่สุดในโลก'},
+  {name:'จางเจียเจี้ย, จีน',country:'China',vibe:'Nature Retreat',emoji:'⛰️',img:'https://images.unsplash.com/photo-1541411438265-4cb4687110f2?auto=format&fit=crop&w=800&q=80',desc:'เสาหินลอยฟ้าต้นแบบฉากใน Avatar'},
+  {name:'ซานย่า, จีน',country:'China',vibe:'Beach Getaway',emoji:'🏖️',img:'https://images.unsplash.com/photo-1510414842594-a61c69b5ae57?auto=format&fit=crop&w=800&q=80',desc:'ฮาวายของจีน หาดทรายขาวและน้ำทะเลใส'},
+
+  // ─── 🇦🇪 UAE ──────────────────────────────────────────
+  {name:'ดูไบ, UAE',country:'UAE',vibe:'Urban Adventure',emoji:'🏙️',img:'https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=800&q=80',desc:'แสงสียามค่ำคืนในมหานครสุดล้ำ'},
+  {name:'อาบูดาบี, UAE',country:'UAE',vibe:'Urban Adventure',emoji:'🕌',img:'https://images.unsplash.com/photo-1545569341-9eb8b30979d9?auto=format&fit=crop&w=800&q=80',desc:'มัสยิดชีคซาเยด และมอเตอร์สปอร์ตระดับโลก'},
+  {name:'ทะเลทรายดูไบ',country:'UAE',vibe:'Nature Retreat',emoji:'🐪',img:'https://images.unsplash.com/photo-1542385151-efd9000785a0?auto=format&fit=crop&w=800&q=80',desc:'Dune Bashing และค่ำคืนใต้ดาวในทะเลทราย'},
+  {name:'จุมไบราห์บีช, UAE',country:'UAE',vibe:'Beach Getaway',emoji:'🏖️',img:'https://images.unsplash.com/photo-1506973035872-a4ec16b8e8d9?auto=format&fit=crop&w=800&q=80',desc:'หาดทรายขาวพร้อมวิวเบิร์จอัลอาหรับ'},
+  {name:'ดีรา, ดูไบ',country:'UAE',vibe:'Slow Living',emoji:'🛶',img:'https://images.unsplash.com/photo-1604537466608-109fa2f16c3b?auto=format&fit=crop&w=800&q=80',desc:'ย่านเก่าแก่ ตลาดทองและเรือ abra ข้ามคลอง'},
+  {name:'อาหารอาหรับ, ดูไบ',country:'UAE',vibe:'Foodie Tour',emoji:'🥘',img:'https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=800&q=80',desc:'Shawarma ฮุมมัสและอาหารอาหรับต้นตำรับ'},
+
+  // ─── 🇸🇬 Singapore ─────────────────────────────────
+  {name:'มารีน่าเบย์, สิงคโปร์',country:'Singapore',vibe:'Urban Adventure',emoji:'🏙️',img:'https://images.unsplash.com/photo-1525625293386-3f8f99389edd?auto=format&fit=crop&w=800&q=80',desc:'Marina Bay Sands และ Supertrees ยามค่ำ'},
+  {name:'ไชนาทาวน์, สิงคโปร์',country:'Singapore',vibe:'Foodie Tour',emoji:'🥣',img:'https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=800&q=80',desc:'Hawker centre และอาหารหลายเชื้อชาติ'},
+  {name:'เซนโตซ่า, สิงคโปร์',country:'Singapore',vibe:'Beach Getaway',emoji:'🎢',img:'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=80',desc:'สวนสนุกและหาดทรายสวยในใจกลางเมือง'},
+  {name:'สวนพฤกษา, สิงคโปร์',country:'Singapore',vibe:'Nature Retreat',emoji:'🌳',img:'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=800&q=80',desc:'สวนมรดกโลกที่เขียวขจีกลางเมือง'},
+  {name:'ลิตเติ้ลอินเดีย, สิงคโปร์',country:'Singapore',vibe:'Foodie Tour',emoji:'🍛',img:'https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=800&q=80',desc:'อาหารอินเดียใต้และสีสันบนถนนเซรังกูน'},
+  {name:'การ์เดนส์บายเดอะเบย์',country:'Singapore',vibe:'Slow Living',emoji:'🌸',img:'https://images.unsplash.com/photo-1565967511849-76a60a516170?auto=format&fit=crop&w=800&q=80',desc:'สวนดอกไม้ในโดมกระจกและโชว์แสงยามค่ำ'},
+
+  // ─── 🇻🇳 Vietnam ─────────────────────────────────────
+  {name:'ฮานอย, เวียดนาม',country:'Vietnam',vibe:'Urban Adventure',emoji:'🏛️',img:'https://images.unsplash.com/photo-1603117156560-74be4476bced?auto=format&fit=crop&w=800&q=80',desc:'เมืองเก่าอายุพันปีและกาแฟไข่ที่ไม่มีใครทำได้เหมือน'},
+  {name:'ฮอยอัน, เวียดนาม',country:'Vietnam',vibe:'Slow Living',emoji:'🏮',img:'https://images.unsplash.com/photo-1528127269322-539801943592?auto=format&fit=crop&w=800&q=80',desc:'เมืองโคมไฟงดงามและเสื้อตัดเย็บในวันเดียว'},
+  {name:'อ่าวฮาลอง, เวียดนาม',country:'Vietnam',vibe:'Nature Retreat',emoji:'⛵',img:'https://images.unsplash.com/photo-1559592413-7cec4d0cae2b?auto=format&fit=crop&w=800&q=80',desc:'เขาหินปูนพุ่งขึ้นจากทะเลมรกต'},
+  {name:'ดานัง, เวียดนาม',country:'Vietnam',vibe:'Beach Getaway',emoji:'🏖️',img:'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=800&q=80',desc:'หาดทรายยาว น้ำทะเลใสและซีฟู้ดสด'},
+  {name:'โฮจิมินห์, เวียดนาม',country:'Vietnam',vibe:'Foodie Tour',emoji:'🥖',img:'https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=800&q=80',desc:'บั๋nh mì ผัดเส้นและอาหารเวียดนามใต้ต้นตำรับ'},
+  {name:'ซาปา, เวียดนาม',country:'Vietnam',vibe:'Nature Retreat',emoji:'⛰️',img:'https://images.unsplash.com/photo-1509017174182-aa2ded26f2f4?auto=format&fit=crop&w=800&q=80',desc:'นาขั้นบันไดสีเขียวและหมู่บ้านชาวเขา'},
+  {name:'ฟูก๊วก, เวียดนาม',country:'Vietnam',vibe:'Beach Getaway',emoji:'🏖️',img:'https://images.unsplash.com/photo-1510414842594-a61c69b5ae57?auto=format&fit=crop&w=800&q=80',desc:'เกาะสวรรค์ น้ำทะเลฟ้าใสและฟาร์มไข่มุก'},
+
+  // ─── 🇲🇻 Maldives ────────────────────────────────────
+  {name:'รีสอร์ทบนน้ำ, มัลดีฟส์',country:'Maldives',vibe:'Beach Getaway',emoji:'🏖️',img:'https://images.unsplash.com/photo-1573843981267-be1999ff37cd?auto=format&fit=crop&w=800&q=80',desc:'บังกะโลบนน้ำและทะเลสีฟิโรสตุสที่ไม่มีที่ไหนเหมือน'},
+  {name:'ดำน้ำ, มัลดีฟส์',country:'Maldives',vibe:'Nature Retreat',emoji:'🐠',img:'https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=800&q=80',desc:'ปะการังและฉลามวาฬใต้น้ำใสราวคริสตัล'},
+  {name:'มาเล่, มัลดีฟส์',country:'Maldives',vibe:'Urban Adventure',emoji:'🕌',img:'https://images.unsplash.com/photo-1590523741831-ab7e8b8f9c73?auto=format&fit=crop&w=800&q=80',desc:'เมืองหลวงเล็กๆ สีสันของตลาดและสถาปัตยกรรมอิสลาม'},
+  {name:'ซันเซ็ตครูซ, มัลดีฟส์',country:'Maldives',vibe:'Slow Living',emoji:'🌇',img:'https://images.unsplash.com/photo-1499678329028-101435549a4e?auto=format&fit=crop&w=800&q=80',desc:'ล่องเรือชมพระอาทิตย์ตกดินที่ขอบฟ้ากลางทะเล'},
+  {name:'หาดทรายขาว, มัลดีฟส์',country:'Maldives',vibe:'Beach Getaway',emoji:'🏝️',img:'https://images.unsplash.com/photo-1510414842594-a61c69b5ae57?auto=format&fit=crop&w=800&q=80',desc:'เกาะทรายเล็กๆ ที่สามารถเดินรอบได้ใน 5 นาที'},
+  {name:'ซีฟู้ดมาเล, มัลดีฟส์',country:'Maldives',vibe:'Foodie Tour',emoji:'🐟',img:'https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?auto=format&fit=crop&w=800&q=80',desc:'ปลาทูน่าสดและอาหารท้องถิ่นในเมืองหลวงมาเล'},
+
+  // ─── 🇦🇺 Australia ───────────────────────────────────
+  {name:'ซิดนีย์, ออสเตรเลีย',country:'Australia',vibe:'Urban Adventure',emoji:'🏛️',img:'https://images.unsplash.com/photo-1506973035872-a4ec16b8e8d9?auto=format&fit=crop&w=800&q=80',desc:'โอเปร่าเฮาส์และฮาร์เบอร์บริดจ์'},
+  {name:'เกรตแบร์ริเออร์รีฟ',country:'Australia',vibe:'Nature Retreat',emoji:'🐠',img:'https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=800&q=80',desc:'แนวปะการังที่ใหญ่ที่สุดในโลกและโลกใต้น้ำ'},
+  {name:'เมลเบิร์น, ออสเตรเลีย',country:'Australia',vibe:'Foodie Tour',emoji:'☕',img:'https://images.unsplash.com/photo-1545044846-351ba102c47d?auto=format&fit=crop&w=800&q=80',desc:'กาแฟที่ดีที่สุดในโลกและตรอกศิลปะกราฟฟิตี้'},
+  {name:'อูลูรู, ออสเตรเลีย',country:'Australia',vibe:'Nature Retreat',emoji:'🏜️',img:'https://images.unsplash.com/photo-1551009175-8a7d425e0c07?auto=format&fit=crop&w=800&q=80',desc:'หินศักดิ์สิทธิ์อะบอริจินท่ามกลางทะเลทรายสีแดง'},
+  {name:'บายรอนเบย์, ออสเตรเลีย',country:'Australia',vibe:'Beach Getaway',emoji:'🏄',img:'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=80',desc:'หาดเซิร์ฟและไลฟ์สไตล์โบฮีเมียน'},
+  {name:'โกลด์โคสต์, ออสเตรเลีย',country:'Australia',vibe:'Beach Getaway',emoji:'🎡',img:'https://images.unsplash.com/photo-1510414842594-a61c69b5ae57?auto=format&fit=crop&w=800&q=80',desc:'หาดซูเฟอร์สพาราไดส์และสวนสนุก'},
+  {name:'เดนทรี, ออสเตรเลีย',country:'Australia',vibe:'Nature Retreat',emoji:'🌿',img:'https://images.unsplash.com/photo-1525459819925-3f8e4a77d8c3?auto=format&fit=crop&w=800&q=80',desc:'ป่าฝนเขตร้อนเก่าแก่ที่สุดในโลกที่ติดกับทะเล'},
+
+  // ─── 🇮🇩 Indonesia ──────────────────────────────────
+  {name:'บาหลี, อินโดนีเซีย',country:'Indonesia',vibe:'Beach Getaway',emoji:'🏝️',img:'https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=800&q=80',desc:'เกาะแห่งพระเจ้า วัฒนธรรมและทะเล'},
+  {name:'อูบุด, บาหลี',country:'Indonesia',vibe:'Slow Living',emoji:'🧘',img:'https://images.unsplash.com/photo-1528702748617-c64d49f918af?auto=format&fit=crop&w=800&q=80',desc:'สวนนาขั้นบันได โยคะและอาหารบาหลีแท้'},
+  {name:'โยเกียการ์ตา, อินโดนีเซีย',country:'Indonesia',vibe:'Urban Adventure',emoji:'🏛️',img:'https://images.unsplash.com/photo-1563492065599-3520f775eeed?auto=format&fit=crop&w=800&q=80',desc:'บุโรพุทโธและปรัมบานัน มรดกโลกคู่บารมี'},
+  {name:'ราจาอัมปัต, อินโดนีเซีย',country:'Indonesia',vibe:'Nature Retreat',emoji:'🐠',img:'https://images.unsplash.com/photo-1559595500-d3b73e8ef5e8?auto=format&fit=crop&w=800&q=80',desc:'เกาะหินปูนและความหลากหลายทางทะเลระดับโลก'},
+  {name:'กีลีไอส์แลนด์, อินโดนีเซีย',country:'Indonesia',vibe:'Beach Getaway',emoji:'🐢',img:'https://images.unsplash.com/photo-1506929562872-bb421503ef21?auto=format&fit=crop&w=800&q=80',desc:'หาดทรายขาวปลอดรถและดำน้ำตื้นกับเต่า'},
+  {name:'อาหารบาหลี, อินโดนีเซีย',country:'Indonesia',vibe:'Foodie Tour',emoji:'🍱',img:'https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=800&q=80',desc:'นาซีกอเร็ง ซาเตย์และลูวัคกาแฟแพงที่สุดในโลก'},
+  {name:'โคโมโด, อินโดนีเซีย',country:'Indonesia',vibe:'Nature Retreat',emoji:'🦎',img:'https://images.unsplash.com/photo-1523482580672-f109ba8cb9be?auto=format&fit=crop&w=800&q=80',desc:'มังกรโคโมโดและทะเลสีชมพูที่หาดพิงค์บีช'},
+
+  // ─── 🇮🇳 India ──────────────────────────────────────
+  {name:'เดลี, อินเดีย',country:'India',vibe:'Urban Adventure',emoji:'🏙️',img:'https://images.unsplash.com/photo-1524492412937-b28074a5d7da?auto=format&fit=crop&w=800&q=80',desc:'อินเดียเกตและถนนที่มีพลังชีวิตที่สุดในโลก'},
+  {name:'ราชาสถาน, อินเดีย',country:'India',vibe:'Slow Living',emoji:'🕌',img:'https://images.unsplash.com/photo-1599661046289-e31897846e36?auto=format&fit=crop&w=800&q=80',desc:'พระราชวังสีชมพู เมืองสีน้ำเงินและทะเลทรายทาร์'},
+  {name:'เกรละ, อินเดีย',country:'India',vibe:'Nature Retreat',emoji:'🌴',img:'https://images.unsplash.com/photo-1602567208424-52d26e7efddb?auto=format&fit=crop&w=800&q=80',desc:'แบ็ควอเตอร์ทอดตัวสีเขียวและอายุรเวทแท้'},
+  {name:'มุมไบ, อินเดีย',country:'India',vibe:'Urban Adventure',emoji:'🏙️',img:'https://images.unsplash.com/photo-1529253355930-ddbe423a2ac7?auto=format&fit=crop&w=800&q=80',desc:'เมืองแห่งบอลลีวูดและอาหารริมทางที่เร้าใจ'},
+  {name:'กัว, อินเดีย',country:'India',vibe:'Beach Getaway',emoji:'🏖️',img:'https://images.unsplash.com/photo-1512343879784-a960bf40e7f2?auto=format&fit=crop&w=800&q=80',desc:'หาดทรายทองและบรรยากาศโปรตุเกสเก่าแก่'},
+  {name:'วาราณสี, อินเดีย',country:'India',vibe:'Slow Living',emoji:'🕯️',img:'https://images.unsplash.com/photo-1561361058-c24cecb75dca?auto=format&fit=crop&w=800&q=80',desc:'เมืองศักดิ์สิทธิ์แห่งแม่น้ำคงคาและพิธีกรรม'},
+
+  // ─── 🇪🇸 Spain ──────────────────────────────────────
+  {name:'บาร์เซโลนา, สเปน',country:'Spain',vibe:'Urban Adventure',emoji:'🏰',img:'https://images.unsplash.com/photo-1523531294919-4bcd7c65e216?auto=format&fit=crop&w=800&q=80',desc:'ซากราดาฟามีเลียและสถาปัตยกรรมเกาดี'},
+  {name:'มาดริด, สเปน',country:'Spain',vibe:'Urban Adventure',emoji:'🏛️',img:'https://images.unsplash.com/photo-1539037116277-4db20889f2d4?auto=format&fit=crop&w=800&q=80',desc:'พิพิธภัณฑ์ปราโดและชีวิตยามค่ำที่ไม่สิ้นสุด'},
+  {name:'กรานาดา, สเปน',country:'Spain',vibe:'Slow Living',emoji:'🕌',img:'https://images.unsplash.com/photo-1549989476-69a92fa57c36?auto=format&fit=crop&w=800&q=80',desc:'อัลฮัมบราและชาวัดอาหรับในอันดาลูซิอา'},
+  {name:'คอสตาเดลโซล, สเปน',country:'Spain',vibe:'Beach Getaway',emoji:'🏖️',img:'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=80',desc:'หาดทรายอบอุ่นและสังสรรค์ริมทะเลเมดิเตอร์เรเนียน'},
+  {name:'ซานเซบาสเตียน, สเปน',country:'Spain',vibe:'Foodie Tour',emoji:'🥘',img:'https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=800&q=80',desc:'เมืองพินโช้สและร้านอาหารมิชลินต่อตารางเมตรมากที่สุด'},
+  {name:'กาลีเซีย, สเปน',country:'Spain',vibe:'Nature Retreat',emoji:'🌲',img:'https://images.unsplash.com/photo-1558048026-b56e44f33f3e?auto=format&fit=crop&w=800&q=80',desc:'ริอัสและอ่าวสีเขียวขจีทางตะวันตกเฉียงเหนือ'},
+
+  // ─── 🇹🇷 Turkey ─────────────────────────────────────
+  {name:'อิสตันบูล, ตุรกี',country:'Turkey',vibe:'Urban Adventure',emoji:'🕌',img:'https://images.unsplash.com/photo-1524231757912-21f4fe3a7200?auto=format&fit=crop&w=800&q=80',desc:'สองทวีปบนเมืองเดียว มัสยิดสีน้ำเงินและบาซาร์'},
+  {name:'คัปปาโดเกีย, ตุรกี',country:'Turkey',vibe:'Nature Retreat',emoji:'🎈',img:'https://images.unsplash.com/photo-1527838832700-5059252407fa?auto=format&fit=crop&w=800&q=80',desc:'บอลลูนเหนือสมรภูมิหินรูปเห็ดในตอนเช้า'},
+  {name:'ชายฝั่งตุรกีสีฟ้า',country:'Turkey',vibe:'Beach Getaway',emoji:'⛵',img:'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=800&q=80',desc:'อ่าวเงียบสงัดและล่องเรือ Gulet ท่ามกลางหน้าผา'},
+  {name:'เอฟิซัส, ตุรกี',country:'Turkey',vibe:'Slow Living',emoji:'🏛️',img:'https://images.unsplash.com/photo-1566438480900-0609be27a4be?auto=format&fit=crop&w=800&q=80',desc:'เมืองโบราณกรีก-โรมันที่ยังคงยืนอยู่'},
+  {name:'โบดรัม, ตุรกี',country:'Turkey',vibe:'Beach Getaway',emoji:'🏖️',img:'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=80',desc:'ปราสาทอัศวินและไนต์ไลฟ์ริมทะเลอีเจียน'},
+  {name:'อิสตันบูลสตรีทฟู้ด',country:'Turkey',vibe:'Foodie Tour',emoji:'🥙',img:'https://images.unsplash.com/photo-1559628233-100c798642d7?auto=format&fit=crop&w=800&q=80',desc:'ซิมิต ดอนเนอร์ และบาคลาวาจากเตาอบโบราณ'},
+
+  // ─── 🇩🇪 Germany ────────────────────────────────────
+  {name:'เบอร์ลิน, เยอรมนี',country:'Germany',vibe:'Urban Adventure',emoji:'🏢',img:'https://images.unsplash.com/photo-1560969184-10fe8719e047?auto=format&fit=crop&w=800&q=80',desc:'ศิลปะ ประวัติศาสตร์และคลับที่ดีที่สุดในโลก'},
+  {name:'บาวาเรีย, เยอรมนี',country:'Germany',vibe:'Nature Retreat',emoji:'🏰',img:'https://images.unsplash.com/photo-1527668752968-14dc70a27c95?auto=format&fit=crop&w=800&q=80',desc:'ปราสาทนอยชวานสไตน์และทุ่งหญ้าแอลป์'},
+  {name:'ป่าดำ, เยอรมนี',country:'Germany',vibe:'Nature Retreat',emoji:'🌲',img:'https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&w=800&q=80',desc:'ป่าสนเงียบ เค้กป่าดำและเส้นทางเดินป่า'},
+  {name:'ฮัมบูร์ก, เยอรมนี',country:'Germany',vibe:'Urban Adventure',emoji:'⚓',img:'https://images.unsplash.com/photo-1508867396143-578a47b6cbe4?auto=format&fit=crop&w=800&q=80',desc:'ท่าเรือและย่านเก่าแก่ที่มีชีวิตชีวา'},
+  {name:'ไรน์แวลลีย์, เยอรมนี',country:'Germany',vibe:'Slow Living',emoji:'🍷',img:'https://images.unsplash.com/photo-1548366086-7f1b76106622?auto=format&fit=crop&w=800&q=80',desc:'ปราสาทยุคกลางและไร่ไวน์ริมแม่น้ำไรน์'},
+  {name:'มิวนิก, เยอรมนี',country:'Germany',vibe:'Foodie Tour',emoji:'🥨',img:'https://images.unsplash.com/photo-1595867818082-083862f3d630?auto=format&fit=crop&w=800&q=80',desc:'เบียร์สด ไส้กรอก Brezel และเบียร์การ์เดนดั้งเดิม'}
         ];
 
         // ── localStorage helpers ──
@@ -1236,7 +1255,7 @@ window._toggleLangMenu = function() {
                 const isSaved = savedPlaces.includes(place.name);
                 canvas.insertAdjacentHTML('beforeend',`
                 <div class="place-card ${isLarge?'col-span-2 row-span-2':'col-span-1 row-span-1'} rounded-3xl relative overflow-hidden group shadow-md cursor-pointer" style="animation-delay:${i*0.04}s">
-                    <img src="${place.img}" alt="${place.name}" data-vibe="${place.vibe}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy" onerror="this.onerror=null;const seeds={'Urban Adventure':23,'Slow Living':100,'Nature Retreat':15,'Foodie Tour':292,'Beach Getaway':64};const s=seeds[this.dataset.vibe]||Math.abs([...this.alt].reduce((a,c)=>a+c.charCodeAt(0),0))%1000;this.src='https://picsum.photos/seed/'+s+this.alt.replace(/[^a-z0-9]/gi,'')+'/800/600'">
+                    <img src="${place.img}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy">
                     <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-transparent"></div>
                     <div class="absolute bottom-4 left-4 z-20 text-white">
                         <span class="px-2 py-1 bg-white/20 backdrop-blur-md rounded-md text-xs font-medium mb-2 inline-flex items-center gap-1">${VIBE_ICONS[place.vibe]||""} ${place.vibe}</span>

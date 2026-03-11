@@ -6,7 +6,7 @@
     <title>Traveloha - Storyboard</title>
     <link rel="icon" type="image/png" href="src/favicon.png">
     <script src="https://cdn.tailwindcss.com"></script>
-    <script>tailwind.config={darkMode:'class',theme:{extend:{colors:{brand:{50:'#f4f5f4',100:'#e6e9e6',500:'#8ba888',600:'#6b8a68',900:'#3a4a39'}}}}}</script>
+    <script>tailwind.config={darkMode:'class',theme:{extend:{colors:{brand:{50:'#f0fdfa',100:'#ccfbf1',200:'#99f6e4',300:'#5eead4',400:'#2dd4bf',500:'#14b8a6',600:'#0d9488',700:'#0f766e',800:'#115e59',900:'#134e4a'}}}}}</script>
     <script>
 // ─── Travelaroha i18n ─────────────────────────────────────────────────────────
 // 6 languages: th, en, zh, es, ar, fr
@@ -604,7 +604,7 @@ function renderLangSwitcher(containerId) {
             onmouseout="this.style.background='${code === _lang ? 'rgba(139,168,136,0.2)' : 'transparent'}'">
             <span style="font-size:17px;line-height:1">${l.flag}</span>
             <span>${l.label}</span>
-            ${code === _lang ? '<span style="margin-left:auto;color:#6b8a68;font-size:12px">✓</span>' : ''}
+            ${code === _lang ? '<span style="margin-left:auto;color:#0d9488;font-size:12px">✓</span>' : ''}
           </button>`).join('')}
       </div>
     </div>`;
@@ -637,11 +637,11 @@ window._toggleLangMenu = function() {
         #hide-checkbox{opacity:0;height:0;width:0;position:absolute;}.toggle{position:relative;cursor:pointer;display:inline-block;width:200px;height:100px;background:#211042;border-radius:50px;transition:500ms;overflow:hidden;box-shadow:0 10px 15px -3px rgba(0,0,0,0.3);}.toggle-button{position:absolute;display:inline-block;top:7px;left:6px;width:86px;height:86px;border-radius:50%;background:#FAEAF1;overflow:hidden;box-shadow:0 0 35px 4px rgba(255,255,255);transition:all 500ms ease-out;z-index:10;}.crater{position:absolute;display:inline-block;background:#FAEAF1;border-radius:50%;transition:500ms;}.crater-1{background:#FFFFF9;width:86px;height:86px;left:10px;bottom:10px;}.crater-2{width:20px;height:20px;top:-7px;left:44px;}.crater-3{width:16px;height:16px;top:20px;right:-4px;}.crater-4{width:10px;height:10px;top:24px;left:30px;}.crater-5{width:15px;height:15px;top:40px;left:48px;}.crater-6{width:10px;height:10px;top:48px;left:20px;}.crater-7{width:12px;height:12px;bottom:5px;left:35px;}.star{position:absolute;display:inline-block;border-radius:50%;background:#FFF;box-shadow:1px 0 2px 2px rgba(255,255,255);}.star-1{width:6px;height:6px;right:90px;bottom:40px;}.star-2{width:8px;height:8px;right:70px;top:10px;}.star-3{width:5px;height:5px;right:60px;bottom:15px;}.star-4{width:3px;height:3px;right:40px;bottom:50px;}.star-5{width:4px;height:4px;right:10px;bottom:35px;}.star-6,.star-7,.star-8{width:10px;height:2px;border-radius:2px;transform:rotate(-45deg);box-shadow:5px 0px 4px 1px #FFF;animation-name:travel;animation-duration:1.5s;animation-timing-function:ease-out;animation-iteration-count:infinite;}.star-6{right:30px;bottom:30px;animation-delay:-2s;}.star-7{right:50px;bottom:60px;}.star-8{right:90px;top:10px;animation-delay:-4s;}@keyframes travel{0%{transform:rotate(-45deg) translateX(70px);}50%{transform:rotate(-45deg) translateX(-20px);box-shadow:5px 0px 6px 1px #FFF;}100%{transform:rotate(-45deg) translateX(-30px);width:2px;height:2px;opacity:0;box-shadow:none;}}#hide-checkbox:checked+.toggle{background:#24D7F7;}#hide-checkbox:checked+.toggle .toggle-button{background:#F7FFFF;transform:translateX(102px);box-shadow:0 0 35px 5px rgba(255,255,255);}
         .glass-panel{background:rgba(255,255,255,0.65);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,0.5);box-shadow:0 4px 30px rgba(0,0,0,0.05);}.dark .glass-panel{background:rgba(24,24,27,0.7);border:1px solid rgba(255,255,255,0.08);box-shadow:0 4px 30px rgba(0,0,0,0.2);}
         ::-webkit-scrollbar{width:6px;height:6px;}::-webkit-scrollbar-thumb{background-color:#d4d4d8;border-radius:10px;}.dark ::-webkit-scrollbar-thumb{background-color:#3f3f46;}.scrollbar-hide::-webkit-scrollbar{display:none;}.scrollbar-hide{-ms-overflow-style:none;scrollbar-width:none;}
-        body{background-color:#f2efe8;background-image:radial-gradient(ellipse 90% 70% at 10% 30%,rgba(139,168,136,0.22) 0%,transparent 55%),radial-gradient(ellipse 70% 60% at 90% 10%,rgba(196,181,148,0.18) 0%,transparent 50%),radial-gradient(ellipse 80% 70% at 50% 90%,rgba(152,186,148,0.15) 0%,transparent 55%);}
-        html.dark body{background-color:#111912;background-image:radial-gradient(ellipse 90% 70% at 10% 30%,rgba(58,74,57,0.4) 0%,transparent 55%),radial-gradient(ellipse 70% 60% at 90% 10%,rgba(35,55,35,0.3) 0%,transparent 50%),radial-gradient(ellipse 80% 70% at 50% 90%,rgba(45,65,42,0.25) 0%,transparent 55%);}
+        body{background-color:#f8fafc;background-image:radial-gradient(ellipse 90% 70% at 10% 30%,rgba(20,184,166,0.15) 0%,transparent 55%),radial-gradient(ellipse 70% 60% at 90% 10%,rgba(13,148,136,0.12) 0%,transparent 50%),radial-gradient(ellipse 80% 70% at 50% 90%,rgba(45,212,191,0.10) 0%,transparent 55%);}
+        html.dark body{background-color:#0f172a;background-image:radial-gradient(ellipse 90% 70% at 10% 30%,rgba(15,118,110,0.35) 0%,transparent 55%),radial-gradient(ellipse 70% 60% at 90% 10%,rgba(17,94,89,0.25) 0%,transparent 50%),radial-gradient(ellipse 80% 70% at 50% 90%,rgba(19,78,74,0.20) 0%,transparent 55%);}
         html.dark body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;opacity:0.04;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");background-size:180px 180px;}
         .day-subtitle{outline:none;border-bottom:2px dashed rgba(107,138,104,0.4);padding:0 4px 1px;min-width:60px;display:inline-block;cursor:text;}
-        .day-subtitle:focus{border-bottom-color:#6b8a68;border-bottom-style:solid;}
+        .day-subtitle:focus{border-bottom-color:#0d9488;border-bottom-style:solid;}
         .day-subtitle:empty::before{content:attr(data-placeholder);color:rgba(107,138,104,0.4);pointer-events:none;}
         .time-input{background:rgba(241,245,249,0.8);border:1px solid rgba(203,213,225,0.8);border-radius:8px;padding:3px 8px;font-size:12px;color:#475569;cursor:pointer;outline:none;transition:border-color 0.2s;}
         .time-input:focus{border-color:#8ba888;}
@@ -671,8 +671,8 @@ window._toggleLangMenu = function() {
 
     <nav class="sticky top-4 z-50 glass-panel shadow-sm flex justify-between items-center max-w-7xl mx-auto px-3 md:px-6 py-2.5 md:py-4 rounded-3xl gap-2">
         <div class="flex items-center gap-2 flex-shrink-0">
-            <img src="src/logo.png" alt="Travelaroha" class="w-8 h-8 md:w-10 md:h-10 rounded-full object-cover border-2 border-brand-500 shadow-sm bg-white">
-            <div class="font-bold text-brand-600 dark:text-brand-500 text-base md:text-2xl tracking-tight hidden sm:block">Travelaroha</div>
+            <img src="src/logo.png" alt="Travelaroha" class="w-8 h-8 md:w-10 md:h-10 rounded-full object-cover border-2 border-teal-500 shadow-sm bg-white">
+            <div class="font-bold text-teal-600 dark:text-teal-500 text-base md:text-2xl tracking-tight hidden sm:block">Travelaroha</div>
         </div>
         <div class="hidden sm:flex gap-1 md:gap-6 font-medium text-zinc-500 dark:text-zinc-400 flex-1 justify-center">
             <a href="index.html" class="relative group px-2 py-2 hover:text-zinc-900 dark:hover:text-white transition-colors text-[11px] md:text-sm whitespace-nowrap"><span data-i18n="nav_discovery">DISCOVERY</span><span class="absolute -bottom-1 left-0 w-0 h-[2px] bg-zinc-300 dark:bg-zinc-600 rounded-full transition-all duration-300 group-hover:w-full"></span></a>
@@ -686,6 +686,9 @@ window._toggleLangMenu = function() {
                     <label for="hide-checkbox" class="toggle m-0"><span class="toggle-button"><span class="crater crater-1"></span></span><span class="star star-1"></span></label>
                 </div>
             </div>
+            <button onclick="_toggleTheme()" id="nav-theme-btn-sm" class="flex sm:hidden md:hidden items-center justify-center w-8 h-8 rounded-full bg-zinc-100 dark:bg-zinc-700 text-zinc-600 dark:text-zinc-300 hover:scale-105 transition-transform">
+                <span id="nav-theme-icon-sm"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/></svg></span>
+            </button>
             <div id="lang-slot"></div>
             <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=100&q=80" class="w-8 h-8 rounded-full object-cover shadow-md border-2 border-white dark:border-zinc-800 cursor-pointer hover:scale-105 transition-transform">
         </div>
@@ -699,7 +702,7 @@ window._toggleLangMenu = function() {
             </div>
             <div class="flex items-center gap-3 flex-shrink-0">
                 <button id="clear-btn" class="px-4 py-2.5 border border-rose-200 dark:border-rose-800 text-rose-500 rounded-xl text-sm font-medium hover:bg-rose-50 dark:hover:bg-rose-900/20 transition-colors" data-i18n="sb_clear"><svg class="w-4 h-4 mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></svg><span data-i18n="sb_clear">ล้าง</span></button>
-                <button id="add-day-btn" class="px-5 py-2.5 bg-brand-600 hover:bg-brand-700 text-white rounded-xl text-sm font-bold shadow-md transition-all hover:scale-105" data-i18n="sb_add_day">+ เพิ่มวัน</button>
+                <button id="add-day-btn" class="px-5 py-2.5 bg-orange-500 hover:bg-orange-600 text-white rounded-xl text-sm font-bold shadow-md transition-all hover:scale-105" data-i18n="sb_add_day">+ เพิ่มวัน</button>
             </div>
         </div>
 
@@ -708,14 +711,14 @@ window._toggleLangMenu = function() {
             <div class="w-full lg:w-1/3 glass-panel p-5 rounded-3xl shadow-lg lg:sticky lg:top-24 h-fit">
                 <h3 class="font-bold text-lg mb-1 flex justify-between items-center">
                     <span data-i18n="sb_saved_vibes">Saved Vibes</span>
-                    <span class="bg-brand-100 text-brand-700 dark:bg-brand-900/50 dark:text-brand-300 text-xs px-2.5 py-1 rounded-full" data-i18n="sb_drag_hint">ลากหรือกด +</span>
+                    <span class="bg-teal-100 text-teal-700 dark:bg-teal-900/50 dark:text-teal-300 text-xs px-2.5 py-1 rounded-full" data-i18n="sb_drag_hint">ลากหรือกด +</span>
                 </h3>
                 <p class="text-xs text-slate-400 mb-3" data-i18n="sb_sidebar_sub">แสดงเฉพาะที่กด ❤️ ในหน้า Discovery</p>
                 <div id="sidebar-zone" class="space-y-2.5 min-h-[180px] max-h-[520px] overflow-y-auto pr-1 rounded-xl pb-2 border-2 border-dashed border-slate-200 dark:border-slate-700 transition-colors duration-200">
                     <div id="sidebar-empty" class="hidden flex-col items-center justify-center py-10 text-center gap-2 pointer-events-none select-none">
                         <svg class="w-10 h-10 text-slate-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>
                         <p class="text-sm text-slate-400" data-i18n="sb_no_saved">ยังไม่มี Saved Vibes</p>
-                        <a href="index.html" class="mt-1 text-xs text-brand-600 dark:text-brand-400 underline underline-offset-2 pointer-events-auto" data-i18n="sb_go_discover">ไปกด ❤️ ในหน้า Discovery</a>
+                        <a href="index.html" class="mt-1 text-xs text-teal-600 dark:text-teal-400 underline underline-offset-2 pointer-events-auto" data-i18n="sb_go_discover">ไปกด ❤️ ในหน้า Discovery</a>
                     </div>
                 </div>
             </div>
@@ -738,14 +741,27 @@ window._toggleLangMenu = function() {
     <!-- Mobile Bottom Nav (no Checklist) -->
     <nav class="fixed bottom-0 left-0 right-0 z-50 sm:hidden glass-panel border-t border-slate-200/60 dark:border-slate-700/60 flex justify-around items-center py-2 px-2">
         <a href="index.html" class="flex flex-col items-center gap-0.5 px-3 py-1.5 rounded-2xl text-slate-400 min-w-[56px]"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg><span class="text-[10px] font-medium" data-i18n="mob_discover">Discover</span></a>
-        <a href="storyboard.html" class="flex flex-col items-center gap-0.5 px-3 py-1.5 rounded-2xl bg-brand-500/10 text-brand-600 dark:text-brand-400 min-w-[56px]"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"/></svg><span class="text-[10px] font-bold" data-i18n="mob_storyboard">Storyboard</span></a>
+        <a href="storyboard.html" class="flex flex-col items-center gap-0.5 px-3 py-1.5 rounded-2xl bg-teal-500/10 text-teal-600 dark:text-teal-400 min-w-[56px]"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"/></svg><span class="text-[10px] font-bold" data-i18n="mob_storyboard">Storyboard</span></a>
         <a href="dashboard.html" class="flex flex-col items-center gap-0.5 px-3 py-1.5 rounded-2xl text-slate-400 min-w-[56px]"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg><span class="text-[10px] font-medium" data-i18n="mob_dashboard">Dashboard</span></a>
-        <button id="mob-theme-btn" onclick="_toggleTheme()" class="flex flex-col items-center gap-0.5 px-3 py-1.5 rounded-2xl text-slate-400 min-w-[56px]"><span id="mob-theme-icon" class="w-5 h-5 flex items-center justify-center"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/></svg></span><span class="text-[10px] font-medium" data-i18n="mob_theme">Theme</span></button>
+        
     </nav>
 
 <script>
 // ── i18n init ──
 renderLangSwitcher('lang-slot');
+        // ── Mobile nav theme icon sync ──
+        (function(){
+            const icon = document.getElementById('nav-theme-icon-sm');
+            function syncIcon(){
+                const dark = document.documentElement.classList.contains('dark');
+                if(!icon) return;
+                icon.innerHTML = dark
+                    ? '<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/></svg>'
+                    : '<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/></svg>';
+            }
+            syncIcon();
+            new MutationObserver(syncIcon).observe(document.documentElement,{attributes:true,attributeFilter:['class']});
+        })();
 applyLang();
 // onLangChange is defined later after all functions are ready
 
@@ -886,7 +902,7 @@ function buildCard(name, inBoard=false, start='09:00', end='11:00') {
           <p class="text-xs text-slate-500 truncate">${p.vibe}</p>
         </div>
         <!-- Mobile add btn (sidebar only) -->
-        <button class="add-to-day-btn ${inBoard?'':' mob-vis'} w-8 h-8 flex-shrink-0 items-center justify-center rounded-full bg-brand-100 dark:bg-brand-900/40 text-brand-600 dark:text-brand-400 font-bold text-sm hover:bg-brand-200 transition-colors" title="เพิ่มเข้า Day"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 4v16m8-8H4"/></svg></button>
+        <button class="add-to-day-btn ${inBoard?'':' mob-vis'} w-8 h-8 flex-shrink-0 items-center justify-center rounded-full bg-teal-100 dark:bg-teal-900/40 text-teal-600 dark:text-teal-400 font-bold text-sm hover:bg-teal-200 transition-colors" title="เพิ่มเข้า Day"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 4v16m8-8H4"/></svg></button>
         <!-- Return btn (board only) -->
         <button class="return-btn ${inBoard?'flex':'hidden'} w-7 h-7 flex-shrink-0 items-center justify-center rounded-full bg-slate-100 dark:bg-slate-700 text-slate-500 hover:bg-rose-100 hover:text-rose-500 transition-colors text-sm" title="คืนกลับ"><svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h10a8 8 0 018 8v2M3 10l6 6m-6-6l6-6"/></svg></button>
       </div>
@@ -896,7 +912,7 @@ function buildCard(name, inBoard=false, start='09:00', end='11:00') {
           <input type="time" value="${start}" class="time-start time-input" draggable="false">
           <span class="text-xs text-slate-400">–</span>
           <input type="time" value="${end}" class="time-end time-input" draggable="false">
-          <span class="time-dur text-xs font-semibold text-brand-600 dark:text-brand-400 bg-brand-50 dark:bg-brand-900/30 px-2 py-0.5 rounded-full">${calcDuration(start,end)}</span>
+          <span class="time-dur text-xs font-semibold text-teal-600 dark:text-teal-400 bg-teal-50 dark:bg-teal-900/30 px-2 py-0.5 rounded-full">${calcDuration(start,end)}</span>
         </div>
       </div>`;
 
@@ -979,7 +995,7 @@ function openDayPicker(card, event) {
         const subtitle = board.querySelector('.day-subtitle')?.innerText?.trim();
         const label = `Day ${i+1}${subtitle ? ': '+subtitle : ''}`;
         const btn = document.createElement('button');
-        btn.className = 'w-full text-left px-3 py-2.5 rounded-xl hover:bg-brand-50 dark:hover:bg-brand-900/30 text-sm font-medium text-zinc-700 dark:text-zinc-200 transition-colors flex items-center gap-2';
+        btn.className = 'w-full text-left px-3 py-2.5 rounded-xl hover:bg-teal-50 dark:hover:bg-teal-900/30 text-sm font-medium text-zinc-700 dark:text-zinc-200 transition-colors flex items-center gap-2';
         btn.innerHTML = `<span class="text-base">📍</span>${label}`;
         btn.addEventListener('click', () => {
             const zone = board.querySelector('.board-drop-zone');
@@ -1020,7 +1036,7 @@ function buildDayBoard(subtitle = '', places = []) {
     board.className = 'day-board glass-panel p-5 rounded-3xl shadow-md border border-slate-200/60 dark:border-slate-700/60';
     board.innerHTML = `
       <div class="flex justify-between items-start mb-3 gap-2">
-        <h3 class="font-bold text-lg text-brand-600 dark:text-brand-400 flex items-baseline gap-2 flex-wrap">
+        <h3 class="font-bold text-lg text-teal-600 dark:text-teal-400 flex items-baseline gap-2 flex-wrap">
           <span class="flex-shrink-0">Day ${n}:</span>
           <span contenteditable="true" spellcheck="false" class="day-subtitle" data-i18n-ph="sb_placeholder" data-placeholder="${t('sb_placeholder')}">${subtitle}</span>
           <span class="day-summary text-xs font-normal text-slate-400"></span>
