@@ -136,9 +136,9 @@
     <!-- Day Picker Modal -->
     <Transition name="modal">
       <div v-if="pickerOpen" class="fixed inset-0 z-50 flex items-end sm:items-center justify-center p-4 bg-black/40 backdrop-blur-sm" @click.self="pickerOpen = false">
-        <div class="w-full max-w-xs bg-white dark:bg-slate-900 rounded-3xl shadow-2xl p-6">
-          <h3 class="font-bold text-lg mb-4 text-slate-800 dark:text-slate-200">{{ t('sb_picker_title') }}</h3>
-          <div class="space-y-2">
+        <div class="w-full max-w-xs bg-white dark:bg-slate-900 rounded-3xl shadow-2xl p-6 flex flex-col max-h-[80vh]">
+          <h3 class="font-bold text-lg mb-4 text-slate-800 dark:text-slate-200 shrink-0">{{ t('sb_picker_title') }}</h3>
+          <div class="space-y-2 overflow-y-auto overscroll-contain flex-1 pr-1">
             <button
               v-for="(day, idx) in days" :key="day.id"
               @click="addCardToDay(idx)"
@@ -147,7 +147,7 @@
               Day {{ idx + 1 }}: {{ day.subtitle || t('sb_placeholder') }}
             </button>
           </div>
-          <button @click="pickerOpen = false" class="mt-4 w-full py-2.5 rounded-2xl border border-slate-200 dark:border-slate-700 text-slate-500 text-sm font-medium hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors">
+          <button @click="pickerOpen = false" class="mt-4 w-full py-2.5 rounded-2xl border border-slate-200 dark:border-slate-700 text-slate-500 text-sm font-medium hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors shrink-0">
             {{ t('sb_picker_cancel') }}
           </button>
         </div>
