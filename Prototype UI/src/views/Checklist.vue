@@ -138,7 +138,7 @@
           {{ t('cl_back') }}
         </RouterLink>
         <button @click="startNewPlan" class="flex items-center justify-center gap-2 px-6 py-3 border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 rounded-2xl font-medium hover:scale-105 transition-all">
-          ＋ New Plan
+          {{ t('cl_new_plan') }}
         </button>
       </div>
     </div>

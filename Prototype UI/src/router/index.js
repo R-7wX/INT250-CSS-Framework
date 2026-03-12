@@ -1,4 +1,4 @@
-import { createRouter, createWebHashHistory } from 'vue-router'
+import { createRouter, createMemoryHistory } from 'vue-router'
 import Discovery from '../views/Discovery.vue'
 import Storyboard from '../views/Storyboard.vue'
 import Dashboard from '../views/Dashboard.vue'
@@ -12,7 +12,7 @@ const routes = [
 ]
 
 export default createRouter({
-  history: createWebHashHistory(),
+  history: createMemoryHistory(),
   routes,
   scrollBehavior: () => ({ top: 0 }),
 })
