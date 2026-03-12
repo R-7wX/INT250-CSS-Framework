@@ -11,7 +11,10 @@
       class="glass-panel rounded-3xl border border-slate-200/60 dark:border-slate-700/60 p-5 shadow-sm mb-6"
     >
       <h2 class="font-bold text-base mb-1 text-slate-700 dark:text-slate-300">
-        {{ store.tripName ? '🗺️ ' + store.tripName : t('cl_itin') }}
+        <span class="inline-flex items-center gap-1.5">
+          <svg class="w-4 h-4 text-teal-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-1.447-.894L15 9m0 8V9m0 0L9 7"/></svg>
+          {{ store.tripName ? store.tripName : t('cl_itin_label') }}
+        </span>
       </h2>
       <p class="text-xs text-slate-400 mb-4">{{ itin_meta }}</p>
 
@@ -114,7 +117,13 @@
     <Transition name="fade">
       <div v-if="showAllDone" class="fixed inset-0 z-[150] flex items-center justify-center pointer-events-none">
         <div class="text-center pointer-events-auto bg-white/90 dark:bg-slate-900/90 backdrop-blur-sm rounded-3xl p-8 shadow-2xl border border-teal-200 dark:border-teal-700 mx-4">
-          <div class="text-6xl mb-3 animate-bounce">🎉</div>
+          <div class="flex justify-center mb-3">
+            <div class="w-16 h-16 rounded-2xl bg-teal-100 dark:bg-teal-900/40 flex items-center justify-center animate-bounce">
+              <svg class="w-9 h-9 text-teal-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+              </svg>
+            </div>
+          </div>
           <h2 class="text-2xl font-extrabold text-teal-600 dark:text-teal-400 mb-1">{{ t('cl_all_done_title') }}</h2>
           <p class="text-slate-500 dark:text-slate-400 text-sm mb-5">{{ t('cl_all_done_sub') }}</p>
           <button @click="showAllDone = false" class="px-6 py-2.5 bg-teal-500 hover:bg-teal-600 text-white rounded-2xl font-bold transition-colors">
@@ -305,7 +314,7 @@ function downloadPlan() {
 </head>
 <body>
 <div class="hero">
-  <div class="hero-emoji">🗺️</div>
+  <div class="hero-emoji"><svg xmlns="http://www.w3.org/2000/svg" width="38" height="38" fill="none" stroke="#14b8a6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-1.447-.894L15 9m0 8V9m0 0L9 7"/></svg></div>
   <h1>${docTitle}</h1>
   <div class="date">${now}</div>
 </div>

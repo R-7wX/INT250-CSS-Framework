@@ -12,7 +12,8 @@
         />
       </div>
       <div class="flex gap-2 flex-wrap">
-        <button @click="clearAll" class="px-4 py-2 rounded-2xl text-sm font-semibold border border-rose-200 dark:border-rose-800 text-rose-500 hover:bg-rose-50 dark:hover:bg-rose-900/20 transition-colors">
+        <button @click="clearAll" class="flex items-center gap-1.5 px-4 py-2 rounded-2xl text-sm font-semibold border border-rose-200 dark:border-rose-800 text-rose-500 hover:bg-rose-50 dark:hover:bg-rose-900/20 transition-colors">
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></svg>
           {{ t('sb_clear') }}
         </button>
         <button @click="addDay" class="px-4 py-2 rounded-2xl text-sm font-semibold bg-teal-500 hover:bg-teal-600 text-white shadow transition-colors">
@@ -20,8 +21,9 @@
         </button>
         <button
           @click="generateChecklist"
-          class="relative overflow-hidden flex items-center gap-2 px-5 py-2 rounded-2xl text-sm font-bold text-white shadow-lg hover:scale-105 hover:shadow-xl transition-all duration-200"
-          style="background: linear-gradient(135deg, #0d9488 0%, #06b6d4 50%, #0ea5e9 100%); box-shadow: 0 4px 18px rgba(6,182,212,0.40);"
+          class="relative overflow-hidden flex items-center gap-2 px-5 py-2 rounded-2xl text-sm font-bold text-white shadow-lg transition-all duration-200"
+          :class="hasAnyPlace ? 'hover:scale-105 hover:shadow-xl opacity-100 cursor-pointer' : 'opacity-40 cursor-not-allowed'"
+          :style="hasAnyPlace ? 'background: linear-gradient(135deg, #0d9488 0%, #06b6d4 50%, #0ea5e9 100%); box-shadow: 0 4px 18px rgba(6,182,212,0.40);' : 'background: linear-gradient(135deg, #0d9488 0%, #06b6d4 50%, #0ea5e9 100%);'"
         >
           <svg class="w-4 h-4 flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/>
@@ -123,6 +125,14 @@
             </h3>
             <button @click="confirmRemoveDay(dayIdx)" class="shrink-0 text-rose-400 hover:text-rose-600 text-xs font-medium transition-colors mt-1 px-2 py-1 rounded-lg hover:bg-rose-50 dark:hover:bg-rose-900/20">
               {{ t('sb_del_day') }}
+            </button>
+            <button
+              v-if="day.places.length > 0"
+              @click="confirmClearDayPlaces(dayIdx)"
+              class="shrink-0 flex items-center gap-1 text-slate-400 hover:text-amber-500 text-xs font-medium transition-colors mt-1 px-2 py-1 rounded-lg hover:bg-amber-50 dark:hover:bg-amber-900/20"
+            >
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></svg>
+              {{ t('sb_clear_day_btn') }}
             </button>
           </div>
 
@@ -303,6 +313,20 @@ function addDay() {
   saveBoard()
 }
 
+function confirmClearDayPlaces(idx) {
+  store.showConfirm({
+    title: t('sb_clear_day_title'),
+    desc:  t('sb_clear_day_desc'),
+    confirmLabel: t('sb_clear_day_btn'),
+    cancelLabel:  t('modal_cancel'),
+    danger: false,
+    onConfirm: () => {
+      days.value[idx].places = []
+      saveBoard()
+    }
+  })
+}
+
 function confirmRemoveDay(idx) {
   store.showConfirm({
     title: t('sb_del_day_title'),
@@ -346,7 +370,7 @@ function returnToSidebar(dayIdx, placeIdx) {
   days.value[dayIdx].places.splice(placeIdx, 1)
   saveBoard()
   store.showToast(`${t('toast_returned')} ${t('sb_day')} ${dayIdx + 1}`, {
-    type: 'warning',
+    type: 'info',
     duration: 5000,
     undoFn: () => {
       days.value[dayIdx].places.splice(placeIdx, 0, removed)
@@ -534,7 +558,13 @@ function saveBoard() {
   })
 }
 
+const hasAnyPlace = computed(() => days.value.some(d => d.places.length > 0))
+
 function generateChecklist() {
+  if (!hasAnyPlace.value) {
+    store.showToast(t('sb_no_places_warn'), { type: 'warning', duration: 3000 })
+    return
+  }
   const exportDays = days.value.map((d, i) => ({
     dayNum: i + 1,
     subtitle: d.subtitle,

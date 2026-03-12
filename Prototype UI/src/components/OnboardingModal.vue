@@ -14,7 +14,9 @@
 
           <!-- Step content -->
           <div class="px-7 pt-4 pb-6 text-center">
-            <div class="text-5xl mb-4 leading-none">{{ steps[current].emoji }}</div>
+            <div class="flex justify-center mb-4">
+              <div class="w-16 h-16 rounded-2xl bg-teal-50 dark:bg-teal-900/30 text-teal-500 flex items-center justify-center" v-html="steps[current].svg"></div>
+            </div>
             <h2 class="font-extrabold text-xl text-slate-800 dark:text-slate-100 mb-2">{{ t(steps[current].titleKey) }}</h2>
             <p class="text-sm text-slate-500 dark:text-slate-400 leading-relaxed">{{ t(steps[current].descKey) }}</p>
           </div>
@@ -54,9 +56,18 @@ const visible = ref(false)
 const current = ref(0)
 
 const steps = [
-  { emoji: '🔍', titleKey: 'ob_step1_title', descKey: 'ob_step1_desc' },
-  { emoji: '❤️', titleKey: 'ob_step2_title', descKey: 'ob_step2_desc' },
-  { emoji: '🗓️', titleKey: 'ob_step3_title', descKey: 'ob_step3_desc' },
+  {
+    svg: `<svg class="w-10 h-10" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>`,
+    titleKey: 'ob_step1_title', descKey: 'ob_step1_desc'
+  },
+  {
+    svg: `<svg class="w-10 h-10" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>`,
+    titleKey: 'ob_step2_title', descKey: 'ob_step2_desc'
+  },
+  {
+    svg: `<svg class="w-10 h-10" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>`,
+    titleKey: 'ob_step3_title', descKey: 'ob_step3_desc'
+  },
 ]
 
 const LS_KEY = 'travelaroha_last_visit'

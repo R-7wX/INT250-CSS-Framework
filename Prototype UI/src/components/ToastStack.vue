@@ -10,14 +10,18 @@
             'bg-slate-900/90 border-slate-700 text-white':   toast.type === 'success',
             'bg-rose-900/90 border-rose-700 text-white':     toast.type === 'error',
             'bg-amber-800/90 border-amber-600 text-white':   toast.type === 'warning',
+            'bg-slate-800/90 border-slate-600 text-white':   toast.type === 'info',
           }"
         >
           <!-- SVG icon by type -->
           <svg v-if="toast.type === 'success'" class="w-4 h-4 shrink-0 text-teal-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/>
           </svg>
-          <svg v-else-if="toast.type === 'warning'" class="w-4 h-4 shrink-0 text-amber-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <svg v-else-if="toast.type === 'info'" class="w-4 h-4 shrink-0 text-slate-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h10a8 8 0 018 8v2M3 10l6 6m-6-6l6-6"/>
+          </svg>
+          <svg v-else-if="toast.type === 'warning'" class="w-4 h-4 shrink-0 text-amber-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/>
           </svg>
           <svg v-else-if="toast.type === 'error'" class="w-4 h-4 shrink-0 text-rose-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/>
