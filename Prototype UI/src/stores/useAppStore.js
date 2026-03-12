@@ -7,6 +7,7 @@ const LS_BOARD   = 'travelaroha_storyboard'
 const LS_EXPORT  = 'travelaroha_export'
 const LS_CHECK   = 'travelaroha_checklist'
 const LS_TRIPNAME = 'travelaroha_tripname'
+const LS_TRAVELDATE = 'travelaroha_traveldate'
 
 export const useAppStore = defineStore('app', () => {
   // ── Language ──
@@ -115,6 +116,10 @@ export const useAppStore = defineStore('app', () => {
   const tripName = ref(localStorage.getItem(LS_TRIPNAME) || '')
   watch(tripName, v => localStorage.setItem(LS_TRIPNAME, v))
 
+  // ── Travel Date ──
+  const travelDate = ref(localStorage.getItem(LS_TRAVELDATE) || '')
+  watch(travelDate, v => localStorage.setItem(LS_TRAVELDATE, v))
+
   return {
     lang,
     dark,
@@ -134,5 +139,6 @@ export const useAppStore = defineStore('app', () => {
     setChecked,
     resetChecklist,
     tripName,
+    travelDate,
   }
 })

@@ -10,6 +10,10 @@
           :placeholder="t('sb_trip_name_placeholder')"
           class="mt-3 px-4 py-2 rounded-2xl text-sm font-semibold border border-slate-200 dark:border-slate-700 bg-white/70 dark:bg-slate-800/70 text-slate-700 dark:text-slate-200 focus:outline-none focus:ring-2 focus:ring-teal-400 w-72 placeholder-slate-400 dark:placeholder-slate-500"
         />
+        <div class="mt-2 flex items-center gap-2">
+          <label class="text-xs font-semibold text-slate-500 dark:text-slate-400 whitespace-nowrap">{{ t('sb_travel_date_label') }}</label>
+          <DatePicker v-model="store.travelDate" />
+        </div>
       </div>
       <div class="flex gap-2 flex-wrap">
         <button @click="clearAll" class="flex items-center gap-1.5 px-4 py-2 rounded-2xl text-sm font-semibold border border-rose-200 dark:border-rose-800 text-rose-500 hover:bg-rose-50 dark:hover:bg-rose-900/20 transition-colors">
@@ -242,6 +246,7 @@ import { useAppStore } from '../stores/useAppStore.js'
 import { useI18n } from '../composables/useI18n.js'
 import { PLACE_NAMES } from '../data/places.js'
 import SbCard from '../components/SbCard.vue'
+import DatePicker from '../components/DatePicker.vue'
 
 const store = useAppStore()
 const { t, lang } = useI18n()

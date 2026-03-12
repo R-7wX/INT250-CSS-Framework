@@ -10,7 +10,19 @@
         <div class="flex flex-wrap items-end gap-3 justify-between">
           <div>
             <div class="text-2xl font-extrabold">{{ current.icon }} {{ currentI18n?.name || current.name }}</div>
-            <div class="text-sm text-white/70 mt-0.5">{{ current.temp }} · {{ currentI18n?.desc || current.desc }}</div>
+            <div class="flex items-center gap-2 text-sm text-white/70 mt-0.5 min-h-[1.4rem]">
+              <template v-if="weatherLoading">
+                <span class="inline-block w-20 h-4 bg-white/20 rounded-full animate-pulse"></span>
+              </template>
+              <template v-else-if="weatherData">
+                <span class="font-bold text-white/90">{{ weatherData.temp }}°C {{ weatherData.emoji }}</span>
+                <span>·</span>
+                <span>{{ weatherData.desc }}</span>
+              </template>
+              <template v-else>
+                <span>{{ current.temp }} · {{ currentI18n?.desc || current.desc }}</span>
+              </template>
+            </div>
           </div>
           <select
             v-model="selectedKey"
@@ -25,7 +37,15 @@
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
       <!-- Exchange Rate card -->
       <div class="glass-panel rounded-3xl border border-slate-200/60 dark:border-slate-700/60 p-5 shadow-sm">
-        <h2 class="font-bold text-base mb-4 text-slate-700 dark:text-slate-300">{{ t('db_exchange') }}</h2>
+        <h2 class="font-bold text-base mb-4 text-slate-700 dark:text-slate-300 flex items-center gap-2">
+          <!-- Currency exchange icon -->
+          <svg class="w-5 h-5 text-teal-500 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2z"/>
+            <path d="M8 12h8M14 9l3 3-3 3"/>
+            <path d="M16 12H8M10 15l-3-3 3-3"/>
+          </svg>
+          {{ t('db_exchange') }}
+        </h2>
         <div class="flex gap-2 mb-3">
           <input
             v-model.number="rateAmount"
@@ -50,8 +70,9 @@
           </div>
           <div class="flex items-center gap-2 mt-1">
             <span class="text-xs text-slate-400">{{ rateAmount }} {{ current.currency }} =</span>
-            <span v-if="isOfflineRate && !rateLoading" class="text-xs px-2 py-0.5 rounded-full bg-amber-100 dark:bg-amber-900/30 text-amber-600 dark:text-amber-400 font-medium">
-              ⚠️ {{ t('db_rate_offline') }}
+            <span v-if="isOfflineRate && !rateLoading" class="text-xs px-2 py-0.5 rounded-full bg-amber-100 dark:bg-amber-900/30 text-amber-600 dark:text-amber-400 font-medium flex items-center gap-1">
+              <svg class="w-3 h-3 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+              {{ t('db_rate_offline') }}
             </span>
           </div>
         </div>
@@ -69,7 +90,15 @@
 
       <!-- Trip Summary -->
       <div class="glass-panel rounded-3xl border border-slate-200/60 dark:border-slate-700/60 p-5 shadow-sm">
-        <h2 class="font-bold text-base mb-4 text-slate-700 dark:text-slate-300">{{ t('db_trip_summary') }}</h2>
+        <h2 class="font-bold text-base mb-4 text-slate-700 dark:text-slate-300 flex items-center gap-2">
+          <!-- Map/compass icon -->
+          <svg class="w-5 h-5 text-teal-500 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="3 7 9 4 15 7 21 4 21 17 15 20 9 17 3 20"/>
+            <line x1="9" y1="4" x2="9" y2="17"/>
+            <line x1="15" y1="7" x2="15" y2="20"/>
+          </svg>
+          {{ t('db_trip_summary') }}
+        </h2>
         <div class="grid grid-cols-2 gap-3 mb-4">
           <div class="bg-slate-50 dark:bg-slate-800/60 rounded-2xl p-3">
             <div class="text-xs text-slate-400">{{ t('db_rec_days') }}</div>
@@ -100,7 +129,13 @@
             </div>
           </div>
         </div>
-        <div class="text-xs text-slate-400 mb-1 font-semibold">{{ t('db_highlights') }}</div>
+        <div class="text-xs text-slate-400 mb-1 font-semibold flex items-center gap-1.5">
+          <!-- Star icon -->
+          <svg class="w-3.5 h-3.5 text-amber-400 shrink-0" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+          </svg>
+          {{ t('db_highlights') }}
+        </div>
         <ul class="space-y-1">
           <li
             v-for="h in (currentI18n?.highlights || current.highlights)"
@@ -114,7 +149,17 @@
 
       <!-- Cost Calculator -->
       <div class="glass-panel rounded-3xl border border-slate-200/60 dark:border-slate-700/60 p-5 shadow-sm md:col-span-2">
-        <h2 class="font-bold text-base mb-4 text-slate-700 dark:text-slate-300">{{ t('db_calc_title') }}</h2>
+        <h2 class="font-bold text-base mb-4 text-slate-700 dark:text-slate-300 flex items-center gap-2">
+          <!-- Calculator icon -->
+          <svg class="w-5 h-5 text-teal-500 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="4" y="2" width="16" height="20" rx="2"/>
+            <line x1="8" y1="6" x2="16" y2="6"/>
+            <line x1="8" y1="10" x2="8" y2="10" stroke-width="3"/><line x1="12" y1="10" x2="12" y2="10" stroke-width="3"/><line x1="16" y1="10" x2="16" y2="10" stroke-width="3"/>
+            <line x1="8" y1="14" x2="8" y2="14" stroke-width="3"/><line x1="12" y1="14" x2="12" y2="14" stroke-width="3"/><line x1="16" y1="14" x2="16" y2="14" stroke-width="3"/>
+            <line x1="8" y1="18" x2="8" y2="18" stroke-width="3"/><line x1="12" y1="18" x2="12" y2="18" stroke-width="3"/><line x1="16" y1="18" x2="16" y2="18" stroke-width="3"/>
+          </svg>
+          {{ t('db_calc_title') }}
+        </h2>
         <div class="flex flex-wrap gap-6 items-start">
           <!-- People -->
           <div class="flex flex-col gap-1">
@@ -145,6 +190,7 @@
         <!-- Breakdown -->
         <div class="mt-4 grid grid-cols-2 sm:grid-cols-4 gap-3">
           <div v-for="item in costBreakdown" :key="item.key" class="bg-white dark:bg-slate-800 rounded-2xl p-3 border border-slate-100 dark:border-slate-700 text-center">
+            <svg class="w-5 h-5 mx-auto mb-1.5 text-teal-500 dark:text-teal-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" v-html="item.icon"></svg>
             <div class="text-sm font-semibold text-slate-700 dark:text-slate-300">{{ t(item.key) }}</div>
             <div class="text-xs text-teal-600 dark:text-teal-400 font-bold mt-0.5">{{ item.amount }}</div>
           </div>
@@ -163,26 +209,26 @@ const { t, lang } = useI18n()
 
 // ─── Country data (dashboard-specific with budget tiers) ─────────────────────
 const countryData = {
-  Japan:       { name:'โตเกียว, ญี่ปุ่น',     temp:'15°C ⛅', desc:'อากาศเย็นสบาย', img:'https://images.unsplash.com/photo-1490806843957-31f4c9a91c65?auto=format&fit=crop&w=800&q=80', currency:'JPY', rateUnit:100, rateLabel:'100 JPY', badge:'🇯🇵 Japan', days:'7',  budget:'35k–70k',    budgetLow:35000,  budgetHigh:70000,  lang:'Japanese',   season:'Mar–May', visa:'✅ Visa-free 30d', flight:'~7 hrs',   icon:'⛩️',  highlights:['Cherry blossoms at Ueno','Shibuya Crossing','Ramen','Tokyo Skytree'] },
-  France:      { name:'ปารีส, ฝรั่งเศส',      temp:'12°C 🌥️', desc:'มีเมฆ โรแมนติก',  img:'https://images.unsplash.com/photo-1499856871958-5b9627545d1a?auto=format&fit=crop&w=800&q=80', currency:'EUR', rateUnit:1,   rateLabel:'1 EUR',   badge:'🇫🇷 France', days:'6',  budget:'60k–120k',   budgetLow:60000,  budgetHigh:120000, lang:'French',     season:'Apr–Jun', visa:'🛂 Schengen', flight:'~11 hrs',  icon:'🗼',  highlights:['Eiffel Tower at night','Seine river cruise','The Louvre','Croissant'] },
-  Thailand:    { name:'กรุงเทพฯ, ไทย',        temp:'33°C ☀️', desc:'ร้อน แดดแรง',      img:'https://images.unsplash.com/photo-1508009603885-50cf7c579365?auto=format&fit=crop&w=800&q=80', currency:'THB', rateUnit:1,   rateLabel:'1 THB',   badge:'🇹🇭 Thailand', days:'5', budget:'8k–20k',     budgetLow:8000,   budgetHigh:20000,  lang:'Thai',       season:'Nov–Feb', visa:'✅ No visa',   flight:'Domestic', icon:'🛕',  highlights:['Wat Phra Kaew','Mango sticky rice','Chatuchak Market','Chao Phraya boat'] },
-  SouthKorea:  { name:'โซล, เกาหลีใต้',       temp:'8°C 🌬️',  desc:'ลมแรง หนาว',      img:'https://images.unsplash.com/photo-1517154421773-0529f29ea451?auto=format&fit=crop&w=800&q=80', currency:'KRW', rateUnit:1000,rateLabel:'1,000 KRW',badge:'🇰🇷 South Korea', days:'6',budget:'30k–60k',   budgetLow:30000,  budgetHigh:60000,  lang:'Korean',     season:'Mar–May', visa:'✅ Visa-free 30d', flight:'~5.5 hrs', icon:'🏯',  highlights:['Itaewon','Gyeongbokgung Palace','K-BBQ','Myeongdong'] },
-  USA:         { name:'นิวยอร์ก, USA',         temp:'18°C 🌤️', desc:'อากาศดี',          img:'https://images.unsplash.com/photo-1496442226666-8d4d0e62e6e9?auto=format&fit=crop&w=800&q=80', currency:'USD', rateUnit:1,   rateLabel:'1 USD',   badge:'🇺🇸 USA',    days:'10', budget:'80k–180k',   budgetLow:80000,  budgetHigh:180000, lang:'English',    season:'Apr–Jun', visa:'🛂 US Visa',   flight:'~17 hrs',  icon:'🗽',  highlights:['Central Park','Times Square','Brooklyn Bridge','NY Pizza'] },
-  UK:          { name:'ลอนดอน, UK',            temp:'10°C 🌧️', desc:'มีฝน พกร่ม',      img:'https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?auto=format&fit=crop&w=800&q=80', currency:'GBP', rateUnit:1,   rateLabel:'1 GBP',   badge:'🇬🇧 UK',     days:'7',  budget:'70k–150k',   budgetLow:70000,  budgetHigh:150000, lang:'English',    season:'Jun–Aug', visa:'🛂 UK Visa',   flight:'~12 hrs',  icon:'🎡',  highlights:['Buckingham Palace','Tate Modern','The Tube','Fish and chips'] },
-  Italy:       { name:'โรม, อิตาลี',           temp:'22°C ☀️', desc:'ท้องฟ้าโปร่ง',    img:'https://images.unsplash.com/photo-1552832230-c0197dd311b5?auto=format&fit=crop&w=800&q=80', currency:'EUR', rateUnit:1,   rateLabel:'1 EUR',   badge:'🇮🇹 Italy',  days:'8',  budget:'55k–110k',   budgetLow:55000,  budgetHigh:110000, lang:'Italian',    season:'Apr–Jun', visa:'🛂 Schengen', flight:'~11 hrs',  icon:'🏛️', highlights:['The Colosseum','Gelato','Trevi Fountain','St. Peter\'s'] },
-  Switzerland: { name:'ซูริค, Switzerland',    temp:'5°C 🌨️',  desc:'หนาวจัด หิมะ',    img:'https://images.unsplash.com/photo-1528702748617-c64d49f918af?auto=format&fit=crop&w=800&q=80', currency:'CHF', rateUnit:1,   rateLabel:'1 CHF',   badge:'🇨🇭 Switzerland', days:'6',budget:'90k–200k',  budgetLow:90000,  budgetHigh:200000, lang:'German/French',season:'Jun–Aug', visa:'🛂 Schengen', flight:'~11.5 hrs',icon:'🏔️', highlights:['Interlaken ski','Jungfraujoch','Fondue','Lake Geneva'] },
-  Taiwan:      { name:'ไทเป, Taiwan',           temp:'25°C ⛅', desc:'อากาศอบอุ่น',     img:'https://images.unsplash.com/photo-1550951298-5c7b95a66bfc?auto=format&fit=crop&w=800&q=80', currency:'TWD', rateUnit:100, rateLabel:'100 TWD', badge:'🇹🇼 Taiwan',  days:'5',  budget:'20k–45k',    budgetLow:20000,  budgetHigh:45000,  lang:'Mandarin',   season:'Oct–Dec', visa:'✅ Visa-free 30d', flight:'~3.5 hrs', icon:'🏮',  highlights:['Shilin Night Market','Taipei 101','Stinky tofu','Cycling'] },
-  Singapore:   { name:'สิงคโปร์',               temp:'30°C 🌦️', desc:'ร้อนชื้น',        img:'https://images.unsplash.com/photo-1525625293386-3f8f99389edd?auto=format&fit=crop&w=800&q=80', currency:'SGD', rateUnit:1,   rateLabel:'1 SGD',   badge:'🇸🇬 Singapore', days:'4',budget:'30k–70k',   budgetLow:30000,  budgetHigh:70000,  lang:'English/Chinese',season:'Year-round',visa:'✅ Visa-free 30d', flight:'~2.5 hrs', icon:'🦁',  highlights:['Gardens by the Bay','Chinatown','Chilli crab','Marina Bay Sands'] },
-  Vietnam:     { name:'ดานัง, Vietnam',         temp:'28°C ⛅', desc:'ลมทะเลเย็น',      img:'https://images.unsplash.com/photo-1559592413-7cec4d0cae2b?auto=format&fit=crop&w=800&q=80', currency:'VND', rateUnit:10000,rateLabel:'10,000 VND',badge:'🇻🇳 Vietnam', days:'6', budget:'15k–35k',    budgetLow:15000,  budgetHigh:35000,  lang:'Vietnamese', season:'Jan–Apr', visa:'✅ Visa-free 45d', flight:'~2 hrs',   icon:'🏖️', highlights:['Ha Long Bay','Hoi An','Pho','Motorbike ride'] },
-  Maldives:    { name:'มาเล่, Maldives',        temp:'29°C 🏝️', desc:'แดดแรง ทะเลใส',  img:'https://images.unsplash.com/photo-1510414842594-a61c69b5ae57?auto=format&fit=crop&w=800&q=80', currency:'MVR', rateUnit:10,  rateLabel:'10 MVR',  badge:'🇲🇻 Maldives', days:'5',budget:'80k–200k',   budgetLow:80000,  budgetHigh:200000, lang:'Dhivehi/English',season:'Nov–Apr',visa:'✅ Visa on Arrival', flight:'~3 hrs',  icon:'🐠',  highlights:['Overwater bungalow','Whale shark snorkel','Bioluminescent beach','Dhoni cruise'] },
-  Australia:   { name:'ซิดนีย์, Australia',    temp:'24°C ☀️', desc:'อากาศแจ่มใส',     img:'https://images.unsplash.com/photo-1506973035872-a4ec16b8e8d9?auto=format&fit=crop&w=800&q=80', currency:'AUD', rateUnit:1,   rateLabel:'1 AUD',   badge:'🇦🇺 Australia', days:'10',budget:'60k–130k',  budgetLow:60000,  budgetHigh:130000, lang:'English',    season:'Sep–Nov', visa:'🛂 ETA',       flight:'~9.5 hrs', icon:'🦘',  highlights:['Sydney Opera House','Bondi Beach','Blue Mountains','Kangaroos'] },
-  UAE:         { name:'ดูไบ, UAE',              temp:'35°C 🏜️', desc:'ร้อนแห้ง',        img:'https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=800&q=80', currency:'AED', rateUnit:10,  rateLabel:'10 AED',  badge:'🇦🇪 UAE',    days:'5',  budget:'50k–120k',   budgetLow:50000,  budgetHigh:120000, lang:'Arabic/English',season:'Nov–Apr',visa:'✅ Visa on Arrival', flight:'~6.5 hrs', icon:'🏙️', highlights:['Burj Khalifa','Dubai Mall','Dune bashing','Dubai Fountain'] },
-  China:       { name:'ปักกิ่ง, จีน',           temp:'10°C 🌤️', desc:'อากาศดี แห้ง',    img:'https://images.unsplash.com/photo-1508804185872-d7badad00f7d?auto=format&fit=crop&w=800&q=80', currency:'CNY', rateUnit:10,  rateLabel:'10 CNY',  badge:'🇨🇳 China',  days:'8',  budget:'25k–60k',    budgetLow:25000,  budgetHigh:60000,  lang:'Mandarin',   season:'Apr–Jun', visa:'🛂 China Visa', flight:'~4.5 hrs', icon:'🏯',  highlights:['Great Wall of China','Forbidden City','Peking Duck','Hutong walk'] },
-  Germany:     { name:'เบอร์ลิน, เยอรมนี',      temp:'8°C 🌥️',  desc:'เย็น มีเมฆ',      img:'https://images.unsplash.com/photo-1467269204594-9661b134dd2b?auto=format&fit=crop&w=800&q=80', currency:'EUR', rateUnit:1,   rateLabel:'1 EUR',   badge:'🇩🇪 Germany', days:'7', budget:'50k–110k',   budgetLow:50000,  budgetHigh:110000, lang:'German',     season:'Jun–Aug', visa:'🛂 Schengen', flight:'~11 hrs',  icon:'🍺',  highlights:['Brandenburg Gate','Black Forest','Bavarian castles','Oktoberfest','Berlin Wall'] },
-  India:       { name:'มุมไบ, อินเดีย',          temp:'32°C ☀️', desc:'ร้อนชื้น',         img:'https://images.unsplash.com/photo-1524492412937-b28074a5d7da?auto=format&fit=crop&w=800&q=80', currency:'INR', rateUnit:100, rateLabel:'100 INR', badge:'🇮🇳 India',  days:'9',  budget:'15k–40k',    budgetLow:15000,  budgetHigh:40000,  lang:'Hindi/English',season:'Oct–Mar',visa:'✅ eVisa',      flight:'~3.5 hrs', icon:'🕌',  highlights:['Taj Mahal','Jaipur Pink City','Goa beaches','Street food tour'] },
-  Indonesia:   { name:'บาหลี, อินโดนีเซีย',     temp:'30°C 🌦️', desc:'ร้อนชื้น ฝนบาง',  img:'https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=800&q=80', currency:'IDR', rateUnit:10000,rateLabel:'10,000 IDR',badge:'🇮🇩 Indonesia', days:'7',budget:'15k–40k',   budgetLow:15000,  budgetHigh:40000,  lang:'Indonesian', season:'Apr–Oct', visa:'✅ Visa-free 30d', flight:'~3 hrs',   icon:'🌺',  highlights:['Ubud rice terraces','Tanah Lot','Komodo Island','Seminyak beach'] },
-  Spain:       { name:'มาดริด, สเปน',            temp:'18°C ☀️', desc:'อากาศดี แจ่มใส',  img:'https://images.unsplash.com/photo-1558642452-9d2a7deb7f62?auto=format&fit=crop&w=800&q=80', currency:'EUR', rateUnit:1,   rateLabel:'1 EUR',   badge:'🇪🇸 Spain',  days:'8',  budget:'45k–100k',   budgetLow:45000,  budgetHigh:100000, lang:'Spanish',    season:'Apr–Jun', visa:'🛂 Schengen', flight:'~12 hrs',  icon:'💃',  highlights:['Sagrada Familia','Flamenco show','La Tomatina','Paella','Alhambra'] },
-  Turkey:      { name:'อิสตันบูล, ตุรกี',        temp:'15°C 🌤️', desc:'อากาศดี',          img:'https://images.unsplash.com/photo-1524231757912-21f4fe3a7200?auto=format&fit=crop&w=800&q=80', currency:'TRY', rateUnit:100, rateLabel:'100 TRY', badge:'🇹🇷 Turkey',  days:'7',  budget:'20k–50k',    budgetLow:20000,  budgetHigh:50000,  lang:'Turkish',    season:'Apr–Jun', visa:'✅ eVisa',      flight:'~9 hrs',   icon:'🕌',  highlights:['Hagia Sophia','Cappadocia balloon','Grand Bazaar','Turkish tea','Bosphorus cruise'] },
+  Japan:       { lat:35.6762,  lon:139.6503, name:'โตเกียว, ญี่ปุ่น',     temp:'15°C ⛅', desc:'อากาศเย็นสบาย', img:'https://images.unsplash.com/photo-1490806843957-31f4c9a91c65?auto=format&fit=crop&w=800&q=80', currency:'JPY', rateUnit:100, rateLabel:'100 JPY', badge:'🇯🇵 Japan', days:'7',  budget:'35k–70k',    budgetLow:35000,  budgetHigh:70000,  lang:'Japanese',   season:'Mar–May', visa:'✅ Visa-free 30d', flight:'~7 hrs',   icon:'⛩️',  highlights:['Cherry blossoms at Ueno','Shibuya Crossing','Ramen','Tokyo Skytree'] },
+  France:      { lat:48.8566,  lon:2.3522,   name:'ปารีส, ฝรั่งเศส',      temp:'12°C 🌥️', desc:'มีเมฆ โรแมนติก',  img:'https://images.unsplash.com/photo-1499856871958-5b9627545d1a?auto=format&fit=crop&w=800&q=80', currency:'EUR', rateUnit:1,   rateLabel:'1 EUR',   badge:'🇫🇷 France', days:'6',  budget:'60k–120k',   budgetLow:60000,  budgetHigh:120000, lang:'French',     season:'Apr–Jun', visa:'🛂 Schengen', flight:'~11 hrs',  icon:'🗼',  highlights:['Eiffel Tower at night','Seine river cruise','The Louvre','Croissant'] },
+  Thailand:    { lat:13.7563,  lon:100.5018, name:'กรุงเทพฯ, ไทย',        temp:'33°C ☀️', desc:'ร้อน แดดแรง',      img:'https://images.unsplash.com/photo-1508009603885-50cf7c579365?auto=format&fit=crop&w=800&q=80', currency:'THB', rateUnit:1,   rateLabel:'1 THB',   badge:'🇹🇭 Thailand', days:'5', budget:'8k–20k',     budgetLow:8000,   budgetHigh:20000,  lang:'Thai',       season:'Nov–Feb', visa:'✅ No visa',   flight:'Domestic', icon:'🛕',  highlights:['Wat Phra Kaew','Mango sticky rice','Chatuchak Market','Chao Phraya boat'] },
+  SouthKorea:  { lat:37.5665,  lon:126.9780, name:'โซล, เกาหลีใต้',       temp:'8°C 🌬️',  desc:'ลมแรง หนาว',      img:'https://images.unsplash.com/photo-1517154421773-0529f29ea451?auto=format&fit=crop&w=800&q=80', currency:'KRW', rateUnit:1000,rateLabel:'1,000 KRW',badge:'🇰🇷 South Korea', days:'6',budget:'30k–60k',   budgetLow:30000,  budgetHigh:60000,  lang:'Korean',     season:'Mar–May', visa:'✅ Visa-free 30d', flight:'~5.5 hrs', icon:'🏯',  highlights:['Itaewon','Gyeongbokgung Palace','K-BBQ','Myeongdong'] },
+  USA:         { lat:40.7128,  lon:-74.0060, name:'นิวยอร์ก, USA',         temp:'18°C 🌤️', desc:'อากาศดี',          img:'https://images.unsplash.com/photo-1496442226666-8d4d0e62e6e9?auto=format&fit=crop&w=800&q=80', currency:'USD', rateUnit:1,   rateLabel:'1 USD',   badge:'🇺🇸 USA',    days:'10', budget:'80k–180k',   budgetLow:80000,  budgetHigh:180000, lang:'English',    season:'Apr–Jun', visa:'🛂 US Visa',   flight:'~17 hrs',  icon:'🗽',  highlights:['Central Park','Times Square','Brooklyn Bridge','NY Pizza'] },
+  UK:          { lat:51.5074,  lon:-0.1278,  name:'ลอนดอน, UK',            temp:'10°C 🌧️', desc:'มีฝน พกร่ม',      img:'https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?auto=format&fit=crop&w=800&q=80', currency:'GBP', rateUnit:1,   rateLabel:'1 GBP',   badge:'🇬🇧 UK',     days:'7',  budget:'70k–150k',   budgetLow:70000,  budgetHigh:150000, lang:'English',    season:'Jun–Aug', visa:'🛂 UK Visa',   flight:'~12 hrs',  icon:'🎡',  highlights:['Buckingham Palace','Tate Modern','The Tube','Fish and chips'] },
+  Italy:       { lat:41.9028,  lon:12.4964,  name:'โรม, อิตาลี',           temp:'22°C ☀️', desc:'ท้องฟ้าโปร่ง',    img:'https://images.unsplash.com/photo-1552832230-c0197dd311b5?auto=format&fit=crop&w=800&q=80', currency:'EUR', rateUnit:1,   rateLabel:'1 EUR',   badge:'🇮🇹 Italy',  days:'8',  budget:'55k–110k',   budgetLow:55000,  budgetHigh:110000, lang:'Italian',    season:'Apr–Jun', visa:'🛂 Schengen', flight:'~11 hrs',  icon:'🏛️', highlights:['The Colosseum','Gelato','Trevi Fountain','St. Peter\'s'] },
+  Switzerland: { lat:47.3769,  lon:8.5417,   name:'ซูริค, Switzerland',    temp:'5°C 🌨️',  desc:'หนาวจัด หิมะ',    img:'https://images.unsplash.com/photo-1528702748617-c64d49f918af?auto=format&fit=crop&w=800&q=80', currency:'CHF', rateUnit:1,   rateLabel:'1 CHF',   badge:'🇨🇭 Switzerland', days:'6',budget:'90k–200k',  budgetLow:90000,  budgetHigh:200000, lang:'German/French',season:'Jun–Aug', visa:'🛂 Schengen', flight:'~11.5 hrs',icon:'🏔️', highlights:['Interlaken ski','Jungfraujoch','Fondue','Lake Geneva'] },
+  Taiwan:      { lat:25.0330,  lon:121.5654, name:'ไทเป, Taiwan',           temp:'25°C ⛅', desc:'อากาศอบอุ่น',     img:'https://images.unsplash.com/photo-1550951298-5c7b95a66bfc?auto=format&fit=crop&w=800&q=80', currency:'TWD', rateUnit:100, rateLabel:'100 TWD', badge:'🇹🇼 Taiwan',  days:'5',  budget:'20k–45k',    budgetLow:20000,  budgetHigh:45000,  lang:'Mandarin',   season:'Oct–Dec', visa:'✅ Visa-free 30d', flight:'~3.5 hrs', icon:'🏮',  highlights:['Shilin Night Market','Taipei 101','Stinky tofu','Cycling'] },
+  Singapore:   { lat:1.3521,   lon:103.8198, name:'สิงคโปร์',               temp:'30°C 🌦️', desc:'ร้อนชื้น',        img:'https://images.unsplash.com/photo-1525625293386-3f8f99389edd?auto=format&fit=crop&w=800&q=80', currency:'SGD', rateUnit:1,   rateLabel:'1 SGD',   badge:'🇸🇬 Singapore', days:'4',budget:'30k–70k',   budgetLow:30000,  budgetHigh:70000,  lang:'English/Chinese',season:'Year-round',visa:'✅ Visa-free 30d', flight:'~2.5 hrs', icon:'🦁',  highlights:['Gardens by the Bay','Chinatown','Chilli crab','Marina Bay Sands'] },
+  Vietnam:     { lat:16.0544,  lon:108.2022, name:'ดานัง, Vietnam',         temp:'28°C ⛅', desc:'ลมทะเลเย็น',      img:'https://images.unsplash.com/photo-1559592413-7cec4d0cae2b?auto=format&fit=crop&w=800&q=80', currency:'VND', rateUnit:10000,rateLabel:'10,000 VND',badge:'🇻🇳 Vietnam', days:'6', budget:'15k–35k',    budgetLow:15000,  budgetHigh:35000,  lang:'Vietnamese', season:'Jan–Apr', visa:'✅ Visa-free 45d', flight:'~2 hrs',   icon:'🏖️', highlights:['Ha Long Bay','Hoi An','Pho','Motorbike ride'] },
+  Maldives:    { lat:4.1755,   lon:73.5093,  name:'มาเล่, Maldives',        temp:'29°C 🏝️', desc:'แดดแรง ทะเลใส',  img:'https://images.unsplash.com/photo-1510414842594-a61c69b5ae57?auto=format&fit=crop&w=800&q=80', currency:'MVR', rateUnit:10,  rateLabel:'10 MVR',  badge:'🇲🇻 Maldives', days:'5',budget:'80k–200k',   budgetLow:80000,  budgetHigh:200000, lang:'Dhivehi/English',season:'Nov–Apr',visa:'✅ Visa on Arrival', flight:'~3 hrs',  icon:'🐠',  highlights:['Overwater bungalow','Whale shark snorkel','Bioluminescent beach','Dhoni cruise'] },
+  Australia:   { lat:-33.8688, lon:151.2093, name:'ซิดนีย์, Australia',    temp:'24°C ☀️', desc:'อากาศแจ่มใส',     img:'https://images.unsplash.com/photo-1506973035872-a4ec16b8e8d9?auto=format&fit=crop&w=800&q=80', currency:'AUD', rateUnit:1,   rateLabel:'1 AUD',   badge:'🇦🇺 Australia', days:'10',budget:'60k–130k',  budgetLow:60000,  budgetHigh:130000, lang:'English',    season:'Sep–Nov', visa:'🛂 ETA',       flight:'~9.5 hrs', icon:'🦘',  highlights:['Sydney Opera House','Bondi Beach','Blue Mountains','Kangaroos'] },
+  UAE:         { lat:25.2048,  lon:55.2708,  name:'ดูไบ, UAE',              temp:'35°C 🏜️', desc:'ร้อนแห้ง',        img:'https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=800&q=80', currency:'AED', rateUnit:10,  rateLabel:'10 AED',  badge:'🇦🇪 UAE',    days:'5',  budget:'50k–120k',   budgetLow:50000,  budgetHigh:120000, lang:'Arabic/English',season:'Nov–Apr',visa:'✅ Visa on Arrival', flight:'~6.5 hrs', icon:'🏙️', highlights:['Burj Khalifa','Dubai Mall','Dune bashing','Dubai Fountain'] },
+  China:       { lat:39.9042,  lon:116.4074, name:'ปักกิ่ง, จีน',           temp:'10°C 🌤️', desc:'อากาศดี แห้ง',    img:'https://images.unsplash.com/photo-1508804185872-d7badad00f7d?auto=format&fit=crop&w=800&q=80', currency:'CNY', rateUnit:10,  rateLabel:'10 CNY',  badge:'🇨🇳 China',  days:'8',  budget:'25k–60k',    budgetLow:25000,  budgetHigh:60000,  lang:'Mandarin',   season:'Apr–Jun', visa:'🛂 China Visa', flight:'~4.5 hrs', icon:'🏯',  highlights:['Great Wall of China','Forbidden City','Peking Duck','Hutong walk'] },
+  Germany:     { lat:52.5200,  lon:13.4050,  name:'เบอร์ลิน, เยอรมนี',      temp:'8°C 🌥️',  desc:'เย็น มีเมฆ',      img:'https://images.unsplash.com/photo-1467269204594-9661b134dd2b?auto=format&fit=crop&w=800&q=80', currency:'EUR', rateUnit:1,   rateLabel:'1 EUR',   badge:'🇩🇪 Germany', days:'7', budget:'50k–110k',   budgetLow:50000,  budgetHigh:110000, lang:'German',     season:'Jun–Aug', visa:'🛂 Schengen', flight:'~11 hrs',  icon:'🍺',  highlights:['Brandenburg Gate','Black Forest','Bavarian castles','Oktoberfest','Berlin Wall'] },
+  India:       { lat:19.0760,  lon:72.8777,  name:'มุมไบ, อินเดีย',          temp:'32°C ☀️', desc:'ร้อนชื้น',         img:'https://images.unsplash.com/photo-1524492412937-b28074a5d7da?auto=format&fit=crop&w=800&q=80', currency:'INR', rateUnit:100, rateLabel:'100 INR', badge:'🇮🇳 India',  days:'9',  budget:'15k–40k',    budgetLow:15000,  budgetHigh:40000,  lang:'Hindi/English',season:'Oct–Mar',visa:'✅ eVisa',      flight:'~3.5 hrs', icon:'🕌',  highlights:['Taj Mahal','Jaipur Pink City','Goa beaches','Street food tour'] },
+  Indonesia:   { lat:-8.3405,  lon:115.0920, name:'บาหลี, อินโดนีเซีย',     temp:'30°C 🌦️', desc:'ร้อนชื้น ฝนบาง',  img:'https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=800&q=80', currency:'IDR', rateUnit:10000,rateLabel:'10,000 IDR',badge:'🇮🇩 Indonesia', days:'7',budget:'15k–40k',   budgetLow:15000,  budgetHigh:40000,  lang:'Indonesian', season:'Apr–Oct', visa:'✅ Visa-free 30d', flight:'~3 hrs',   icon:'🌺',  highlights:['Ubud rice terraces','Tanah Lot','Komodo Island','Seminyak beach'] },
+  Spain:       { lat:40.4168,  lon:-3.7038,  name:'มาดริด, สเปน',            temp:'18°C ☀️', desc:'อากาศดี แจ่มใส',  img:'https://images.unsplash.com/photo-1558642452-9d2a7deb7f62?auto=format&fit=crop&w=800&q=80', currency:'EUR', rateUnit:1,   rateLabel:'1 EUR',   badge:'🇪🇸 Spain',  days:'8',  budget:'45k–100k',   budgetLow:45000,  budgetHigh:100000, lang:'Spanish',    season:'Apr–Jun', visa:'🛂 Schengen', flight:'~12 hrs',  icon:'💃',  highlights:['Sagrada Familia','Flamenco show','La Tomatina','Paella','Alhambra'] },
+  Turkey:      { lat:41.0082,  lon:28.9784,  name:'อิสตันบูล, ตุรกี',        temp:'15°C 🌤️', desc:'อากาศดี',          img:'https://images.unsplash.com/photo-1524231757912-21f4fe3a7200?auto=format&fit=crop&w=800&q=80', currency:'TRY', rateUnit:100, rateLabel:'100 TRY', badge:'🇹🇷 Turkey',  days:'7',  budget:'20k–50k',    budgetLow:20000,  budgetHigh:50000,  lang:'Turkish',    season:'Apr–Jun', visa:'✅ eVisa',      flight:'~9 hrs',   icon:'🕌',  highlights:['Hagia Sophia','Cappadocia balloon','Grand Bazaar','Turkish tea','Bosphorus cruise'] },
 }
 
 const FLIGHT_OPTIONS = [
@@ -322,11 +368,17 @@ const costBreakdown = computed(() => {
   const midHigh = c.budgetHigh * ppl * days / base * r
   const total = (midLow + midHigh) / 2
   const sign = calcCurrSign.value
+  const BREAKDOWN_ICONS = {
+    db_hotel:      `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0h6"/>`,
+    db_food:       `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2 5h12m-10-5v5m4-5v5m4-5v5"/><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/>`,
+    db_transport:  `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 17h8M3 9l1-5h14l1 5M3 9v6a1 1 0 001 1h1m12 0h1a1 1 0 001-1V9M3 9h18"/><circle cx="7.5" cy="17" r="1.5"/><circle cx="16.5" cy="17" r="1.5"/>`,
+    db_activities: `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>`,
+  }
   return [
-    { key: 'db_hotel',      amount: `${sign}${fmt(total * hotelPct)}` },
-    { key: 'db_food',       amount: `${sign}${fmt(total * foodPct)}` },
-    { key: 'db_transport',  amount: `${sign}${fmt(total * transPct)}` },
-    { key: 'db_activities', amount: `${sign}${fmt(total * actPct)}` },
+    { key: 'db_hotel',      amount: `${sign}${fmt(total * hotelPct)}`, icon: BREAKDOWN_ICONS.db_hotel },
+    { key: 'db_food',       amount: `${sign}${fmt(total * foodPct)}`,  icon: BREAKDOWN_ICONS.db_food },
+    { key: 'db_transport',  amount: `${sign}${fmt(total * transPct)}`, icon: BREAKDOWN_ICONS.db_transport },
+    { key: 'db_activities', amount: `${sign}${fmt(total * actPct)}`,   icon: BREAKDOWN_ICONS.db_activities },
   ]
 })
 
@@ -424,6 +476,84 @@ async function fetchRate() {
 // Auto-fetch on country or currency change
 watch([selectedKey, targetCurrency, rateAmount], () => fetchRate(), { immediate: true })
 watch(targetCurrency, () => fetchCalcRate(), { immediate: true })
+
+// ─── Realtime Weather (Open-Meteo, free, no API key) ─────────────────────────
+const WMO = {
+  0:  { emoji:'☀️',  th:'ท้องฟ้าแจ่มใส',    en:'Clear sky',          zh:'晴天',      es:'Cielo despejado', ar:'سماء صافية',   fr:'Ciel dégagé' },
+  1:  { emoji:'🌤️', th:'แจ่มใสเป็นส่วนมาก', en:'Mostly clear',       zh:'大致晴朗',   es:'Mayormente despejado', ar:'غالباً صافي', fr:'Globalement dégagé' },
+  2:  { emoji:'⛅',  th:'มีเมฆบางส่วน',      en:'Partly cloudy',      zh:'多云',       es:'Parcialmente nublado', ar:'غائم جزئياً', fr:'Partiellement nuageux' },
+  3:  { emoji:'☁️',  th:'มีเมฆมาก',          en:'Overcast',           zh:'阴天',       es:'Nublado',         ar:'غائم',          fr:'Couvert' },
+  45: { emoji:'🌫️', th:'หมอกลง',            en:'Foggy',              zh:'有雾',       es:'Niebla',          ar:'ضبابي',         fr:'Brouillard' },
+  48: { emoji:'🌫️', th:'หมอกเยือกแข็ง',     en:'Icy fog',            zh:'冻雾',       es:'Niebla helada',   ar:'ضباب جليدي',    fr:'Brouillard givrant' },
+  51: { emoji:'🌦️', th:'ฝนปรอยเบา',         en:'Light drizzle',      zh:'毛毛雨',     es:'Llovizna ligera',  ar:'رذاذ خفيف',    fr:'Bruine légère' },
+  53: { emoji:'🌦️', th:'ฝนปรอย',            en:'Drizzle',            zh:'毛毛雨',     es:'Llovizna',        ar:'رذاذ',           fr:'Bruine' },
+  55: { emoji:'🌦️', th:'ฝนปรอยหนัก',        en:'Heavy drizzle',      zh:'浓毛毛雨',   es:'Llovizna intensa', ar:'رذاذ كثيف',    fr:'Bruine dense' },
+  61: { emoji:'🌧️', th:'ฝนตกเบา',           en:'Light rain',         zh:'小雨',       es:'Lluvia ligera',   ar:'مطر خفيف',      fr:'Pluie légère' },
+  63: { emoji:'🌧️', th:'ฝนตก',              en:'Rain',               zh:'下雨',       es:'Lluvia',          ar:'مطر',            fr:'Pluie' },
+  65: { emoji:'🌧️', th:'ฝนตกหนัก',          en:'Heavy rain',         zh:'大雨',       es:'Lluvia fuerte',   ar:'مطر غزير',      fr:'Pluie forte' },
+  71: { emoji:'🌨️', th:'หิมะตกเบา',         en:'Light snow',         zh:'小雪',       es:'Nieve ligera',    ar:'ثلج خفيف',      fr:'Neige légère' },
+  73: { emoji:'🌨️', th:'หิมะตก',            en:'Snow',               zh:'下雪',       es:'Nieve',           ar:'ثلج',            fr:'Neige' },
+  75: { emoji:'❄️',  th:'หิมะตกหนัก',        en:'Heavy snow',         zh:'大雪',       es:'Nieve intensa',   ar:'ثلج كثيف',      fr:'Neige dense' },
+  80: { emoji:'🌦️', th:'ฝนตกเป็นพักๆ เบา',  en:'Light showers',      zh:'阵雨',       es:'Chubascos ligeros',ar:'زخات خفيفة',   fr:'Averses légères' },
+  81: { emoji:'🌦️', th:'ฝนตกเป็นพักๆ',      en:'Showers',            zh:'阵雨',       es:'Chubascos',       ar:'زخات مطر',       fr:'Averses' },
+  82: { emoji:'⛈️',  th:'ฝนหนักมาก',         en:'Heavy showers',      zh:'强阵雨',     es:'Chubascos fuertes',ar:'زخات غزيرة',   fr:'Averses fortes' },
+  85: { emoji:'🌨️', th:'หิมะเป็นพักๆ',      en:'Snow showers',       zh:'阵雪',       es:'Chubascos de nieve',ar:'زخات ثلج',     fr:'Averses de neige' },
+  95: { emoji:'⛈️',  th:'พายุฝนฟ้าคะนอง',    en:'Thunderstorm',       zh:'雷雨',       es:'Tormenta',        ar:'عاصفة رعدية',   fr:'Orage' },
+  96: { emoji:'⛈️',  th:'พายุลูกเห็บ',       en:'Thunderstorm w/ hail',zh:'冰雹雷雨',  es:'Tormenta con granizo',ar:'عاصفة مع برد',fr:'Orage avec grêle' },
+  99: { emoji:'⛈️',  th:'พายุลูกเห็บหนัก',   en:'Heavy hail storm',   zh:'强冰雹',     es:'Tormenta fuerte',  ar:'عاصفة قوية',   fr:'Orage violent' },
+}
+
+function wmoInfo(code) {
+  // find closest code (handles odd codes like 77, 56, etc.)
+  if (WMO[code]) return WMO[code]
+  const closest = Object.keys(WMO).map(Number).reduce((a, b) => Math.abs(b - code) < Math.abs(a - code) ? b : a)
+  return WMO[closest]
+}
+
+const weatherData   = ref(null)  // { temp, emoji, desc }
+const weatherLoading = ref(false)
+let   weatherCache  = {}
+
+async function fetchWeather() {
+  const c = current.value
+  if (!c?.lat) return
+  const key = selectedKey.value
+  const cached = weatherCache[key]
+  if (cached && Date.now() - cached.ts < 600000) { weatherData.value = cached.data; return }
+
+  weatherLoading.value = true
+  weatherData.value = null
+  try {
+    const url = `https://api.open-meteo.com/v1/forecast?latitude=${c.lat}&longitude=${c.lon}&current=temperature_2m,weathercode&wind_speed_unit=kmh&timezone=auto`
+    const res  = await fetch(url, { signal: AbortSignal.timeout(6000) })
+    const json = await res.json()
+    const cur  = json.current
+    const info = wmoInfo(cur.weathercode)
+    const l    = lang.value
+    const data = {
+      temp:  Math.round(cur.temperature_2m),
+      emoji: info.emoji,
+      desc:  info[l] || info.en,
+    }
+    weatherCache[key] = { data, ts: Date.now() }
+    weatherData.value = data
+  } catch(e) {
+    weatherData.value = null
+  }
+  weatherLoading.value = false
+}
+
+// Re-map desc when language changes (use cached temp/emoji)
+watch(lang, () => {
+  const cached = weatherCache[selectedKey.value]
+  if (cached) {
+    const l = lang.value
+    const info = Object.values(WMO).find(w => w.emoji === cached.data.emoji) || WMO[0]
+    weatherData.value = { ...cached.data, desc: info[l] || info.en }
+  }
+})
+
+watch(selectedKey, () => fetchWeather(), { immediate: true })
 </script>
 
 <style scoped>

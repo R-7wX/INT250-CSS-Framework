@@ -124,11 +124,11 @@ function toggleSavedWithToast(placeName) {
   store.toggleSaved(placeName)
   const displayName = getPlaceName(placeName)
   if (!wasSaved) {
-    store.showToast(displayName, { type: 'success',
+    store.showToast(displayName, { type: 'saved',
       undoFn: () => store.toggleSaved(placeName)
     })
   } else {
-    store.showToast(displayName, { type: 'warning', duration: 2000 })
+    store.showToast(displayName, { type: 'unsaved', duration: 2000 })
   }
 }
 
