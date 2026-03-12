@@ -10,7 +10,7 @@
       <img :src="placeData?.img" class="w-12 h-12 rounded-xl object-cover shrink-0 pointer-events-none" loading="lazy" />
       <div class="flex-1 min-w-0 pointer-events-none">
         <h4 class="font-bold text-sm truncate text-slate-800 dark:text-slate-200">{{ displayName }}</h4>
-        <p class="text-xs text-slate-500 truncate">{{ placeData?.vibe }}</p>
+        <p class="text-xs text-slate-500 truncate">{{ displayVibe }}</p>
       </div>
 
       <!-- Mobile add btn (sidebar only) -->
@@ -79,6 +79,22 @@ import { useAppStore } from '../stores/useAppStore.js'
 import { useI18n } from '../composables/useI18n.js'
 import { PLACES, PLACE_NAMES } from '../data/places.js'
 
+const VIBE_I18N_KEY = {
+  'Urban Adventure': 'idx_vibe_urban',
+  'Slow Living':     'idx_vibe_slow',
+  'Nature Retreat':  'idx_vibe_nature',
+  'Foodie Tour':     'idx_vibe_foodie',
+  'Beach Getaway':   'idx_vibe_beach',
+}
+
+const VIBE_ICONS = {
+  'Urban Adventure': '🏙️',
+  'Slow Living':     '☕',
+  'Nature Retreat':  '🌲',
+  'Foodie Tour':     '🍣',
+  'Beach Getaway':   '🏖️',
+}
+
 const props = defineProps({
   name: String,
   inBoard: Boolean,
@@ -99,9 +115,19 @@ watch(() => props.end,   v => localEnd.value = v)
 const placeData = computed(() => PLACES.find(p => p.name === props.name))
 
 const displayName = computed(() => {
+  if (lang.value === 'th') return props.name   // key itself is Thai
   const row = PLACE_NAMES[props.name]
   if (!row) return props.name
   return row[lang.value] || row['en'] || props.name
+})
+
+const displayVibe = computed(() => {
+  const vibe = placeData.value?.vibe
+  if (!vibe) return ''
+  const key = VIBE_I18N_KEY[vibe]
+  if (!key) return vibe
+  const icon = VIBE_ICONS[vibe] || ''
+  return icon ? `${icon} ${t(key)}` : t(key)
 })
 
 const duration = computed(() => {

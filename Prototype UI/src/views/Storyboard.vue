@@ -34,8 +34,8 @@
 
     <div class="flex flex-col lg:flex-row gap-6">
       <!-- Sidebar: Saved Vibes -->
-      <aside class="w-full lg:w-64 shrink-0">
-        <div class="glass-panel rounded-3xl border border-slate-200/60 dark:border-slate-700/60 p-4 shadow-sm">
+      <aside class="w-full lg:w-80 shrink-0">
+        <div class="glass-panel rounded-3xl border border-slate-200/60 dark:border-slate-700/60 p-4 shadow-sm lg:sticky lg:top-20">
           <h2 class="font-bold text-base mb-0.5 text-slate-700 dark:text-slate-300 flex items-center gap-2">
             {{ t('sb_saved_vibes') }}
             <span v-if="sidebarPlaces.length > 0" class="px-1.5 py-0.5 rounded-full text-xs font-bold bg-teal-100 dark:bg-teal-900/40 text-teal-600 dark:text-teal-400">
