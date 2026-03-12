@@ -359,6 +359,8 @@ function clearAll() {
     onConfirm: () => {
       days.value = []
       days.value.push({ id: nextId++, subtitle: t('sb_arrival'), places: [] })
+      store.tripName = ''
+      store.travelDate = ''
       saveBoard()
     }
   })
