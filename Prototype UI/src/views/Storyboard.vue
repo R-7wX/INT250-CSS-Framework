@@ -205,7 +205,8 @@
             <button
               v-for="(day, idx) in days" :key="day.id"
               @click="addCardToDay(idx)"
-              class="w-full text-left px-4 py-3 rounded-2xl border border-slate-200 dark:border-slate-700 hover:bg-teal-50 dark:hover:bg-teal-900/20 hover:border-teal-300 dark:hover:border-teal-700 transition-colors font-medium text-sm text-slate-800 dark:text-slate-200"
+              @touchend="$event.target.blur()"
+              class="w-full text-left px-4 py-3 rounded-2xl border border-slate-200 dark:border-slate-700 focus:outline-none active:bg-teal-50 dark:active:bg-teal-900/20 sm:hover:bg-teal-50 dark:sm:hover:bg-teal-900/20 sm:hover:border-teal-300 dark:sm:hover:border-teal-700 transition-colors font-medium text-sm text-slate-800 dark:text-slate-200"
             >
               {{ t('sb_day') }} {{ idx + 1 }}: {{ day.subtitle || t('sb_placeholder') }}
             </button>

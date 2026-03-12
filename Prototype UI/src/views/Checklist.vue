@@ -243,6 +243,7 @@ function downloadPlan() {
   const isRtl = lang.value === 'ar'
   const now = new Date().toLocaleDateString(locale, { year: 'numeric', month: 'long', day: 'numeric' })
   const docTitle = store.tripName || t('plan_title')
+  const planByPre = { th:'สร้างด้วย ', en:'Created with ', zh:'由 ', es:'Creado con ', ar:'أُنشئ بواسطة ', fr:'Créé avec ' }[lang.value] || 'Created with '
   const d = exportData.value
 
   let itineraryHtml = ''
@@ -322,7 +323,7 @@ function downloadPlan() {
 ${itineraryHtml}
 <div class="section-label">${t('plan_packing')}</div>
 ${packingHtml}
-<div class="footer">${t('plan_by_pre')}<a href="https://travelaroha.space" target="_blank" style="color:#14b8a6;text-decoration:none;font-weight:600;">Travelaroha</a></div>
+<div class="footer">${planByPre}<a href="https://travelaroha.space" target="_blank" style="color:#14b8a6;text-decoration:none;font-weight:600;">Travelaroha</a></div>
 </body></html>`
 
   const blob = new Blob([html], { type: 'text/html;charset=utf-8' })
