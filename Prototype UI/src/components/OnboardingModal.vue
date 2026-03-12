@@ -59,12 +59,18 @@ const steps = [
   { emoji: '🗓️', titleKey: 'ob_step3_title', descKey: 'ob_step3_desc' },
 ]
 
-const LS_KEY = 'travelaroha_onboarded'
+const LS_KEY = 'travelaroha_last_visit'
+const WEEK_MS = 7 * 24 * 60 * 60 * 1000
 
 onMounted(() => {
-  if (!localStorage.getItem(LS_KEY)) {
+  const last = localStorage.getItem(LS_KEY)
+  const now = Date.now()
+  const shouldShow = !last || (now - Number(last)) >= WEEK_MS
+  if (shouldShow) {
     setTimeout(() => { visible.value = true }, 600)
   }
+  // Update last visit every time page loads
+  localStorage.setItem(LS_KEY, String(now))
 })
 
 function next() {
@@ -72,7 +78,7 @@ function next() {
 }
 function dismiss() {
   visible.value = false
-  localStorage.setItem(LS_KEY, '1')
+  current.value = 0
 }
 </script>
 
