@@ -45,7 +45,7 @@ export const I18N = {
   sb_picker_title:{th:'เลือกวันที่จะเพิ่ม',en:'Choose a Day',    zh:'选择日期',  es:'Elige un Día',ar:'اختر يومًا',fr:'Choisir un jour'},
   sb_picker_cancel:{th:'ยกเลิก',          en:'Cancel',           zh:'取消',      es:'Cancelar',  ar:'إلغاء',      fr:'Annuler'},
   sb_drop_hint:   {th:'ลากสถานที่มาวาง', en:'Drop places here', zh:'拖拽地点到这里',es:'Arrastra lugares aquí',ar:'اسحب الأماكن هنا',fr:'Déposer les lieux ici'},
-  sb_drop_mob:    {th:'หรือกด ＋ บนการ์ด',en:'or tap ＋ on card',zh:'或点击卡片上的＋',es:'o toca ＋ en la tarjeta',ar:'أو اضغط ＋ على البطاقة',fr:'ou appuyez ＋ sur la carte'},
+  sb_drop_mob:    {th:'ลาก หรือกด ＋ บนการ์ด',en:'Drag or tap ＋ on card',zh:'拖拽或点击卡片上的＋',es:'Arrastra o toca ＋ en la tarjeta',ar:'اسحب أو اضغط ＋ على البطاقة',fr:'Glisser ou appuyer ＋ sur la carte'},
   sb_del_day:     {th:'✕ ลบวัน',             en:'✕ Remove',         zh:'✕ 删除',    es:'✕ Eliminar',ar:'✕ حذف',     fr:'✕ Supprimer'},
   sb_arrival:     {th:'วันเดินทางถึง',       en:'Arrival Day',      zh:'抵达日',    es:'Día de llegada',ar:'يوم الوصول',fr:"Jour d'arrivée"},
   sb_generate:    {th:'สร้าง Checklist',en:'Generate Checklist',zh:'生成清单',es:'Generar Lista',ar:'إنشاء القائمة',fr:'Générer la liste'},
@@ -179,9 +179,13 @@ export const I18N = {
 
   // Confirm Modal
   modal_cancel:        {th:'ยกเลิก',     en:'Cancel',      zh:'取消',   es:'Cancelar',  ar:'إلغاء',    fr:'Annuler'},
+  sb_day:              {th:'วัน',         en:'Day',         zh:'第',      es:'Día',         ar:'يوم',         fr:'Jour'},
   sb_clear_title:      {th:'ล้างแผนทั้งหมด?',  en:'Clear all days?',     zh:'清除所有天数？', es:'¿Borrar todo?',          ar:'مسح الكل؟',          fr:'Tout effacer ?'},
   sb_clear_desc:       {th:'Day Board ทั้งหมดจะถูกลบ เหลือแค่วันแรก ไม่สามารถกู้คืนได้',en:'All day boards will be removed, leaving only Day 1. This cannot be undone.',zh:'所有行程天数将被删除，只保留第一天，此操作无法撤销。',es:'Todos los días serán eliminados, dejando solo el Día 1. No se puede deshacer.',ar:'ستُحذف جميع أيام الرحلة وتبقى اليوم الأول فقط. لا يمكن التراجع.',fr:'Tous les jours seront supprimés, ne laissant que le Jour 1. Impossible à annuler.'},
   sb_clear_confirm_btn:{th:'ล้างเลย',    en:'Clear All',   zh:'全部清除', es:'Borrar todo', ar:'مسح الكل', fr:'Tout effacer'},
+  sb_del_day_title:    {th:'ลบวันนี้?',  en:'Remove this day?', zh:'删除此天？', es:'¿Eliminar este día?', ar:'حذف هذا اليوم؟', fr:'Supprimer ce jour ?'},
+  sb_del_day_desc:     {th:'สถานที่ทั้งหมดในวันนี้จะถูกลบออก ไม่สามารถกู้คืนได้',en:'All places in this day will be removed. This cannot be undone.',zh:'该天的所有地点将被删除，无法恢复。',es:'Todos los lugares de este día serán eliminados. No se puede deshacer.',ar:'ستُحذف جميع أماكن هذا اليوم ولا يمكن التراجع.',fr:'Tous les lieux de ce jour seront supprimés. Impossible à annuler.'},
+  sb_del_day_confirm_btn:{th:'ลบเลย',   en:'Remove',      zh:'删除',    es:'Eliminar',    ar:'حذف',         fr:'Supprimer'},
   cl_reset_title:      {th:'รีเซ็ต Checklist?', en:'Reset Checklist?',  zh:'重置清单？',  es:'¿Reiniciar lista?',      ar:'إعادة تعيين القائمة؟',fr:'Réinitialiser la liste ?'},
   cl_reset_desc:       {th:'รายการที่ติ๊กไว้ทั้งหมดจะถูกล้าง ไม่สามารถกู้คืนได้', en:'All checked items will be cleared. This cannot be undone.',zh:'所有已勾选的项目将被清除，无法撤销。',es:'Todos los elementos marcados serán borrados. No se puede deshacer.',ar:'ستُمسح جميع العناصر المحددة. لا يمكن التراجع.',fr:'Tous les éléments cochés seront effacés. Impossible à annuler.'},
   cl_reset_confirm_btn:{th:'รีเซ็ตเลย', en:'Reset',        zh:'重置',    es:'Reiniciar',   ar:'إعادة تعيين', fr:'Réinitialiser'},  toast_undo:       {th:'ยกเลิก',  en:'Undo',    zh:'撤销',  es:'Deshacer',ar:'تراجع',  fr:'Annuler'},

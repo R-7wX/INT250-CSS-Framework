@@ -73,7 +73,7 @@
         <div class="grid grid-cols-2 gap-3 mb-4">
           <div class="bg-slate-50 dark:bg-slate-800/60 rounded-2xl p-3">
             <div class="text-xs text-slate-400">{{ t('db_rec_days') }}</div>
-            <div class="font-extrabold text-lg text-teal-600 dark:text-teal-400">{{ currentI18n ? 'Mar–May' : current.season }}</div>
+            <div class="font-extrabold text-lg text-teal-600 dark:text-teal-400">{{ currentI18n?.season || current.season }}</div>
           </div>
           <div class="bg-slate-50 dark:bg-slate-800/60 rounded-2xl p-3">
             <div class="text-xs text-slate-400">{{ t('db_budget') }}</div>

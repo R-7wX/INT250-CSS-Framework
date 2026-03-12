@@ -10,7 +10,14 @@ const LS_TRIPNAME = 'travelaroha_tripname'
 
 export const useAppStore = defineStore('app', () => {
   // ── Language ──
-  const lang = ref(localStorage.getItem(LS_LANG) || 'th')
+  const SUPPORTED_LANGS = ['th', 'en', 'zh', 'es', 'ar', 'fr']
+  function detectLang() {
+    const saved = localStorage.getItem(LS_LANG)
+    if (saved) return saved
+    const browser = (navigator.language || navigator.userLanguage || 'en').split('-')[0].toLowerCase()
+    return SUPPORTED_LANGS.includes(browser) ? browser : 'en'
+  }
+  const lang = ref(detectLang())
   watch(lang, v => localStorage.setItem(LS_LANG, v))
 
   // ── Dark mode ──

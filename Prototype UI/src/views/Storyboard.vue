@@ -113,7 +113,7 @@
         >
           <div class="flex justify-between items-start mb-3 gap-2">
             <h3 class="font-bold text-lg text-teal-600 dark:text-teal-400 flex items-baseline gap-2 flex-wrap">
-              <span class="shrink-0">Day {{ dayIdx + 1 }}:</span>
+              <span class="shrink-0">{{ t('sb_day') }} {{ dayIdx + 1 }}:</span>
               <input
                 v-model="day.subtitle"
                 :placeholder="t('sb_placeholder')"
@@ -121,7 +121,7 @@
               />
               <span class="text-xs font-normal text-slate-400">{{ daySummary(day) }}</span>
             </h3>
-            <button @click="removeDay(dayIdx)" class="shrink-0 text-rose-400 hover:text-rose-600 text-xs font-medium transition-colors mt-1 px-2 py-1 rounded-lg hover:bg-rose-50 dark:hover:bg-rose-900/20">
+            <button @click="confirmRemoveDay(dayIdx)" class="shrink-0 text-rose-400 hover:text-rose-600 text-xs font-medium transition-colors mt-1 px-2 py-1 rounded-lg hover:bg-rose-50 dark:hover:bg-rose-900/20">
               {{ t('sb_del_day') }}
             </button>
           </div>
@@ -176,7 +176,7 @@
               @click="addCardToDay(idx)"
               class="w-full text-left px-4 py-3 rounded-2xl border border-slate-200 dark:border-slate-700 hover:bg-teal-50 dark:hover:bg-teal-900/20 hover:border-teal-300 dark:hover:border-teal-700 transition-colors font-medium text-sm text-slate-800 dark:text-slate-200"
             >
-              Day {{ idx + 1 }}: {{ day.subtitle || t('sb_placeholder') }}
+              {{ t('sb_day') }} {{ idx + 1 }}: {{ day.subtitle || t('sb_placeholder') }}
             </button>
           </div>
           <button @click="pickerOpen = false" class="mt-4 w-full py-2.5 rounded-2xl border border-slate-200 dark:border-slate-700 text-slate-500 text-sm font-medium hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors shrink-0">
@@ -262,6 +262,17 @@ function addDay() {
   saveBoard()
 }
 
+function confirmRemoveDay(idx) {
+  store.showConfirm({
+    title: t('sb_del_day_title'),
+    desc:  t('sb_del_day_desc'),
+    confirmLabel: t('sb_del_day_confirm_btn'),
+    cancelLabel:  t('modal_cancel'),
+    danger: true,
+    onConfirm: () => removeDay(idx)
+  })
+}
+
 function removeDay(idx) {
   days.value.splice(idx, 1)
   saveBoard()
@@ -293,7 +304,7 @@ function returnToSidebar(dayIdx, placeIdx) {
   const dayLabel = `Day ${dayIdx + 1}`
   days.value[dayIdx].places.splice(placeIdx, 1)
   saveBoard()
-  store.showToast(`${t('toast_returned')} Day ${dayIdx + 1}`, {
+  store.showToast(`${t('toast_returned')} ${t('sb_day')} ${dayIdx + 1}`, {
     type: 'warning',
     duration: 5000,
     undoFn: () => {
@@ -317,7 +328,7 @@ function addCardToDay(dayIdx) {
     const name = pickerName.value
     days.value[dayIdx].places.push({ name, start: '09:00', end: '11:00' })
     const displayName = getDisplayNameForToast(name)
-    store.showToast(`${displayName} → Day ${dayIdx + 1}`, { type: 'success' })
+    store.showToast(`${displayName} → ${t('sb_day')} ${dayIdx + 1}`, { type: 'success' })
   }
   pickerOpen.value = false
   pickerName.value = null
