@@ -4,7 +4,7 @@
       <!-- Logo -->
       <RouterLink to="/" class="flex items-center gap-2 shrink-0">
         <img src="/favicon.png" class="w-7 h-7 sm:w-8 sm:h-8" alt="logo" />
-        <span class="font-extrabold text-base sm:text-lg bg-gradient-to-r from-teal-600 to-teal-400 bg-clip-text text-transparent">
+        <span class="font-extrabold text-base sm:text-lg bg-gradient-to-r from-teal-500 to-cyan-400 bg-clip-text text-transparent">
           Travelaroha
         </span>
       </RouterLink>

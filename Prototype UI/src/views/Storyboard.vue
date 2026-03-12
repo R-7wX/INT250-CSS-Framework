@@ -21,7 +21,7 @@
         <button
           @click="generateChecklist"
           class="relative overflow-hidden flex items-center gap-2 px-5 py-2 rounded-2xl text-sm font-bold text-white shadow-lg hover:scale-105 hover:shadow-xl transition-all duration-200"
-          style="background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #0d9488 100%); box-shadow: 0 4px 18px rgba(99,102,241,0.45);"
+          style="background: linear-gradient(135deg, #0d9488 0%, #06b6d4 50%, #0ea5e9 100%); box-shadow: 0 4px 18px rgba(6,182,212,0.40);"
         >
           <svg class="w-4 h-4 flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/>
@@ -38,7 +38,7 @@
         <div class="glass-panel rounded-3xl border border-slate-200/60 dark:border-slate-700/60 p-4 shadow-sm lg:sticky lg:top-20">
           <h2 class="font-bold text-base mb-0.5 text-slate-700 dark:text-slate-300 flex items-center gap-2">
             {{ t('sb_saved_vibes') }}
-            <span v-if="sidebarPlaces.length > 0" class="px-1.5 py-0.5 rounded-full text-xs font-bold bg-teal-100 dark:bg-teal-900/40 text-teal-600 dark:text-teal-400">
+            <span v-if="sidebarPlaces.length > 0" class="px-1.5 py-0.5 rounded-full text-xs font-bold bg-amber-100 dark:bg-amber-900/40 text-amber-600 dark:text-amber-400">
               {{ sidebarPlaces.length }}
             </span>
           </h2>
@@ -151,7 +151,7 @@
             </div>
 
             <SbCard
-              v-for="(place, placeIdx) in day.places" :key="place.name + placeIdx"
+              v-for="(place, placeIdx) in day.places" :key="`${dayIdx}-${placeIdx}`"
               :name="place.name"
               :in-board="true"
               :start="place.start"
@@ -207,10 +207,7 @@ const isTouchDevice = typeof navigator !== 'undefined' && navigator.maxTouchPoin
 const days = ref([])
 let nextId = 1
 
-const sidebarPlaces = computed(() => {
-  const boardNames = days.value.flatMap(d => d.places.map(p => p.name))
-  return store.savedPlaces.filter(n => !boardNames.includes(n))
-})
+const sidebarPlaces = computed(() => store.savedPlaces)
 
 // Search
 const sidebarSearch = ref('')
@@ -339,11 +336,12 @@ function getDisplayNameForToast(thaiName) {
 function onDropToDay(dayIdx, e) {
   if (!draggedItem.value) return
   const name = draggedItem.value
-  // Remove from source
+  // If dragging from board → move (remove from source)
   if (draggedFrom.value?.type === 'board') {
     const { dayIdx: fromDay, placeIdx: fromPlace } = draggedFrom.value
     days.value[fromDay].places.splice(fromPlace, 1)
   }
+  // If dragging from sidebar → copy (leave sidebar intact)
   days.value[dayIdx].places.push({ name, start: '09:00', end: '11:00' })
   draggedItem.value = null
   draggedFrom.value = null
@@ -352,6 +350,7 @@ function onDropToDay(dayIdx, e) {
 
 function onDropToSidebar(e) {
   if (!draggedItem.value) return
+  // Only handle board → sidebar (remove from board; sidebar already has the place)
   if (draggedFrom.value?.type === 'board') {
     const { dayIdx, placeIdx } = draggedFrom.value
     days.value[dayIdx].places.splice(placeIdx, 1)

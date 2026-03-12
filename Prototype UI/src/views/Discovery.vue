@@ -16,7 +16,10 @@
         v-for="vibe in vibes" :key="vibe.key"
         @click="setVibe(vibe.key)"
         class="filter-btn"
-        :class="currentVibe === vibe.key && !savedMode ? VIBE_ACTIVE_COLORS[vibe.key] : ''"
+        :class="[
+          currentVibe === vibe.key && !savedMode ? VIBE_ACTIVE_COLORS[vibe.key] : '',
+          VIBE_HOVER_CLASSES[vibe.key]
+        ]"
       >
         {{ VIBE_ICONS[vibe.key] ? VIBE_ICONS[vibe.key] + ' ' : '' }}{{ t(vibe.labelKey) }}
       </button>
@@ -32,7 +35,7 @@
           <path stroke-linecap="round" stroke-linejoin="round" d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/>
         </svg>
         <span>{{ savedMode ? t('idx_saved_on') : t('idx_saved_btn') }}</span>
-        <span class="px-1.5 py-0.5 rounded-full text-xs font-bold bg-rose-100 dark:bg-rose-900/40 text-rose-500">
+        <span class="px-1.5 py-0.5 rounded-full text-xs font-bold bg-amber-100 dark:bg-amber-900/40 text-amber-600 dark:text-amber-400">
           {{ savedPlaces.length }}
         </span>
       </button>
@@ -161,6 +164,15 @@ const VIBE_ACTIVE_COLORS = {
   'Nature Retreat':  'vibe-active-nature',
   'Foodie Tour':     'vibe-active-foodie',
   'Beach Getaway':   'vibe-active-beach',
+}
+
+const VIBE_HOVER_CLASSES = {
+  'All':             'vibe-btn-all',
+  'Urban Adventure': 'vibe-btn-urban',
+  'Slow Living':     'vibe-btn-slow',
+  'Nature Retreat':  'vibe-btn-nature',
+  'Foodie Tour':     'vibe-btn-foodie',
+  'Beach Getaway':   'vibe-btn-beach',
 }
 
 const filtered = computed(() => {

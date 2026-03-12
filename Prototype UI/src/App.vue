@@ -1,5 +1,5 @@
 <template>
-  <div class="min-h-screen bg-gradient-to-br from-slate-50 via-teal-50/30 to-slate-100 dark:from-slate-950 dark:via-slate-900 dark:to-slate-950 transition-colors duration-300">
+  <div class="min-h-screen bg-gradient-to-br from-slate-50 via-cyan-50/20 to-amber-50/20 dark:from-slate-950 dark:via-slate-900 dark:to-slate-950 transition-colors duration-300">
     <NavBar />
     <main class="pb-20 sm:pb-0">
       <RouterView />
@@ -22,7 +22,7 @@ import { watch } from 'vue'
 
 // ── One-time reset ──────────────────────────────────────────
 // เปลี่ยน CACHE_VERSION เมื่อต้องการ reset ผู้ใช้ทุกคนอีกครั้ง
-const CACHE_VERSION = 'v3'
+const CACHE_VERSION = 'v2'
 const VERSION_KEY   = 'travelaroha_version'
 if (localStorage.getItem(VERSION_KEY) !== CACHE_VERSION) {
   Object.keys(localStorage)

@@ -130,7 +130,7 @@
       <h3 class="font-bold text-xl text-slate-800 dark:text-slate-200">{{ t('cl_save_title') }}</h3>
       <p class="text-sm text-slate-500 dark:text-slate-400">{{ t('cl_save_sub') }}</p>
       <div class="flex flex-col sm:flex-row justify-center gap-3 flex-wrap">
-        <button @click="downloadPlan" class="flex items-center justify-center gap-2 px-6 py-3 bg-orange-500 hover:bg-orange-600 text-white rounded-2xl font-bold shadow-lg hover:scale-105 transition-all">
+        <button @click="downloadPlan" class="flex items-center justify-center gap-2 px-6 py-3 bg-amber-500 hover:bg-amber-600 text-white rounded-2xl font-bold shadow-lg hover:scale-105 transition-all">
           <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
           {{ t('cl_download') }}
         </button>
