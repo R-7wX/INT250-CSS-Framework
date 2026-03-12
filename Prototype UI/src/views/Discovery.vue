@@ -49,7 +49,8 @@
         :class="isLargeCard(i, filtered.length) ? 'large' : 'small'"
         :style="{ animationDelay: (i * 0.04) + 's' }"
       >
-        <img :src="place.img" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy" />
+        <div class="absolute inset-0 bg-gradient-to-br from-slate-700 via-slate-600 to-slate-800 animate-pulse"></div>
+        <img :src="place.img" class="w-full h-full object-cover group-hover:scale-105 transition-all duration-700 opacity-0 absolute inset-0" loading="lazy" @load="e => e.target.classList.replace('opacity-0','opacity-100')" />
         <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-transparent"></div>
         <div class="absolute bottom-4 left-4 z-20 text-white pr-12">
           <span class="px-2 py-1 bg-white/20 backdrop-blur-md rounded-md text-xs font-medium mb-2 inline-flex items-center gap-1">

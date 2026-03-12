@@ -19,7 +19,9 @@
         <span class="block w-4 h-0.5 rounded-full bg-current"></span>
       </div>
 
-      <img :src="placeData?.img" class="w-12 h-12 rounded-xl object-cover shrink-0 pointer-events-none" loading="lazy" />
+      <div class="w-12 h-12 rounded-xl shrink-0 relative overflow-hidden bg-gradient-to-br from-slate-200 to-slate-300 dark:from-slate-600 dark:to-slate-700">
+        <img :src="placeData?.img" class="w-12 h-12 rounded-xl object-cover absolute inset-0 opacity-0 transition-opacity duration-300 pointer-events-none" loading="lazy" @load="e => e.target.classList.replace('opacity-0','opacity-100')" />
+      </div>
       <div class="flex-1 min-w-0 pointer-events-none">
         <h4 class="font-bold text-sm truncate text-slate-800 dark:text-slate-200">{{ displayName }}</h4>
         <p class="text-xs text-slate-500 truncate">{{ displayVibe }}</p>
