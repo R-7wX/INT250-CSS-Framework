@@ -14,6 +14,18 @@ import { useAppStore } from './stores/useAppStore.js'
 import { LANGS } from './data/i18n.js'
 import { watch, onMounted } from 'vue'
 
+// ── One-time reset ──────────────────────────────────────────
+// เปลี่ยน CACHE_VERSION เมื่อต้องการ reset ผู้ใช้ทุกคนอีกครั้ง
+const CACHE_VERSION = 'v2'
+const VERSION_KEY   = 'travelaroha_version'
+if (localStorage.getItem(VERSION_KEY) !== CACHE_VERSION) {
+  Object.keys(localStorage)
+    .filter(k => k.startsWith('travelaroha') && k !== VERSION_KEY)
+    .forEach(k => localStorage.removeItem(k))
+  localStorage.setItem(VERSION_KEY, CACHE_VERSION)
+}
+// ────────────────────────────────────────────────────────────
+
 const store = useAppStore()
 
 // Sync RTL direction on lang change
