@@ -114,11 +114,24 @@ export const useAppStore = defineStore('app', () => {
 
   // ── Trip Name ──
   const tripName = ref(localStorage.getItem(LS_TRIPNAME) || '')
-  watch(tripName, v => localStorage.setItem(LS_TRIPNAME, v))
+  watch(tripName, v => {
+    if (v) localStorage.setItem(LS_TRIPNAME, v)
+    else localStorage.removeItem(LS_TRIPNAME)
+  })
 
   // ── Travel Date ──
   const travelDate = ref(localStorage.getItem(LS_TRAVELDATE) || '')
-  watch(travelDate, v => localStorage.setItem(LS_TRAVELDATE, v))
+  watch(travelDate, v => {
+    if (v) localStorage.setItem(LS_TRAVELDATE, v)
+    else localStorage.removeItem(LS_TRAVELDATE)
+  })
+
+  function clearTripMeta() {
+    tripName.value = ''
+    travelDate.value = ''
+    localStorage.removeItem(LS_TRIPNAME)
+    localStorage.removeItem(LS_TRAVELDATE)
+  }
 
   return {
     lang,
@@ -140,5 +153,6 @@ export const useAppStore = defineStore('app', () => {
     resetChecklist,
     tripName,
     travelDate,
+    clearTripMeta,
   }
 })
