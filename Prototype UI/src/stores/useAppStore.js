@@ -20,9 +20,25 @@ export const useAppStore = defineStore('app', () => {
     else   document.documentElement.classList.remove('dark')
     localStorage.setItem('theme', v ? 'dark' : 'light')
   })
-  // init DOM
   if (dark.value) document.documentElement.classList.add('dark')
   else            document.documentElement.classList.remove('dark')
+
+  // ── Toast ──
+  const toasts = ref([])
+  let toastId = 0
+  const toastTimers = {}
+
+  function showToast(msg, { type = 'success', duration = 2500, undoFn = null } = {}) {
+    const id = ++toastId
+    toasts.value.push({ id, msg, type, undoFn })
+    toastTimers[id] = setTimeout(() => dismissToast(id), duration)
+    return id
+  }
+  function dismissToast(id) {
+    clearTimeout(toastTimers[id])
+    delete toastTimers[id]
+    toasts.value = toasts.value.filter(t => t.id !== id)
+  }
 
   // ── Saved places ──
   const savedPlaces = ref(
@@ -79,6 +95,15 @@ export const useAppStore = defineStore('app', () => {
     checkState.value = {}
   }
 
+  // ── Confirm Modal ──
+  const confirmModal = ref({ open: false, title: '', desc: '', confirmLabel: '', cancelLabel: '', danger: false, onConfirm: null })
+  function showConfirm({ title, desc, confirmLabel, cancelLabel, danger = false, onConfirm }) {
+    confirmModal.value = { open: true, title, desc, confirmLabel, cancelLabel, danger, onConfirm }
+  }
+  function closeConfirm() {
+    confirmModal.value = { ...confirmModal.value, open: false, onConfirm: null }
+  }
+
   // ── Trip Name ──
   const tripName = ref(localStorage.getItem(LS_TRIPNAME) || '')
   watch(tripName, v => localStorage.setItem(LS_TRIPNAME, v))
@@ -86,6 +111,8 @@ export const useAppStore = defineStore('app', () => {
   return {
     lang,
     dark,
+    toasts, showToast, dismissToast,
+    confirmModal, showConfirm, closeConfirm,
     savedPlaces,
     toggleSaved,
     isSaved,

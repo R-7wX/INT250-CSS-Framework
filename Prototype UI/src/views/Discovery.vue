@@ -60,7 +60,7 @@
           </p>
         </div>
         <button
-          @click.stop="store.toggleSaved(place.name)"
+          @click.stop="toggleSavedWithToast(place.name)"
           class="absolute top-4 right-4 z-20 w-9 h-9 flex items-center justify-center backdrop-blur-md rounded-full hover:scale-110 transition-all"
           :class="store.isSaved(place.name) ? 'bg-white text-rose-500 shadow-md' : 'bg-black/20 text-white'"
         >
@@ -112,6 +112,22 @@ const currentVibe = ref('All')
 const savedMode = ref(false)
 
 const savedPlaces = computed(() => store.savedPlaces)
+
+// Mobile detection for drag hint
+const isTouchDevice = typeof navigator !== 'undefined' && navigator.maxTouchPoints > 0
+
+function toggleSavedWithToast(placeName) {
+  const wasSaved = store.isSaved(placeName)
+  store.toggleSaved(placeName)
+  const displayName = getPlaceName(placeName)
+  if (!wasSaved) {
+    store.showToast(displayName, { type: 'success',
+      undoFn: () => store.toggleSaved(placeName)
+    })
+  } else {
+    store.showToast(displayName, { type: 'warning', duration: 2000 })
+  }
+}
 
 const vibes = [
   { key: 'All',             labelKey: 'idx_filter_all' },

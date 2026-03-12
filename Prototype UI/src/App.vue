@@ -4,19 +4,25 @@
     <main class="pb-20 sm:pb-0">
       <RouterView />
     </main>
+    <ToastStack />
+    <OnboardingModal />
+    <ConfirmModal />
   </div>
 </template>
 
 <script setup>
 import NavBar from './components/NavBar.vue'
+import ToastStack from './components/ToastStack.vue'
+import OnboardingModal from './components/OnboardingModal.vue'
+import ConfirmModal from './components/ConfirmModal.vue'
 import { RouterView } from 'vue-router'
 import { useAppStore } from './stores/useAppStore.js'
 import { LANGS } from './data/i18n.js'
-import { watch, onMounted } from 'vue'
+import { watch } from 'vue'
 
 // ── One-time reset ──────────────────────────────────────────
 // เปลี่ยน CACHE_VERSION เมื่อต้องการ reset ผู้ใช้ทุกคนอีกครั้ง
-const CACHE_VERSION = 'v2'
+const CACHE_VERSION = 'v3'
 const VERSION_KEY   = 'travelaroha_version'
 if (localStorage.getItem(VERSION_KEY) !== CACHE_VERSION) {
   Object.keys(localStorage)

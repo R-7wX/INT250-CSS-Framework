@@ -65,17 +65,23 @@
     <!-- Packing sections -->
     <div class="space-y-4 mb-6">
       <div v-for="section in CHECKLIST_SECTIONS" :key="section.id"
-        class="glass-panel rounded-3xl border border-slate-200/60 dark:border-slate-700/60 p-5 shadow-sm"
+        class="glass-panel rounded-3xl border p-5 shadow-sm transition-all duration-500"
+        :class="sectionDone(section)
+          ? 'border-teal-300 dark:border-teal-700 bg-teal-50/40 dark:bg-teal-900/10'
+          : 'border-slate-200/60 dark:border-slate-700/60'"
       >
         <div class="flex items-center justify-between mb-3">
-          <h3 class="font-bold text-slate-700 dark:text-slate-300 flex items-center gap-2">
-            <span>{{ section.icon }}</span> {{ t(section.titleKey) }}
+          <h3 class="font-bold flex items-center gap-2 transition-colors duration-300"
+            :class="sectionDone(section) ? 'text-teal-600 dark:text-teal-400' : 'text-slate-700 dark:text-slate-300'"
+          >
+            <span class="transition-transform duration-300" :class="sectionDone(section) ? 'scale-125' : ''">{{ section.icon }}</span>
+            {{ t(section.titleKey) }}
           </h3>
-          <span class="text-xs font-semibold px-2.5 py-1 rounded-full"
+          <span class="text-xs font-semibold px-2.5 py-1 rounded-full transition-all duration-300"
             :class="sectionDone(section) ? 'bg-teal-100 dark:bg-teal-900/40 text-teal-600 dark:text-teal-400' : 'bg-slate-100 dark:bg-slate-800 text-slate-500'"
           >
             {{ sectionChecked(section) }}/{{ section.items.length }}
-            <span v-if="sectionDone(section)"> {{ t('cl_sec_done') }}</span>
+            <span v-if="sectionDone(section)"> ✓</span>
           </span>
         </div>
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
@@ -89,7 +95,7 @@
             <input
               type="checkbox"
               :checked="store.checkState[itemId]"
-              @change="store.setChecked(itemId, $event.target.checked)"
+              @change="onCheckItem(section, itemId, $event.target.checked)"
               class="w-4 h-4 rounded accent-teal-500"
             />
             <span class="text-sm"
@@ -101,6 +107,20 @@
         </div>
       </div>
     </div>
+
+    <!-- All done confetti banner -->
+    <Transition name="fade">
+      <div v-if="showAllDone" class="fixed inset-0 z-[150] flex items-center justify-center pointer-events-none">
+        <div class="text-center pointer-events-auto bg-white/90 dark:bg-slate-900/90 backdrop-blur-sm rounded-3xl p-8 shadow-2xl border border-teal-200 dark:border-teal-700 mx-4">
+          <div class="text-6xl mb-3 animate-bounce">🎉</div>
+          <h2 class="text-2xl font-extrabold text-teal-600 dark:text-teal-400 mb-1">{{ t('cl_all_done_title') }}</h2>
+          <p class="text-slate-500 dark:text-slate-400 text-sm mb-5">{{ t('cl_all_done_sub') }}</p>
+          <button @click="showAllDone = false" class="px-6 py-2.5 bg-teal-500 hover:bg-teal-600 text-white rounded-2xl font-bold transition-colors">
+            {{ t('cl_all_done_btn') }}
+          </button>
+        </div>
+      </div>
+    </Transition>
 
     <!-- Save plan section -->
     <div class="glass-panel p-6 rounded-3xl border border-teal-200 dark:border-teal-800 shadow-sm text-center space-y-4">
@@ -126,7 +146,7 @@
 </template>
 
 <script setup>
-import { computed, onMounted } from 'vue'
+import { computed, onMounted, ref } from 'vue'
 import { RouterLink, useRouter } from 'vue-router'
 import { useAppStore } from '../stores/useAppStore.js'
 import { useI18n } from '../composables/useI18n.js'
@@ -164,6 +184,23 @@ const progressPct = computed(() => totalCount.value > 0 ? Math.round(checkedCoun
 function sectionChecked(section) { return section.items.filter(id => store.checkState[id]).length }
 function sectionDone(section)    { return sectionChecked(section) === section.items.length }
 
+const showAllDone = ref(false)
+const prevAllDone = ref(progressPct.value >= 100)
+
+function onCheckItem(section, itemId, val) {
+  const wasSectionDone = sectionDone(section)
+  store.setChecked(itemId, val)
+  // Section just completed
+  if (!wasSectionDone && sectionDone(section)) {
+    store.showToast(`${t(section.titleKey)} ${t('cl_sec_done')}`, { type: 'success', duration: 2500 })
+  }
+  // All done
+  if (!prevAllDone.value && progressPct.value >= 100) {
+    setTimeout(() => { showAllDone.value = true }, 400)
+  }
+  prevAllDone.value = progressPct.value >= 100
+}
+
 function getPlaceName(thaiName) {
   if (lang.value === 'th') return thaiName
   const row = PLACE_NAMES[thaiName]
@@ -172,7 +209,14 @@ function getPlaceName(thaiName) {
 }
 
 function resetChecklist() {
-  if (confirm(t('cl_reset_confirm'))) store.resetChecklist()
+  store.showConfirm({
+    title: t('cl_reset_title'),
+    desc:  t('cl_reset_desc'),
+    confirmLabel: t('cl_reset_confirm_btn'),
+    cancelLabel:  t('modal_cancel'),
+    danger: true,
+    onConfirm: () => store.resetChecklist()
+  })
 }
 
 function startNewPlan() {
@@ -281,3 +325,9 @@ ${packingHtml}
   URL.revokeObjectURL(url)
 }
 </script>
+
+<style scoped>
+.fade-enter-active { transition: all 0.4s ease; }
+.fade-leave-active { transition: all 0.3s ease-in; }
+.fade-enter-from, .fade-leave-to { opacity: 0; transform: scale(0.92); }
+</style>

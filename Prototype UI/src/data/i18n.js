@@ -50,6 +50,7 @@ export const I18N = {
   sb_arrival:     {th:'วันเดินทางถึง',       en:'Arrival Day',      zh:'抵达日',    es:'Día de llegada',ar:'يوم الوصول',fr:"Jour d'arrivée"},
   sb_generate:    {th:'สร้าง Checklist',en:'Generate Checklist',zh:'生成清单',es:'Generar Lista',ar:'إنشاء القائمة',fr:'Générer la liste'},
   sb_trip_name_placeholder: {th:'ชื่อแผนการเดินทาง…',en:'Trip name…',zh:'旅行名称…',es:'Nombre del viaje…',ar:'اسم الرحلة…',fr:'Nom du voyage…'},
+  sb_search_placeholder: {th:'ค้นหาสถานที่…',en:'Search places…',zh:'搜索地点…',es:'Buscar lugares…',ar:'ابحث عن أماكن…',fr:'Rechercher des lieux…'},
   sb_places_unit: {th:'สถานที่',           en:'places',           zh:'个地点',    es:'lugares',   ar:'أماكن',      fr:'lieux'},
   sb_clear_confirm:{th:'ล้างทุก Day Board?',en:'Clear all Day Boards?',zh:'清除所有日程吗？',es:'¿Borrar todos los días?',ar:'مسح كل الأيام؟',fr:'Effacer tous les jours ?'},
   sb_add_day_alert:{th:'เพิ่มวันก่อนนะ กด "+ เพิ่มวัน"',en:'Please add a day first',zh:'请先添加日期',es:'Primero añade un día',ar:'أضف يومًا أولاً',fr:'Ajoutez un jour en premier'},
@@ -98,7 +99,12 @@ export const I18N = {
   cn_Singapore:  {th:'🇸🇬 สิงคโปร์',       en:'🇸🇬 Singapore',     zh:'🇸🇬 新加坡', es:'🇸🇬 Singapur',ar:'🇸🇬 سنغافورة',  fr:'🇸🇬 Singapour'},
   cn_Vietnam:    {th:'🇻🇳 เวียดนาม',       en:'🇻🇳 Vietnam',       zh:'🇻🇳 越南',   es:'🇻🇳 Vietnam', ar:'🇻🇳 فيتنام',    fr:'🇻🇳 Viêt Nam'},
   cn_Maldives:   {th:'🇲🇻 มัลดีฟส์',       en:'🇲🇻 Maldives',      zh:'🇲🇻 马尔代夫',es:'🇲🇻 Maldivas',ar:'🇲🇻 المالديف',   fr:'🇲🇻 Maldives'},
-  cn_Australia:  {th:'🇦🇺 ออสเตรเลีย',     en:'🇦🇺 Australia',     zh:'🇦🇺 澳大利亚',es:'🇦🇺 Australia',ar:'🇦🇺 أستراليا',  fr:'🇦🇺 Australie'},
+  cn_Australia:  {th:'🇦🇺 ออสเตรเลีย',      en:'🇦🇺 Australia',     zh:'🇦🇺 澳大利亚',es:'🇦🇺 Australia',ar:'🇦🇺 أستراليا',  fr:'🇦🇺 Australie'},
+  cn_Germany:    {th:'🇩🇪 เยอรมนี',          en:'🇩🇪 Germany',       zh:'🇩🇪 德国',   es:'🇩🇪 Alemania',ar:'🇩🇪 ألمانيا',    fr:'🇩🇪 Allemagne'},
+  cn_India:      {th:'🇮🇳 อินเดีย',           en:'🇮🇳 India',         zh:'🇮🇳 印度',   es:'🇮🇳 India',  ar:'🇮🇳 الهند',      fr:'🇮🇳 Inde'},
+  cn_Indonesia:  {th:'🇮🇩 อินโดนีเซีย',       en:'🇮🇩 Indonesia',     zh:'🇮🇩 印度尼西亚',es:'🇮🇩 Indonesia',ar:'🇮🇩 إندونيسيا',fr:'🇮🇩 Indonésie'},
+  cn_Spain:      {th:'🇪🇸 สเปน',              en:'🇪🇸 Spain',         zh:'🇪🇸 西班牙', es:'🇪🇸 España', ar:'🇪🇸 إسبانيا',    fr:'🇪🇸 Espagne'},
+  cn_Turkey:     {th:'🇹🇷 ตุรกี',              en:'🇹🇷 Turkey',        zh:'🇹🇷 土耳其', es:'🇹🇷 Turquía',ar:'🇹🇷 تركيا',      fr:'🇹🇷 Turquie'},
 
   // CHECKLIST
   cl_title:      {th:'รายการเตรียมของ',    en:'Trip Checklist',   zh:'旅行清单',  es:'Lista de Viaje',ar:'قائمة الرحلة',fr:'Liste de voyage'},
@@ -170,4 +176,37 @@ export const I18N = {
   plan_packing:  {th:'🧳 Packing Checklist',en:'🧳 Packing Checklist',zh:'🧳 行李清单',es:'🧳 Lista de Equipaje',ar:'🧳 قائمة الأمتعة',fr:'🧳 Liste de bagages'},
   plan_no_places:{th:'ยังไม่มีสถานที่',    en:'No places yet',    zh:'暂无地点',  es:'Sin lugares',   ar:'لا توجد أماكن',fr:'Pas de lieux'},
   plan_no_data:  {th:'ไม่มีข้อมูล Storyboard',en:'No Storyboard data',zh:'无行程数据',es:'Sin datos del plan',ar:'لا توجد بيانات',fr:'Pas de données de plan'},
+
+  // Confirm Modal
+  modal_cancel:        {th:'ยกเลิก',     en:'Cancel',      zh:'取消',   es:'Cancelar',  ar:'إلغاء',    fr:'Annuler'},
+  sb_clear_title:      {th:'ล้างแผนทั้งหมด?',  en:'Clear all days?',     zh:'清除所有天数？', es:'¿Borrar todo?',          ar:'مسح الكل؟',          fr:'Tout effacer ?'},
+  sb_clear_desc:       {th:'Day Board ทั้งหมดจะถูกลบ เหลือแค่วันแรก ไม่สามารถกู้คืนได้',en:'All day boards will be removed, leaving only Day 1. This cannot be undone.',zh:'所有行程天数将被删除，只保留第一天，此操作无法撤销。',es:'Todos los días serán eliminados, dejando solo el Día 1. No se puede deshacer.',ar:'ستُحذف جميع أيام الرحلة وتبقى اليوم الأول فقط. لا يمكن التراجع.',fr:'Tous les jours seront supprimés, ne laissant que le Jour 1. Impossible à annuler.'},
+  sb_clear_confirm_btn:{th:'ล้างเลย',    en:'Clear All',   zh:'全部清除', es:'Borrar todo', ar:'مسح الكل', fr:'Tout effacer'},
+  cl_reset_title:      {th:'รีเซ็ต Checklist?', en:'Reset Checklist?',  zh:'重置清单？',  es:'¿Reiniciar lista?',      ar:'إعادة تعيين القائمة؟',fr:'Réinitialiser la liste ?'},
+  cl_reset_desc:       {th:'รายการที่ติ๊กไว้ทั้งหมดจะถูกล้าง ไม่สามารถกู้คืนได้', en:'All checked items will be cleared. This cannot be undone.',zh:'所有已勾选的项目将被清除，无法撤销。',es:'Todos los elementos marcados serán borrados. No se puede deshacer.',ar:'ستُمسح جميع العناصر المحددة. لا يمكن التراجع.',fr:'Tous les éléments cochés seront effacés. Impossible à annuler.'},
+  cl_reset_confirm_btn:{th:'รีเซ็ตเลย', en:'Reset',        zh:'重置',    es:'Reiniciar',   ar:'إعادة تعيين', fr:'Réinitialiser'},  toast_undo:       {th:'ยกเลิก',  en:'Undo',    zh:'撤销',  es:'Deshacer',ar:'تراجع',  fr:'Annuler'},
+  toast_returned:   {th:'คืนจาก',  en:'returned from', zh:'已从',es:'devuelto de',ar:'تم إرجاعه من',fr:'retiré de'},
+
+  // Onboarding
+  ob_step1_title: {th:'ค้นพบสถานที่', en:'Discover Places', zh:'发现目的地', es:'Descubre Lugares', ar:'اكتشف الأماكن', fr:'Découvrez des lieux'},
+  ob_step1_desc:  {th:'เลื่อนดูสถานที่ทั่วโลก กรองตาม Vibe ที่ชอบ แล้วกด ❤️ เพื่อบันทึกสถานที่ที่สนใจ', en:'Browse destinations worldwide, filter by vibe, and tap ❤️ to save places you love.', zh:'浏览全球目的地，按旅行风格筛选，点击❤️保存喜欢的地方。', es:'Explora destinos, filtra por vibe y toca ❤️ para guardar los que te gustan.', ar:'تصفح الوجهات، صفّ حسب الأجواء، واضغط ❤️ لحفظ ما يعجبك.', fr:'Parcourez les destinations, filtrez par ambiance et appuyez ❤️ pour sauvegarder.'},
+  ob_step2_title: {th:'บันทึกรายการโปรด', en:'Save Your Favorites', zh:'收藏你的最爱', es:'Guarda tus Favoritos', ar:'احفظ مفضلاتك', fr:'Sauvegardez vos favoris'},
+  ob_step2_desc:  {th:'สถานที่ที่บันทึกไว้จะปรากฏใน "รายการโปรด" พร้อมให้ลากหรือกดเพิ่มลงในวันท่องเที่ยว', en:'Saved places appear in your Saved Vibes sidebar, ready to drag or tap into your trip days.', zh:'已收藏的地方会出现在侧边栏，可以拖拽或点击添加到行程。', es:'Los lugares guardados aparecen en tu barra lateral, listos para arrastrar o agregar a tus días de viaje.', ar:'تظهر الأماكن المحفوظة في الشريط الجانبي، جاهزة للسحب أو الإضافة إلى أيام رحلتك.', fr:'Les lieux sauvegardés apparaissent dans la barre latérale, prêts à être glissés dans vos journées.'},
+  ob_step3_title: {th:'วางแผนเดินทาง', en:'Plan Your Trip', zh:'规划你的旅程', es:'Planifica tu Viaje', ar:'خطط لرحلتك', fr:'Planifiez votre voyage'},
+  ob_step3_desc:  {th:'จัดวันเดินทาง ตั้งเวลาแต่ละสถานที่ แล้วดาวน์โหลดแผนเป็นไฟล์ HTML สวยงาม', en:'Arrange your trip days, set times for each place, then download your plan as a beautiful HTML file.', zh:'安排行程天数，为每个地方设定时间，然后下载精美的HTML旅行计划。', es:'Organiza tus días de viaje, establece horarios y descarga tu plan como un archivo HTML.', ar:'رتّب أيام رحلتك، حدد أوقات كل مكان، ثم حمّل خطتك كملف HTML جميل.', fr:"Organisez vos journées, définissez les horaires et téléchargez votre plan en fichier HTML."},
+  ob_skip:   {th:'ข้ามไปก่อน', en:'Skip',    zh:'跳过', es:'Saltar', ar:'تخطى',  fr:'Passer'},
+  ob_next:   {th:'ถัดไป →',   en:'Next →', zh:'下一步 →', es:'Siguiente →', ar:'التالي →', fr:'Suivant →'},
+  ob_start:  {th:'เริ่มต้นได้เลย', en:'Get Started', zh:'开始吧', es:'¡Empezar!', ar:'ابدأ الآن', fr:'Commencer'},
+
+  // Dashboard offline rate
+  db_rate_offline: {th:'อัตราโดยประมาณ', en:'Offline rate', zh:'离线汇率', es:'Tasa aproximada', ar:'سعر تقريبي', fr:'Taux hors ligne'},
+
+  // Storyboard drop guide
+  sb_drop_guide:    {th:'กด + บนการ์ดรายการโปรดด้านซ้าย', en:'Tap + on a saved card to the left', zh:'点击左侧卡片上的+按钮', es:'Toca + en una tarjeta guardada a la izquierda', ar:'اضغط + على بطاقة محفوظة على اليسار', fr:'Appuyez + sur une carte sauvegardée à gauche'},
+  sb_drag_hint_mob: {th:'กด + เพื่อเพิ่มสถานที่ใน Day', en:'Tap + to add places to a day', zh:'点击+添加地点到天数', es:'Toca + para agregar lugares al día', ar:'اضغط + لإضافة أماكن إلى اليوم', fr:'Appuyez + pour ajouter des lieux à la journée'},
+
+  // Checklist all done
+  cl_all_done_title: {th:'เก็บของครบแล้ว! 🎉',    en:"All packed! You're ready! 🎉",zh:'行李打包完毕！🎉', es:'¡Todo listo! 🎉',              ar:'الحقيبة جاهزة! 🎉',      fr:'Tout est prêt ! 🎉'},
+  cl_all_done_sub:   {th:'พร้อมออกเดินทางแล้ว ✈️', en:'Have an amazing trip ✈️',     zh:'祝你旅途愉快 ✈️',  es:'¡Que tengas un gran viaje ✈️',ar:'رحلة ممتعة ✈️',          fr:'Bon voyage ✈️'},
+  cl_all_done_btn:   {th:'เยี่ยมเลย!',             en:'Awesome!',                   zh:'太棒了！',          es:'¡Genial!',                     ar:'رائع!',                  fr:'Super !'},
 };

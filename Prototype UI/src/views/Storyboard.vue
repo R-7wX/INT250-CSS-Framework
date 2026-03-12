@@ -42,7 +42,25 @@
               {{ sidebarPlaces.length }}
             </span>
           </h2>
-          <p class="text-xs text-slate-400 mb-3">{{ t('sb_drag_hint') }}</p>
+          <p class="text-xs text-slate-400 mb-2">{{ isTouchDevice ? t('sb_drag_hint_mob') : t('sb_drag_hint') }}</p>
+
+          <!-- Search box -->
+          <div v-if="sidebarPlaces.length > 0" class="relative mb-3">
+            <svg class="absolute left-2.5 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-slate-400 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+            </svg>
+            <input
+              v-model="sidebarSearch"
+              type="text"
+              class="w-full pl-8 pr-7 py-1.5 text-xs rounded-xl border border-slate-200 dark:border-slate-600 bg-slate-50 dark:bg-slate-800 text-slate-700 dark:text-slate-200 placeholder-slate-400 focus:outline-none focus:ring-1 focus:ring-teal-400"
+              :placeholder="t('sb_search_placeholder')"
+            />
+            <button v-if="sidebarSearch" @click="sidebarSearch = ''" class="absolute right-2 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200">
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+              </svg>
+            </button>
+          </div>
 
           <div
             id="sidebar-zone"
@@ -63,9 +81,14 @@
               <RouterLink to="/" class="text-xs text-teal-500 font-semibold hover:underline">{{ t('sb_go_discover') }}</RouterLink>
             </div>
 
+            <!-- No search results -->
+            <div v-else-if="filteredSidebarPlaces.length === 0" class="py-6 text-center text-xs text-slate-400">
+              {{ t('idx_empty_h') }}
+            </div>
+
             <!-- Cards -->
             <SbCard
-              v-for="name in sidebarPlaces" :key="name"
+              v-for="name in filteredSidebarPlaces" :key="name"
               :name="name"
               :in-board="false"
               @add-to-day="openDayPicker(name)"
@@ -110,12 +133,21 @@
             @dragover.prevent
             @drop="onDropToDay(dayIdx, $event)"
           >
-            <div v-if="day.places.length === 0" class="col-span-2 flex flex-col items-center justify-center text-slate-400 py-4 gap-2 pointer-events-none">
+            <div v-if="day.places.length === 0" class="col-span-2 flex flex-col items-center justify-center text-slate-400 py-4 gap-1.5 pointer-events-none">
               <svg class="w-8 h-8 text-slate-300 dark:text-slate-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
               </svg>
-              <p class="text-sm">{{ t('sb_drop_hint') }} <span class="md:hidden">{{ t('sb_drop_mob') }}</span></p>
+              <p class="text-sm text-center">
+                <span v-if="isTouchDevice">{{ t('sb_drop_mob') }}</span>
+                <span v-else>{{ t('sb_drop_hint') }}</span>
+              </p>
+              <p class="text-xs text-teal-400 flex items-center gap-1">
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16l-4-4m0 0l4-4m-4 4h18"/>
+                </svg>
+                {{ t('sb_drop_guide') }}
+              </p>
             </div>
 
             <SbCard
@@ -162,11 +194,14 @@ import { useRouter } from 'vue-router'
 import { RouterLink } from 'vue-router'
 import { useAppStore } from '../stores/useAppStore.js'
 import { useI18n } from '../composables/useI18n.js'
+import { PLACE_NAMES } from '../data/places.js'
 import SbCard from '../components/SbCard.vue'
 
 const store = useAppStore()
-const { t } = useI18n()
+const { t, lang } = useI18n()
 const router = useRouter()
+
+const isTouchDevice = typeof navigator !== 'undefined' && navigator.maxTouchPoints > 0
 
 // Sidebar = saved places NOT yet in any board
 const days = ref([])
@@ -175,6 +210,24 @@ let nextId = 1
 const sidebarPlaces = computed(() => {
   const boardNames = days.value.flatMap(d => d.places.map(p => p.name))
   return store.savedPlaces.filter(n => !boardNames.includes(n))
+})
+
+// Search
+const sidebarSearch = ref('')
+function getDisplayName(thaiName) {
+  if (lang.value === 'th') return thaiName
+  const row = PLACE_NAMES[thaiName]
+  if (!row) return thaiName
+  return row[lang.value] || row['en'] || thaiName
+}
+const filteredSidebarPlaces = computed(() => {
+  const q = sidebarSearch.value.trim().toLowerCase()
+  if (!q) return sidebarPlaces.value
+  return sidebarPlaces.value.filter(name => {
+    const display = getDisplayName(name).toLowerCase()
+    const thai    = name.toLowerCase()
+    return display.includes(q) || thai.includes(q)
+  })
 })
 
 const draggedItem = ref(null)
@@ -218,10 +271,18 @@ function removeDay(idx) {
 }
 
 function clearAll() {
-  if (!confirm(t('sb_clear_confirm'))) return
-  days.value = []
-  days.value.push({ id: nextId++, subtitle: t('sb_arrival'), places: [] })
-  saveBoard()
+  store.showConfirm({
+    title: t('sb_clear_title'),
+    desc:  t('sb_clear_desc'),
+    confirmLabel: t('sb_clear_confirm_btn'),
+    cancelLabel:  t('modal_cancel'),
+    danger: true,
+    onConfirm: () => {
+      days.value = []
+      days.value.push({ id: nextId++, subtitle: t('sb_arrival'), places: [] })
+      saveBoard()
+    }
+  })
 }
 
 function updateTime(dayIdx, placeIdx, s, e) {
@@ -231,23 +292,47 @@ function updateTime(dayIdx, placeIdx, s, e) {
 }
 
 function returnToSidebar(dayIdx, placeIdx) {
+  const removed = days.value[dayIdx].places[placeIdx]
+  const dayLabel = `Day ${dayIdx + 1}`
   days.value[dayIdx].places.splice(placeIdx, 1)
   saveBoard()
+  store.showToast(`${t('toast_returned')} Day ${dayIdx + 1}`, {
+    type: 'warning',
+    duration: 5000,
+    undoFn: () => {
+      days.value[dayIdx].places.splice(placeIdx, 0, removed)
+      saveBoard()
+    }
+  })
 }
 
 function openDayPicker(name) {
-  if (days.value.length === 0) { alert(t('sb_add_day_alert')); return }
+  if (days.value.length === 0) {
+    store.showToast(t('sb_add_day_alert'), { type: 'warning', duration: 3000 })
+    return
+  }
   pickerName.value = name
   pickerOpen.value = true
 }
 
 function addCardToDay(dayIdx) {
   if (pickerName.value) {
-    days.value[dayIdx].places.push({ name: pickerName.value, start: '09:00', end: '11:00' })
+    const name = pickerName.value
+    days.value[dayIdx].places.push({ name, start: '09:00', end: '11:00' })
+    const displayName = getDisplayNameForToast(name)
+    store.showToast(`${displayName} → Day ${dayIdx + 1}`, { type: 'success' })
   }
   pickerOpen.value = false
   pickerName.value = null
   saveBoard()
+}
+
+function getDisplayNameForToast(thaiName) {
+  const row = PLACE_NAMES[thaiName]
+  if (!row) return thaiName
+  const l = store.lang
+  if (l === 'th') return thaiName
+  return row[l] || row['en'] || thaiName
 }
 
 // Drag and drop
