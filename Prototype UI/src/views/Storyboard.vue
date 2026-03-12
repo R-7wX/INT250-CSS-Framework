@@ -150,16 +150,37 @@
               </p>
             </div>
 
-            <SbCard
+            <div
               v-for="(place, placeIdx) in day.places" :key="`${dayIdx}-${placeIdx}`"
-              :name="place.name"
-              :in-board="true"
-              :start="place.start"
-              :end="place.end"
-              @update-time="(s, e) => updateTime(dayIdx, placeIdx, s, e)"
-              @return-card="returnToSidebar(dayIdx, placeIdx)"
-              @drag-start="draggedItem = place.name; draggedFrom = { type: 'board', dayIdx, placeIdx }"
-            />
+              class="relative"
+              :data-touch-card="true"
+              :data-touch-day="dayIdx"
+              :data-touch-place="placeIdx"
+              @dragover.prevent="dragOverTarget = { dayIdx, placeIdx }"
+              @dragleave="dragOverTarget = null"
+            >
+              <!-- Drop indicator line -->
+              <div
+                v-if="(dragOverTarget?.dayIdx === dayIdx && dragOverTarget?.placeIdx === placeIdx && draggedFrom?.dayIdx !== placeIdx) || (touchOver?.dayIdx === dayIdx && touchOver?.placeIdx === placeIdx)"
+                class="absolute -top-1 left-2 right-2 h-0.5 rounded-full bg-teal-400 z-10"
+              />
+              <SbCard
+                :name="place.name"
+                :in-board="true"
+                :start="place.start"
+                :end="place.end"
+                :class="[touchDrag?.dayIdx === dayIdx && touchDrag?.placeIdx === placeIdx ? 'opacity-40 scale-95' : '', overlapMap[`${dayIdx}-${placeIdx}`] ? 'ring-2 ring-amber-400/70' : '']"
+                @update-time="(s, e) => updateTime(dayIdx, placeIdx, s, e)"
+                @return-card="returnToSidebar(dayIdx, placeIdx)"
+                @drag-start="draggedItem = place.name; draggedFrom = { type: 'board', dayIdx, placeIdx }"
+                @touch-drag-start="onTouchDragStart(dayIdx, placeIdx, $event)"
+              />
+              <!-- Overlap warning -->
+              <div v-if="overlapMap[`${dayIdx}-${placeIdx}`]" class="flex items-center gap-1 px-2 pt-1 pb-0.5 text-amber-400 text-[10px] font-medium">
+                <svg class="w-3 h-3 shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd"/></svg>
+                {{ t('sb_time_overlap') }}
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -185,11 +206,25 @@
         </div>
       </div>
     </Transition>
+
+  <!-- Scroll to top button -->
+  <Transition name="scroll-top">
+    <button
+      v-if="showScrollTop"
+      @click="scrollToTop"
+      class="fixed bottom-24 right-5 z-50 w-11 h-11 flex items-center justify-center rounded-full shadow-lg transition-all duration-200 hover:scale-110 active:scale-95 bg-teal-500 hover:bg-teal-400 dark:bg-teal-600 dark:hover:bg-teal-500 text-white"
+      aria-label="Scroll to top"
+    >
+      <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M5 15l7-7 7 7"/>
+      </svg>
+    </button>
+  </Transition>
   </div>
 </template>
 
 <script setup>
-import { ref, computed, watch, onMounted } from 'vue'
+import { ref, computed, watch, onMounted, onUnmounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { RouterLink } from 'vue-router'
 import { useAppStore } from '../stores/useAppStore.js'
@@ -229,6 +264,12 @@ const filteredSidebarPlaces = computed(() => {
 
 const draggedItem = ref(null)
 const draggedFrom = ref(null)
+const dragOverTarget = ref(null) // { dayIdx, placeIdx }
+
+// Touch drag state
+const touchDrag = ref(null)   // { dayIdx, placeIdx }
+const touchOver = ref(null)   // { dayIdx, placeIdx }
+let touchCloneEl = null
 
 const pickerOpen = ref(false)
 const pickerName = ref(null)
@@ -347,15 +388,37 @@ function getDisplayNameForToast(thaiName) {
 function onDropToDay(dayIdx, e) {
   if (!draggedItem.value) return
   const name = draggedItem.value
-  // If dragging from board → move (remove from source)
+  const toIdx = dragOverTarget.value?.dayIdx === dayIdx ? dragOverTarget.value.placeIdx : null
+
   if (draggedFrom.value?.type === 'board') {
     const { dayIdx: fromDay, placeIdx: fromPlace } = draggedFrom.value
-    days.value[fromDay].places.splice(fromPlace, 1)
+    // Reorder within same day
+    if (fromDay === dayIdx && toIdx !== null && toIdx !== fromPlace) {
+      const places = days.value[dayIdx].places
+      const [item] = places.splice(fromPlace, 1)
+      const insertAt = toIdx > fromPlace ? toIdx - 1 : toIdx
+      places.splice(insertAt, 0, item)
+    } else if (fromDay !== dayIdx) {
+      // Move to different day
+      const place = days.value[fromDay].places.splice(fromPlace, 1)[0]
+      if (toIdx !== null) {
+        days.value[dayIdx].places.splice(toIdx, 0, place)
+      } else {
+        days.value[dayIdx].places.push(place)
+      }
+    }
+  } else {
+    // From sidebar → insert at position or push
+    const newPlace = { name, start: '09:00', end: '11:00' }
+    if (toIdx !== null) {
+      days.value[dayIdx].places.splice(toIdx, 0, newPlace)
+    } else {
+      days.value[dayIdx].places.push(newPlace)
+    }
   }
-  // If dragging from sidebar → copy (leave sidebar intact)
-  days.value[dayIdx].places.push({ name, start: '09:00', end: '11:00' })
   draggedItem.value = null
   draggedFrom.value = null
+  dragOverTarget.value = null
   saveBoard()
 }
 
@@ -369,6 +432,97 @@ function onDropToSidebar(e) {
   }
   draggedItem.value = null
   draggedFrom.value = null
+}
+
+// Time overlap detection
+function toMin(t) { const [h,m]=t.split(':').map(Number); return h*60+m }
+const overlapMap = computed(() => {
+  const result = {}
+  days.value.forEach((day, di) => {
+    const places = day.places
+    for (let i = 0; i < places.length; i++) {
+      for (let j = i + 1; j < places.length; j++) {
+        const aS = toMin(places[i].start), aE = toMin(places[i].end)
+        const bS = toMin(places[j].start), bE = toMin(places[j].end)
+        if (aS < bE && bS < aE) {
+          result[`${di}-${i}`] = true
+          result[`${di}-${j}`] = true
+        }
+      }
+    }
+  })
+  return result
+})
+function onTouchDragStart(dayIdx, placeIdx, e) {
+  e.preventDefault()
+  touchDrag.value = { dayIdx, placeIdx }
+  touchOver.value = null
+
+  // Create floating clone
+  const cardEl = e.target.closest('.sb-card')
+  if (cardEl) {
+    const rect = cardEl.getBoundingClientRect()
+    touchCloneEl = cardEl.cloneNode(true)
+    touchCloneEl.style.cssText = `
+      position:fixed; z-index:9999; pointer-events:none; opacity:0.85;
+      width:${rect.width}px; left:${rect.left}px; top:${rect.top}px;
+      transition:none; box-shadow:0 8px 30px rgba(0,0,0,0.25);
+      border-radius:1rem; transform:scale(1.03);
+    `
+    document.body.appendChild(touchCloneEl)
+  }
+
+  document.addEventListener('touchmove', onTouchMove, { passive: false })
+  document.addEventListener('touchend', onTouchEnd)
+}
+
+function onTouchMove(e) {
+  e.preventDefault()
+  if (!touchDrag.value || !touchCloneEl) return
+  const t = e.touches[0]
+
+  // Move clone
+  touchCloneEl.style.left = `${t.clientX - touchCloneEl.offsetWidth / 2}px`
+  touchCloneEl.style.top  = `${t.clientY - touchCloneEl.offsetHeight / 2}px`
+
+  // Find card under finger (hide clone temporarily)
+  touchCloneEl.style.display = 'none'
+  const el = document.elementFromPoint(t.clientX, t.clientY)
+  touchCloneEl.style.display = ''
+
+  const cardWrapper = el?.closest('[data-touch-card]')
+  if (cardWrapper) {
+    touchOver.value = {
+      dayIdx:   parseInt(cardWrapper.dataset.touchDay),
+      placeIdx: parseInt(cardWrapper.dataset.touchPlace),
+    }
+  } else {
+    touchOver.value = null
+  }
+}
+
+function onTouchEnd() {
+  document.removeEventListener('touchmove', onTouchMove)
+  document.removeEventListener('touchend', onTouchEnd)
+
+  if (touchCloneEl) { touchCloneEl.remove(); touchCloneEl = null }
+
+  if (touchDrag.value && touchOver.value) {
+    const { dayIdx: fromDay, placeIdx: fromPlace } = touchDrag.value
+    const { dayIdx: toDay, placeIdx: toPlace }     = touchOver.value
+
+    if (!(fromDay === toDay && fromPlace === toPlace)) {
+      const fromPlaces = days.value[fromDay].places
+      const [item] = fromPlaces.splice(fromPlace, 1)
+      const toPlaces = days.value[toDay].places
+      const insertAt = (fromDay === toDay && toPlace > fromPlace) ? toPlace - 1 : toPlace
+      toPlaces.splice(Math.max(0, insertAt), 0, item)
+      saveBoard()
+    }
+  }
+
+  touchDrag.value = null
+  touchOver.value = null
 }
 
 function saveBoard() {
@@ -390,8 +544,14 @@ function generateChecklist() {
   router.push('/checklist')
 }
 
+// Scroll to top
+const showScrollTop = ref(false)
+function onScroll() { showScrollTop.value = window.scrollY > 320 }
+function scrollToTop() { window.scrollTo({ top: 0, behavior: 'smooth' }) }
+
 // Init
 onMounted(() => {
+  window.addEventListener('scroll', onScroll, { passive: true })
   const saved = store.boardData
   if (saved && saved.days) {
     days.value = saved.days.map(d => ({ id: nextId++, subtitle: d.subtitle || '', places: d.places || [] }))
@@ -400,9 +560,12 @@ onMounted(() => {
     days.value.push({ id: nextId++, subtitle: t('sb_arrival'), places: [] })
   }
 })
+onUnmounted(() => window.removeEventListener('scroll', onScroll))
 </script>
 
 <style scoped>
 .modal-enter-active, .modal-leave-active { transition: all 0.2s ease; }
 .modal-enter-from, .modal-leave-to { opacity: 0; }
+.scroll-top-enter-active, .scroll-top-leave-active { transition: opacity 0.25s ease, transform 0.25s ease; }
+.scroll-top-enter-from, .scroll-top-leave-to { opacity: 0; transform: translateY(12px) scale(0.9); }
 </style>

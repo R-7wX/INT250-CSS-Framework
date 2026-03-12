@@ -173,6 +173,7 @@ export const I18N = {
   // Downloaded plan strings
   plan_title:    {th:'แผนการเดินทาง',      en:'Travel Plan',      zh:'旅行计划',  es:'Plan de Viaje',ar:'خطة السفر',  fr:'Plan de voyage'},
   plan_by:       {th:'สร้างด้วย Travelaroha',en:'Created with Travelaroha',zh:'由 Travelaroha 创建',es:'Creado con Travelaroha',ar:'أُنشئ بواسطة Travelaroha',fr:'Créé avec Travelaroha'},
+  sb_time_overlap: {th:'เวลาซ้ำกับสถานที่อื่น', en:'Time overlaps with another place', zh:'时间与其他地点重叠', es:'Horario se superpone', ar:'يتداخل الوقت مع مكان آخر', fr:'Horaire en conflit'},
   plan_itinerary:{th:'📅 ตารางการเดินทาง', en:'📅 Itinerary',     zh:'📅 行程安排',es:'📅 Itinerario',ar:'📅 جدول الرحلة',fr:'📅 Itinéraire'},
   plan_packing:  {th:'🧳 Packing Checklist',en:'🧳 Packing Checklist',zh:'🧳 行李清单',es:'🧳 Lista de Equipaje',ar:'🧳 قائمة الأمتعة',fr:'🧳 Liste de bagages'},
   plan_no_places:{th:'ยังไม่มีสถานที่',    en:'No places yet',    zh:'暂无地点',  es:'Sin lugares',   ar:'لا توجد أماكن',fr:'Pas de lieux'},

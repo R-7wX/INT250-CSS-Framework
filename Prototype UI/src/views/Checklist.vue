@@ -10,7 +10,9 @@
     <div v-if="exportData && exportData.days?.length"
       class="glass-panel rounded-3xl border border-slate-200/60 dark:border-slate-700/60 p-5 shadow-sm mb-6"
     >
-      <h2 class="font-bold text-base mb-1 text-slate-700 dark:text-slate-300">{{ t('cl_itin') }}</h2>
+      <h2 class="font-bold text-base mb-1 text-slate-700 dark:text-slate-300">
+        {{ store.tripName ? '🗺️ ' + store.tripName : t('cl_itin') }}
+      </h2>
       <p class="text-xs text-slate-400 mb-4">{{ itin_meta }}</p>
 
       <div class="space-y-3">
@@ -311,7 +313,7 @@ function downloadPlan() {
 ${itineraryHtml}
 <div class="section-label">${t('plan_packing')}</div>
 ${packingHtml}
-<div class="footer">${t('plan_by')}</div>
+<div class="footer">${t('plan_by_pre')}<a href="https://travelaroha.space" target="_blank" style="color:#14b8a6;text-decoration:none;font-weight:600;">Travelaroha</a></div>
 </body></html>`
 
   const blob = new Blob([html], { type: 'text/html;charset=utf-8' })
