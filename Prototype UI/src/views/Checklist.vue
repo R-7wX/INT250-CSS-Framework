@@ -234,6 +234,8 @@ function startNewPlan() {
   store.clearBoard()
   store.clearExport()
   store.resetChecklist()
+  store.tripName = ''
+  store.travelDate = ''
   router.push('/storyboard')
 }
 
