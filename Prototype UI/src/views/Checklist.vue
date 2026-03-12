@@ -282,67 +282,53 @@ function downloadPlan() {
 <title>${docTitle}</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
 <style>
+  /* ── Default (Dark) ── */
   *{box-sizing:border-box;margin:0;padding:0}
-  body{font-family:'Inter',system-ui,sans-serif;padding:28px 20px;max-width:820px;margin:0 auto;min-height:100vh}
+  body{font-family:'Inter',system-ui,sans-serif;padding:28px 20px;max-width:820px;margin:0 auto;min-height:100vh;background:#0f172a;color:#e2e8f0}
   .hero{position:relative;overflow:hidden;background:linear-gradient(135deg,#134e4a 0%,#0d9488 50%,#0891b2 100%);border-radius:24px;padding:36px 32px;margin-bottom:32px}
   .hero::before{content:'';position:absolute;top:-40px;right:-40px;width:180px;height:180px;border-radius:50%;background:rgba(255,255,255,0.07)}
   .hero::after{content:'';position:absolute;bottom:-30px;left:60px;width:120px;height:120px;border-radius:50%;background:rgba(255,255,255,0.05)}
   .hero-emoji{font-size:2.4rem;margin-bottom:12px}
   .hero h1{font-size:2rem;font-weight:800;color:#fff;letter-spacing:-0.02em;margin-bottom:6px;position:relative;z-index:1}
   .hero .date{font-size:.9rem;color:rgba(255,255,255,0.7);font-weight:500;position:relative;z-index:1}
-  .section-label{font-size:1.1rem;font-weight:800;text-transform:uppercase;letter-spacing:.08em;margin:28px 0 14px;display:flex;align-items:center;gap:8px}
   .day-num{width:34px;height:34px;background:linear-gradient(135deg,#0d9488,#0891b2);color:#fff;border-radius:10px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:.82rem;flex-shrink:0}
-  .day-header{display:flex;align-items:center;gap:12px;padding:14px 18px;border-bottom-width:1px;border-bottom-style:solid}
+  .section-label{font-size:1.1rem;font-weight:800;text-transform:uppercase;letter-spacing:.08em;margin:28px 0 14px;display:flex;align-items:center;gap:8px;color:#94a3b8}
+  .day-card{border-radius:18px;margin-bottom:14px;overflow:hidden;border:1px solid;background:#1e293b;border-color:#334155}
+  .day-header{display:flex;align-items:center;gap:12px;padding:14px 18px;border-bottom-width:1px;border-bottom-style:solid;background:#273449;border-color:#334155}
+  .day-title{color:#e2e8f0;font-weight:700;font-size:.98rem}
   .places{padding:12px 16px}
-  .place-row{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 14px;border-radius:12px;border:1px solid;margin-bottom:8px}
+  .place-row{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 14px;border-radius:12px;border:1px solid;margin-bottom:8px;background:#273449;border-color:#334155}
+  .place-name{font-weight:600;font-size:.9rem;color:#cbd5e1}
   .place-time{font-size:.8rem;font-weight:700;color:#2dd4bf;background:rgba(45,212,191,.12);padding:4px 10px;border-radius:8px;white-space:nowrap}
-  .day-card{border-radius:18px;margin-bottom:14px;overflow:hidden;border:1px solid}
-  .section{border-radius:18px;margin-bottom:14px;padding:20px;border:1px solid}
+  .section{border-radius:18px;margin-bottom:14px;padding:20px;border:1px solid;background:#1e293b;border-color:#334155}
   .section-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
-  .section-title{font-size:1rem;font-weight:700}
+  .section-title{font-size:1rem;font-weight:700;color:#e2e8f0}
   .badge{background:#0d9488;color:#fff;font-size:.75rem;font-weight:700;padding:3px 10px;border-radius:20px}
-  .progress-wrap{height:5px;border-radius:9px;margin-bottom:14px;overflow:hidden}
+  .progress-wrap{height:5px;border-radius:9px;margin-bottom:14px;overflow:hidden;background:#334155}
   .progress-bar{height:100%;background:linear-gradient(90deg,#0d9488,#2dd4bf);border-radius:9px}
   .items{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:8px}
-  .item{display:flex;align-items:center;gap:9px;padding:9px 12px;border-radius:11px;border:1px solid;font-size:.86rem}
-  .checkbox{width:17px;height:17px;border-radius:5px;border:1.5px solid;display:flex;align-items:center;justify-content:center;font-size:.65rem;font-weight:800;color:#0d9488;flex-shrink:0}
+  .item{display:flex;align-items:center;gap:9px;padding:9px 12px;border-radius:11px;border:1px solid;font-size:.86rem;background:#273449;border-color:#334155;color:#94a3b8}
+  .item.done{border-color:#0d948840;color:#64748b;text-decoration:line-through;background:#1a2a2a}
+  .checkbox{width:17px;height:17px;border-radius:5px;border:1.5px solid;display:flex;align-items:center;justify-content:center;font-size:.65rem;font-weight:800;color:#0d9488;flex-shrink:0;border-color:#475569}
   .item.done .checkbox{background:#0d9488;color:#fff;border-color:#0d9488}
-  .footer{margin-top:36px;text-align:center;font-size:.78rem;padding-top:20px;border-top:1px solid}
+  .footer{margin-top:36px;text-align:center;font-size:.78rem;padding-top:20px;border-top:1px solid;color:#475569;border-color:#1e293b}
 
-  /* ── Light mode ── */
+  /* ── Light mode override ── */
   @media (prefers-color-scheme: light) {
     body{background:#f8fafc;color:#1e293b}
     .section-label{color:#64748b}
     .day-card{background:#fff;border-color:#e2e8f0}
     .day-header{background:#f1f5f9;border-color:#e2e8f0}
-    .day-title{color:#1e293b;font-weight:700;font-size:.98rem}
+    .day-title{color:#1e293b}
     .place-row{background:#f8fafc;border-color:#e2e8f0}
-    .place-name{font-weight:600;font-size:.9rem;color:#334155}
+    .place-name{color:#334155}
     .section{background:#fff;border-color:#e2e8f0}
     .section-title{color:#1e293b}
     .progress-wrap{background:#e2e8f0}
     .item{background:#f8fafc;border-color:#e2e8f0;color:#475569}
-    .item.done{border-color:#0d948830;color:#94a3b8;text-decoration:line-through;background:#f0fdf9}
+    .item.done{border-color:#0d948830;color:#94a3b8;background:#f0fdf9}
     .checkbox{border-color:#cbd5e1}
     .footer{color:#94a3b8;border-color:#e2e8f0}
-  }
-
-  /* ── Dark mode ── */
-  @media (prefers-color-scheme: dark) {
-    body{background:#0f172a;color:#e2e8f0}
-    .section-label{color:#94a3b8}
-    .day-card{background:#1e293b;border-color:#334155}
-    .day-header{background:#273449;border-color:#334155}
-    .day-title{color:#e2e8f0;font-weight:700;font-size:.98rem}
-    .place-row{background:#273449;border-color:#334155}
-    .place-name{font-weight:600;font-size:.9rem;color:#cbd5e1}
-    .section{background:#1e293b;border-color:#334155}
-    .section-title{color:#e2e8f0}
-    .progress-wrap{background:#334155}
-    .item{background:#273449;border-color:#334155;color:#94a3b8}
-    .item.done{border-color:#0d948840;color:#64748b;text-decoration:line-through;background:#1a2a2a}
-    .checkbox{border-color:#475569}
-    .footer{color:#475569;border-color:#1e293b}
   }
 </style>
 </head>
