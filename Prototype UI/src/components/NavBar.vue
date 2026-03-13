@@ -27,7 +27,7 @@
       <div class="flex items-center gap-2 shrink-0">
         <!-- Version badge -->
         <span class="hidden sm:inline-flex items-center px-2 py-0.5 rounded-md text-[10px] font-mono font-semibold bg-slate-100 dark:bg-slate-800 text-slate-400 dark:text-slate-500 select-none tracking-wide">
-          v0.2.0a
+          v0.2.1a
         </span>
 
         <!-- Theme toggle -->
