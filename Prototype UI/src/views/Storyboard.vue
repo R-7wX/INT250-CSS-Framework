@@ -123,6 +123,7 @@
               <input
                 v-model="day.subtitle"
                 :placeholder="t('sb_placeholder')"
+                @input="saveBoard"
                 class="bg-transparent border-none outline-none text-teal-600 dark:text-teal-400 font-bold text-lg w-40 min-w-0"
               />
               <span class="text-xs font-normal text-slate-400">{{ daySummary(day) }}</span>
