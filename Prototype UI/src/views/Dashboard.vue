@@ -28,12 +28,33 @@
               </template>
             </div>
           </div>
-          <select
-            v-model="selectedKey"
-            class="bg-white/20 backdrop-blur-md border border-white/30 text-white rounded-xl px-3 py-2 text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-white/50"
-          >
-            <option v-for="(_, k) in countryData" :key="k" :value="k" class="text-slate-800">{{ countryData[k].badge }}</option>
-          </select>
+          <!-- Custom country dropdown -->
+          <div class="relative">
+            <button
+              ref="countryBtnRef"
+              @click.stop="toggleCountryDrop"
+              class="flex items-center gap-2 bg-white/20 backdrop-blur-md border border-white/30 text-white rounded-xl px-3 py-2 text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-white/50 min-w-[140px] justify-between"
+            >
+              <span>{{ current.badge }}</span>
+              <svg class="w-4 h-4 opacity-70 transition-transform" :class="countryDropOpen ? 'rotate-180' : ''" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+            </button>
+            <Teleport to="body">
+              <Transition name="drop-fade">
+                <div
+                  v-if="countryDropOpen"
+                  :style="countryDropStyle"
+                  class="fixed w-52 max-h-72 overflow-y-auto rounded-2xl shadow-2xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 z-[9999] py-1"
+                >
+                  <button
+                    v-for="(_, k) in countryData" :key="k"
+                    @click.stop="selectedKey = k; countryDropOpen = false"
+                    class="w-full text-left px-3 py-2 text-sm font-medium hover:bg-teal-50 dark:hover:bg-teal-900/30 text-slate-800 dark:text-slate-200 transition-colors"
+                    :class="selectedKey === k ? 'bg-teal-100 dark:bg-teal-900/50 text-teal-700 dark:text-teal-300 font-semibold' : ''"
+                  >{{ countryData[k].badge }}</button>
+                </div>
+              </Transition>
+            </Teleport>
+          </div>
         </div>
       </div>
     </div>
@@ -58,12 +79,32 @@
           />
           <span class="px-3 py-2 bg-slate-100 dark:bg-slate-800 rounded-xl text-sm font-semibold text-slate-600 dark:text-slate-300">{{ current.currency }}</span>
           <span class="py-2 text-slate-400 text-sm">→</span>
-          <select
-            v-model="targetCurrency"
-            class="flex-1 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-teal-400"
-          >
-            <option v-for="cur in currencies" :key="cur">{{ cur }}</option>
-          </select>
+          <div class="relative flex-1">
+            <button
+              ref="currencyBtnRef"
+              @click.stop="toggleCurrencyDrop"
+              class="w-full flex items-center justify-between gap-1 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 px-3 py-2 text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-teal-400"
+            >
+              <span>{{ targetCurrency }}</span>
+              <svg class="w-4 h-4 opacity-50 transition-transform shrink-0" :class="currencyDropOpen ? 'rotate-180' : ''" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+            </button>
+            <Teleport to="body">
+              <Transition name="drop-fade">
+                <div
+                  v-if="currencyDropOpen"
+                  :style="currencyDropStyle"
+                  class="fixed w-36 max-h-64 overflow-y-auto rounded-2xl shadow-2xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 z-[9999] py-1"
+                >
+                  <button
+                    v-for="cur in currencies" :key="cur"
+                    @click.stop="targetCurrency = cur; currencyDropOpen = false"
+                    class="w-full text-left px-3 py-2 text-sm font-medium hover:bg-teal-50 dark:hover:bg-teal-900/30 text-slate-800 dark:text-slate-200 transition-colors"
+                    :class="targetCurrency === cur ? 'bg-teal-100 dark:bg-teal-900/50 text-teal-700 dark:text-teal-300 font-semibold' : ''"
+                  >{{ cur }}</button>
+                </div>
+              </Transition>
+            </Teleport>
+          </div>
         </div>
 
         <div class="bg-teal-50 dark:bg-teal-900/20 rounded-2xl p-4 mb-2">
@@ -122,12 +163,32 @@
               {{ t('db_flight') }}
             </div>
             <div class="flex items-center gap-2 flex-wrap">
-              <select
-                v-model="flightOrigin"
-                class="flex-1 min-w-[140px] rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-700 text-slate-700 dark:text-slate-200 px-2.5 py-1.5 text-xs font-semibold focus:outline-none focus:ring-2 focus:ring-teal-400"
-              >
-                <option v-for="o in FLIGHT_OPTIONS" :key="o.value" :value="o.value">{{ o.label }}</option>
-              </select>
+              <div class="relative flex-1 min-w-[140px]">
+                <button
+                  ref="flightBtnRef"
+                  @click.stop="toggleFlightDrop"
+                  class="w-full flex items-center justify-between gap-1 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-700 text-slate-700 dark:text-slate-200 px-2.5 py-1.5 text-xs font-semibold focus:outline-none focus:ring-2 focus:ring-teal-400"
+                >
+                  <span>{{ flightOriginLabel }}</span>
+                  <svg class="w-3.5 h-3.5 opacity-60 transition-transform shrink-0" :class="flightDropOpen ? 'rotate-180' : ''" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                </button>
+                <Teleport to="body">
+                  <Transition name="drop-fade">
+                    <div
+                      v-if="flightDropOpen"
+                      :style="flightDropStyle"
+                      class="fixed w-52 max-h-64 overflow-y-auto rounded-2xl shadow-2xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 z-[9999] py-1"
+                    >
+                      <button
+                        v-for="o in FLIGHT_OPTIONS" :key="o.value"
+                        @click.stop="flightOrigin = o.value; flightDropOpen = false"
+                        class="w-full text-left px-3 py-2 text-xs font-medium hover:bg-teal-50 dark:hover:bg-teal-900/30 text-slate-800 dark:text-slate-200 transition-colors"
+                        :class="flightOrigin === o.value ? 'bg-teal-100 dark:bg-teal-900/50 text-teal-700 dark:text-teal-300 font-semibold' : ''"
+                      >{{ o.label }}</button>
+                    </div>
+                  </Transition>
+                </Teleport>
+              </div>
               <span class="text-slate-400 text-xs">→</span>
               <span class="font-extrabold text-sm text-teal-600 dark:text-teal-400">{{ flightTime }}</span>
             </div>
@@ -205,7 +266,7 @@
 </template>
 
 <script setup>
-import { ref, computed, watch, onMounted } from 'vue'
+import { ref, computed, watch, onMounted, onUnmounted } from 'vue'
 import { useI18n } from '../composables/useI18n.js'
 import { DB_COUNTRIES } from '../data/countries.js'
 
@@ -256,6 +317,11 @@ const FLIGHT_OPTIONS = [
   {value:'BOM', label:'🇮🇳 Mumbai (BOM)'},
   {value:'HKG', label:'🇭🇰 Hong Kong (HKG)'},
   {value:'PEK', label:'🇨🇳 Beijing (PEK)'},
+  {value:'ATH', label:'🇬🇷 Athens (ATH)'},
+  {value:'LIS', label:'🇵🇹 Lisbon (LIS)'},
+  {value:'MEX', label:'🇲🇽 Mexico City (MEX)'},
+  {value:'CMN', label:'🇲🇦 Casablanca (CMN)'},
+  {value:'AMM', label:'🇯🇴 Amman (AMM)'},
 ]
 
 const FLIGHT_TIMES = {
@@ -274,6 +340,11 @@ const FLIGHT_TIMES = {
   BOM: {Japan:'~8.5h',France:'~9h',Thailand:'~3.5h',SouthKorea:'~8.5h',USA:'~16h',UK:'~9h',Italy:'~8.5h',Switzerland:'~8.5h',Taiwan:'~5h',UAE:'~3h',Singapore:'~4h',Vietnam:'~5h',Maldives:'~2h',Australia:'~12h',China:'~5.5h',Germany:'~9h',India:'local',Indonesia:'~5h',Spain:'~10h',Turkey:'~6h',Greece:'~6.5h',Portugal:'~11h',Mexico:'~18h',Morocco:'~9h',Jordan:'~4h'},
   HKG: {Japan:'~4h',France:'~12h',Thailand:'~2.5h',SouthKorea:'~3.5h',USA:'~15h',UK:'~12h',Italy:'~12h',Switzerland:'~12h',Taiwan:'~1.5h',UAE:'~8h',Singapore:'~3.5h',Vietnam:'~2h',Maldives:'~6h',Australia:'~9h',China:'~3h',Germany:'~11.5h',India:'~5h',Indonesia:'~4h',Spain:'~13h',Turkey:'~11h',Greece:'~12h',Portugal:'~14h',Mexico:'~18h',Morocco:'~13h',Jordan:'~9.5h'},
   PEK: {Japan:'~3h',France:'~10.5h',Thailand:'~4.5h',SouthKorea:'~1.5h',USA:'~13h',UK:'~10h',Italy:'~10h',Switzerland:'~10h',Taiwan:'~3h',UAE:'~8.5h',Singapore:'~5h',Vietnam:'~3.5h',Maldives:'~7h',Australia:'~11h',China:'local',Germany:'~10h',India:'~5h',Indonesia:'~6h',Spain:'~11h',Turkey:'~9.5h',Greece:'~10h',Portugal:'~12h',Mexico:'~16h',Morocco:'~11h',Jordan:'~8.5h'},
+  ATH: {Japan:'~12h',France:'~3h',Thailand:'~11h',SouthKorea:'~11h',USA:'~11h',UK:'~3.5h',Italy:'~2h',Switzerland:'~3h',Taiwan:'~12h',UAE:'~4h',Singapore:'~12h',Vietnam:'~11h',Maldives:'~9h',Australia:'~20h',China:'~10h',Germany:'~3h',India:'~6.5h',Indonesia:'~13h',Spain:'~3.5h',Turkey:'~1.5h',Greece:'local',Portugal:'~4h',Mexico:'~13h',Morocco:'~4.5h',Jordan:'~3h'},
+  LIS: {Japan:'~14h',France:'~2.5h',Thailand:'~13h',SouthKorea:'~13h',USA:'~8h',UK:'~2.5h',Italy:'~3h',Switzerland:'~3h',Taiwan:'~14h',UAE:'~8h',Singapore:'~14h',Vietnam:'~14h',Maldives:'~12h',Australia:'~24h',China:'~12h',Germany:'~3h',India:'~11h',Indonesia:'~15h',Spain:'~1.5h',Turkey:'~4h',Greece:'~4h',Portugal:'local',Mexico:'~10.5h',Morocco:'~3h',Jordan:'~5.5h'},
+  MEX: {Japan:'~15h',France:'~11.5h',Thailand:'~22h',SouthKorea:'~16h',USA:'~4.5h',UK:'~11h',Italy:'~13h',Switzerland:'~12.5h',Taiwan:'~18h',UAE:'~16h',Singapore:'~23h',Vietnam:'~23h',Maldives:'~22h',Australia:'~20h',China:'~16h',Germany:'~12h',India:'~19h',Indonesia:'~22h',Spain:'~12h',Turkey:'~13.5h',Greece:'~13h',Portugal:'~10.5h',Mexico:'local',Morocco:'~12.5h',Jordan:'~14.5h'},
+  CMN: {Japan:'~13h',France:'~3.5h',Thailand:'~11h',SouthKorea:'~13h',USA:'~8.5h',UK:'~3.5h',Italy:'~3h',Switzerland:'~3.5h',Taiwan:'~13h',UAE:'~7h',Singapore:'~13h',Vietnam:'~12h',Maldives:'~10h',Australia:'~22h',China:'~11h',Germany:'~3.5h',India:'~9h',Indonesia:'~14h',Spain:'~2h',Turkey:'~4.5h',Greece:'~4.5h',Portugal:'~3h',Mexico:'~12.5h',Morocco:'local',Jordan:'~5h'},
+  AMM: {Japan:'~10.5h',France:'~5h',Thailand:'~7h',SouthKorea:'~9.5h',USA:'~12h',UK:'~5h',Italy:'~3.5h',Switzerland:'~4h',Taiwan:'~9h',UAE:'~3h',Singapore:'~8h',Vietnam:'~7.5h',Maldives:'~6h',Australia:'~17h',China:'~8.5h',Germany:'~4.5h',India:'~4h',Indonesia:'~9h',Spain:'~5.5h',Turkey:'~2h',Greece:'~3h',Portugal:'~5.5h',Mexico:'~14.5h',Morocco:'~5h',Jordan:'local'},
 }
 
 const STATIC_USD_RATES = { USD:1,EUR:0.92,GBP:0.79,JPY:149.8,CHF:0.90,AUD:1.57,CAD:1.38,SGD:1.35,HKD:7.78,CNY:7.27,KRW:1360,TWD:32.5,THB:34.8,VND:25100,IDR:15900,MYR:4.70,INR:83.2,AED:3.673,TRY:32.0,MVR:15.42,MXN:17.15,MAD:10.05,JOD:0.71 }
@@ -286,6 +357,68 @@ function loadDB(key, def) {
 function saveDB(key, val) { try { localStorage.setItem(key, JSON.stringify(val)) } catch(e) {} }
 
 const selectedKey    = ref(loadDB(LS_DB + '_country', 'Japan'))
+const countryDropOpen  = ref(false)
+const flightDropOpen   = ref(false)
+const currencyDropOpen = ref(false)
+const countryBtnRef    = ref(null)
+const flightBtnRef     = ref(null)
+const currencyBtnRef   = ref(null)
+const countryDropStyle = ref({})
+const flightDropStyle  = ref({})
+const currencyDropStyle = ref({})
+
+function positionCountry() {
+  if (!countryBtnRef.value) return
+  const r = countryBtnRef.value.getBoundingClientRect()
+  const dropH = Math.min(288, Object.keys(countryData).length * 40)
+  const above = r.top > dropH + 8
+  countryDropStyle.value = above
+    ? { bottom: (window.innerHeight - r.top + 8) + 'px', right: (window.innerWidth - r.right) + 'px' }
+    : { top: (r.bottom + 8) + 'px', right: (window.innerWidth - r.right) + 'px' }
+}
+function positionFlight() {
+  if (!flightBtnRef.value) return
+  const r = flightBtnRef.value.getBoundingClientRect()
+  const dropH = Math.min(256, 20 * 32)
+  const above = r.bottom + dropH + 8 > window.innerHeight
+  flightDropStyle.value = above
+    ? { bottom: (window.innerHeight - r.top + 4) + 'px', left: r.left + 'px' }
+    : { top: (r.bottom + 4) + 'px', left: r.left + 'px' }
+}
+function positionCurrency() {
+  if (!currencyBtnRef.value) return
+  const r = currencyBtnRef.value.getBoundingClientRect()
+  const dropH = 256
+  const above = r.bottom + dropH + 8 > window.innerHeight
+  currencyDropStyle.value = above
+    ? { bottom: (window.innerHeight - r.top + 4) + 'px', left: r.left + 'px', width: r.width + 'px' }
+    : { top: (r.bottom + 4) + 'px', left: r.left + 'px', width: r.width + 'px' }
+}
+
+function toggleCountryDrop() {
+  countryDropOpen.value = !countryDropOpen.value
+  flightDropOpen.value = false
+  currencyDropOpen.value = false
+  if (countryDropOpen.value) positionCountry()
+}
+function toggleFlightDrop() {
+  flightDropOpen.value = !flightDropOpen.value
+  countryDropOpen.value = false
+  currencyDropOpen.value = false
+  if (flightDropOpen.value) positionFlight()
+}
+function toggleCurrencyDrop() {
+  currencyDropOpen.value = !currencyDropOpen.value
+  countryDropOpen.value = false
+  flightDropOpen.value = false
+  if (currencyDropOpen.value) positionCurrency()
+}
+
+function onScrollResize() {
+  if (countryDropOpen.value)  positionCountry()
+  if (flightDropOpen.value)   positionFlight()
+  if (currencyDropOpen.value) positionCurrency()
+}
 const rateAmount     = ref(loadDB(LS_DB + '_rateamt', 1))
 const targetCurrency = ref(loadDB(LS_DB + '_currency', 'THB'))
 const rateResult  = ref(0)
@@ -324,6 +457,17 @@ const current = computed(() => countryData[selectedKey.value])
 // Preload all country images so switching is instant
 onMounted(() => {
   Object.values(countryData).forEach(c => { const i = new Image(); i.src = c.img })
+  document.addEventListener('click', () => {
+    countryDropOpen.value = false
+    flightDropOpen.value = false
+    currencyDropOpen.value = false
+  })
+  window.addEventListener('scroll', onScrollResize, true)
+  window.addEventListener('resize', onScrollResize)
+})
+onUnmounted(() => {
+  window.removeEventListener('scroll', onScrollResize, true)
+  window.removeEventListener('resize', onScrollResize)
 })
 const currentI18n = computed(() => {
   const c = DB_COUNTRIES[selectedKey.value]
@@ -582,4 +726,10 @@ watch(selectedKey, () => fetchWeather(), { immediate: true })
 .img-fade-leave-active { transition: opacity 0.2s ease; position: absolute; inset: 0; }
 .img-fade-enter-from   { opacity: 0; }
 .img-fade-leave-to     { opacity: 0; }
+
+/* Custom dropdown fade */
+.drop-fade-enter-active { transition: opacity 0.15s ease, transform 0.15s ease; }
+.drop-fade-leave-active { transition: opacity 0.1s ease, transform 0.1s ease; }
+.drop-fade-enter-from   { opacity: 0; transform: translateY(4px); }
+.drop-fade-leave-to     { opacity: 0; transform: translateY(4px); }
 </style>
