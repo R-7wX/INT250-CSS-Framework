@@ -33,8 +33,14 @@
             </p>
           </div>
 
+          <!-- Keyboard hint -->
+          <div class="flex justify-center gap-4 pb-1 text-[10px] text-slate-300 dark:text-slate-600 font-mono select-none">
+            <span>Enter → {{ store.confirmModal.confirmLabel }}</span>
+            <span>Esc → {{ store.confirmModal.cancelLabel }}</span>
+          </div>
+
           <!-- Buttons -->
-          <div class="flex gap-3 px-6 py-5">
+          <div class="flex gap-3 px-6 py-4">
             <button @click="cancel"
               class="flex-1 py-2.5 rounded-2xl border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 text-sm font-semibold hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors"
             >{{ store.confirmModal.cancelLabel }}</button>
@@ -52,6 +58,7 @@
 </template>
 
 <script setup>
+import { onMounted, onUnmounted } from 'vue'
 import { useAppStore } from '../stores/useAppStore.js'
 const store = useAppStore()
 
@@ -62,6 +69,14 @@ function confirm() {
 function cancel() {
   store.closeConfirm()
 }
+
+function onKey(e) {
+  if (!store.confirmModal.open) return
+  if (e.key === 'Enter')  { e.preventDefault(); confirm() }
+  if (e.key === 'Escape') { cancel() }
+}
+onMounted(()   => document.addEventListener('keydown', onKey))
+onUnmounted(() => document.removeEventListener('keydown', onKey))
 </script>
 
 <style scoped>

@@ -27,12 +27,26 @@
       <div class="flex items-center gap-2 shrink-0">
         <!-- Version badge -->
         <span class="hidden sm:inline-flex items-center px-2 py-0.5 rounded-md text-[10px] font-mono font-semibold bg-slate-100 dark:bg-slate-800 text-slate-400 dark:text-slate-500 select-none tracking-wide">
-          v0.2.1a
+          v0.2.2a
         </span>
+
+        <!-- Help button (re-triggers onboarding) -->
+        <button
+          @click.stop="openHelp"
+          class="flex p-2 rounded-xl text-slate-400 dark:text-slate-500 hover:text-teal-600 dark:hover:text-teal-400 hover:bg-teal-50 dark:hover:bg-teal-900/20 transition-colors"
+          :title="t('nav_help')"
+          aria-label="Help"
+        >
+          <svg class="w-4 h-4 sm:w-4 sm:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5">
+            <circle cx="12" cy="12" r="10"/>
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3"/>
+            <line x1="12" y1="17" x2="12.01" y2="17" stroke-width="3" stroke-linecap="round"/>
+          </svg>
+        </button>
 
         <!-- Theme toggle -->
         <button
-          @click="store.dark = !store.dark"
+          @click="e => store.toggleDark(e)"
           class="p-2 rounded-xl text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
           :title="t('mob_theme')"
         >
@@ -44,7 +58,7 @@
           </svg>
         </button>
 
-        <!-- Lang switcher -->
+        <!-- Theme toggle -->
         <div class="relative" ref="langRef">
           <button
             @click="open = !open"
@@ -118,6 +132,10 @@ function setLang(code) {
   store.lang = code
   document.documentElement.dir = LANGS[code].dir
   open.value = false
+}
+
+function openHelp() {
+  window.dispatchEvent(new CustomEvent('travelaroha:help'))
 }
 
 function onClickOutside(e) {

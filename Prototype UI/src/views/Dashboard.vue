@@ -11,7 +11,7 @@
       </div>
       <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
       <div class="absolute bottom-0 left-0 right-0 p-5 text-white">
-        <div class="flex flex-wrap items-end gap-3 justify-between">
+        <div class="flex flex-wrap items-end justify-between gap-3">
           <div>
             <div class="text-2xl font-extrabold">{{ current.icon }} {{ currentI18n?.name || current.name }}</div>
             <div class="flex items-center gap-2 text-sm text-white/70 mt-0.5 min-h-[1.4rem]">
@@ -23,12 +23,24 @@
                 <span>·</span>
                 <span>{{ weatherData.desc }}</span>
               </template>
+              <template v-else-if="weatherError">
+                <button
+                  @click="fetchWeather"
+                  class="flex items-center gap-1.5 text-amber-300/90 hover:text-amber-200 transition-colors text-xs font-medium"
+                  :title="t('db_weather_err')"
+                >
+                  <svg class="w-3.5 h-3.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/>
+                  </svg>
+                  <span>{{ t('db_weather_err') }}</span>
+                </button>
+              </template>
               <template v-else>
                 <span>{{ current.temp }} · {{ currentI18n?.desc || current.desc }}</span>
               </template>
             </div>
           </div>
-          <!-- Custom country dropdown -->
+          <!-- Country dropdown — bottom-right -->
           <div class="relative">
             <button
               ref="countryBtnRef"
@@ -60,6 +72,41 @@
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+      <!-- Local Time card -->
+      <div class="glass-panel rounded-3xl border border-slate-200/60 dark:border-slate-700/60 p-5 shadow-sm">
+        <h2 class="font-bold text-base mb-4 text-slate-700 dark:text-slate-300 flex items-center gap-2">
+          <svg class="w-5 h-5 text-teal-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
+          </svg>
+          {{ t('db_local_time') }}
+        </h2>
+        <div class="flex items-center justify-between gap-4">
+          <div>
+            <div class="text-4xl font-extrabold tabular-nums tracking-tight text-slate-800 dark:text-slate-100">
+              {{ localTime }}
+            </div>
+            <div class="mt-1 text-xs text-slate-400 dark:text-slate-500">{{ localDate }}</div>
+          </div>
+          <div class="relative w-16 h-16 shrink-0">
+            <svg viewBox="0 0 64 64" class="w-full h-full -rotate-90">
+              <circle cx="32" cy="32" r="28" fill="none" stroke="currentColor" class="text-slate-200 dark:text-slate-700" stroke-width="4"/>
+              <circle cx="32" cy="32" r="28" fill="none" stroke="currentColor" class="text-teal-500" stroke-width="4"
+                :stroke-dasharray="`${clockSecFrac * 175.93} 175.93`" stroke-linecap="round"/>
+            </svg>
+            <div class="absolute inset-0 flex items-center justify-center text-xs font-bold text-teal-500 dark:text-teal-400">
+              {{ localSeconds }}s
+            </div>
+          </div>
+        </div>
+        <div class="mt-3 flex items-center gap-2 text-xs text-slate-400 dark:text-slate-500">
+          <svg class="w-3.5 h-3.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+          <span>{{ currentI18n?.name || current.name }}</span>
+          <span class="text-slate-300 dark:text-slate-600">·</span>
+          <span>{{ localTZ }}</span>
+        </div>
+      </div>
+
       <!-- Exchange Rate card -->
       <div class="glass-panel rounded-3xl border border-slate-200/60 dark:border-slate-700/60 p-5 shadow-sm">
         <h2 class="font-bold text-base mb-4 text-slate-700 dark:text-slate-300 flex items-center gap-2">
@@ -134,7 +181,7 @@
       </div>
 
       <!-- Trip Summary -->
-      <div class="glass-panel rounded-3xl border border-slate-200/60 dark:border-slate-700/60 p-5 shadow-sm">
+      <div class="glass-panel rounded-3xl border border-slate-200/60 dark:border-slate-700/60 p-5 shadow-sm md:col-span-2">
         <h2 class="font-bold text-base mb-4 text-slate-700 dark:text-slate-300 flex items-center gap-2">
           <!-- Map/compass icon -->
           <svg class="w-5 h-5 text-teal-500 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -201,15 +248,15 @@
           </svg>
           {{ t('db_highlights') }}
         </div>
-        <ul class="space-y-1">
-          <li
-            v-for="h in (currentI18n?.highlights || current.highlights)"
+        <div class="grid grid-cols-2 gap-x-4 gap-y-0.5">
+          <div
+            v-for="(h, i) in (currentI18n?.highlights || current.highlights)"
             :key="h"
             class="flex items-start gap-2 text-sm text-slate-600 dark:text-slate-400"
           >
-            <span class="text-teal-500 mt-0.5">•</span> {{ h }}
-          </li>
-        </ul>
+            <span class="text-teal-500 mt-0.5 shrink-0">•</span> {{ h }}
+          </div>
+        </div>
       </div>
 
       <!-- Cost Calculator -->
@@ -263,6 +310,20 @@
       </div>
     </div>
   </div>
+
+  <!-- Scroll to top button -->
+  <Transition name="scroll-top">
+    <button
+      v-if="showScrollTop"
+      @click="scrollToTop"
+      class="fixed bottom-24 right-5 z-50 w-11 h-11 flex items-center justify-center rounded-full shadow-lg transition-all duration-200 hover:scale-110 active:scale-95 bg-teal-500 hover:bg-teal-400 dark:bg-teal-600 dark:hover:bg-teal-500 text-white"
+      aria-label="Scroll to top"
+    >
+      <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M5 15l7-7 7 7"/>
+      </svg>
+    </button>
+  </Transition>
 </template>
 
 <script setup>
@@ -274,31 +335,31 @@ const { t, lang } = useI18n()
 
 // ─── Country data (dashboard-specific with budget tiers) ─────────────────────
 const countryData = {
-  Japan:       { lat:35.6762,  lon:139.6503, name:'โตเกียว, ญี่ปุ่น',     temp:'15°C ⛅', desc:'อากาศเย็นสบาย', img:'https://images.unsplash.com/photo-1741851374582-79f4ac123442?q=90&w=1000&auto=format&fit=crop', currency:'JPY', rateUnit:100, rateLabel:'100 JPY', badge:'🇯🇵 Japan', days:'7',  budget:'35k–70k',    budgetLow:35000,  budgetHigh:70000,  lang:'Japanese',   season:'Mar–May', visa:'✅ Visa-free 30d', flight:'~7 hrs',   icon:'⛩️',  highlights:['Cherry blossoms at Ueno','Shibuya Crossing','Ramen','Tokyo Skytree'] },
-  France:      { lat:48.8566,  lon:2.3522,   name:'ปารีส, ฝรั่งเศส',      temp:'12°C 🌥️', desc:'มีเมฆ โรแมนติก',  img:'https://images.unsplash.com/photo-1553455427-c38fa28dc586?q=90&w=1000&auto=format&fit=crop', currency:'EUR', rateUnit:1,   rateLabel:'1 EUR',   badge:'🇫🇷 France', days:'6',  budget:'60k–120k',   budgetLow:60000,  budgetHigh:120000, lang:'French',     season:'Apr–Jun', visa:'🛂 Schengen', flight:'~11 hrs',  icon:'🗼',  highlights:['Eiffel Tower at night','Seine river cruise','The Louvre','Croissant'] },
-  Thailand:    { lat:13.7563,  lon:100.5018, name:'กรุงเทพฯ, ไทย',        temp:'33°C ☀️', desc:'ร้อน แดดแรง',      img:'https://images.unsplash.com/photo-1673449239841-06fb264eef2b?q=90&w=1000&auto=format&fit=crop', currency:'THB', rateUnit:1,   rateLabel:'1 THB',   badge:'🇹🇭 Thailand', days:'5', budget:'8k–20k',     budgetLow:8000,   budgetHigh:20000,  lang:'Thai',       season:'Nov–Feb', visa:'✅ No visa',   flight:'Domestic', icon:'🛕',  highlights:['Wat Phra Kaew','Mango sticky rice','Chatuchak Market','Chao Phraya boat'] },
-  SouthKorea:  { lat:37.5665,  lon:126.9780, name:'โซล, เกาหลีใต้',       temp:'8°C 🌬️',  desc:'ลมแรง หนาว',      img:'https://images.unsplash.com/photo-1546874177-9e664107314e?q=90&w=1000&auto=format&fit=crop', currency:'KRW', rateUnit:1000,rateLabel:'1,000 KRW',badge:'🇰🇷 South Korea', days:'6',budget:'30k–60k',   budgetLow:30000,  budgetHigh:60000,  lang:'Korean',     season:'Mar–May', visa:'✅ Visa-free 30d', flight:'~5.5 hrs', icon:'🏯',  highlights:['Itaewon','Gyeongbokgung Palace','K-BBQ','Myeongdong'] },
-  USA:         { lat:40.7128,  lon:-74.0060, name:'นิวยอร์ก, USA',         temp:'18°C 🌤️', desc:'อากาศดี',          img:'https://images.unsplash.com/photo-1485871981521-5b1fd3805eee?q=90&w=1000&auto=format&fit=crop', currency:'USD', rateUnit:1,   rateLabel:'1 USD',   badge:'🇺🇸 USA',    days:'10', budget:'80k–180k',   budgetLow:80000,  budgetHigh:180000, lang:'English',    season:'Apr–Jun', visa:'🛂 US Visa',   flight:'~17 hrs',  icon:'🗽',  highlights:['Central Park','Times Square','Brooklyn Bridge','NY Pizza'] },
-  UK:          { lat:51.5074,  lon:-0.1278,  name:'ลอนดอน, UK',            temp:'10°C 🌧️', desc:'มีฝน พกร่ม',      img:'https://images.unsplash.com/photo-1529655683826-aba9b3e77383?q=90&w=1000&auto=format&fit=crop', currency:'GBP', rateUnit:1,   rateLabel:'1 GBP',   badge:'🇬🇧 UK',     days:'7',  budget:'70k–150k',   budgetLow:70000,  budgetHigh:150000, lang:'English',    season:'Jun–Aug', visa:'🛂 UK Visa',   flight:'~12 hrs',  icon:'🎡',  highlights:['Buckingham Palace','Tate Modern','The Tube','Fish and chips'] },
-  Italy:       { lat:41.9028,  lon:12.4964,  name:'โรม, อิตาลี',           temp:'22°C ☀️', desc:'ท้องฟ้าโปร่ง',    img:'https://images.unsplash.com/photo-1555992828-ca4dbe41d294?q=90&w=1000&auto=format&fit=crop', currency:'EUR', rateUnit:1,   rateLabel:'1 EUR',   badge:'🇮🇹 Italy',  days:'8',  budget:'55k–110k',   budgetLow:55000,  budgetHigh:110000, lang:'Italian',    season:'Apr–Jun', visa:'🛂 Schengen', flight:'~11 hrs',  icon:'🏛️', highlights:['The Colosseum','Gelato','Trevi Fountain','St. Peter\'s'] },
-  Switzerland: { lat:47.3769,  lon:8.5417,   name:'ซูริค, Switzerland',    temp:'5°C 🌨️',  desc:'หนาวจัด หิมะ',    img:'https://images.unsplash.com/photo-1657137436880-e906b111b040?q=90&w=1000&auto=format&fit=crop', currency:'CHF', rateUnit:1,   rateLabel:'1 CHF',   badge:'🇨🇭 Switzerland', days:'6',budget:'90k–200k',  budgetLow:90000,  budgetHigh:200000, lang:'German/French',season:'Jun–Aug', visa:'🛂 Schengen', flight:'~11.5 hrs',icon:'🏔️', highlights:['Interlaken ski','Jungfraujoch','Fondue','Lake Geneva'] },
-  Taiwan:      { lat:25.0330,  lon:121.5654, name:'ไทเป, Taiwan',           temp:'25°C ⛅', desc:'อากาศอบอุ่น',     img:'https://images.unsplash.com/photo-1598935898639-81586f7d2129?q=90&w=1000&auto=format&fit=crop', currency:'TWD', rateUnit:100, rateLabel:'100 TWD', badge:'🇹🇼 Taiwan',  days:'5',  budget:'20k–45k',    budgetLow:20000,  budgetHigh:45000,  lang:'Mandarin',   season:'Oct–Dec', visa:'✅ Visa-free 30d', flight:'~3.5 hrs', icon:'🏮',  highlights:['Shilin Night Market','Taipei 101','Stinky tofu','Cycling'] },
-  Singapore:   { lat:1.3521,   lon:103.8198, name:'สิงคโปร์',               temp:'30°C 🌦️', desc:'ร้อนชื้น',        img:'https://images.unsplash.com/photo-1582511951111-56f95f789d79?q=90&w=1000&auto=format&fit=crop', currency:'SGD', rateUnit:1,   rateLabel:'1 SGD',   badge:'🇸🇬 Singapore', days:'4',budget:'30k–70k',   budgetLow:30000,  budgetHigh:70000,  lang:'English/Chinese',season:'Year-round',visa:'✅ Visa-free 30d', flight:'~2.5 hrs', icon:'🦁',  highlights:['Gardens by the Bay','Chinatown','Chilli crab','Marina Bay Sands'] },
-  Vietnam:     { lat:16.0544,  lon:108.2022, name:'ดานัง, Vietnam',         temp:'28°C ⛅', desc:'ลมทะเลเย็น',      img:'https://images.unsplash.com/photo-1722526933541-9a9cdfcdb28f?q=90&w=1000&auto=format&fit=crop', currency:'VND', rateUnit:10000,rateLabel:'10,000 VND',badge:'🇻🇳 Vietnam', days:'6', budget:'15k–35k',    budgetLow:15000,  budgetHigh:35000,  lang:'Vietnamese', season:'Jan–Apr', visa:'✅ Visa-free 45d', flight:'~2 hrs',   icon:'🏖️', highlights:['Ha Long Bay','Hoi An','Pho','Motorbike ride'] },
-  Maldives:    { lat:4.1755,   lon:73.5093,  name:'มาเล่, Maldives',        temp:'29°C 🏝️', desc:'แดดแรง ทะเลใส',  img:'https://images.unsplash.com/photo-1676082896999-9c7288fdb7f1?q=90&w=1000&auto=format&fit=crop', currency:'MVR', rateUnit:10,  rateLabel:'10 MVR',  badge:'🇲🇻 Maldives', days:'5',budget:'80k–200k',   budgetLow:80000,  budgetHigh:200000, lang:'Dhivehi/English',season:'Nov–Apr',visa:'✅ Visa on Arrival', flight:'~3 hrs',  icon:'🐠',  highlights:['Overwater bungalow','Whale shark snorkel','Bioluminescent beach','Dhoni cruise'] },
-  Australia:   { lat:-33.8688, lon:151.2093, name:'ซิดนีย์, Australia',    temp:'24°C ☀️', desc:'อากาศแจ่มใส',     img:'https://images.unsplash.com/photo-1528072164453-f4e8ef0d475a?q=90&w=1000&auto=format&fit=crop', currency:'AUD', rateUnit:1,   rateLabel:'1 AUD',   badge:'🇦🇺 Australia', days:'10',budget:'60k–130k',  budgetLow:60000,  budgetHigh:130000, lang:'English',    season:'Sep–Nov', visa:'🛂 ETA',       flight:'~9.5 hrs', icon:'🦘',  highlights:['Sydney Opera House','Bondi Beach','Blue Mountains','Kangaroos'] },
-  UAE:         { lat:25.2048,  lon:55.2708,  name:'ดูไบ, UAE',              temp:'35°C 🏜️', desc:'ร้อนแห้ง',        img:'https://images.unsplash.com/photo-1512453979798-5ea266f8880c?q=90&w=1000&auto=format&fit=crop', currency:'AED', rateUnit:10,  rateLabel:'10 AED',  badge:'🇦🇪 UAE',    days:'5',  budget:'50k–120k',   budgetLow:50000,  budgetHigh:120000, lang:'Arabic/English',season:'Nov–Apr',visa:'✅ Visa on Arrival', flight:'~6.5 hrs', icon:'🏙️', highlights:['Burj Khalifa','Dubai Mall','Dune bashing','Dubai Fountain'] },
-  China:       { lat:39.9042,  lon:116.4074, name:'ปักกิ่ง, จีน',           temp:'10°C 🌤️', desc:'อากาศดี แห้ง',    img:'https://images.unsplash.com/photo-1508804185872-d7badad00f7d?q=90&w=1000&auto=format&fit=crop', currency:'CNY', rateUnit:10,  rateLabel:'10 CNY',  badge:'🇨🇳 China',  days:'8',  budget:'25k–60k',    budgetLow:25000,  budgetHigh:60000,  lang:'Mandarin',   season:'Apr–Jun', visa:'🛂 China Visa', flight:'~4.5 hrs', icon:'🏯',  highlights:['Great Wall of China','Forbidden City','Peking Duck','Hutong walk'] },
-  Germany:     { lat:52.5200,  lon:13.4050,  name:'เบอร์ลิน, เยอรมนี',      temp:'8°C 🌥️',  desc:'เย็น มีเมฆ',      img:'https://images.unsplash.com/photo-1528728329032-2972f65dfb3f?q=90&w=1000&auto=format&fit=crop', currency:'EUR', rateUnit:1,   rateLabel:'1 EUR',   badge:'🇩🇪 Germany', days:'7', budget:'50k–110k',   budgetLow:50000,  budgetHigh:110000, lang:'German',     season:'Jun–Aug', visa:'🛂 Schengen', flight:'~11 hrs',  icon:'🍺',  highlights:['Brandenburg Gate','Black Forest','Bavarian castles','Oktoberfest','Berlin Wall'] },
-  India:       { lat:19.0760,  lon:72.8777,  name:'มุมไบ, อินเดีย',          temp:'32°C ☀️', desc:'ร้อนชื้น',         img:'https://images.unsplash.com/photo-1660145416818-b9a2b1a1f193?q=90&w=1000&auto=format&fit=crop', currency:'INR', rateUnit:100, rateLabel:'100 INR', badge:'🇮🇳 India',  days:'9',  budget:'15k–40k',    budgetLow:15000,  budgetHigh:40000,  lang:'Hindi/English',season:'Oct–Mar',visa:'✅ eVisa',      flight:'~3.5 hrs', icon:'🕌',  highlights:['Taj Mahal','Jaipur Pink City','Goa beaches','Street food tour'] },
-  Indonesia:   { lat:-8.3405,  lon:115.0920, name:'บาหลี, อินโดนีเซีย',     temp:'30°C 🌦️', desc:'ร้อนชื้น ฝนบาง',  img:'https://images.unsplash.com/photo-1639044859961-b8171c166c1e?q=90&w=1000&auto=format&fit=crop', currency:'IDR', rateUnit:10000,rateLabel:'10,000 IDR',badge:'🇮🇩 Indonesia', days:'7',budget:'15k–40k',   budgetLow:15000,  budgetHigh:40000,  lang:'Indonesian', season:'Apr–Oct', visa:'✅ Visa-free 30d', flight:'~3 hrs',   icon:'🌺',  highlights:['Ubud rice terraces','Tanah Lot','Komodo Island','Seminyak beach'] },
-  Spain:       { lat:40.4168,  lon:-3.7038,  name:'มาดริด, สเปน',            temp:'18°C ☀️', desc:'อากาศดี แจ่มใส',  img:'https://images.unsplash.com/photo-1539037116277-4db20889f2d4?q=90&w=1000&auto=format&fit=crop', currency:'EUR', rateUnit:1,   rateLabel:'1 EUR',   badge:'🇪🇸 Spain',  days:'8',  budget:'45k–100k',   budgetLow:45000,  budgetHigh:100000, lang:'Spanish',    season:'Apr–Jun', visa:'🛂 Schengen', flight:'~12 hrs',  icon:'💃',  highlights:['Sagrada Familia','Flamenco show','La Tomatina','Paella','Alhambra'] },
-  Turkey:      { lat:41.0082,  lon:28.9784,  name:'อิสตันบูล, ตุรกี',        temp:'15°C 🌤️', desc:'อากาศดี',          img:'https://images.unsplash.com/photo-1524231757912-21f4fe3a7200?q=90&w=1000&auto=format&fit=crop', currency:'TRY', rateUnit:100, rateLabel:'100 TRY', badge:'🇹🇷 Turkey',  days:'7',  budget:'20k–50k',    budgetLow:20000,  budgetHigh:50000,  lang:'Turkish',    season:'Apr–Jun', visa:'✅ eVisa',      flight:'~9 hrs',   icon:'🕌',  highlights:['Hagia Sophia','Cappadocia balloon','Grand Bazaar','Turkish tea','Bosphorus cruise'] },
-  Greece:      { lat:37.9838,  lon:23.7275,  name:'เอเธนส์, กรีซ',           temp:'20°C ☀️', desc:'อากาศดี แจ่มใส',  img:'https://images.unsplash.com/photo-1555993539-1732b0258235?q=90&w=1000&auto=format&fit=crop', currency:'EUR', rateUnit:1,   rateLabel:'1 EUR',   badge:'🇬🇷 Greece',  days:'7',  budget:'45k–100k',   budgetLow:45000,  budgetHigh:100000, lang:'Greek',      season:'Apr–Jun', visa:'🛂 Schengen', flight:'~11 hrs',  icon:'🏛️', highlights:['Acropolis of Athens','Santorini sunset','Greek moussaka','Island hopping','Parthenon'] },
-  Portugal:    { lat:38.7223,  lon:-9.1393,  name:'ลิสบอน, โปรตุเกส',        temp:'18°C 🌤️', desc:'อากาศอบอุ่น',     img:'https://images.unsplash.com/photo-1555881400-74d7acaacd8b?q=90&w=1000&auto=format&fit=crop', currency:'EUR', rateUnit:1,   rateLabel:'1 EUR',   badge:'🇵🇹 Portugal', days:'7', budget:'40k–90k',    budgetLow:40000,  budgetHigh:90000,  lang:'Portuguese', season:'Apr–Oct', visa:'🛂 Schengen', flight:'~13 hrs',  icon:'🐓', highlights:['Belém Tower','Sintra palaces','Pastéis de nata','Tram 28','Douro Valley wine'] },
-  Mexico:      { lat:19.4326,  lon:-99.1332, name:'เม็กซิโก ซิตี้, เม็กซิโก', temp:'22°C ⛅', desc:'อากาศอบอุ่น',     img:'https://images.unsplash.com/photo-1518638150340-f706e86654de?q=90&w=1000&auto=format&fit=crop', currency:'MXN', rateUnit:10,  rateLabel:'10 MXN',  badge:'🇲🇽 Mexico',  days:'9',  budget:'35k–80k',    budgetLow:35000,  budgetHigh:80000,  lang:'Spanish',    season:'Nov–Apr', visa:'🛂 Tourist Visa', flight:'~22 hrs', icon:'🌮', highlights:['Chichen Itza','Tulum ruins','Tacos al pastor','Lucha Libre','Cenote swimming'] },
-  Morocco:     { lat:31.6295,  lon:-7.9811,  name:'มาร์ราเกช, โมร็อกโก',      temp:'26°C ☀️', desc:'ร้อน แห้ง',       img:'https://images.unsplash.com/photo-1624805098931-098c0d918b34?q=90&w=1000&auto=format&fit=crop', currency:'MAD', rateUnit:10,  rateLabel:'10 MAD',  badge:'🇲🇦 Morocco',  days:'7', budget:'20k–50k',    budgetLow:20000,  budgetHigh:50000,  lang:'Arabic/French',season:'Mar–May', visa:'✅ Visa on Arrival', flight:'~11 hrs', icon:'🕌', highlights:['Djemaa el-Fna','Sahara Desert','Medina souks','Tajine','Atlas Mountains'] },
-  Jordan:      { lat:31.9454,  lon:35.9284,  name:'อัมมาน, จอร์แดน',          temp:'23°C ☀️', desc:'อากาศดี แห้ง',    img:'https://images.unsplash.com/photo-1680423141142-77b719842d9d?q=90&w=1000&auto=format&fit=crop', currency:'JOD', rateUnit:1,   rateLabel:'1 JOD',   badge:'🇯🇴 Jordan',  days:'6',  budget:'30k–70k',    budgetLow:30000,  budgetHigh:70000,  lang:'Arabic',     season:'Mar–May', visa:'✅ Visa on Arrival', flight:'~7 hrs',  icon:'🏜️', highlights:['Petra','Wadi Rum','Dead Sea float','Jerash ruins','Mansaf'] },
+  Japan:       { lat:35.6762,  lon:139.6503, name:'โตเกียว, ญี่ปุ่น',     temp:'15°C ⛅', desc:'อากาศเย็นสบาย', img:'https://images.unsplash.com/photo-1741851374582-79f4ac123442?q=90&w=1000&auto=format&fit=crop', currency:'JPY', rateUnit:100, rateLabel:'100 JPY', badge:'🇯🇵 Japan', days:'7',  budget:'35k–70k',    budgetLow:35000,  budgetHigh:70000,  lang:'Japanese',   season:'Mar–May', visa:'✅ Visa-free 30d', flight:'~7 hrs',   icon:'⛩️',  highlights:['Cherry blossoms at Ueno','Shibuya Crossing','Ramen','Tokyo Skytree','Senso-ji Temple','Akihabara electronics','Tsukiji fish market','Mt. Fuji day trip','Onsen in Hakone','Osaka street food','Arashiyama bamboo grove','Nara deer park','Hiroshima Peace Memorial','Shinkansen bullet train','Teamlab digital art'] },
+  France:      { lat:48.8566,  lon:2.3522,   name:'ปารีส, ฝรั่งเศส',      temp:'12°C 🌥️', desc:'มีเมฆ โรแมนติก',  img:'https://images.unsplash.com/photo-1553455427-c38fa28dc586?q=90&w=1000&auto=format&fit=crop', currency:'EUR', rateUnit:1,   rateLabel:'1 EUR',   badge:'🇫🇷 France', days:'6',  budget:'60k–120k',   budgetLow:60000,  budgetHigh:120000, lang:'French',     season:'Apr–Jun', visa:'🛂 Schengen', flight:'~11 hrs',  icon:'🗼',  highlights:['Eiffel Tower at night','Seine river cruise','The Louvre','Croissant','Versailles gardens','Montmartre street art','Nice Riviera beach','Bordeaux wine tasting','Mont Saint-Michel','Sainte-Chapelle glass','Musée d\'Orsay','Lyon gastronomy','Pont du Gard aqueduct','Dordogne châteaux','Alsace wine route'] },
+  Thailand:    { lat:13.7563,  lon:100.5018, name:'กรุงเทพฯ, ไทย',        temp:'33°C ☀️', desc:'ร้อน แดดแรง',      img:'https://images.unsplash.com/photo-1673449239841-06fb264eef2b?q=90&w=1000&auto=format&fit=crop', currency:'THB', rateUnit:1,   rateLabel:'1 THB',   badge:'🇹🇭 Thailand', days:'5', budget:'8k–20k',     budgetLow:8000,   budgetHigh:20000,  lang:'Thai',       season:'Nov–Feb', visa:'✅ No visa',   flight:'Domestic', icon:'🛕',  highlights:['Wat Phra Kaew','Mango sticky rice','Chatuchak Market','Chao Phraya boat','Floating market','Elephant sanctuary','Phi Phi Islands','Grand Palace tour','Yaowarat street food','Muay Thai match','Chiang Mai night bazaar','Krabi rock climbing','Pai valley road trip','Koh Lanta beach','Ayutthaya ruins'] },
+  SouthKorea:  { lat:37.5665,  lon:126.9780, name:'โซล, เกาหลีใต้',       temp:'8°C 🌬️',  desc:'ลมแรง หนาว',      img:'https://images.unsplash.com/photo-1546874177-9e664107314e?q=90&w=1000&auto=format&fit=crop', currency:'KRW', rateUnit:1000,rateLabel:'1,000 KRW',badge:'🇰🇷 South Korea', days:'6',budget:'30k–60k',   budgetLow:30000,  budgetHigh:60000,  lang:'Korean',     season:'Mar–May', visa:'✅ Visa-free 30d', flight:'~5.5 hrs', icon:'🏯',  highlights:['Itaewon','Gyeongbokgung Palace','K-BBQ','Myeongdong','Han River picnic','Namsan Seoul Tower','Insadong tea street','Jeju Island','Busan beach','BTS statue photo','Demilitarized Zone tour','Jeonju hanok village','Seoraksan hiking','Andong mask festival','Lotte World theme park'] },
+  USA:         { lat:40.7128,  lon:-74.0060, name:'นิวยอร์ก, USA',         temp:'18°C 🌤️', desc:'อากาศดี',          img:'https://images.unsplash.com/photo-1485871981521-5b1fd3805eee?q=90&w=1000&auto=format&fit=crop', currency:'USD', rateUnit:1,   rateLabel:'1 USD',   badge:'🇺🇸 USA',    days:'10', budget:'80k–180k',   budgetLow:80000,  budgetHigh:180000, lang:'English',    season:'Apr–Jun', visa:'🛂 US Visa',   flight:'~17 hrs',  icon:'🗽',  highlights:['Central Park','Times Square','Brooklyn Bridge','NY Pizza','Statue of Liberty','High Line Park','Grand Canyon','Hollywood Walk of Fame','Golden Gate Bridge','Niagara Falls','New Orleans jazz','Chicago deep dish','Las Vegas Strip','Yellowstone geysers','Miami Art Deco'] },
+  UK:          { lat:51.5074,  lon:-0.1278,  name:'ลอนดอน, UK',            temp:'10°C 🌧️', desc:'มีฝน พกร่ม',      img:'https://images.unsplash.com/photo-1529655683826-aba9b3e77383?q=90&w=1000&auto=format&fit=crop', currency:'GBP', rateUnit:1,   rateLabel:'1 GBP',   badge:'🇬🇧 UK',     days:'7',  budget:'70k–150k',   budgetLow:70000,  budgetHigh:150000, lang:'English',    season:'Jun–Aug', visa:'🛂 UK Visa',   flight:'~12 hrs',  icon:'🎡',  highlights:['Buckingham Palace','Tate Modern','The Tube','Fish and chips','Tower of London','Harry Potter studio','Edinburgh Castle','Cotswolds village','Stonehenge day trip','Camden Market','Oxford University tour','Lake District hike','Bath Roman spa','Glastonbury countryside','Scottish Highlands'] },
+  Italy:       { lat:41.9028,  lon:12.4964,  name:'โรม, อิตาลี',           temp:'22°C ☀️', desc:'ท้องฟ้าโปร่ง',    img:'https://images.unsplash.com/photo-1555992828-ca4dbe41d294?q=90&w=1000&auto=format&fit=crop', currency:'EUR', rateUnit:1,   rateLabel:'1 EUR',   badge:'🇮🇹 Italy',  days:'8',  budget:'55k–110k',   budgetLow:55000,  budgetHigh:110000, lang:'Italian',    season:'Apr–Jun', visa:'🛂 Schengen', flight:'~11 hrs',  icon:'🏛️', highlights:['The Colosseum','Gelato','Trevi Fountain','St. Peter\'s','Venice gondola','Florence Uffizi','Amalfi Coast drive','Pizza in Naples','Cinque Terre hike','Vatican Museums','Pompeii ruins','Lake Como villa','Siena Palio square','Trulli of Alberobello','Sicilian arancino'] },
+  Switzerland: { lat:47.3769,  lon:8.5417,   name:'ซูริค, Switzerland',    temp:'5°C 🌨️',  desc:'หนาวจัด หิมะ',    img:'https://images.unsplash.com/photo-1657137436880-e906b111b040?q=90&w=1000&auto=format&fit=crop', currency:'CHF', rateUnit:1,   rateLabel:'1 CHF',   badge:'🇨🇭 Switzerland', days:'6',budget:'90k–200k',  budgetLow:90000,  budgetHigh:200000, lang:'German/French',season:'Jun–Aug', visa:'🛂 Schengen', flight:'~11.5 hrs',icon:'🏔️', highlights:['Interlaken ski','Jungfraujoch','Fondue','Lake Geneva','Matterhorn view','Lucerne chapel bridge','Rhine Falls','Zermatt cable car','Swiss chocolate factory','Bern old town','Lausanne Olympic Museum','Grindelwald glacier','Appenzell countryside','St. Moritz resort','Geneva jet d\'eau'] },
+  Taiwan:      { lat:25.0330,  lon:121.5654, name:'ไทเป, Taiwan',           temp:'25°C ⛅', desc:'อากาศอบอุ่น',     img:'https://images.unsplash.com/photo-1598935898639-81586f7d2129?q=90&w=1000&auto=format&fit=crop', currency:'TWD', rateUnit:100, rateLabel:'100 TWD', badge:'🇹🇼 Taiwan',  days:'5',  budget:'20k–45k',    budgetLow:20000,  budgetHigh:45000,  lang:'Mandarin',   season:'Oct–Dec', visa:'✅ Visa-free 30d', flight:'~3.5 hrs', icon:'🏮',  highlights:['Shilin Night Market','Taipei 101','Stinky tofu','Cycling','Jiufen village','Sun Moon Lake','Taroko Gorge','Din Tai Fung dumplings','Tainan temples','Beitou hot spring','Yehliu geopark','Kenting surf beach','Alishan forest train','Lantern Festival','Wulai aboriginal village'] },
+  Singapore:   { lat:1.3521,   lon:103.8198, name:'สิงคโปร์',               temp:'30°C 🌦️', desc:'ร้อนชื้น',        img:'https://images.unsplash.com/photo-1582511951111-56f95f789d79?q=90&w=1000&auto=format&fit=crop', currency:'SGD', rateUnit:1,   rateLabel:'1 SGD',   badge:'🇸🇬 Singapore', days:'4',budget:'30k–70k',   budgetLow:30000,  budgetHigh:70000,  lang:'English/Chinese',season:'Year-round',visa:'✅ Visa-free 30d', flight:'~2.5 hrs', icon:'🦁',  highlights:['Gardens by the Bay','Chinatown','Chilli crab','Marina Bay Sands','Hawker centre feast','Universal Studios','Sentosa island','Little India','Clarke Quay nightlife','Night Safari','Haw Par Villa','Arab Street','Jewel Changi waterfall','Botanic Gardens','Southern Ridges walk'] },
+  Vietnam:     { lat:16.0544,  lon:108.2022, name:'ดานัง, Vietnam',         temp:'28°C ⛅', desc:'ลมทะเลเย็น',      img:'https://images.unsplash.com/photo-1722526933541-9a9cdfcdb28f?q=90&w=1000&auto=format&fit=crop', currency:'VND', rateUnit:10000,rateLabel:'10,000 VND',badge:'🇻🇳 Vietnam', days:'6', budget:'15k–35k',    budgetLow:15000,  budgetHigh:35000,  lang:'Vietnamese', season:'Jan–Apr', visa:'✅ Visa-free 45d', flight:'~2 hrs',   icon:'🏖️', highlights:['Ha Long Bay','Hoi An','Pho','Motorbike ride','Hanoi Old Quarter','Mekong Delta boat','Sapa rice terraces','Banh mi breakfast','War Remnants Museum','Cu Chi tunnels','Hue Imperial City','Da Nang beach','Ninh Binh limestone','Bun cha lunch','Egg coffee in Hanoi'] },
+  Maldives:    { lat:4.1755,   lon:73.5093,  name:'มาเล่, Maldives',        temp:'29°C 🏝️', desc:'แดดแรง ทะเลใส',  img:'https://images.unsplash.com/photo-1676082896999-9c7288fdb7f1?q=90&w=1000&auto=format&fit=crop', currency:'MVR', rateUnit:10,  rateLabel:'10 MVR',  badge:'🇲🇻 Maldives', days:'5',budget:'80k–200k',   budgetLow:80000,  budgetHigh:200000, lang:'Dhivehi/English',season:'Nov–Apr',visa:'✅ Visa on Arrival', flight:'~3 hrs',  icon:'🐠',  highlights:['Overwater bungalow','Whale shark snorkel','Bioluminescent beach','Dhoni cruise','Sunset dolphin watch','Coral reef snorkeling','Island hopping','Local island visit','Manta ray diving','Beach bonfire night','Underwater restaurant','Sandbank picnic','Fishing with locals','Seaplane transfer view','Spa on water deck'] },
+  Australia:   { lat:-33.8688, lon:151.2093, name:'ซิดนีย์, Australia',    temp:'24°C ☀️', desc:'อากาศแจ่มใส',     img:'https://images.unsplash.com/photo-1528072164453-f4e8ef0d475a?q=90&w=1000&auto=format&fit=crop', currency:'AUD', rateUnit:1,   rateLabel:'1 AUD',   badge:'🇦🇺 Australia', days:'10',budget:'60k–130k',  budgetLow:60000,  budgetHigh:130000, lang:'English',    season:'Sep–Nov', visa:'🛂 ETA',       flight:'~9.5 hrs', icon:'🦘',  highlights:['Sydney Opera House','Bondi Beach','Blue Mountains','Kangaroos','Great Barrier Reef','Melbourne laneways','Uluru sunrise','Great Ocean Road','Daintree Rainforest','Sydney Harbour cruise','Kakadu National Park','Fraser Island 4WD','Barossa Valley wine','Tasmanian wilderness','Whitsunday sailing'] },
+  UAE:         { lat:25.2048,  lon:55.2708,  name:'ดูไบ, UAE',              temp:'35°C 🏜️', desc:'ร้อนแห้ง',        img:'https://images.unsplash.com/photo-1512453979798-5ea266f8880c?q=90&w=1000&auto=format&fit=crop', currency:'AED', rateUnit:10,  rateLabel:'10 AED',  badge:'🇦🇪 UAE',    days:'5',  budget:'50k–120k',   budgetLow:50000,  budgetHigh:120000, lang:'Arabic/English',season:'Nov–Apr',visa:'✅ Visa on Arrival', flight:'~6.5 hrs', icon:'🏙️', highlights:['Burj Khalifa','Dubai Mall','Dune bashing','Dubai Fountain','Abra boat in Deira','Gold Souk shopping','Abu Dhabi mosque','Desert glamping','Sky Views Observatory','Old Dubai heritage walk','Louvre Abu Dhabi','Yas Island F1 circuit','Hatta mountain escape','Palm Jumeirah brunch','Dubai Frame landmark'] },
+  China:       { lat:39.9042,  lon:116.4074, name:'ปักกิ่ง, จีน',           temp:'10°C 🌤️', desc:'อากาศดี แห้ง',    img:'https://images.unsplash.com/photo-1508804185872-d7badad00f7d?q=90&w=1000&auto=format&fit=crop', currency:'CNY', rateUnit:10,  rateLabel:'10 CNY',  badge:'🇨🇳 China',  days:'8',  budget:'25k–60k',    budgetLow:25000,  budgetHigh:60000,  lang:'Mandarin',   season:'Apr–Jun', visa:'🛂 China Visa', flight:'~4.5 hrs', icon:'🏯',  highlights:['Great Wall of China','Forbidden City','Peking Duck','Hutong walk','Temple of Heaven','Summer Palace','Terracotta Army Xi\'an','Li River cruise','Panda base Chengdu','Zhangjiajie park','Shanghai Bund promenade','Guilin karst scenery','West Lake Hangzhou','Chengdu hotpot dinner','Leshan Giant Buddha'] },
+  Germany:     { lat:52.5200,  lon:13.4050,  name:'เบอร์ลิน, เยอรมนี',      temp:'8°C 🌥️',  desc:'เย็น มีเมฆ',      img:'https://images.unsplash.com/photo-1528728329032-2972f65dfb3f?q=90&w=1000&auto=format&fit=crop', currency:'EUR', rateUnit:1,   rateLabel:'1 EUR',   badge:'🇩🇪 Germany', days:'7', budget:'50k–110k',   budgetLow:50000,  budgetHigh:110000, lang:'German',     season:'Jun–Aug', visa:'🛂 Schengen', flight:'~11 hrs',  icon:'🍺',  highlights:['Brandenburg Gate','Black Forest','Bavarian castles','Oktoberfest','Berlin Wall','Cologne Cathedral','Neuschwanstein Castle','Hamburg harbour','Rhine Valley cruise','Dresden Zwinger','Munich Hofbräuhaus','Romantic Road drive','Heidelberg old town','Berlin street art','Nuremberg Christmas market'] },
+  India:       { lat:19.0760,  lon:72.8777,  name:'มุมไบ, อินเดีย',          temp:'32°C ☀️', desc:'ร้อนชื้น',         img:'https://images.unsplash.com/photo-1660145416818-b9a2b1a1f193?q=90&w=1000&auto=format&fit=crop', currency:'INR', rateUnit:100, rateLabel:'100 INR', badge:'🇮🇳 India',  days:'9',  budget:'15k–40k',    budgetLow:15000,  budgetHigh:40000,  lang:'Hindi/English',season:'Oct–Mar',visa:'✅ eVisa',      flight:'~3.5 hrs', icon:'🕌',  highlights:['Taj Mahal','Jaipur Pink City','Goa beaches','Street food tour','Varanasi ghats sunrise','Kerala backwaters','Amber Fort','Mumbai Dharavi tour','Darjeeling tea garden','Hampi ruins','Udaipur lake palace','Rishikesh yoga retreat','Ranthambore tiger safari','Mysore palace','Amritsar Golden Temple'] },
+  Indonesia:   { lat:-8.3405,  lon:115.0920, name:'บาหลี, อินโดนีเซีย',     temp:'30°C 🌦️', desc:'ร้อนชื้น ฝนบาง',  img:'https://images.unsplash.com/photo-1639044859961-b8171c166c1e?q=90&w=1000&auto=format&fit=crop', currency:'IDR', rateUnit:10000,rateLabel:'10,000 IDR',badge:'🇮🇩 Indonesia', days:'7',budget:'15k–40k',   budgetLow:15000,  budgetHigh:40000,  lang:'Indonesian', season:'Apr–Oct', visa:'✅ Visa-free 30d', flight:'~3 hrs',   icon:'🌺',  highlights:['Ubud rice terraces','Tanah Lot','Komodo Island','Seminyak beach','Borobudur temple','Bromo volcano sunrise','Gili Islands snorkel','Tegalalang swing','Kecak fire dance','Nusa Penida cliffs','Raja Ampat diving','Lombok waterfalls','Toraja funeral ceremony','Mentawai surf','Toba Lake Sumatra'] },
+  Spain:       { lat:40.4168,  lon:-3.7038,  name:'มาดริด, สเปน',            temp:'18°C ☀️', desc:'อากาศดี แจ่มใส',  img:'https://images.unsplash.com/photo-1539037116277-4db20889f2d4?q=90&w=1000&auto=format&fit=crop', currency:'EUR', rateUnit:1,   rateLabel:'1 EUR',   badge:'🇪🇸 Spain',  days:'8',  budget:'45k–100k',   budgetLow:45000,  budgetHigh:100000, lang:'Spanish',    season:'Apr–Jun', visa:'🛂 Schengen', flight:'~12 hrs',  icon:'💃',  highlights:['Sagrada Familia','Flamenco show','La Tomatina','Paella','Alhambra','La Boqueria market','Park Güell','San Sebastian pintxos','Seville cathedral','Camino de Santiago','Prado Museum','Toledo medieval city','Valencia City of Arts','Ronda cliff bridge','Ibiza sunset'] },
+  Turkey:      { lat:41.0082,  lon:28.9784,  name:'อิสตันบูล, ตุรกี',        temp:'15°C 🌤️', desc:'อากาศดี',          img:'https://images.unsplash.com/photo-1524231757912-21f4fe3a7200?q=90&w=1000&auto=format&fit=crop', currency:'TRY', rateUnit:100, rateLabel:'100 TRY', badge:'🇹🇷 Turkey',  days:'7',  budget:'20k–50k',    budgetLow:20000,  budgetHigh:50000,  lang:'Turkish',    season:'Apr–Jun', visa:'✅ eVisa',      flight:'~9 hrs',   icon:'🕌',  highlights:['Hagia Sophia','Cappadocia balloon','Grand Bazaar','Turkish tea','Bosphorus cruise','Pamukkale hot springs','Ephesus ruins','Antalya beach','Turkish hammam','Topkapi Palace','Whirling dervishes','Sumela monastery','Trabzon plateau','Bodrum castle','Gallipoli memorial'] },
+  Greece:      { lat:37.9838,  lon:23.7275,  name:'เอเธนส์, กรีซ',           temp:'20°C ☀️', desc:'อากาศดี แจ่มใส',  img:'https://images.unsplash.com/photo-1555993539-1732b0258235?q=90&w=1000&auto=format&fit=crop', currency:'EUR', rateUnit:1,   rateLabel:'1 EUR',   badge:'🇬🇷 Greece',  days:'7',  budget:'45k–100k',   budgetLow:45000,  budgetHigh:100000, lang:'Greek',      season:'Apr–Jun', visa:'🛂 Schengen', flight:'~11 hrs',  icon:'🏛️', highlights:['Acropolis of Athens','Santorini sunset','Greek moussaka','Island hopping','Parthenon','Mykonos beach club','Delphi Oracle','Rhodes medieval town','Meteora monasteries','Athens flea market','Corfu old town','Crete Samaria Gorge','Olympia ancient site','Thessaloniki food tour','Zakynthos shipwreck beach'] },
+  Portugal:    { lat:38.7223,  lon:-9.1393,  name:'ลิสบอน, โปรตุเกส',        temp:'18°C 🌤️', desc:'อากาศอบอุ่น',     img:'https://images.unsplash.com/photo-1555881400-74d7acaacd8b?q=90&w=1000&auto=format&fit=crop', currency:'EUR', rateUnit:1,   rateLabel:'1 EUR',   badge:'🇵🇹 Portugal', days:'7', budget:'40k–90k',    budgetLow:40000,  budgetHigh:90000,  lang:'Portuguese', season:'Apr–Oct', visa:'🛂 Schengen', flight:'~13 hrs',  icon:'🐓', highlights:['Belém Tower','Sintra palaces','Pastéis de nata','Tram 28','Douro Valley wine','Fado music night','Porto wine cellars','Algarve sea caves','Nazaré surf waves','Alfama sunset view','Évora Roman temple','Azores island hike','Madeira levada walk','Obidos walled town','Monsanto boulder village'] },
+  Mexico:      { lat:19.4326,  lon:-99.1332, name:'เม็กซิโก ซิตี้, เม็กซิโก', temp:'22°C ⛅', desc:'อากาศอบอุ่น',     img:'https://images.unsplash.com/photo-1518638150340-f706e86654de?q=90&w=1000&auto=format&fit=crop', currency:'MXN', rateUnit:10,  rateLabel:'10 MXN',  badge:'🇲🇽 Mexico',  days:'9',  budget:'35k–80k',    budgetLow:35000,  budgetHigh:80000,  lang:'Spanish',    season:'Nov–Apr', visa:'🛂 Tourist Visa', flight:'~22 hrs', icon:'🌮', highlights:['Chichen Itza','Tulum ruins','Tacos al pastor','Lucha Libre','Cenote swimming','Oaxaca mezcal tour','Day of the Dead','Mariachi in Garibaldi','Mexico City murals','Copper Canyon train','Palenque jungle ruins','Guanajuato mummy museum','Monarch butterfly reserve','Izamal yellow city','Huatulco bays'] },
+  Morocco:     { lat:31.6295,  lon:-7.9811,  name:'มาร์ราเกช, โมร็อกโก',      temp:'26°C ☀️', desc:'ร้อน แห้ง',       img:'https://images.unsplash.com/photo-1624805098931-098c0d918b34?q=90&w=1000&auto=format&fit=crop', currency:'MAD', rateUnit:10,  rateLabel:'10 MAD',  badge:'🇲🇦 Morocco',  days:'7', budget:'20k–50k',    budgetLow:20000,  budgetHigh:50000,  lang:'Arabic/French',season:'Mar–May', visa:'✅ Visa on Arrival', flight:'~11 hrs', icon:'🕌', highlights:['Djemaa el-Fna','Sahara Desert','Medina souks','Tajine','Atlas Mountains','Chefchaouen blue city','Fes tannery','Ouarzazate kasbahs','Essaouira port town','Hammam spa','Aït Benhaddou ksar','Dades Gorge drive','Merzouga camel ride','Rabat royal palace','Marrakech rooftop dining'] },
+  Jordan:      { lat:31.9454,  lon:35.9284,  name:'อัมมาน, จอร์แดน',          temp:'23°C ☀️', desc:'อากาศดี แห้ง',    img:'https://images.unsplash.com/photo-1680423141142-77b719842d9d?q=90&w=1000&auto=format&fit=crop', currency:'JOD', rateUnit:1,   rateLabel:'1 JOD',   badge:'🇯🇴 Jordan',  days:'6',  budget:'30k–70k',    budgetLow:30000,  budgetHigh:70000,  lang:'Arabic',     season:'Mar–May', visa:'✅ Visa on Arrival', flight:'~7 hrs',  icon:'🏜️', highlights:['Petra','Wadi Rum','Dead Sea float','Jerash ruins','Mansaf','Aqaba Red Sea diving','Baptism Site of Jesus','Ajloun forest castle','Madaba mosaic map','Dana Nature Reserve','Little Petra','Shobak crusader castle','Wadi Mujib canyon swim','Umm Qais hilltop view','Amman Roman Theatre'] },
 }
 
 const FLIGHT_OPTIONS = [
@@ -455,6 +516,61 @@ const flightOriginLabel = computed(() =>
 const current = computed(() => countryData[selectedKey.value])
 
 // Preload all country images so switching is instant
+// ── Local Time for selected country ─────────────────────────────────────
+const localTime     = ref('')
+const localDate     = ref('')
+const localSeconds  = ref(0)
+const localTZ       = ref('')
+const clockSecFrac  = ref(0)
+let   clockTimer    = null
+
+function updateClock() {
+  const c = current.value
+  if (!c?.lat) return
+  try {
+    // derive IANA timezone from lat/lon using Intl offset heuristic
+    // Use the timezone auto-detected by open-meteo (stored in weatherData) or guess from longitude
+    const tz = c.tz || guessTimezone(c.lon)
+    const now = new Date()
+    const dtf = new Intl.DateTimeFormat('en-US', {
+      timeZone: tz,
+      hour: '2-digit', minute: '2-digit', second: '2-digit',
+      hour12: false,
+    })
+    const dtfDate = new Intl.DateTimeFormat(lang.value === 'th' ? 'th-TH' : 'en-US', {
+      timeZone: tz,
+      weekday: 'short', month: 'short', day: 'numeric',
+    })
+    const parts = dtf.formatToParts(now)
+    const get   = type => parts.find(p => p.type === type)?.value || '00'
+    const hh = get('hour'), mm = get('minute'), ss = get('second')
+    localTime.value    = `${hh}:${mm}`
+    localSeconds.value = parseInt(ss)
+    clockSecFrac.value = parseInt(ss) / 60
+    localDate.value    = dtfDate.format(now)
+    localTZ.value      = tz.replace(/_/g, ' ')
+  } catch(e) {
+    localTime.value = '--:--'
+  }
+}
+
+function guessTimezone(lon) {
+  // rough mapping of lon → IANA tz (good enough for listed countries)
+  const tzMap = {
+    Japan: 'Asia/Tokyo', France: 'Europe/Paris', Thailand: 'Asia/Bangkok',
+    SouthKorea: 'Asia/Seoul', USA: 'America/New_York', UK: 'Europe/London',
+    Italy: 'Europe/Rome', Switzerland: 'Europe/Zurich', Taiwan: 'Asia/Taipei',
+    Singapore: 'Asia/Singapore', Vietnam: 'Asia/Ho_Chi_Minh',
+    Maldives: 'Indian/Maldives', Australia: 'Australia/Sydney',
+    China: 'Asia/Shanghai', Germany: 'Europe/Berlin', India: 'Asia/Kolkata',
+    Indonesia: 'Asia/Makassar', Spain: 'Europe/Madrid', Turkey: 'Europe/Istanbul',
+    Greece: 'Europe/Athens', Portugal: 'Europe/Lisbon', Mexico: 'America/Mexico_City',
+    Morocco: 'Africa/Casablanca', Jordan: 'Asia/Amman', UAE: 'Asia/Dubai',
+  }
+  return tzMap[selectedKey.value] || 'UTC'
+}
+// ────────────────────────────────────────────────────────────────────────
+
 onMounted(() => {
   Object.values(countryData).forEach(c => { const i = new Image(); i.src = c.img })
   document.addEventListener('click', () => {
@@ -464,22 +580,35 @@ onMounted(() => {
   })
   window.addEventListener('scroll', onScrollResize, true)
   window.addEventListener('resize', onScrollResize)
+  // Start clock
+  updateClock()
+  clockTimer = setInterval(updateClock, 1000)
+  window.addEventListener('scroll', onScrollTop, { passive: true })
 })
 onUnmounted(() => {
   window.removeEventListener('scroll', onScrollResize, true)
   window.removeEventListener('resize', onScrollResize)
+  window.removeEventListener('scroll', onScrollTop)
+  if (clockTimer) clearInterval(clockTimer)
 })
+
+const showScrollTop = ref(false)
+function onScrollTop() { showScrollTop.value = window.scrollY > 320 }
+function scrollToTop() { window.scrollTo({ top: 0, behavior: 'smooth' }) }
 const currentI18n = computed(() => {
   const c = DB_COUNTRIES[selectedKey.value]
   if (!c) return null
   const l = lang.value
+  const lH  = c.highlights?.[l]    || []
+  const enH = c.highlights?.['en'] || []
+  const mergedHighlights = lH.length >= enH.length ? lH : [...lH, ...enH.slice(lH.length)]
   return {
     name:       c.name?.[l]       || c.name?.['en'],
     desc:       c.desc?.[l]       || c.desc?.['en'],
     lang:       c.lang?.[l]       || c.lang?.['en'],
     season:     c.season?.[l]     || c.season?.['en'],
     flight:     c.flight?.[l]     || c.flight?.['en'],
-    highlights: c.highlights?.[l] || c.highlights?.['en'],
+    highlights: mergedHighlights,
   }
 })
 
@@ -670,6 +799,7 @@ function wmoInfo(code) {
 
 const weatherData   = ref(null)  // { temp, emoji, desc }
 const weatherLoading = ref(false)
+const weatherError   = ref(false)
 let   weatherCache  = {}
 
 async function fetchWeather() {
@@ -677,10 +807,18 @@ async function fetchWeather() {
   if (!c?.lat) return
   const key = selectedKey.value
   const cached = weatherCache[key]
-  if (cached && Date.now() - cached.ts < 600000) { weatherData.value = cached.data; return }
+  if (cached && Date.now() - cached.ts < 600000) {
+    // always re-derive desc from current language (cache may have old lang)
+    const info = wmoInfo(cached.data.code)
+    const l = lang.value
+    weatherData.value = { ...cached.data, desc: info[l] || info.en }
+    weatherError.value = false
+    return
+  }
 
   weatherLoading.value = true
   weatherData.value = null
+  weatherError.value = false
   try {
     const url = `https://api.open-meteo.com/v1/forecast?latitude=${c.lat}&longitude=${c.lon}&current=temperature_2m,weathercode&wind_speed_unit=kmh&timezone=auto`
     const res  = await fetch(url, { signal: AbortSignal.timeout(6000) })
@@ -692,26 +830,40 @@ async function fetchWeather() {
       temp:  Math.round(cur.temperature_2m),
       emoji: info.emoji,
       desc:  info[l] || info.en,
+      code:  cur.weathercode,
     }
     weatherCache[key] = { data, ts: Date.now() }
     weatherData.value = data
+    weatherError.value = false
   } catch(e) {
     weatherData.value = null
+    weatherError.value = true
   }
   weatherLoading.value = false
 }
 
-// Re-map desc when language changes (use cached temp/emoji)
+// Re-map desc when language changes — update ALL cached entries + current view
 watch(lang, () => {
-  const cached = weatherCache[selectedKey.value]
-  if (cached) {
-    const l = lang.value
-    const info = Object.values(WMO).find(w => w.emoji === cached.data.emoji) || WMO[0]
-    weatherData.value = { ...cached.data, desc: info[l] || info.en }
-  }
+  const l = lang.value
+  // update every cached country so switching country later gets correct lang
+  Object.keys(weatherCache).forEach(key => {
+    const cached = weatherCache[key]
+    if (!cached) return
+    const info = wmoInfo(cached.data.code)
+    weatherCache[key] = {
+      ...cached,
+      data: { ...cached.data, desc: info[l] || info.en }
+    }
+  })
+  // update currently displayed weather immediately
+  const current = weatherCache[selectedKey.value]
+  if (current) weatherData.value = { ...current.data }
 })
 
-watch(selectedKey, () => fetchWeather(), { immediate: true })
+watch(selectedKey, () => {
+  fetchWeather()
+  updateClock()
+}, { immediate: true })
 </script>
 
 <style scoped>
@@ -732,4 +884,8 @@ watch(selectedKey, () => fetchWeather(), { immediate: true })
 .drop-fade-leave-active { transition: opacity 0.1s ease, transform 0.1s ease; }
 .drop-fade-enter-from   { opacity: 0; transform: translateY(4px); }
 .drop-fade-leave-to     { opacity: 0; transform: translateY(4px); }
+
+/* Scroll to top */
+.scroll-top-enter-active, .scroll-top-leave-active { transition: opacity 0.25s ease, transform 0.25s ease; }
+.scroll-top-enter-from, .scroll-top-leave-to { opacity: 0; transform: translateY(12px) scale(0.9); }
 </style>

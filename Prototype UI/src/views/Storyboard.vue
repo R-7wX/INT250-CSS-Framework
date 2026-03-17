@@ -16,12 +16,22 @@
         </div>
       </div>
       <div class="flex gap-2 flex-wrap">
-        <button @click="clearAll" class="flex items-center gap-1.5 px-4 py-2 rounded-2xl text-sm font-semibold border border-rose-200 dark:border-rose-800 text-rose-500 hover:bg-rose-50 dark:hover:bg-rose-900/20 transition-colors">
-          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></svg>
+        <button @click="clearAll" class="trash-btn flex items-center gap-1.5 px-4 py-2 rounded-2xl text-sm font-semibold border border-rose-200 dark:border-rose-800 text-rose-500 hover:bg-rose-50 dark:hover:bg-rose-900/20 transition-colors">
+          <svg class="w-3.5 h-3.5 overflow-visible" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+            <g class="trash-lid"><line x1="4" y1="7" x2="20" y2="7"/><path d="M9 7V5a1 1 0 011-1h4a1 1 0 011 1v2"/></g>
+            <path d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7"/>
+            <line x1="10" y1="11" x2="10" y2="17"/><line x1="14" y1="11" x2="14" y2="17"/>
+          </svg>
           {{ t('sb_clear') }}
         </button>
-        <button @click="addDay" class="px-4 py-2 rounded-2xl text-sm font-semibold bg-teal-500 hover:bg-teal-600 text-white shadow transition-colors">
-          {{ t('sb_add_day') }}
+        <button @click="addDay" class="add-day-btn relative overflow-hidden px-4 py-2 rounded-2xl text-sm font-semibold bg-teal-500 hover:bg-teal-600 text-white shadow transition-colors">
+          <span class="relative z-10 flex items-center gap-1.5">
+            <svg class="w-4 h-4 add-day-icon" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/>
+            </svg>
+            {{ t('sb_add_day') }}
+          </span>
+          <span class="add-day-ripple"></span>
         </button>
         <button
           @click="generateChecklist"
@@ -128,15 +138,24 @@
               />
               <span class="text-xs font-normal text-slate-400">{{ daySummary(day) }}</span>
             </h3>
-            <button @click="confirmRemoveDay(dayIdx)" class="shrink-0 text-rose-400 hover:text-rose-600 text-xs font-medium transition-colors mt-1 px-2 py-1 rounded-lg hover:bg-rose-50 dark:hover:bg-rose-900/20">
+            <button @click="confirmRemoveDay(dayIdx)" class="trash-btn shrink-0 flex items-center gap-1 text-rose-400 hover:text-rose-600 text-xs font-medium transition-colors mt-1 px-2 py-1 rounded-lg hover:bg-rose-50 dark:hover:bg-rose-900/20">
+              <svg class="w-3.5 h-3.5 overflow-visible" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+                <g class="trash-lid"><line x1="4" y1="7" x2="20" y2="7"/><path d="M9 7V5a1 1 0 011-1h4a1 1 0 011 1v2"/></g>
+                <path d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7"/>
+                <line x1="10" y1="11" x2="10" y2="17"/><line x1="14" y1="11" x2="14" y2="17"/>
+              </svg>
               {{ t('sb_del_day') }}
             </button>
             <button
               v-if="day.places.length > 0"
               @click="confirmClearDayPlaces(dayIdx)"
-              class="shrink-0 flex items-center gap-1 text-slate-400 hover:text-amber-500 text-xs font-medium transition-colors mt-1 px-2 py-1 rounded-lg hover:bg-amber-50 dark:hover:bg-amber-900/20"
+              class="trash-btn shrink-0 flex items-center gap-1 text-slate-400 hover:text-amber-500 text-xs font-medium transition-colors mt-1 px-2 py-1 rounded-lg hover:bg-amber-50 dark:hover:bg-amber-900/20"
             >
-              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></svg>
+              <svg class="w-3.5 h-3.5 overflow-visible" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+                <g class="trash-lid"><line x1="4" y1="7" x2="20" y2="7"/><path d="M9 7V5a1 1 0 011-1h4a1 1 0 011 1v2"/></g>
+                <path d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7"/>
+                <line x1="10" y1="11" x2="10" y2="17"/><line x1="14" y1="11" x2="14" y2="17"/>
+              </svg>
               {{ t('sb_clear_day_btn') }}
             </button>
           </div>
@@ -222,6 +241,24 @@
         </div>
       </div>
     </Transition>
+
+  <!-- Floating generate checklist FAB -->
+  <Transition name="scroll-top">
+    <button
+      v-if="showScrollTop"
+      @click="generateChecklist"
+      :class="[
+        'fixed bottom-24 right-20 z-50 w-14 h-14 flex items-center justify-center rounded-full shadow-lg transition-all duration-200 hover:scale-110 active:scale-95 text-white',
+        hasAnyPlace ? 'opacity-100 cursor-pointer' : 'opacity-40 cursor-not-allowed'
+      ]"
+      :style="'background: linear-gradient(135deg, #0d9488 0%, #06b6d4 50%, #0ea5e9 100%); box-shadow: 0 4px 18px rgba(6,182,212,0.40);'"
+      :title="t('sb_generate')"
+    >
+      <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/>
+      </svg>
+    </button>
+  </Transition>
 
   <!-- Scroll to top button -->
   <Transition name="scroll-top">
@@ -607,4 +644,29 @@ onUnmounted(() => window.removeEventListener('scroll', onScroll))
 .modal-enter-from, .modal-leave-to { opacity: 0; }
 .scroll-top-enter-active, .scroll-top-leave-active { transition: opacity 0.25s ease, transform 0.25s ease; }
 .scroll-top-enter-from, .scroll-top-leave-to { opacity: 0; transform: translateY(12px) scale(0.9); }
+
+/* Trash lid animation */
+.trash-lid {
+  transform-origin: 4px 7px;
+  transform-box: view-box;
+  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.trash-btn:hover .trash-lid {
+  transform: rotate(-40deg);
+}
+.add-day-btn { transition: transform 0.15s ease, box-shadow 0.15s ease, background-color 0.15s ease; }
+.add-day-btn:hover { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(13,148,136,0.4); }
+.add-day-btn:active { transform: scale(0.95); }
+
+.add-day-icon { transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1); }
+.add-day-btn:hover .add-day-icon { transform: rotate(90deg) scale(1.2); }
+
+.add-day-ripple {
+  position: absolute; inset: 0; border-radius: inherit;
+  background: radial-gradient(circle at center, rgba(255,255,255,0.3) 0%, transparent 70%);
+  opacity: 0; transform: scale(0);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+  pointer-events: none;
+}
+.add-day-btn:active .add-day-ripple { opacity: 1; transform: scale(2); transition: none; }
 </style>

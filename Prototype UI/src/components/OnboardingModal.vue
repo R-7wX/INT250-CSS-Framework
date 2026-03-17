@@ -1,7 +1,7 @@
 <template>
   <Teleport to="body">
     <Transition name="onboard">
-      <div v-if="visible" class="fixed inset-0 z-[300] flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm">
+      <div v-if="visible" class="fixed inset-0 z-[300] flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm" @click.self="dismiss">
         <div class="w-full max-w-sm bg-white dark:bg-slate-900 rounded-3xl shadow-2xl overflow-hidden">
 
           <!-- Progress dots -->
@@ -13,7 +13,7 @@
           </div>
 
           <!-- Step content -->
-          <div class="px-7 pt-4 pb-6 text-center">
+          <div class="px-7 pt-4 pb-4 text-center">
             <div class="flex justify-center mb-4">
               <div class="w-16 h-16 rounded-2xl bg-teal-50 dark:bg-teal-900/30 text-teal-500 flex items-center justify-center" v-html="steps[current].svg"></div>
             </div>
@@ -21,8 +21,15 @@
             <p class="text-sm text-slate-500 dark:text-slate-400 leading-relaxed">{{ t(steps[current].descKey) }}</p>
           </div>
 
+          <!-- Keyboard hint -->
+          <div class="flex justify-center gap-4 pb-1 text-[10px] text-slate-300 dark:text-slate-600 font-mono select-none">
+            <span>← → {{ t('ob_navigate') }}</span>
+            <span>Enter → {{ current < steps.length - 1 ? t('ob_next') : t('ob_start') }}</span>
+            <span>Esc → {{ t('ob_skip') }}</span>
+          </div>
+
           <!-- Buttons -->
-          <div class="px-6 pb-6 flex gap-3">
+          <div class="px-6 pb-6 pt-3 flex gap-3">
             <button
               v-if="current < steps.length - 1"
               @click="dismiss"
@@ -48,12 +55,17 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref, computed, watch, onMounted, onUnmounted } from 'vue'
 import { useI18n } from '../composables/useI18n.js'
+import { useAppStore } from '../stores/useAppStore.js'
 
 const { t } = useI18n()
-const visible = ref(false)
-const current = ref(0)
+const store = useAppStore()
+const autoShow = ref(false)   // first-visit auto trigger
+const current  = ref(0)
+
+// v-if ผูกกับ computed นี้โดยตรง — ไม่ผ่าน watch
+const visible = computed(() => autoShow.value || store.onboardingOpen)
 
 const steps = [
   {
@@ -70,27 +82,39 @@ const steps = [
   },
 ]
 
-const LS_KEY = 'travelaroha_last_visit'
+const LS_KEY  = 'travelaroha_last_visit'
 const WEEK_MS = 7 * 24 * 60 * 60 * 1000
 
 onMounted(() => {
   const last = localStorage.getItem(LS_KEY)
-  const now = Date.now()
-  const shouldShow = !last || (now - Number(last)) >= WEEK_MS
-  if (shouldShow) {
-    setTimeout(() => { visible.value = true }, 600)
+  const now  = Date.now()
+  if (!last || (now - Number(last)) >= WEEK_MS) {
+    setTimeout(() => { autoShow.value = true }, 600)
   }
-  // Update last visit every time page loads
   localStorage.setItem(LS_KEY, String(now))
+  document.addEventListener('keydown', onKey)
+  window.addEventListener('travelaroha:help', onHelpEvent)
+})
+onUnmounted(() => {
+  document.removeEventListener('keydown', onKey)
+  window.removeEventListener('travelaroha:help', onHelpEvent)
 })
 
-function next() {
-  current.value++
+function onHelpEvent() { current.value = 0; autoShow.value = true }
+
+// reset step เมื่อเปิดจาก ? button
+watch(() => store.onboardingOpen, v => { if (v) current.value = 0 })
+
+function onKey(e) {
+  if (!visible.value) return
+  if (e.key === 'Escape')     { dismiss(); return }
+  if (e.key === 'Enter')      { e.preventDefault(); current.value < steps.length - 1 ? next() : dismiss() }
+  if (e.key === 'ArrowRight') { next() }
+  if (e.key === 'ArrowLeft' && current.value > 0) current.value--
 }
-function dismiss() {
-  visible.value = false
-  current.value = 0
-}
+
+function next()    { if (current.value < steps.length - 1) current.value++ }
+function dismiss() { autoShow.value = false; current.value = 0; store.closeOnboarding() }
 </script>
 
 <style scoped>

@@ -23,13 +23,28 @@ export const useAppStore = defineStore('app', () => {
 
   // ── Dark mode ──
   const dark = ref(localStorage.getItem('theme') === 'dark')
-  watch(dark, v => {
+  function applyDark(v) {
     if (v) document.documentElement.classList.add('dark')
     else   document.documentElement.classList.remove('dark')
     localStorage.setItem('theme', v ? 'dark' : 'light')
-  })
-  if (dark.value) document.documentElement.classList.add('dark')
-  else            document.documentElement.classList.remove('dark')
+  }
+  function toggleDark(event) {
+    const next = !dark.value
+    if (!document.startViewTransition) { dark.value = next; return }
+
+    const x = event?.clientX ?? window.innerWidth / 2
+    const y = event?.clientY ?? window.innerHeight / 2
+    const maxR = Math.hypot(Math.max(x, window.innerWidth - x), Math.max(y, window.innerHeight - y))
+    document.documentElement.style.setProperty('--vt-x', x + 'px')
+    document.documentElement.style.setProperty('--vt-y', y + 'px')
+    document.documentElement.style.setProperty('--vt-r', maxR + 'px')
+    document.documentElement.dataset.vtDir = next ? 'to-dark' : 'to-light'
+
+    const transition = document.startViewTransition(() => { dark.value = next })
+    transition.finished.finally(() => delete document.documentElement.dataset.vtDir)
+  }
+  watch(dark, v => applyDark(v))
+  applyDark(dark.value)
 
   // ── Toast ──
   const toasts = ref([])
@@ -112,6 +127,11 @@ export const useAppStore = defineStore('app', () => {
     confirmModal.value = { ...confirmModal.value, open: false, onConfirm: null }
   }
 
+  // ── Onboarding ──
+  const onboardingOpen = ref(false)
+  function openOnboarding() { onboardingOpen.value = true }
+  function closeOnboarding() { onboardingOpen.value = false }
+
   // ── Trip Name ──
   const tripName = ref(localStorage.getItem(LS_TRIPNAME) || '')
   watch(tripName, v => {
@@ -135,9 +155,10 @@ export const useAppStore = defineStore('app', () => {
 
   return {
     lang,
-    dark,
+    dark, toggleDark,
     toasts, showToast, dismissToast,
     confirmModal, showConfirm, closeConfirm,
+    onboardingOpen, openOnboarding, closeOnboarding,
     savedPlaces,
     toggleSaved,
     isSaved,

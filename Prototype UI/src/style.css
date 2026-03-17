@@ -88,3 +88,40 @@
     @apply h-full rounded-full bg-gradient-to-r from-teal-400 via-cyan-400 to-sky-400 transition-all duration-500;
   }
 }
+/* ── Theme switch View Transition — radial ripple ─────────── */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+
+/* Going to dark: new (dark) layer ripples in from click point */
+[data-vt-dir="to-dark"]::view-transition-new(root) {
+  animation: theme-ripple-in 0.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+[data-vt-dir="to-dark"]::view-transition-old(root) {
+  z-index: 1;
+}
+[data-vt-dir="to-dark"]::view-transition-new(root) {
+  z-index: 2;
+}
+
+/* Going to light: old (dark) layer ripples out */
+[data-vt-dir="to-light"]::view-transition-old(root) {
+  animation: theme-ripple-out 0.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+[data-vt-dir="to-light"]::view-transition-old(root) {
+  z-index: 2;
+}
+[data-vt-dir="to-light"]::view-transition-new(root) {
+  z-index: 1;
+}
+
+@keyframes theme-ripple-in {
+  from { clip-path: circle(0px at var(--vt-x) var(--vt-y)); }
+  to   { clip-path: circle(var(--vt-r) at var(--vt-x) var(--vt-y)); }
+}
+@keyframes theme-ripple-out {
+  from { clip-path: circle(var(--vt-r) at var(--vt-x) var(--vt-y)); }
+  to   { clip-path: circle(0px at var(--vt-x) var(--vt-y)); }
+}

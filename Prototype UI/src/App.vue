@@ -22,7 +22,7 @@ import { watch } from 'vue'
 
 // ── One-time reset ──────────────────────────────────────────
 // เปลี่ยน CACHE_VERSION เมื่อต้องการ reset ผู้ใช้ทุกคนอีกครั้ง
-const CACHE_VERSION = 'v021'
+const CACHE_VERSION = 'v5'
 const VERSION_KEY   = 'travelaroha_version'
 if (localStorage.getItem(VERSION_KEY) !== CACHE_VERSION) {
   Object.keys(localStorage)

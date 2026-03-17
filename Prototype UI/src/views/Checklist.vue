@@ -68,8 +68,20 @@
     </div>
 
     <!-- Packing sections -->
+    <!-- Vibe detected badge -->
+    <Transition name="fade-in">
+      <div v-if="vibeSections.length > 0" class="mb-4 flex items-center gap-2 px-4 py-2.5 rounded-2xl bg-teal-50 dark:bg-teal-900/20 border border-teal-200 dark:border-teal-800">
+        <span class="flex gap-1 text-lg">
+          <span v-for="sec in vibeSections" :key="sec.id">{{ sec.icon }}</span>
+        </span>
+        <div>
+          <p class="text-xs font-bold text-teal-700 dark:text-teal-300">{{ t('cl_vibe_detected') }}</p>
+          <p class="text-xs text-teal-600/70 dark:text-teal-400/70">{{ t('cl_vibe_hint') }}</p>
+        </div>
+      </div>
+    </Transition>
     <div class="space-y-4 mb-6">
-      <div v-for="section in CHECKLIST_SECTIONS" :key="section.id"
+      <div v-for="section in allSections" :key="section.id"
         class="glass-panel rounded-3xl border p-5 shadow-sm transition-all duration-500"
         :class="sectionDone(section)
           ? 'border-teal-300 dark:border-teal-700 bg-teal-50/40 dark:bg-teal-900/10'
@@ -161,8 +173,8 @@ import { computed, onMounted, ref } from 'vue'
 import { RouterLink, useRouter } from 'vue-router'
 import { useAppStore } from '../stores/useAppStore.js'
 import { useI18n } from '../composables/useI18n.js'
-import { CHECKLIST_SECTIONS } from '../data/checklist.js'
-import { PLACE_NAMES } from '../data/places.js'
+import { CHECKLIST_SECTIONS, VIBE_SECTIONS } from '../data/checklist.js'
+import { PLACE_NAMES, PLACES } from '../data/places.js'
 
 const store = useAppStore()
 const { t, lang } = useI18n()
@@ -173,6 +185,46 @@ const exportData = computed(() => store.exportData)
 onMounted(() => {
   store.loadExport()
 })
+
+// ── Detect ALL vibes in trip ─────────────────────────────────────────────
+// Priority: places in exported storyboard → saved places
+const detectedVibes = computed(() => {
+  let placeNames = []
+
+  // 1. from storyboard export
+  if (exportData.value?.days?.length) {
+    exportData.value.days.forEach(day => {
+      day.places.forEach(p => placeNames.push(p.name))
+    })
+  }
+  // 2. fallback: saved places
+  if (placeNames.length === 0) {
+    placeNames = store.savedPlaces
+  }
+
+  if (placeNames.length === 0) return []
+
+  // Collect unique vibes ordered by frequency
+  const counts = {}
+  placeNames.forEach(name => {
+    const place = PLACES.find(p => p.name === name)
+    if (place?.vibe) counts[place.vibe] = (counts[place.vibe] || 0) + 1
+  })
+
+  return Object.entries(counts)
+    .sort((a, b) => b[1] - a[1])
+    .map(([vibe]) => vibe)
+    .filter(vibe => VIBE_SECTIONS[vibe])
+})
+
+const vibeSections = computed(() => detectedVibes.value.map(v => VIBE_SECTIONS[v]))
+
+// All active sections = ALL vibe sections detected + base sections
+const allSections = computed(() => {
+  if (vibeSections.value.length > 0) return [...vibeSections.value, ...CHECKLIST_SECTIONS]
+  return CHECKLIST_SECTIONS
+})
+// ─────────────────────────────────────────────────────────────────────────
 
 const heroSub = computed(() => {
   if (!exportData.value) return t('cl_sub')
@@ -188,7 +240,7 @@ const itin_meta = computed(() => {
   return `${d.days?.length} ${t('cl_days')} · ${total} ${t('cl_places')} · ${new Date(d.exportedAt).toLocaleDateString()}`
 })
 
-const totalCount = computed(() => CHECKLIST_SECTIONS.reduce((s, sec) => s + sec.items.length, 0))
+const totalCount = computed(() => allSections.value.reduce((s, sec) => s + sec.items.length, 0))
 const checkedCount = computed(() => Object.values(store.checkState).filter(Boolean).length)
 const progressPct = computed(() => totalCount.value > 0 ? Math.round(checkedCount.value / totalCount.value * 100) : 0)
 

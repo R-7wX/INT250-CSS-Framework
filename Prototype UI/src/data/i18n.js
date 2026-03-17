@@ -36,7 +36,7 @@ export const I18N = {
   sb_title:       {th:'วางแผนเดินทาง',en:'My Trip Storyboard',zh:'我的行程规划',es:'Mi Plan de Viaje',ar:'خطة رحلتي',fr:'Mon Plan de Voyage'},
   sb_sub:         {th:'แก้ชื่อวัน · ลากสถานที่ · ตั้งเวลา · บันทึกอัตโนมัติ 💾',en:'Edit day names · Drag places · Set times · Auto-saved 💾',zh:'编辑日期 · 拖拽地点 · 设置时间 · 自动保存 💾',es:'Edita días · Arrastra lugares · Horarios · Auto guardado 💾',ar:'عدّل الأيام · اسحب الأماكن · الأوقات · حفظ تلقائي 💾',fr:'Modifier jours · Glisser lieux · Horaires · Sauvegarde auto 💾'},
   sb_clear:       {th:'ล้าง',         en:'Clear',        zh:'清除',  es:'Borrar',ar:'مسح',    fr:'Effacer'},
-  sb_add_day:     {th:'+ เพิ่มวัน',      en:'+ Add Day',        zh:'+ 添加日期',es:'+ Añadir Día',ar:'+ إضافة يوم',fr:'+ Ajouter jour'},
+  sb_add_day:     {th:'เพิ่มวัน',      en:'Add Day',        zh:'添加日期',es:'Añadir Día',ar:'إضافة يوم',fr:'Ajouter jour'},
   sb_saved_vibes: {th:'รายการโปรด',      en:'Saved Vibes',      zh:'已收藏',    es:'Guardados', ar:'المحفوظات',  fr:'Favoris'},
   sb_drag_hint:   {th:'ลากหรือกด +',     en:'Drag or tap +',    zh:'拖拽或点击 +',es:'Arrastra o toca +',ar:'اسحب أو اضغط +',fr:'Glisser ou appuyer +'},
   sb_sidebar_sub: {th:'แสดงเฉพาะที่กด ❤️ ในหน้าค้นพบ',en:'Only places you ❤️ in Discovery',zh:'仅显示发现页中收藏的地点',es:'Solo lugares que guardaste en Discovery',ar:'الأماكن التي أحببتها في Discovery فقط',fr:'Seulement les lieux aimés dans Découvrir'},
@@ -76,7 +76,7 @@ export const I18N = {
   sb_search_placeholder: {th:'ค้นหาสถานที่…',en:'Search places…',zh:'搜索地点…',es:'Buscar lugares…',ar:'ابحث عن أماكن…',fr:'Rechercher des lieux…'},
   sb_places_unit: {th:'สถานที่',           en:'places',           zh:'个地点',    es:'lugares',   ar:'أماكن',      fr:'lieux'},
   sb_clear_confirm:{th:'ล้างทุก Day Board?',en:'Clear all Day Boards?',zh:'清除所有日程吗？',es:'¿Borrar todos los días?',ar:'مسح كل الأيام؟',fr:'Effacer tous les jours ?'},
-  sb_add_day_alert:{th:'เพิ่มวันก่อนนะ กด "+ เพิ่มวัน"',en:'Please add a day first',zh:'请先添加日期',es:'Primero añade un día',ar:'أضف يومًا أولاً',fr:'Ajoutez un jour en premier'},
+  sb_add_day_alert:{th:'เพิ่มวันก่อนนะ กด "เพิ่มวัน"',en:'Please add a day first',zh:'请先添加日期',es:'Primero añade un día',ar:'أضف يومًا أولاً',fr:'Ajoutez un jour en premier'},
   sb_placeholder: {th:'ชื่อกิจกรรม...',   en:'Activity name...',  zh:'活动名称...',es:'Nombre del día...',ar:'اسم النشاط...',fr:'Nom du jour...'},
 
   // DASHBOARD labels
@@ -132,6 +132,8 @@ export const I18N = {
   // CHECKLIST
   cl_title:      {th:'รายการเตรียมของ',    en:'Trip Checklist',   zh:'旅行清单',  es:'Lista de Viaje',ar:'قائمة الرحلة',fr:'Liste de voyage'},
   cl_sub:        {th:'เตรียมสัมภาระให้พร้อมก่อนออกเดินทาง ✈️',en:'Pack everything before your trip ✈️',zh:'出发前整理好所有行李 ✈️',es:'Prepara todo antes de tu viaje ✈️',ar:'احزم كل شيء قبل رحلتك ✈️',fr:'Préparez tout avant votre voyage ✈️'},
+  cl_vibe_detected: {th:'เพิ่ม Checklist พิเศษตาม Vibe ของทริปแล้ว!',en:'Added a special checklist for your trip vibe!',zh:'已根据行程氛围添加专属清单！',es:'Lista especial según el vibe del viaje!',ar:'تمت إضافة قائمة خاصة بأسلوب رحلتك!',fr:'Liste spéciale selon l"ambiance du voyage!'},
+  cl_vibe_hint:     {th:'รายการพิเศษตาม Vibe แสดงไว้ด้านบน',en:'Vibe-specific items appear at the top',zh:'专属氛围物品显示在顶部',es:'Artículos del vibe aparecen arriba',ar:'عناصر الأسلوب تظهر في الأعلى',fr:'Articles du vibe affichés en haut'},
   cl_itin:       {th:'แผนการเดินทางของคุณ',en:'Your Trip Itinerary',zh:'你的行程安排',es:'Tu Itinerario',ar:'مسار رحلتك',fr:'Votre itinéraire'},
   cl_itin_label: {th:'แผนการเดินทางของคุณ',en:'Your Trip Itinerary',zh:'你的行程安排',es:'Tu Itinerario',ar:'مسار رحلتك',fr:'Votre itinéraire'},
   cl_packing:    {th:'ความคืบหน้าการแพ็คกระเป๋า',en:'Packing Progress', zh:'打包进度',  es:'Progreso de packing',ar:'تقدم الحزم',fr:'Progression du packing'},
@@ -186,6 +188,59 @@ export const I18N = {
   pe6: {th:'ทิชชู่เปียก / ทิชชู่แห้ง',    en:'Wet wipes / Tissues',           zh:'湿纸巾 / 纸巾',  es:'Toallitas húmedas / Pañuelos', ar:'مناديل مبللة / مناديل جافة',  fr:'Lingettes / Mouchoirs'},
   pe7: {th:'หน้ากากอนามัย / เจลล้างมือ',  en:'Face mask / Hand sanitizer',    zh:'口罩 / 洗手液',  es:'Mascarilla / Gel desinfectante',ar:'كمامة / جل تعقيم اليدين',     fr:'Masque / Gel hydroalcoolique'},
 
+  // ── Vibe-specific sections ──────────────────────────────────────────────
+  sec_beach:  {th:'ชายหาดและทะเล',         en:'Beach & Sea',              zh:'海滩装备',         es:'Playa y Mar',              ar:'الشاطئ والبحر',              fr:'Plage et Mer'},
+  sec_nature: {th:'ธรรมชาติและผจญภัย',     en:'Nature & Adventure',       zh:'自然探险',         es:'Naturaleza y Aventura',    ar:'الطبيعة والمغامرة',          fr:'Nature et Aventure'},
+  sec_urban:  {th:'เมืองและเออร์เบิน',     en:'City & Urban Essentials',  zh:'城市必备',         es:'Esenciales Urbanos',       ar:'أساسيات المدينة',            fr:'Essentiels Urbains'},
+  sec_foodie: {th:'สายกิน / ฟู้ดดี้',      en:'Foodie Essentials',        zh:'美食必备',         es:'Esenciales Foodie',        ar:'أساسيات الطعام',             fr:'Essentiels Gastronomiques'},
+  sec_slow:   {th:'สโลว์ลิฟวิ่ง',          en:'Slow Living Comforts',     zh:'慢生活舒适',       es:'Confort Slow Living',      ar:'راحة الحياة الهادئة',        fr:'Douceurs Slow Living'},
+
+  // Beach Getaway items
+  be1: {th:'ชุดว่ายน้ำ / บิกินี่',         en:'Swimsuit / Bikini',        zh:'泳衣',             es:'Traje de baño / Bikini',   ar:'ملابس سباحة',                fr:'Maillot de bain'},
+  be2: {th:'ครีมกันแดด SPF 50+',           en:'Sunscreen SPF 50+',        zh:'防晒霜 SPF 50+',  es:'Protector solar SPF 50+',  ar:'واقي شمس SPF 50+',           fr:'Crème solaire SPF 50+'},
+  be3: {th:'แว่นกันแดด / หมวก',            en:'Sunglasses / Sun hat',     zh:'太阳镜 / 遮阳帽', es:'Gafas de sol / Sombrero',  ar:'نظارات شمس / قبعة',          fr:'Lunettes de soleil / Chapeau'},
+  be4: {th:'ผ้าขนหนูชายหาด',              en:'Beach towel',              zh:'沙滩毛巾',         es:'Toalla de playa',          ar:'منشفة الشاطئ',               fr:'Serviette de plage'},
+  be5: {th:'รองเท้าแตะ / แซนเดิล',        en:'Flip-flops / Sandals',     zh:'人字拖 / 凉鞋',   es:'Chanclas / Sandalias',     ar:'شبشب / صندل',                fr:'Tongs / Sandales'},
+  be6: {th:'ถุงกันน้ำ (Dry Bag)',           en:'Waterproof dry bag',       zh:'防水袋',           es:'Bolsa impermeable',        ar:'حقيبة مضادة للماء',          fr:'Sac étanche'},
+  be7: {th:'อุปกรณ์ดำน้ำตื้น (Snorkel)',   en:'Snorkel gear (optional)',  zh:'浮潜装备（可选）',es:'Equipo de snorkel',        ar:'معدات الغوص',                fr:'Matériel de plongée'},
+
+  // Nature Retreat items
+  na1: {th:'รองเท้าเดินป่า / บู๊ต',        en:'Hiking boots / Trail shoes',zh:'登山鞋',          es:'Botas de senderismo',      ar:'أحذية المشي',                fr:'Chaussures de randonnée'},
+  na2: {th:'ยากันยุง / สเปรย์ไล่แมลง',    en:'Insect repellent spray',   zh:'驱虫喷雾',        es:'Repelente de insectos',    ar:'طارد الحشرات',               fr:'Répulsif insectes'},
+  na3: {th:'เสื้อกันฝน / Windbreaker',     en:'Rain jacket / Windbreaker',zh:'雨衣 / 防风外套', es:'Chubasquero / Cortavientos',ar:'معطف مطر',                   fr:'Veste imperméable'},
+  na4: {th:'ชุดปฐมพยาบาลพกพา',            en:'First aid kit (portable)', zh:'便携急救包',      es:'Botiquín de primeros auxilios',ar:'مجموعة إسعاف أولي',         fr:'Trousse de premiers secours'},
+  na5: {th:'ขวดน้ำกรองได้ / กระติกน้ำ',   en:'Filtered water bottle',    zh:'过滤水壶',        es:'Botella de agua filtrada', ar:'زجاجة ماء مصفاة',            fr:'Bouteille filtrante'},
+  na6: {th:'ไฟฉาย / หัวคาดไฟ',            en:'Flashlight / Headlamp',    zh:'手电筒 / 头灯',   es:'Linterna / Frontal',       ar:'مصباح يدوي / كشاف رأس',      fr:'Lampe torche / Frontale'},
+  na7: {th:'แผนที่ออฟไลน์ / เข็มทิศ',     en:'Offline map / Compass',    zh:'离线地图 / 指南针',es:'Mapa offline / Brújula',  ar:'خريطة دون اتصال / بوصلة',   fr:'Carte hors-ligne / Boussole'},
+
+  // Urban Adventure items
+  ur1: {th:'รองเท้าเดินสบาย',              en:'Comfortable walking shoes',zh:'舒适步行鞋',      es:'Zapatos cómodos para caminar',ar:'حذاء مريح للمشي',           fr:'Chaussures de marche confort'},
+  ur2: {th:'City Pass / บัตรโดยสาร',       en:'City transit card / Pass', zh:'交通卡 / 城市通行证',es:'Tarjeta de transporte',  ar:'بطاقة المواصلات',            fr:'Pass transport / City card'},
+  ur3: {th:'Power bank / แบตสำรอง',        en:'Power bank (10,000+ mAh)', zh:'充电宝',          es:'Batería portátil',         ar:'شاحن متنقل',                 fr:'Batterie externe'},
+  ur4: {th:'กระเป๋าคาดอก / Anti-theft',   en:'Anti-theft crossbody bag', zh:'防盗斜挎包',      es:'Bolso antirrobo',          ar:'حقيبة مضادة للسرقة',         fr:'Sac antivol bandoulière'},
+  ur5: {th:'ร่ม (พับได้)',                 en:'Compact folding umbrella', zh:'折叠伞',           es:'Paraguas plegable',        ar:'مظلة قابلة للطي',            fr:'Parapluie compact'},
+  ur6: {th:'แผนที่ออฟไลน์ + ปักหมุดสถานที่',en:'Offline map with saved spots',zh:'带标记的离线地图',es:'Mapa con lugares guardados',ar:'خريطة مع الأماكن المحفوظة', fr:'Carte avec lieux enregistrés'},
+
+  // Foodie Tour items
+  fo1: {th:'สมุดจดรีวิว / Food diary',     en:'Food diary / Notebook',    zh:'美食日记本',      es:'Diario de comidas',        ar:'مفكرة الطعام',               fr:'Carnet gastronomique'},
+  fo2: {th:'บัตรแจ้งอาหารแพ้ (ภาษาท้องถิ่น)',en:'Allergy card (local language)',zh:'过敏卡（当地语言）',es:'Tarjeta de alergias',    ar:'بطاقة الحساسية',             fr:'Carte d\'allergies'},
+  fo3: {th:'เงินสด (สำหรับ street food)',  en:'Cash for street food',     zh:'现金（路边摊）',  es:'Efectivo para comida callejera',ar:'نقود للطعام الشعบي',        fr:'Espèces pour street food'},
+  fo4: {th:'ยาธาตุ / โปรไบโอติกส์',       en:'Digestive aid / Probiotics',zh:'助消化药 / 益生菌',es:'Digestivo / Probióticos',  ar:'مساعد هضمي',                 fr:'Aide digestive / Probiotiques'},
+  fo5: {th:'แอปแปลเมนู (เช่น Google Lens)',en:'Menu translator app',      zh:'菜单翻译应用',    es:'App traductora de menús',   ar:'تطبيق ترجمة القائمة',        fr:'App traduction de menu'},
+  fo6: {th:'กระเป๋าใส่ของฝาก / ของกิน',   en:'Tote bag for food souvenirs',zh:'食品纪念品袋',   es:'Bolsa para souvenirs',     ar:'حقيبة لمستلزمات الطعام',     fr:'Sac pour souvenirs gastronomiques'},
+
+  // Slow Living items
+  sl1: {th:'หนังสือ / Kindle',             en:'Book / Kindle / e-reader',  zh:'书 / 电子书',    es:'Libro / Kindle',           ar:'كتاب / كيندل',               fr:'Livre / Kindle'},
+  sl2: {th:'สมุดบันทึก / ไดอารี่',         en:'Journal / Diary',          zh:'日记本',          es:'Diario / Cuaderno',        ar:'مفكرة',                      fr:'Journal / Carnet'},
+  sl3: {th:'หูฟังตัดเสียง Noise-cancelling',en:'Noise-cancelling headphones',zh:'降噪耳机',     es:'Auriculares con cancelación de ruido',ar:'سماعات عازلة للصوت',  fr:'Écouteurs anti-bruit'},
+  sl4: {th:'เสื้อผ้าสบาย / Linen / ผ้าลื่น',en:'Comfortable linen / soft clothing',zh:'舒适亚麻服装',es:'Ropa cómoda / lino',    ar:'ملابس مريحة',                fr:'Vêtements confortables / lin'},
+  sl5: {th:'เทียนหอม / น้ำมันหอมระเหย',   en:'Scented candle / Essential oil',zh:'香薰蜡烛 / 精油',es:'Vela aromática / aceite esencial',ar:'شمعة عطرية / زيوت عطرية',fr:'Bougie parfumée / Huile essentielle'},
+  sl6: {th:'ชา / กาแฟพิเศษ (พกพา)',        en:'Specialty tea / coffee (travel)',zh:'旅行茶 / 咖啡',es:'Té / café especial de viaje',ar:'شاي / قهوة مميزة للسفر',   fr:'Thé / café spécial voyage'},
+
+  // Dashboard clock
+  db_local_time:  {th:'เวลาท้องถิ่น',      en:'Local Time',               zh:'本地时间',        es:'Hora local',               ar:'التوقيت المحلي',             fr:'Heure locale'},
+  db_weather_err: {th:'โหลดสภาพอากาศไม่ได้ แตะเพื่อลองใหม่', en:'Weather unavailable — tap to retry', zh:'天气加载失败，点击重试', es:'Clima no disponible — toca para reintentar', ar:'الطقس غير متاح — انقر للإعادة', fr:'Météo indisponible — appuyer pour réessayer'},
+
   // Dashboard extra
   db_rate_updated: {th:'อัปเดต',       en:'Updated',       zh:'更新于',    es:'Actualizado', ar:'تحديث',      fr:'Mis à jour'},
   db_rate_source:  {th:'frankfurter',   en:'frankfurter',   zh:'frankfurter',es:'frankfurter', ar:'frankfurter',fr:'frankfurter'},
@@ -228,9 +283,11 @@ export const I18N = {
   ob_step2_desc:  {th:'สถานที่ที่บันทึกไว้จะปรากฏใน "รายการโปรด" พร้อมให้ลากหรือกดเพิ่มลงในวันท่องเที่ยว', en:'Saved places appear in your Saved Vibes sidebar, ready to drag or tap into your trip days.', zh:'已收藏的地方会出现在侧边栏，可以拖拽或点击添加到行程。', es:'Los lugares guardados aparecen en tu barra lateral, listos para arrastrar o agregar a tus días de viaje.', ar:'تظهر الأماكن المحفوظة في الشريط الجانبي، جاهزة للسحب أو الإضافة إلى أيام رحلتك.', fr:'Les lieux sauvegardés apparaissent dans la barre latérale, prêts à être glissés dans vos journées.'},
   ob_step3_title: {th:'วางแผนเดินทาง', en:'Plan Your Trip', zh:'规划你的旅程', es:'Planifica tu Viaje', ar:'خطط لرحلتك', fr:'Planifiez votre voyage'},
   ob_step3_desc:  {th:'จัดวันเดินทาง ตั้งเวลาแต่ละสถานที่ แล้วดาวน์โหลดแผนเป็นไฟล์ HTML สวยงาม', en:'Arrange your trip days, set times for each place, then download your plan as a beautiful HTML file.', zh:'安排行程天数，为每个地方设定时间，然后下载精美的HTML旅行计划。', es:'Organiza tus días de viaje, establece horarios y descarga tu plan como un archivo HTML.', ar:'رتّب أيام رحلتك، حدد أوقات كل مكان، ثم حمّل خطتك كملف HTML جميل.', fr:"Organisez vos journées, définissez les horaires et téléchargez votre plan en fichier HTML."},
-  ob_skip:   {th:'ข้ามไปก่อน', en:'Skip',    zh:'跳过', es:'Saltar', ar:'تخطى',  fr:'Passer'},
-  ob_next:   {th:'ถัดไป →',   en:'Next →', zh:'下一步 →', es:'Siguiente →', ar:'التالي →', fr:'Suivant →'},
-  ob_start:  {th:'เริ่มต้นได้เลย', en:'Get Started', zh:'开始吧', es:'¡Empezar!', ar:'ابدأ الآن', fr:'Commencer'},
+  ob_skip:      {th:'ข้ามไปก่อน',      en:'Skip',         zh:'跳过',    es:'Saltar',      ar:'تخطى',           fr:'Passer'},
+  ob_next:      {th:'ถัดไป →',         en:'Next →',       zh:'下一步 →', es:'Siguiente →', ar:'التالي →',       fr:'Suivant →'},
+  ob_start:     {th:'เริ่มต้นได้เลย',  en:'Get Started',  zh:'开始吧',   es:'¡Empezar!',   ar:'ابدأ الآن',      fr:'Commencer'},
+  ob_navigate:  {th:'เลื่อนหน้า',      en:'navigate',     zh:'切换',     es:'navegar',      ar:'تنقل',           fr:'naviguer'},
+  nav_help:     {th:'วิธีใช้งาน',       en:'How to use',   zh:'使用说明', es:'Cómo usar',   ar:'كيفية الاستخدام',fr:'Mode d\'emploi'},
 
   // Dashboard offline rate
   db_rate_offline: {th:'อัตราโดยประมาณ', en:'Offline rate', zh:'离线汇率', es:'Tasa aproximada', ar:'سعر تقريبي', fr:'Taux hors ligne'},
