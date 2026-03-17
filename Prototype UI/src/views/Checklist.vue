@@ -319,7 +319,7 @@ function downloadPlan() {
   }
 
   let packingHtml = ''
-  CHECKLIST_SECTIONS.forEach(sec => {
+  allSections.value.forEach(sec => {
     const total = sec.items.length
     const checked = sec.items.filter(id => store.checkState[id]).length
     const pct = total ? Math.round((checked / total) * 100) : 0
