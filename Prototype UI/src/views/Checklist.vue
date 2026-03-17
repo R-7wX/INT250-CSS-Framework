@@ -241,7 +241,10 @@ const itin_meta = computed(() => {
 })
 
 const totalCount = computed(() => allSections.value.reduce((s, sec) => s + sec.items.length, 0))
-const checkedCount = computed(() => Object.values(store.checkState).filter(Boolean).length)
+const checkedCount = computed(() => {
+  const ids = new Set(allSections.value.flatMap(sec => sec.items))
+  return Object.entries(store.checkState).filter(([id, v]) => v && ids.has(id)).length
+})
 const progressPct = computed(() => totalCount.value > 0 ? Math.round(checkedCount.value / totalCount.value * 100) : 0)
 
 function sectionChecked(section) { return section.items.filter(id => store.checkState[id]).length }
