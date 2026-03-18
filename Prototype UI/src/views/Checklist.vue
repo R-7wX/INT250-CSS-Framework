@@ -55,7 +55,7 @@
         <div class="flex items-center gap-3">
           <span class="text-sm font-semibold text-teal-600 dark:text-teal-400">{{ checkedCount }} / {{ totalCount }}</span>
           <button @click="resetChecklist" class="text-xs text-slate-400 hover:text-rose-500 px-3 py-1.5 rounded-xl border border-slate-200 dark:border-slate-700 hover:border-rose-300 bg-white/50 dark:bg-slate-800/50 transition-colors">
-            {{ t('cl_reset') }}
+            <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="inline-block mr-1 -mt-0.5"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>{{ t('cl_reset') }}
           </button>
         </div>
       </div>
