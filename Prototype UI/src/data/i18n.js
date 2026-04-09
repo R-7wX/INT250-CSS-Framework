@@ -137,7 +137,7 @@ export const I18N = {
   cl_itin:       {th:'แผนการเดินทางของคุณ',en:'Your Trip Itinerary',zh:'你的行程安排',es:'Tu Itinerario',ar:'مسار رحلتك',fr:'Votre itinéraire'},
   cl_itin_label: {th:'แผนการเดินทางของคุณ',en:'Your Trip Itinerary',zh:'你的行程安排',es:'Tu Itinerario',ar:'مسار رحلتك',fr:'Votre itinéraire'},
   cl_packing:    {th:'ความคืบหน้าการแพ็คกระเป๋า',en:'Packing Progress', zh:'打包进度',  es:'Progreso de packing',ar:'تقدم الحزم',fr:'Progression du packing'},
-  cl_reset:      {th:'🔄 รีเซ็ต',         en:'🔄 Reset',         zh:'🔄 重置',   es:'🔄 Reiniciar',ar:'🔄 إعادة تعيين',fr:'🔄 Réinitialiser'},
+  cl_reset:      {th:'รีเซ็ต',         en:'Reset',         zh:'重置',   es:'Reiniciar',ar:'إعادة تعيين',fr:'Réinitialiser'},
   cl_done:       {th:'🎉 เก็บของครบแล้ว! พร้อมออกเดินทาง ✈️',en:'🎉 All packed! Ready to go ✈️',zh:'🎉 全部打包完成！出发吧 ✈️',es:'🎉 ¡Todo listo! A viajar ✈️',ar:'🎉 كل شيء جاهز! وقت السفر ✈️',fr:'🎉 Tout est prêt ! En voyage ✈️'},
   cl_sec_done:   {th:'✓ ครบ!',            en:'✓ Done!',          zh:'✓ 完成!',   es:'✓ ¡Listo!', ar:'✓ تم!',      fr:'✓ Fait!'},
   cl_save_title: {th:'บันทึกแผนการเดินทาง',en:'Save Travel Plan', zh:'保存旅行计划',es:'Guardar Plan de Viaje',ar:'حفظ خطة السفر',fr:'Enregistrer le plan'},
