@@ -1,0 +1,48 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .btn-primary {
+    @apply inline-block px-10 py-3 rounded-full font-heading font-bold text-sm text-white
+           bg-gradient-to-r from-fylo-cyan to-fylo-blue
+           hover:opacity-90 transition-opacity duration-200 cursor-pointer;
+  }
+
+  .nav-link {
+    @apply font-heading text-sm hover:text-fylo-cyan transition-colors duration-200 cursor-pointer;
+  }
+
+  .section-heading {
+    @apply font-heading font-bold text-2xl md:text-3xl text-center;
+  }
+
+  .feature-card {
+    @apply flex flex-col items-center text-center px-8 py-6;
+  }
+
+  .testimonial-card {
+    @apply p-6 rounded-lg bg-white dark:bg-fylo-dark-blue-3 shadow-md
+           text-gray-600 dark:text-gray-300 text-sm leading-relaxed;
+  }
+
+  .faq-item {
+    @apply border-b border-gray-200 dark:border-gray-600 py-4;
+  }
+
+  .faq-question {
+    @apply w-full flex justify-between items-center text-left font-heading font-bold
+           text-sm md:text-base text-gray-800 dark:text-white
+           hover:text-fylo-cyan dark:hover:text-fylo-cyan transition-colors duration-200 cursor-pointer;
+  }
+
+  .input-field {
+    @apply w-full px-6 py-3 rounded-full text-sm text-gray-700 border border-transparent
+           focus:outline-none focus:border-fylo-cyan;
+  }
+
+  .footer-link {
+    @apply text-sm text-gray-500 dark:text-gray-300 hover:text-fylo-cyan dark:hover:text-fylo-cyan
+           transition-colors duration-200 cursor-pointer;
+  }
+}
