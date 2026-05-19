@@ -1,5 +1,5 @@
 <template>
-  <section id="hero" class="relative min-h-screen flex items-center overflow-hidden grid-bg">
+  <section id="hero" class="relative min-h-screen flex items-center overflow-hidden grid-bg bg-primary">
     <!-- Decorative glow blob -->
     <div class="absolute top-1/3 right-0 w-96 h-96 rounded-full blur-3xl pointer-events-none"
          style="background: radial-gradient(circle, var(--hero-blob-accent) 0%, transparent 70%); transform: translate(30%, -30%)"></div>

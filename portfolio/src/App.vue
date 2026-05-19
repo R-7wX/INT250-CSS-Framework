@@ -1,5 +1,5 @@
 <template>
-  <div :class="isDark ? 'dark' : ''">
+  <div>
     <NavBar :isDark="isDark" @toggle-theme="toggleTheme" />
     <main>
       <HeroSection />
@@ -14,7 +14,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, watch } from 'vue'
 import NavBar from './components/NavBar.vue'
 import HeroSection from './components/HeroSection.vue'
 import AboutSection from './components/AboutSection.vue'
@@ -27,10 +27,17 @@ import FooterSection from './components/FooterSection.vue'
 // Dark mode — default to dark
 const isDark = ref(true)
 
+// Apply dark class directly on <html> so body + all CSS vars work correctly
+const applyTheme = (dark) => {
+  document.documentElement.classList.toggle('dark', dark)
+}
+
 const toggleTheme = () => {
   isDark.value = !isDark.value
   localStorage.setItem('theme', isDark.value ? 'dark' : 'light')
 }
+
+watch(isDark, (val) => applyTheme(val))
 
 // Scroll-triggered animations
 const initScrollAnimations = () => {
@@ -54,6 +61,9 @@ onMounted(() => {
   // Restore theme preference
   const saved = localStorage.getItem('theme')
   if (saved) isDark.value = saved === 'dark'
+
+  // Apply theme immediately on mount
+  applyTheme(isDark.value)
 
   initScrollAnimations()
 
