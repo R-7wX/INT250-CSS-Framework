@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#F59E0B"/>
+      <stop offset="100%" stop-color="#D97706"/>
+    </linearGradient>
+    <linearGradient id="shine" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.2"/>
+      <stop offset="100%" stop-color="#FFFFFF" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Rounded card background -->
+  <rect width="64" height="64" rx="14" fill="url(#bg)"/>
+  <rect width="64" height="64" rx="14" fill="url(#shine)"/>
+
+  <!-- Airplane silhouette, rotated 45deg, centered -->
+  <g transform="translate(32,32) rotate(-40) scale(0.9)">
+    <!-- Fuselage -->
+    <ellipse cx="0" cy="0" rx="3.5" ry="14" fill="white"/>
+    <!-- Wings -->
+    <ellipse cx="0" cy="-2" rx="13" ry="4" fill="white"/>
+    <!-- Tail fin horizontal -->
+    <ellipse cx="0" cy="10.5" rx="7" ry="2.5" fill="white"/>
+    <!-- Tail fin vertical -->
+    <ellipse cx="0" cy="10" rx="2" ry="3.5" fill="white"/>
+  </g>
+</svg>
