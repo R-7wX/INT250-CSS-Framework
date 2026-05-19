@@ -110,6 +110,12 @@ import { ref, computed } from 'vue'
 const form = ref({ name: '', email: '', message: '' })
 const focusedField = ref(null)
 
+const focusStyle = computed(() =>
+  focusedField.value === 'name'
+    ? { border: '1px solid var(--accent)' }
+    : { border: '1px solid var(--border)' }
+)
+
 const mailtoLink = computed(() => {
   const subject = encodeURIComponent(`Portfolio Contact from ${form.value.name || 'Visitor'}`)
   const body = encodeURIComponent(form.value.message || '')

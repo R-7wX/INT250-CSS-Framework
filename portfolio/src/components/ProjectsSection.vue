@@ -107,4 +107,21 @@ const projects = [
     role: 'Developer',
     tech: ['Vue.js', 'Tailwind CSS', 'JavaScript', 'Vite'],
     demo: 'https://triptab.space',
+    github: null,
+  },
+  {
+    title: 'Portfolio Website',
+    type: 'Personal',
+    icon: '💼',
+    image: null,
+    colorA: 'rgba(0,212,255,0.15)',
+    colorB: 'rgba(0,100,200,0.15)',
+    description:
+      'This portfolio — built with Vue.js, Tailwind CSS, and Vite. Features dark/light mode, scroll animations, and a clean minimal design.',
+    role: 'Designer & Developer',
+    tech: ['Vue.js', 'Tailwind CSS', 'Vite'],
+    demo: null,
+    github: null,
+  },
+]
 </script>

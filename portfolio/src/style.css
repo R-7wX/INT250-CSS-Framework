@@ -6,6 +6,7 @@
 
 @layer base {
   :root {
+    --bg-primary-rgb: 248, 247, 244;
     --bg-primary: #F8F7F4;
     --bg-secondary: #EEECEA;
     --bg-card: #FFFFFF;
@@ -21,6 +22,7 @@
   }
 
   .dark {
+    --bg-primary-rgb: 10, 10, 15;
     --bg-primary: #0A0A0F;
     --bg-secondary: #111118;
     --bg-card: #1A1A24;
