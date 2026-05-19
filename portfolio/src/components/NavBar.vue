@@ -6,7 +6,11 @@
   >
     <div class="max-w-6xl mx-auto px-6 flex items-center justify-between">
       <!-- Logo -->
-      <a href="#hero" class="font-mono text-sm font-medium accent hover:opacity-70 transition-opacity">
+      <a
+        href="javascript:void(0)"
+        @click="scrollTo('hero')"
+        class="font-mono text-sm font-medium accent hover:opacity-70 transition-opacity cursor-pointer"
+      >
         <span class="opacity-50">~/</span>atcharayu
       </a>
 
@@ -14,9 +18,10 @@
       <div class="hidden md:flex items-center gap-8">
         <a
           v-for="link in navLinks"
-          :key="link.href"
-          :href="link.href"
-          class="font-mono text-xs uppercase tracking-wider text-secondary hover:text-primary transition-colors duration-200 hover:accent"
+          :key="link.id"
+          href="javascript:void(0)"
+          @click="scrollTo(link.id)"
+          class="font-mono text-xs uppercase tracking-wider text-secondary hover:text-primary transition-colors duration-200 hover:accent cursor-pointer"
         >
           {{ link.label }}
         </a>
@@ -62,10 +67,10 @@
     >
       <a
         v-for="link in navLinks"
-        :key="link.href"
-        :href="link.href"
-        @click="menuOpen = false"
-        class="font-mono text-sm text-secondary hover:accent transition-colors"
+        :key="link.id"
+        href="javascript:void(0)"
+        @click="scrollTo(link.id); menuOpen = false"
+        class="font-mono text-sm text-secondary hover:accent transition-colors cursor-pointer"
       >
         {{ link.label }}
       </a>
@@ -83,12 +88,16 @@ const scrolled = ref(false)
 const menuOpen = ref(false)
 
 const navLinks = [
-  { href: '#about', label: 'About' },
-  { href: '#skills', label: 'Skills' },
-  { href: '#projects', label: 'Projects' },
-  { href: '#experience', label: 'Experience' },
-  { href: '#contact', label: 'Contact' },
+  { id: 'about',      label: 'About' },
+  { id: 'skills',     label: 'Skills' },
+  { id: 'projects',   label: 'Projects' },
+  { id: 'experience', label: 'Experience' },
+  { id: 'contact',    label: 'Contact' },
 ]
+
+const scrollTo = (id) => {
+  document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' })
+}
 
 const handleScroll = () => { scrolled.value = window.scrollY > 40 }
 onMounted(() => window.addEventListener('scroll', handleScroll))

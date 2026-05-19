@@ -32,8 +32,9 @@
 
           <div class="flex flex-wrap gap-4 animate-fade-up" style="animation-delay: 0.5s">
             <a
-              href="#projects"
-              class="inline-flex items-center gap-2 px-6 py-3 font-mono text-sm font-medium rounded-sm transition-all duration-200 hover:opacity-90 hover:-translate-y-0.5"
+              href="javascript:void(0)"
+              @click="scrollTo('projects')"
+              class="inline-flex items-center gap-2 px-6 py-3 font-mono text-sm font-medium rounded-sm transition-all duration-200 hover:opacity-90 hover:-translate-y-0.5 cursor-pointer"
               style="background-color: var(--accent); color: var(--btn-on-accent)"
             >
               View Projects
@@ -42,8 +43,9 @@
               </svg>
             </a>
             <a
-              href="#contact"
-              class="inline-flex items-center gap-2 px-6 py-3 font-mono text-sm font-medium rounded-sm transition-all duration-200 hover:-translate-y-0.5"
+              href="javascript:void(0)"
+              @click="scrollTo('contact')"
+              class="inline-flex items-center gap-2 px-6 py-3 font-mono text-sm font-medium rounded-sm transition-all duration-200 hover:-translate-y-0.5 cursor-pointer"
               style="border: 1px solid var(--border); color: var(--text-secondary); background: var(--bg-card);"
               onmouseover="this.style.borderColor='var(--accent)'; this.style.color='var(--text-primary)'"
               onmouseout="this.style.borderColor='var(--border)'; this.style.color='var(--text-secondary)'"
@@ -99,4 +101,8 @@
   </section>
 </template>
 
-<script setup></script>
+<script setup>
+const scrollTo = (id) => {
+  document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' })
+}
+</script>
