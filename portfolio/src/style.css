@@ -14,6 +14,10 @@
     --border: rgba(0,0,0,0.08);
     --accent: #00B8E0;
     --accent-glow: rgba(0, 212, 255, 0.15);
+    --hero-blob-accent: rgba(0, 184, 224, 0.10);
+    --hero-blob-warm:   rgba(255, 107, 53, 0.05);
+    --code-string: #c2570a;
+    --btn-on-accent: #0A0A0F;
   }
 
   .dark {
@@ -25,6 +29,10 @@
     --border: rgba(255,255,255,0.07);
     --accent: #00D4FF;
     --accent-glow: rgba(0, 212, 255, 0.12);
+    --hero-blob-accent: rgba(0, 212, 255, 0.14);
+    --hero-blob-warm:   rgba(255, 107, 53, 0.08);
+    --code-string: #fb923c;
+    --btn-on-accent: #0A0A0F;
   }
 
   html {

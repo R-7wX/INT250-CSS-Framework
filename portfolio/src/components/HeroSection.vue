@@ -1,10 +1,10 @@
 <template>
   <section id="hero" class="relative min-h-screen flex items-center overflow-hidden grid-bg">
     <!-- Decorative glow blob -->
-    <div class="absolute top-1/3 right-0 w-96 h-96 rounded-full opacity-10 blur-3xl pointer-events-none"
-         style="background: radial-gradient(circle, #00D4FF 0%, transparent 70%); transform: translate(30%, -30%)"></div>
-    <div class="absolute bottom-0 left-0 w-64 h-64 rounded-full opacity-5 blur-2xl pointer-events-none"
-         style="background: radial-gradient(circle, #FF6B35 0%, transparent 70%); transform: translate(-30%, 30%)"></div>
+    <div class="absolute top-1/3 right-0 w-96 h-96 rounded-full blur-3xl pointer-events-none"
+         style="background: radial-gradient(circle, var(--hero-blob-accent) 0%, transparent 70%); transform: translate(30%, -30%)"></div>
+    <div class="absolute bottom-0 left-0 w-64 h-64 rounded-full blur-2xl pointer-events-none"
+         style="background: radial-gradient(circle, var(--hero-blob-warm) 0%, transparent 70%); transform: translate(-30%, 30%)"></div>
 
     <div class="max-w-6xl mx-auto px-6 pt-24 pb-16 w-full">
       <div class="grid lg:grid-cols-2 gap-16 items-center">
@@ -34,7 +34,7 @@
             <a
               href="#projects"
               class="inline-flex items-center gap-2 px-6 py-3 font-mono text-sm font-medium rounded-sm transition-all duration-200 hover:opacity-90 hover:-translate-y-0.5"
-              style="background-color: var(--accent); color: #0A0A0F"
+              style="background-color: var(--accent); color: var(--btn-on-accent)"
             >
               View Projects
               <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -43,7 +43,10 @@
             </a>
             <a
               href="#contact"
-              class="inline-flex items-center gap-2 px-6 py-3 font-mono text-sm font-medium rounded-sm border border-theme hover:border-accent transition-all duration-200 text-secondary hover:text-primary"
+              class="inline-flex items-center gap-2 px-6 py-3 font-mono text-sm font-medium rounded-sm transition-all duration-200 hover:-translate-y-0.5"
+              style="border: 1px solid var(--border); color: var(--text-secondary); background: var(--bg-card);"
+              onmouseover="this.style.borderColor='var(--accent)'; this.style.color='var(--text-primary)'"
+              onmouseout="this.style.borderColor='var(--border)'; this.style.color='var(--text-secondary)'"
             >
               Contact Me
             </a>
@@ -78,7 +81,7 @@
               class="absolute -bottom-4 -left-4 px-4 py-2 rounded-lg font-mono text-xs"
               style="background: var(--bg-card); border: 1px solid var(--border); color: var(--text-secondary)"
             >
-              <span style="color: var(--accent)">const</span> role = <span class="text-orange-400">"IT Student"</span>
+              <span style="color: var(--accent)">const</span> role = <span style="color: var(--code-string)">"Fullstack Dev"</span>
             </div>
           </div>
         </div>
